@@ -28,4 +28,4 @@ jobs:
           retention-days: 5
       
       - name: 'Checking Node js Version'
-      - run: node -v
+        run: node -v
