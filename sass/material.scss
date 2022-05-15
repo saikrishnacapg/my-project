@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.material {
+  // Mixins
+ // @import "../node_modules/materialize-css/sass/components/prefixer";
+
+  @import "../node_modules/materialize-css/sass/components/color";
+
+  // Variables;
+  @import "../node_modules/materialize-css/sass/components/variables";
+
+  // Reset
+  @import "../node_modules/materialize-css/sass/components/normalize";
+
+  // Typography (for the footer in the global module)
+  @import "../node_modules/materialize-css/sass/components/typography";
+
+  // components
+  @import "../node_modules/materialize-css/sass/components/global";
+  @import "../node_modules/materialize-css/sass/components/grid";
+  @import "../node_modules/materialize-css/sass/components/navbar";
+  @import "../node_modules/materialize-css/sass/components/cards";
+  /*@import "../node_modules/materialize-css/sass/components/form";*/
+  @import "../node_modules/materialize-css/sass/components/waves";
+  @import "../node_modules/materialize-css/sass/components/collapsible";
+
+  @import "overrides";
+  @import "transitions";
+}
+
+//Icons don't need to be embedded under material and the only variable we need is the icon font path.
+$icons-font-path: "../font/material-design-icons/" !default;
+@import "../node_modules/materialize-css/sass/components/icons-material-design";
+// Include colors and variables for preloader
+@import "../node_modules/materialize-css/sass/components/color";
+@import "../node_modules/materialize-css/sass/components/variables";
+@import "../node_modules/materialize-css/sass/components/preloader";

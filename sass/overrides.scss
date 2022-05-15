@@ -1,0 +1,333 @@
+// Cards
+.card {
+  font-size:13px;
+  border: 1px solid rgb(242, 238, 238);
+  // Not sure why this is display none - it's not in the version I downloaded on my Mac.
+  // Overriding and it works anyway, presume it's a temporary bug.
+  .card-reveal {
+    display:block !important;
+  }
+}
+
+.card.small {
+  height:320px !important;
+}
+.card.medium {
+  height:220px !important;
+}
+.card.mini {
+  height:185px !important;
+}
+
+.card.medium .card-content {
+  height: 200px;
+}
+
+.card .card-content{
+  padding: 15px !important;
+  strong {
+    font-size: 1.26em;
+    line-height: 1.2em;
+  }
+}
+
+.card .card-title {
+  font-size: 22px !important;
+}
+
+.card-text {
+  font-size: 13px;
+}
+
+.card-sub-title {
+  margin-top: -10px;
+  margin-left: 0px;
+}
+
+.card-small-title {
+  font-size: 18px;
+}
+
+#challenge-percentage{
+  position: absolute;
+  top: 125px;
+  width: 100%;
+  padding-right: 30px;
+}
+#challenge-percentage-span{
+  max-width: 75px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#challenge-card svg {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Forms
+.material [type="checkbox"].filled-in:not(:checked) + label:after {
+  tr {
+    line-height: 0.3em;
+  }
+}
+
+// Icons
+.sy-icon-large {
+  font-size: 6rem;
+}
+
+// Indicators
+.center-x{
+  text-align:center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.element-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(30%);
+}
+
+.element-bottom {
+  position: relative;
+  top: 50%;
+  transform: translateY(150%);
+}
+
+// Collapsible
+
+.collapsible {
+  box-shadow: none;
+  border: none;
+}
+
+.collapsible-body p {
+  padding-bottom: 0px;
+  padding-top: 0px;
+  padding-right: 10px;
+  padding-left: 40px;
+}
+
+// Colors
+
+.sy-orange { color: #FDBE57; }
+.material-icons.sy-red { color: #EF5350; }
+.material-icons.sy-green { color: #43A047; }
+.material-icons.sy-blue { color: #58b4d2; }
+
+// Mouse pointer
+
+.pointer{
+  cursor: hand;
+  cursor: pointer;
+}
+
+// Buttons
+
+.btn span[class^='sy-icon']{
+  margin: auto;
+}
+
+.sy-button--default {
+  margin-bottom: 5px;
+}
+
+.dropdown-menu {
+  min-width: 100px;
+}
+
+// Charts
+
+.xy-tooltip table {
+  width: auto;
+}
+
+// Table
+
+.hide-on-med-and-up table th, .hide-on-med-and-up table td{
+  text-align:center;
+}
+
+.table-wrapper div {
+  margin-left: -30px !important;
+  margin-top: -7px;
+}
+
+.table-wrapper td, .table-wrapper tr {
+  padding: 10px 5px;
+}
+
+
+.unsupportedBrowser {
+    background-image: linear-gradient(#feefae, #fae692);
+    padding: 10px 40px;
+    border-bottom-color: #b3a569;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    color: #211e14;
+
+    .main {
+        background-color: transparent;
+    }
+
+    .alert-close {
+        color: #211e14;
+        padding-top: 15px;
+        padding-right: 40px;
+        margin-bottom: 5px;
+        position: absolute;
+        top:0;
+        right:0;
+        border:none;
+        text-align:center;
+        background-color:transparent;
+    }
+    .alert-close:before{
+        display: block;
+        height:18px;
+        margin-bottom:5px;
+        content: "";
+        box-sizing: border-box;
+        transition: width .25s cubic-bezier(.23,1,.32,1),height .25s cubic-bezier(.23,1,.32,1);
+        background: url(/images/icons/close-black.svg) center no-repeat;
+    }
+}
+
+@media (max-width:1024px){
+    .unsupportedBrowser {
+      .alert-close { padding-right: 20px; }
+      
+      .main {
+        min-width: auto;
+        width:90%
+      }
+    }
+}
+
+
+
+//------------------- Covid 19 changes starts----------------------------------
+.unsupportedBrowser, #activityStatementCompatible  {
+  .inner-wrap{
+    max-width: 1520px;
+  }
+  .alert-close {
+    padding-top: 15px;
+    padding-right: 40px;
+    margin-bottom: 5px;
+    position: absolute;
+    top: 0;
+    font-size: .8125rem;
+    right: 0;
+    border: none;
+    line-height: 1.30769em;
+    text-align: center;
+    background-color: transparent;
+  }
+  .alert-close:before{
+    display: block;
+    height:18px;
+    margin-bottom:5px;
+    content: "";
+    box-sizing: border-box;
+    transition: width .25s cubic-bezier(.23,1,.32,1),height .25s cubic-bezier(.23,1,.32,1);
+  }
+  .alert-close:focus::before,
+  .alert-close:hover::before{
+    width: 24px;
+    height: 24px;
+    padding: 0px;
+    margin: 0px auto 5px auto;
+  }
+}
+#activityStatementCompatible  {
+  background-image: linear-gradient(#c21c09, #c21c09);
+  padding: 10px 0px;
+  border-bottom-color: #b3a569;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  color: #ffffff;
+  position:relative;
+  .alert-description{
+    padding: 0 50px 0px 0px;
+    vertical-align: middle;
+    font-family: "Proxima Nova W01",Futura,"Trebuchet MS",Helvetica,Arial,Verdana,sans-serif;
+    font-weight: 400;
+    width:75%;
+    padding-left: 50px;
+  }
+  .alert-description{
+    p {
+      margin: 5px 0;
+    }
+    .alert-link
+    {
+      color: #fff;
+      position: relative;
+      padding-left: 1em;
+      display: inline-block;
+      -webkit-transform: rotate(.0001deg);
+      -ms-transform: rotate(.0001deg);
+      transform: rotate(.0001deg);
+      -webkit-transition: -webkit-transform .25s cubic-bezier(.23,1,.32,1);
+      transition: transform .25s cubic-bezier(.23,1,.32,1);
+      &:hover {
+        color: #fff;
+        -webkit-transform: translateX(6px);
+        -ms-transform: translateX(6px);
+        transform: translateX(6px);
+      }
+      &:before {
+        content:"";
+        display: block;
+        width: 0;
+        height: 0;
+        border: .35em solid transparent;
+        transition: border-color .25s cubic-bezier(.23,1,.32,1);
+        border-left-color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-transform: translateY(50%);
+        -ms-transform: translateY(50%);
+        transform: translateY(50%);
+      }
+    }
+  }
+  .alert-close {
+    color: #ffffff;
+  }
+  .alert-close:before{
+    content: "";
+    background: url(/images/icons/close-white.svg) center no-repeat;
+  }
+}
+.unsupportedBrowser{
+  .alert-close {
+    color: #211e14;
+  }
+  .alert-close:before{
+    content: "";
+    background: url(/images/icons/close-black.svg) center no-repeat;
+  }
+}
+
+@media (max-width:1024px){
+  #covidChanges .alert-close
+  
+  #covidChanges .alert-description,
+  
+  .unsupportedBrowser .alert-description{
+    width:75%;
+    padding:0 50px 0px 0px;
+    padding-left: 50px;
+  }
+}
+
+//------------------- Covid 19 changes ends----------------------------------
+
+
+
