@@ -1,37 +1,34 @@
---- 
-jobs: 
-  build-deployment-artifact: 
-    name: "Build Deployment Artifact"
+name: GitHub Actions Demo
+on: [push]
+jobs:
+  build-deployment-artifact:
+    name: Build Deployment Artifact
     runs-on: ubuntu-latest
-    steps: 
-      - 
-        name: "Checkout repository"
+    steps:
+
+      - name: Checkout repository
         uses: actions/checkout@v2
-      - 
-        name: "Setup Node v12.19"
+
+      - name: Setup Node v12.19
         uses: actions/setup-node@v2
-        with: 
-          node-version: "12.19"
-      - 
-        name: "Install NPM"
-        run: "npm install"
-      - 
-        name: "Run Server Build"
-        run: "gulp serverbuild"
-      - 
-        name: "Upload Build Artifacts"
+        with:
+          node-version: '12.19'
+
+      - name: 'Install NPM'
+        run: npm install
+
+      - name: 'Run Server Build'
+        run: gulp serverbuild
+
+      - name: 'Upload Build Artifacts'
         uses: actions/upload-artifact@v3
-        with: 
+        with:
           name: MyAccount-Artifact
           path: dist/myaccount.zip
           retention-days: 5
-      - 
-        name: "Download Build artifact"
-        uses: actions/download-artifact@v3
-        with: 
-          name: MyAccount-Artifact
-          path: ~/download/path
-name: "GitHub Actions Demo"
-true: 
-  - push
 
+      - name: 'Download Build artifact'
+	uses: actions/download-artifact@v3
+	with:
+	  name: MyAccount-Artifact
+	  path: ~/download
