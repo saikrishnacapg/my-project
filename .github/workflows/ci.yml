@@ -26,10 +26,7 @@ jobs:
           name: MyAccount-Artifact
           path: dist/myaccount.zip
           retention-days: 5
-      - name: 'Download Build Artifact'
-	uses: actions/download-artifact@v3
-  	with:
-    	  name: MyAccount-Artifact
-    
-      - name: Display structure of downloaded files
-        run: ls -R
+      - uses: actions/download-artifact@v3
+    	with:
+      	  name: MyAccount-Artifact
+      	  path: ~/download/path
