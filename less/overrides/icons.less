@@ -1,0 +1,518 @@
+// IMPORT font
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('../font/icomoon.eot?laadju');
+  src: url('../font/icomoon.eot?#iefixlaadju') format('embedded-opentype'),
+    url('../font/icomoon.woff?laadju') format('woff'),
+    url('../font/icomoon.ttf?laadju') format('truetype'),
+    url('../font/icomoon.svg?laadju#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Glyphicons Regular';
+  src: url('../font/glyphicons-regular.eot');
+  src: url('../font/glyphicons-regular.eot?#iefixlaadju')
+      format('embedded-opentype'),
+    url('../font/glyphicons-regular.woff') format('woff'),
+    url('../font/glyphicons-regular.ttf') format('truetype'),
+    url('../font/glyphicons-regular.svg#glyphiconsregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "Glyphicons Halflings";
+  src: url("../font/glyphicons-halflings-regular.eot");
+  src: url("../font/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"),
+  url("../font/glyphicons-halflings-regular.woff2") format("woff2"),
+  url("../font/glyphicons-halflings-regular.woff") format("woff"),
+  url("../font/glyphicons-halflings-regular.ttf") format("truetype"),
+  url("../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../font/material-design-icons/MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: local('Material Icons'), local('MaterialIcons-Regular'),
+    url('../font/MaterialIcons-Regular.woff2') format('woff2'),
+    url('../font/MaterialIcons-Regular.woff') format('woff'),
+    url('../font/MaterialIcons-Regular.ttf') format('truetype');
+}
+
+.make-sy-icon(@icon-content) {
+  &:extend(.glyphicon);
+
+  color: @secondary-cyan;
+  display: inline;
+  font-family: 'Glyphicons Regular';
+  margin-right: 6px;
+
+  &:before {
+    content: @icon-content;
+  }
+}
+
+.make-sy-extra-icon(@icon-content) {
+  .make-sy-icon(@icon-content);
+  font-family: 'icomoon';
+
+  &:before {
+    font-family: 'icomoon';
+  }
+}
+
+/*
+
+View glyphicons here to find number.
+
+http://glyphicons.com/
+
+*/
+
+.sy-icon--leaf {
+  .make-sy-icon('\E002');
+}
+.sy-icon--user {
+  .make-sy-icon('\E004');
+}
+.sy-icon--car {
+  .make-sy-icon('\E006');
+}
+
+.sy-icon--envelope {
+  .make-sy-icon('\2709');
+}
+
+.sy-icon--print {
+  .make-sy-icon('\E016');
+}
+.sy-icon--bin {
+  .make-sy-icon('\E017');
+}
+
+.sy-icon--home {
+  .make-sy-icon('\E021');
+}
+
+.sy-icon--parents {
+  .make-sy-icon('\E025');
+}
+
+.sy-icon--search {
+  .make-sy-icon('\E028');
+}
+
+.sy-icon--pencil {
+  .make-sy-icon('\270F');
+}
+
+.sy-icon--file {
+  .make-sy-icon('\E037');
+}
+.sy-icon--directdebit {
+  .make-sy-icon('\e177');
+}
+
+.sy-icon--stats {
+  .make-sy-icon('\E041');
+}
+.sy-icon--charts {
+  .make-sy-icon('\E042');
+}
+.sy-icon--pie_chart {
+  .make-sy-icon('\E043');
+}
+.sy-icon--calendar {
+  .make-sy-icon('\E046');
+}
+.sy-icon--dislikes {
+  .make-sy-icon('\E049');
+}
+
+.sy-icon--clock {
+  .make-sy-icon('\E055');
+}
+
+.sy-icon--power {
+  .make-sy-icon('\E064');
+}
+
+.sy-icon--warning_sign {
+  .make-sy-icon('\E079');
+}
+.sy-icon--refresh {
+  .make-sy-icon('\E082');
+}
+.sy-icon--repeat {
+  .make-sy-icon('\E086');
+}
+.sy-icon--cogwheel {
+  .make-sy-icon('\E137');
+}
+
+.sy-icon--folder_open {
+  .make-sy-icon('\E145');
+}
+
+.sy-icon--edit {
+  .make-sy-icon('\E151');
+}
+.sy-icon--new_window {
+  .make-sy-icon('\E152');
+}
+.sy-icon--check {
+  .make-sy-icon('\E153');
+}
+
+.sy-icon--show_big_thumbnails {
+  .make-sy-icon('\E156');
+}
+
+.sy-icon--show_lines {
+  .make-sy-icon('\E159');
+}
+
+.sy-icon--forward {
+  .make-sy-icon('\E177');
+}
+
+.sy-icon--download_alt {
+  .make-sy-icon('\E182');
+}
+
+.sy-icon--more {
+  .make-sy-icon('\E188');
+}
+
+.sy-icon--circle_plus {
+  .make-sy-icon('\E191');
+}
+.sy-icon--circle_remove {
+  .make-sy-icon('\E193');
+}
+.sy-icon--circle_ok {
+  .make-sy-icon('\E194');
+}
+.sy-icon--circle_question_mark {
+  .make-sy-icon('\E195');
+}
+.sy-icon--circle_info {
+  .make-sy-icon('\E196');
+}
+.sy-icon--circle_exclamation_mark {
+  .make-sy-icon('\E197');
+}
+.sy-icon--remove {
+  .make-sy-icon('\E198');
+}
+.sy-icon--ok {
+  .make-sy-icon('\E199');
+}
+
+.sy-icon--lock {
+  .make-sy-icon('\E204');
+}
+.sy-icon--unlock {
+  .make-sy-icon('\E205');
+}
+.sy-icon--electricity {
+  .make-sy-icon('\E206');
+}
+.sy-icon--ok_2 {
+  .make-sy-icon('\E207');
+}
+.sy-icon--remove_2 {
+  .make-sy-icon('\E208');
+}
+
+.sy-icon--left_arrow {
+  .make-sy-icon('\E211');
+}
+.sy-icon--right_arrow {
+  .make-sy-icon('\E212');
+}
+.sy-icon--down_arrow {
+  .make-sy-icon('\E213');
+}
+.sy-icon--up_arrow {
+  .make-sy-icon('\E214');
+}
+
+.sy-icon--circle_arrow_down {
+  .make-sy-icon('\E220');
+}
+.sy-icon--unshare {
+  .make-sy-icon('\E222');
+}
+.sy-icon--share {
+  .make-sy-icon('\E223');
+}
+.sy-icon--chevron-right {
+  .make-sy-icon('\E224');
+}
+.sy-icon--chevron-down {
+  .make-sy-icon('\E602');
+}
+.sy-icon--chevron-left {
+  .make-sy-icon('\E225');
+}
+
+.sy-icon--usd {
+  .make-sy-icon('\E228');
+}
+
+.sy-icon--zoom_in {
+  .make-sy-icon('\E237');
+}
+.sy-icon--zoom_out {
+  .make-sy-icon('\E238');
+}
+
+.sy-icon--flash {
+  .make-sy-icon('\E242');
+}
+
+.sy-icon--credit_card {
+  .make-sy-icon('\E268');
+}
+
+.sy-icon--shield {
+  .make-sy-icon('\E271');
+}
+
+.sy-icon--settings {
+  .make-sy-icon('\E281');
+}
+
+.sy-icon--filter {
+  .make-sy-icon('\E321');
+}
+
+.sy-icon--dashboard {
+  .make-sy-icon('\E332');
+}
+
+.sy-icon--log_in {
+  .make-sy-icon('\E387');
+}
+.sy-icon--log_out {
+  .make-sy-icon('\E388');
+}
+.sy-icon--exit {
+  .make-sy-icon('\E389');
+}
+.sy-icon--new_window_alt {
+  .make-sy-icon('\E390');
+}
+
+.sy-icon--sorting {
+  .make-sy-icon('\E404');
+}
+
+.sy-icon--disk_save {
+  .make-sy-icon('\E415');
+}
+.sy-icon--disk_open {
+  .make-sy-icon('\E416');
+}
+
+.sy-icon--plus {
+  .make-sy-icon('\002B');
+}
+.sy-icon--minus {
+  .make-sy-icon('\2212');
+}
+.sy-icon--redo {
+  .make-sy-icon('\E435');
+}
+.sy-icon--undo {
+  .make-sy-icon('\E436');
+}
+
+.sy-icon--folder_closed {
+  .make-sy-icon('\E441');
+}
+.sy-icon--phone_alt {
+  .make-sy-icon('\E442');
+}
+.sy-icon--earphone {
+  .make-sy-icon('\E443');
+}
+
+// extra icons
+
+.sy-icon--account-info {
+  .make-sy-extra-icon('\E606');
+}
+.sy-icon--login-name {
+  .make-sy-extra-icon('\E604');
+}
+.sy-icon--download-link {
+  .make-sy-extra-icon('\E600');
+}
+.sy-icon--sort-menu {
+  .make-sy-extra-icon('\E601');
+}
+.sy-icon--renewable-energy {
+  .make-sy-extra-icon('\E602');
+}
+.sy-icon--pay-bill {
+  .make-sy-extra-icon('\E603');
+}
+.sy-icon--login-name {
+  .make-sy-extra-icon('\E604');
+}
+.sy-icon--comparison {
+  .make-sy-extra-icon('\E605');
+}
+.sy-icon--account-info {
+  .make-sy-extra-icon('\E606');
+}
+.sy-icon--buildings {
+  .make-sy-extra-icon('\E607');
+}
+
+// added extra icons 24/05/2016
+.sy-icon--rebs {
+  .make-sy-extra-icon('\E900');
+}
+.sy-icon--concessions {
+  .make-sy-extra-icon('\E901');
+}
+.sy-icon--direct-debit {
+  .make-sy-extra-icon('\E902');
+}
+.sy-icon--green-energy {
+  .make-sy-extra-icon('\E903');
+}
+.sy-icon--moving-home {
+  .make-sy-extra-icon('\E904');
+}
+.sy-icon--moving-business {
+  .make-sy-extra-icon('\E907');
+}
+.sy-icon--paperless-billing {
+  .make-sy-extra-icon('\E905');
+}
+.sy-icon--solar {
+  .make-sy-extra-icon('\E906');
+}
+.sy-icon--car {
+  .make-sy-icon('\e006');
+}
+.sy-icon--account-info-active {
+  .make-sy-extra-icon('\E606');
+  font-size: 25px;
+}
+.sy-icon--account-info-inactive {
+  .make-sy-icon(url('../img/file-empty.svg'));
+}
+.sy-icon--account-info-inactive-white {
+  .make-sy-icon(url('../img/file-empty_white.svg'));
+}
+.sy-cancel-flag {
+  .make-sy-icon('\E079');
+  color: @primary-yellow;
+}
+.sy-icon--directdebit {
+  .make-sy-extra-icon('\e177');
+  color: @complimentary-green-light!important;
+}
+.sy-icon--directdebitinstalment {
+  .make-sy-extra-icon('\E908');
+  color: @complimentary-green-light!important;
+}
+.sy-icon--directdebitpayment {
+  .make-sy-extra-icon('\E908');
+  color: @complimentary-green-light!important;
+}
+.sy-icon--usd-green {
+  .make-sy-icon('\E228');
+  color: @complimentary-green-light!important;
+}
+
+.sy-icon-tabular--charts {
+  .make-sy-icon(url('../img/track-your-usage-tabular-black.svg'));
+}
+.sy-icon-stats-bar--charts {
+  .make-sy-icon(url('../img/track-your-usage-stats-bars-black.svg'));
+}
+.sy-icon--circle_info_inactive {
+  display: inline;
+  font-family: 'Glyphicons Regular';
+  margin-right: -13px;
+}
+.sy-icon--circle_info_inactive:before {
+  content: '\E196';
+}
+// Material design icons
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.sy-icon--meter {
+  .make-sy-extra-icon(url('../img/meters.svg'));
+}
+
+.sy-icon-yellow--solar {
+  .make-sy-extra-icon(url('../img/solar-yellow.svg'));
+}
+
+.sy-tabs li .sy-icon-energytoolbox {
+  padding-right: 20px;
+  .make-sy-extra-icon(url('../img/energyTools.svg'));
+}
+.sy-tabs li.active .sy-icon-energytoolbox {
+  padding-right: 20px;
+  .make-sy-extra-icon(url('../img/energyTools_white.svg'));
+}
+.sy-icon-energytoolbox:before {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  top: -6px;
+  left: -2px;
+}
+.sy-tabs li .sy-icon-activitystatement {
+  padding-right: 20px;
+  .make-sy-extra-icon(url('../img/activity-statement-black.svg'));
+}
+.sy-tabs li.active .sy-icon-activitystatement {
+  padding-right: 20px;
+  .make-sy-extra-icon(url('../img/activity-statement-white.svg'));
+}
+.sy-icon-activitystatement:before {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  top: -6px;
+  left: -2px;
+}

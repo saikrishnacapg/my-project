@@ -1,0 +1,94 @@
+.sy-switch {
+  display: inline-block;
+}
+
+.sy-switch label {
+  font-size: 12px;
+}
+
+.sy-switch input[type='checkbox'] {
+  display: none;
+}
+
+.sy-switch__element {
+  background: #fff;
+  border: 1px solid #bacada;
+  border-radius: 15px;
+  cursor: pointer;
+  display: inline-block;
+  height: 29px;
+  margin-top: 5px;
+  padding: 3px 6px;
+  position: relative;
+  transition-duration: 0.1s;
+  transition-delay: 0.2s;
+  width: 85px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sy-switch--right .sy-switch__element.sy-switch--yellow {
+  background: #fdbe57;
+  border-color: #fdbe57;
+}
+
+.sy-switch--right .sy-switch__element.sy-switch--grey {
+  background: #ccc;
+  border-color: #ccc;
+}
+
+.sy-switch--right .sy-switch__element.sy-switch--blue {
+  background: #a3b8ce;
+  border-color: #a3b8ce;
+}
+
+.sy-switch--right .sy-switch__element.sy-switch--cyan {
+  background: #58b4d2;
+  border-color: #58b4d2;
+}
+
+.sy-switch__element:hover {
+  xborder: 1px solid #002c5a;
+}
+
+.sy-switch__handle {
+  background: #002c5a;
+  border-radius: 10px;
+  display: inline-block;
+  height: 21px;
+  left: 3px;
+  transform: translate3d(4px, 0, 0);
+  position: absolute;
+  top: 3px;
+  transition-duration: 0.2s;
+  width: 21px;
+}
+
+.sy-switch--left .sy-switch__handle {
+  transform: translate3d(4px, 0, 0);
+}
+
+.sy-switch--right .sy-switch__handle {
+  transform: translate3d(53px, 0, 0);
+}
+
+.sy-switch__label {
+  color: #bacada;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+.sy-switch--left .sy-switch__label {
+  text-align: right;
+}
+
+.sy-switch--right .sy-switch__label {
+  color: #002c5a;
+  text-align: left;
+}

@@ -1,0 +1,97 @@
+.contact-numbers {
+  .clearfix();
+
+  @media (min-width: @screen-xs) {
+    width: 430px;
+    display: block;
+  }
+  @media (min-width: @screen-sm) {
+    width: 500px;
+    display: table-cell;
+  }
+
+  @media (max-width: @screen-xs) {
+    .table,
+    .table-row {
+      display: block;
+    }
+    .table-cell {
+      display: inline-block;
+    }
+  }
+
+  .contact {
+    .make-xs-column(4);
+    padding: 0;
+    text-align: center;
+
+    @media (min-width: @screen-sm) {
+      padding: 0 15px;
+      text-align: left;
+      .inMobileViewleft {
+        padding-right: 30px;
+        width: 100px;
+      }
+    }
+
+    @media (max-width: @screen-xs) {
+      .inMobileViewleft {
+        padding-right: 0px;
+        width: 0px;
+      }
+    }
+
+    span[class*='sy-icon--'] {
+      color: #002c5a;
+      font-size: 24px;
+      display: inline-block;
+      text-align: center;
+      width: 30px;
+
+      @media (min-width: @screen-sm) {
+        display: block;
+        float: left;
+        margin-right: 20px;
+      }
+    }
+
+    span[class*='sy-icon--buildings'] {
+      font-size: 32px;
+    }
+  }
+
+  .contact__icon {
+    height: 34px;
+    text-align: center;
+
+    @media (min-width: @screen-sm) {
+      float: left;
+    }
+  }
+
+  .contact__label {
+    font-size: 12px;
+    @media (min-width: @screen-sm) {
+      font-size: 14px;
+    }
+  }
+}
+
+.contactDetailsSubForm {
+  .contact-name {
+    float: left;
+    width: 100%;
+    margin-top: 5px;
+  }
+  .contact-name .form-group {
+    width: 48%;
+    float: left;
+  }
+
+  @media (max-width: 375px) {
+    .contact-name .form-group {
+      width: 100%;
+      float: left;
+    }
+  }
+}

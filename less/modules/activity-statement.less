@@ -1,0 +1,281 @@
+.activity-statement {
+	.bold {
+		font-weight: bold;
+	}
+	.heading {
+		margin-bottom: 5px;
+	}
+	.calendar-padding {
+		margin: auto;
+ 		padding-left: 40px;
+		padding-top: 20px;
+	}
+	.calendar-width {
+		width:auto;
+	}
+	.tertiary-heading {
+		.resetMarginPadding();
+
+	}
+	.tile,
+	.column {
+		.flex(column);
+	}
+	.tile {
+		align-items: center;
+		padding: 20px;
+	}
+	.row {
+		.resetMarginPadding();
+		.flex(@wrap: wrap);
+		justify-content: space-between;
+		padding-left:75px;
+	}
+	.column {
+		width: 100%;
+		position: relative;
+	}
+	.disclaimer {
+		.secondary-heading {
+			margin-bottom: 20px;
+		}
+		padding-top: 20px;
+	}
+	.dates-padding{
+		padding-top: 10px;
+		line-height: 10px;
+		text-align: left
+	}
+	.graph-title-padding {
+		margin-bottom: 20px;
+	}
+	.padding-left{
+		padding-left: 15px;
+	}
+	.shift-image-padding{
+		padding-top: 25px;
+		padding-left: 0px;
+	}
+	.text-padding{
+		padding-left: 15px;
+		font-size: 20px;
+	}
+	.radio-button-padding{
+		padding-left: 50px;
+		width:60%;
+	}
+	.content{
+		.fontSize(30);
+		border: 1px solid gray;
+		width: 100px;
+		background-color: #fff;
+		text-align: center;
+		border-radius:4px;
+		margin-top: 5px;
+		padding-left: 0px;
+	}
+	.acc-radio-btn-group {
+		display: inline-block;
+		margin: 15px 25px !important;
+		line-height: 1.0;
+	}
+	.savings {
+		p {
+			padding: 0;
+		}
+		&-text {
+			.fontSize(30);
+		}
+		&-textIcon{
+			display: inline-block;
+			padding-left: 65px;
+			padding-top: 30px;
+		}
+		&-iconHeight{
+			position: absolute;
+			line-height: 110px;
+		}
+
+		&-padding{
+			padding-bottom: 15px;
+
+
+		}
+		&-height{
+			height:34px;
+			padding-left: 60px;
+			margin-top: 23px;
+		}
+		&-paddingLeft{
+			font-style: italic;
+			font-size: 12px;
+			text-align: left;
+		}
+	}
+	.callout-text {
+		padding: 30px 0;
+	}
+	.date-selector {
+		position: relative;
+		.sy-form-group:last-child {
+			margin-bottom: 0;
+		}
+	}
+	.padding-right{
+		padding-right: 20px;
+	}
+	.padding-icon{
+		padding-left: 100px;
+	}
+	.padding-display-button{
+		padding-right: 20px;
+		padding-top: 10px;
+	}
+	.padding-progress-text{
+		line-height: 20px;
+		padding-left: 75px !important;
+	}
+	.padding-shift-text{
+		padding-left: 0px !important;
+	}
+.font-style{
+	font-weight: 700;
+}
+	label {
+		display: inline-block;
+		max-width: 100%;
+		margin-bottom: 13px !important;
+		font-weight: unset;
+	}
+	.no-data {
+		font-size: 16px;
+		color:#c21c09;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		font-weight:700
+	}
+.div-width{
+	width:100%;
+}
+	.div-left{
+		width: 76%;
+		float: left;
+		font-size:14px;
+	}
+	.div-right{
+		display: inline-block;
+		float: left;
+	}
+	.radio-style{
+		display: block;
+		width: 38%;
+	}
+.font{
+	font-size:14px
+}
+
+  .box-text-style{
+    font-size: 18px;
+    padding: 0px 0 0 44px;
+  }
+.usage-compare{
+	font-size: 1.875rem;
+	padding: 10px 0px 0px 40px;
+	width:83%
+}
+.image-height{
+	width: auto ;
+	max-width: 100% ;
+	height: auto ;
+}
+.black-box-border{
+	border: 3px solid #000 !important;
+}
+.red-box-border{
+	border: 3px solid #c21c09 !important;
+}
+.green-box-border{
+	border: 3px solid #55ae3a !important;
+}
+.sy-form-error {
+		width: 65% !important;
+	}
+
+	@media screen and (min-width: @screen-sm) {
+		.column {
+			width: 50%;
+		}
+		.date-selector {
+			.flexVerticalCenter();
+		}
+		.savings {
+			.flexVerticalCenter();
+		}
+
+	}
+
+	@media screen and (min-width: @screen-md) {
+		.tertiary-heading,
+		.secondary-heading {
+			.fontSize(30);
+		}
+		.savings {
+			&-text {
+				.fontSize(36);
+			}
+		}
+		.disclaimer {
+			padding: 50px;
+		}
+		.content{
+			.fontSize(30);
+			border: 2px solid #fff;
+			width: 90px;
+			background-color: #fff;
+			text-align: center;
+			margin-left: 20px;
+			border-radius:4px;
+		}
+		.dates-padding{
+			padding-top: 10px;
+			line-height: 10px;
+			text-align: center
+		}
+		.shift-image-padding{
+			padding-top: 20px;
+			padding-bottom: 10px;
+		}
+		.padding-right{
+			padding-right: 20px;
+			width:19%;
+			padding-top: 10px;
+		}
+		.shift-image-text-padding{
+			padding-left: 40px;
+			padding-top: 10px;
+		}
+		.usage-compare{
+			font-size: 1.875rem;
+			padding: 10px 0px 0px 40px;
+			width:61%
+		}
+		.image-height{
+			width: auto;
+			max-width: 90%;
+			height: auto;
+			padding-left: 70px
+		}
+		.calendar-width {
+			width:29.2%
+		}
+		.row {
+			.resetMarginPadding();
+			.flex(@wrap: wrap);
+			justify-content: space-between;
+			padding-left:0px;
+		}
+		.padding-shift-text{
+			padding-left: 40px !important;
+		}
+	}
+}

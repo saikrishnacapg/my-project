@@ -1,0 +1,146 @@
+.step {
+    border: 1px solid #ccc;
+    border-bottom: none;
+
+    &:last-child {
+        border-bottom: 1px solid #ccc;
+    }
+}
+
+.step__title {
+
+    background: #eee;
+    clear: both;
+    overflow: hidden;
+    padding: 10px;
+
+    .sy-icon--ok_2,
+    .sy-icon--right_arrow {
+        color: #666;
+        font-size: 18px;
+        line-height: 14px;
+    }
+
+    .sy-icon--plus,
+    .sy-icon--minus {
+        color: #666;
+        //font-size: 18px;
+        line-height: 14px;
+    }
+
+    h3 {
+
+        font-size: 14px;
+        margin: 0;
+    }
+}
+ 
+.step__status {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+
+.step__content {
+
+    background: #eee;
+    clear: both;
+    padding: 10px;
+    padding-left: 36px;
+
+    &.content-expand p {
+        display: block;
+    }
+
+
+    .step__content--intro {
+        display: block;
+
+        p {
+            display: block;
+        }
+    }
+
+
+    p {
+        display: none;
+    }
+
+    .read-less {
+        color: #096ba8;
+        font-size: 12px;
+        text-decoration: underline;
+    }
+
+    .read-less:before {
+        content: '-';
+        display: block;
+        float: left;   
+        margin-right: 5px;     
+    }
+}
+
+.step--in-progress {
+
+    .step__title, .step__title h3 {
+        background: #fff;
+        color: #096ba8;
+    }
+
+    .step__title .sy-icon--right_arrow,
+    .step__title .sy-icon--minus {
+        color: #096ba8;
+    }
+
+    .step__content {
+        background: #fff;
+    }
+
+        .step__content .step__content--intro p {
+            display: block;
+        }
+
+    .step__status {
+        color: #096ba8;
+    }
+}
+
+.step--completed {
+    //border-color: #666;
+
+
+    .step__title, .step__title h3 {
+
+        background: #a3b8ce;
+
+        .sy-icon--ok_2 {
+            color: #002c5a;
+        }
+    }
+
+    .step__content {
+        background: #fff;
+    }
+
+    .sy-icon--plus {
+        color: #002c5a;
+    }
+}
+
+.step--hide {
+
+    .step__title {
+        &:hover {
+            
+        }
+    }
+
+    .step__content {
+        display: none;
+    
+        .sy-icon--more,
+        .sy-icon--plus {
+            color: #666;
+        }
+    }
+}

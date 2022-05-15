@@ -1,0 +1,109 @@
+/**
+ * (C)Leanest CSS spinner ever
+ */
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(1turn);
+  }
+}
+
+@-moz-keyframes spin {
+  to {
+    -moz-transform: rotate(1turn);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.spinner-gif {
+  bottom: 0;
+  height: 32px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 32px;
+}
+
+.spinner {
+  position: relative;
+  display: inline-block;
+  width: 5em;
+  height: 5em;
+  margin: 0 0.5em;
+  font-size: 4px;
+  text-indent: 999em;
+  overflow: hidden;
+  -moz-animation: spin 0.8s infinite steps(8);
+  -webkit-animation: spin 0.8s infinite steps(8);
+  animation: spin 0.8s infinite steps(8);
+}
+
+.spinner.large {
+  font-size: 6px;
+}
+
+.spinner:before,
+.spinner:after,
+.spinner > div:before,
+.spinner > div:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2.25em; /* (container width - part width)/2  */
+  width: 0.5em;
+  height: 1.5em;
+  border-radius: 0.2em;
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3.5em rgba(0, 0, 0, 0.1); /* container height - part height */
+  -moz-transform-origin: 50% 2.5em; /* container height / 2 */
+  -webkit-transform-origin: 50% 2.5em; /* container height / 2 */
+  transform-origin: 50% 2.5em; /* container height / 2 */
+}
+
+.spinner:before {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.spinner.light:before {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.spinner:after {
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.spinner.light:after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.spinner > div:before {
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.spinner.light > div:before {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.spinner > div:after {
+  -moz-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.spinner.light > div:after {
+  background: rgba(255, 255, 255, 0.4);
+}

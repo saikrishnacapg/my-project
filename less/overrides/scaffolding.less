@@ -1,0 +1,22 @@
+//== Scaffolding
+//
+// ## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+@body-bg:               @primary-blue;
+//** Global text color on `<body>`.
+@text-color:            @complimentary-black;
+
+//** Global textual link color.
+@link-color:            @primary-blue;
+//** Link hover color set via `darken()` function.
+@link-hover-color:      darken(@link-color, 15%);
+
+
+hr {
+  border-color: @secondary-grey;
+
+  .panel & {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,25 @@
+@import "default-vars";
+@import "mixins";
+
+.navbar-inverse .navbar-link:hover {
+  color: @synergy-background-blue;
+  text-decoration: underline;
+}
+
+.footer {
+  height: @footerHeight;
+  border: none;
+  border-top: 1px solid @synergy-background-blue;
+  box-shadow: none;
+
+  .navbar-link{
+    margin: 10px;
+    font-size: 14px;
+    color: black;
+    font-weight: lighter;
+  }
+}
+
+.sy-phone > span {
+  margin-right: 5px;
+}

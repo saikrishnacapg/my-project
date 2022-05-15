@@ -1,0 +1,16 @@
+@import "../../node_modules/bootstrap/less/mixins";
+
+// rewrite bootstraps styles with our own colors
+// --------------------------------------------------
+
+.btn-primary {
+  .button-variant(#fff; @synergy-dark-blue; darken(@synergy-dark-blue, 5%));
+}
+
+		    
+a.list-group-item {
+	&.active, &.active:hover, &.active:focus {
+		background-color: @synergy-dark-blue;
+		border-color: @synergy-dark-blue
+	}
+}

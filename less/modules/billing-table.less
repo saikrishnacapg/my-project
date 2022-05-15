@@ -1,0 +1,194 @@
+table.billing {
+    width: 100%;
+
+    th {
+        border-bottom: 1px solid @secondary-blue;
+        padding: 0 10px 10px;
+    }
+
+    td {
+        padding: 10px;
+        border: none;
+    }
+
+    tr {
+        border-bottom: 1px solid @secondary-blue-light !important;
+    }
+
+    td:first-child {
+        padding-left: 35px;
+        display: flex;
+        align-items: center;
+
+        span[class*='sy-icon--'] {
+            left: auto;
+            margin-left: -25px;
+            position: absolute;
+            top: 10px;
+
+            @media (min-width: @screen-md) {
+                left: 6px;
+                margin: 0;
+            }
+        }
+    }
+
+    td:last-child {
+        span[class*='sy-icon--'] {
+            font-size: 24px;
+            margin-left: 4px;
+            position: absolute;
+            top: -5px;
+        }
+    }
+
+    @media (max-width: @screen-sm) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+
+        thead tr {
+            display: none;
+        }
+
+        tbody tr {
+            td:first-child {
+                padding-top: 15px;
+            }
+
+            td:last-child {
+                border-bottom: 1px solid @secondary-blue-light !important;
+                padding-bottom: 15px;
+            }
+        }
+
+        td {
+            border: none !important;
+            line-height: 1;
+            position: relative;
+            padding-left: 45% !important;
+
+            .glyphicon {
+                float: left;
+            }
+        }
+
+        td:before {
+            color: @complimentary-black;
+            font-weight: bold;
+            left: 0;
+            margin: auto 6px;
+            position: absolute;
+            white-space: nowrap;
+            width: 40%;
+        }
+
+        td:nth-of-type(1):before {
+            content: 'Billing Event';
+        }
+        td:nth-of-type(2):before {
+            content: 'Date';
+        }
+        td:nth-of-type(3):before {
+            content: 'Amount';
+        }
+
+        td:nth-of-type(4) div:before {
+            content: 'Download as';
+            color: @complimentary-black;
+            font-weight: bold;
+            left: 0;
+            margin: auto 6px;
+            position: absolute;
+            white-space: nowrap;
+            width: 40%;
+        }
+    }
+
+    // screen width break point for billing and payment history table
+    @media (min-width: 769px) {
+        .billAndPaymentsTable {
+            max-width: 298px;
+        }
+    }
+}
+
+.schedule-reading-date,
+.scheduled-billing-date {
+    display: flex;
+    justify-content: space-between;
+    .title-info-icon {
+        font-size: 1.65rem;
+    }
+}
+
+#wrapper .no-underline {
+    text-decoration: none;
+}
+
+// These styles were moved from bills.html as it was inlined in the markup.
+.newDate-cntr {
+    position: relative;
+}
+.newdaterangesection {
+    width: 367px;
+    right: 0px;
+    top: -17px;
+    float: right;
+
+    .sy-form-group {
+        width: 115px;
+        display: inline-block;
+    }
+
+    .form-group {
+        display: inline-block;
+    }
+
+    .sy-button--primary {
+        padding: 7px 30px;
+        position: relative;
+        top: -2px;
+    }
+}
+
+.external-link {
+    margin-bottom: 10px;
+
+    &-inner {
+        float: right;
+    }
+}
+
+@media (max-width: 767px) {
+    .newdaterangesection {
+        float: none;
+
+        .sy-button--primary {
+            top: 0px;
+        }
+    }
+
+    .external-link-inner {
+        float: left;
+    }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .newdaterangesection {
+        width: 367px;
+        right: 0px;
+        top: 0px;
+
+        .sy-button--primary {
+            top: 22px;
+            float: none;
+            position: absolute;
+        }
+    }
+}

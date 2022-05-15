@@ -1,0 +1,636 @@
+.home{
+  .main__content{
+    .panel-header{
+      h1{
+        a{
+          .sy-icon--circle_info{
+            font-size:16px;
+          }
+        }
+      }
+    }
+  }
+}
+.ami-int-cnt{
+  a:not(.sy-button--default){
+    &:focus, &:active, &:hover{
+      color:@link-primary-blue;
+    }
+  }
+  .ami-chart{
+    display:inline-block;
+    width:100%;
+  }
+  .chart-accessable{
+    a{
+      text-decoration: none;
+      &:focus{
+        outline: 2px auto @link-primary-blue;
+      }
+      &:hover, &:focus, &:active{
+        text-decoration: none;
+      }
+    }
+    .apexcharts-yaxistooltip{
+      display:none!important;
+    }
+    .apexcharts-menu-icon{
+      a{
+        img{
+          width:35px;
+          height:35px;
+        }
+      }
+    }
+  }
+  .dailyView{
+    margin: 20px 0px 35px;
+    float: left;
+    width: 100%;
+  }
+  .ami-next-prev-btn{
+    width: 135px;
+    &.ami-next-prev-days-btn{
+      width:160px;
+    }
+  }
+  .sy-alert--info{
+    margin: 20px 0px 0px;
+    display: inline-block;
+    width: 100%;
+  }
+  .ami-usage-summary{
+    margin-bottom:20px;
+    display:inline-block;
+    width:100%;
+  }
+  .interval-data__nav{
+    display: inline-block;
+    width: 100%;
+    margin-top: 35px;
+    margin-bottom: 10px;
+  }
+  .interval-data__graph {
+    min-height: 400px;
+  }
+  .btn-group{
+    margin: 0px 0px;
+
+    &.btn-toggle-gph-chart{
+      width: 100px;
+      margin-top: 0px;
+      border: 1px solid @LimedSpruce;
+      button{
+        background: @color-transparent;
+        margin-right: 0px;
+        margin-bottom: 2px;
+        border-right: 1px solid @LimedSpruce;
+        &.btn-tabular{
+          border-right:0px;
+        }
+        padding:4px 6px;
+      }
+      margin-top:15px;
+    }
+    &.btn-option-download{
+      width: 260px;
+      margin: 15px 0;
+      a{
+        padding:5px;
+        &:focus{
+          color:@link-primary-blue;
+        }
+      }
+      ul{
+        padding: 0px;
+        &.bottom-left{
+          border:0px;
+        }
+        li{
+          padding-left:0px;
+          a{
+            &:hover{
+              border-radius: 3px 3px 3px 3px;
+              -moz-border-radius: 3px 3px 3px 3px;
+              -webkit-border-radius: 3px 3px 3px 3px;
+            }
+            color: @MenuTxtColour;
+          }
+          &:before{
+            display:none;
+          }
+        }
+      }
+      .dropdown{
+        font-size: 14px;
+        font-weight: normal;
+        float: left;
+        margin: 2px 10px;
+        line-height: 23px;
+        span{
+          color:@MenuTxtColour;
+
+          &.sy-icon--new_window{
+            color:@secondary-cyan;
+          }
+        }
+      }
+      a{
+        color:@MenuTxtColour;
+        label{
+          padding:2px 5px 0px;
+        }
+      }
+    }
+    a{
+      text-decoration:none;
+    }
+    &.return-dashboard{
+      margin: 5px 0px;
+      width: 200px;
+      float: right;
+    }
+    .sy-icon-stats-bar--charts{
+      &.activeButton{
+        &:before {
+          content: url(../img/stats-bars-blue.svg);
+        }
+      }
+      &:before {
+        content: url(../img/stats-bars-darker-grey.svg);
+      }
+    }
+    .sy-icon-tabular--charts{
+      &.activeButton{
+        &:before {
+          content: url(../img/tabular-blue.svg);
+        }
+      }
+      &:before {
+        content: url(../img/tabular-darker-grey.svg);
+      }
+    }
+  }
+  section{
+    width: 100%;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: space-between;
+    &.disclaimer-cntr{
+      margin-bottom:0px;
+    }
+    .disclaimer{
+      &.box{
+        width:100%;
+        display:inline-block;
+        li{
+          &:before{
+            border: 3px solid @Black;
+          }
+        }
+      }
+    }
+    .box{
+      -webkit-box-shadow: 0px 0px 5px 1px @Gallery;
+      -moz-box-shadow: 0px 0px 5px 1px @Gallery;
+      box-shadow: 0px 0px 5px 1px @Gallery;
+      padding: 15px 15px 10px;
+      width: 48%;
+      min-height: 200px;
+      .content{
+        margin-top:15px;
+        .acc-radio-btn-group {
+          .acc-radio-btn{
+            display: inline-block;
+            width: 100%;
+            margin: 15px 0px;
+            line-height: 15px;
+          }
+        }
+        .button-cntr{
+          text-align: center;
+        }
+        .toggle-switch{
+          display: flex;
+          justify-content: flex-end;
+          margin: 25px 0px;
+
+          span{
+            line-height: 30px;
+            margin-right: 10px;
+          }
+          .switch{
+            span{
+              margin-right:0px;
+            }
+          }
+        }
+        .usage-graph{
+          img{
+            width:100%;
+          }
+        }
+      }
+    }
+    ul{
+      padding: 15px 0px 20px 0px;
+      margin-bottom: 0px;
+      li{
+        list-style-type: none;
+        line-height: 25px;
+        position: relative;
+        padding-left: 15px;
+        &:before{
+          content: '';
+          display: block;
+          position: absolute;
+          top: 8px;
+          left: 0px;
+          width: 3px;
+          height: 3px;
+          border: 3px solid @link-primary-blue;
+          border-radius: 50%;
+        }
+        a{
+          padding-left: 10px;
+          text-decoration: underline;
+          &:hover{
+            text-decoration: none;
+          }
+          cursor:pointer;
+        }
+      }
+    }
+  }
+  .supply-charge-text{
+    p{
+      margin:0px;
+    }
+    a{
+      text-decoration:underline;
+    }
+  }
+  .newdaterangesection{
+    float:right;
+    .sy-form-group{
+      width: 115px;
+      display: inline-block;
+    }
+    .form-group{
+      display: inline-block;
+    }
+    .sy-button--primary{
+      padding: 7px 30px;
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  .daily-usage-cost{
+    margin:10px 0px;
+    h2{
+      display:inline-block;
+      margin-right:5px
+    }
+    span{
+      font-weight:bold;
+    }
+  }
+
+  /*Toggle button design*/
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      &:checked + .slider {
+        background-color: @primary-green;
+      }
+      &:focus + .slider {
+        box-shadow: 0 0 1px @primary-green;
+      }
+      &:checked + .slider:before {
+        -webkit-transform: translateX(24px);
+        -ms-transform: translateX(24px);
+        transform: translateX(24px);
+      }
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: @Silver;
+      -webkit-transition: .4s;
+      transition: .4s;
+      &:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 4px;
+        background-color: @primary-white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+    }
+  }
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+}
+.ami-account-summary{
+  h2{
+    font-size:16px;
+  }
+  .content{
+    line-height: 16px;
+    margin-bottom:20px;
+    margin-top:11px;
+    a,p{
+      margin:0px;
+      padding:0px;
+    }
+    a{
+      font-size: 12px;
+      text-decoration: underline;
+      &:focus, &:hover, &:active{
+        color:@link-primary-blue;
+      }
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+  .usage-bar-chart{
+    .high, .avg, .low{
+      width: 32%;
+      float: left;
+      height: 100%;
+      margin:0 0.5%;
+      a{
+        &:hover, &:focus, &:active{
+          text-decoration:none;
+        }
+      }
+      .bar-legend{
+        text-align:center;
+        margin-top:2px;
+        div{
+          margin: 0px;
+          color: @complimentary-black;
+          display: block;
+          width: 100%;
+          font-size: 0.8em;
+          padding: 3px 5px;
+          span{
+            &.colour-box{
+              height: 10px;
+              width: 10px;
+              display: inline-block;
+            }
+          }
+        }
+      }
+      .bar-chart{
+        width: 100%;
+        height: 200px;
+        transform: rotate(180deg);
+        overflow: hidden;
+        div{
+          height: 100%;
+          width: 100%;
+          display:inline-block;
+          text-align: center;
+          transform: rotate(180deg);
+          padding: 5px 0px;
+          color: @complimentary-black;
+          font-weight:bold;
+        }
+      }
+    }
+    .high{
+      .bar-chart{
+        div{
+          background: @Carnation;
+        }
+      }
+      .bar-legend{
+        div{
+          background: @Carnation;
+        }
+      }
+    }
+    .avg{
+      .bar-chart{
+        div{
+          background: @primary-yellow;
+        }
+      }
+      .bar-legend{
+        div{
+          background: @primary-yellow;
+        }
+      }
+    }
+    .low{
+      .bar-chart{
+        div{
+          background: @secondary-cyan;
+        }
+      }
+      .bar-legend{
+        div{
+          background: @secondary-cyan;
+        }
+      }
+    }
+  }
+}
+
+.energytool_content, .energyusage_content{
+  padding: 41.5px 0px;
+}
+
+.energyusage_content{
+  min-height: 303px;
+}
+.remove-cursor{
+  cursor:default;
+}
+
+/* Table */
+.custom-table{
+  border-collapse: collapse;
+  width: 100%;
+  .table-responsive{
+    border: 0px;
+  }
+  table{
+    width:100%;
+    caption{
+      text-align: left;
+      margin:10px 0px;
+      position:absolute;
+      visibility: hidden;
+    }
+    margin-bottom:0px;
+  }
+  &.daily-table{
+    table{
+      margin:30px 0px;
+    }
+  }
+  td, th {
+    border-bottom: 1px solid @primary-blue;
+    padding: 8px;
+    text-align: center;
+  }
+  tr{
+    &:hover
+    {
+      background-color: @primary-blue;
+    }
+  }
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: @primary-blue;
+    color: #182124;
+  }
+  td{
+    a{
+      border-bottom:0px;
+      text-decoration:underline;
+      &:focus{
+        color:@link-primary-blue;
+      }
+    }
+  }
+}
+/* Table */
+
+@media (max-width: 767px) {
+  .main__content {
+    .ami-int-cnt
+    .panel-header {
+      h1 {
+        margin: 10px 0 15px;
+      }
+    }
+  }
+
+  .ami-int-cnt{
+    display: inline-block;
+    width: 100%;
+    padding: 0px!important;
+    section{
+      margin-bottom:0px;
+      display: block;
+      .box{
+        margin: 10px 0px;
+        min-height:160px;
+        width:100%;
+      }
+    }
+    .btn-group{
+      .return-dashboard, .btn-data-picker{
+        width:100%;
+      }
+      .btn-data-picker{
+        margin-top:10px;
+      }
+
+    }
+    .newdaterangesection {
+      float: none;
+      margin-top:30px;
+      position:relative;
+      .sy-button--primary{
+        top:0px;
+      }
+    }
+    .external-link-inner{
+      float:left;
+    }
+    .ami-next-prev-btn, .ami-next-prev-days-btn{
+      width: 100%;
+      position:relative;
+      .sy-icon--chevron-left{
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        margin-top: -7px;
+      }
+      .sy-icon--chevron-right
+      {
+        position: absolute;
+        right: 10px;
+        margin-top: -7px;
+        top: 50%;
+      }
+    }
+  }
+  .energytool_content, .energyusage_content {
+    padding: 20px 0px;
+  }
+}
+@media (max-width: 640px) {
+  .ami-int-cnt {
+    .btn-group{
+      &.btn-toggle-gph-chart, &.btn-option-download {
+        margin:20px 0 30px;
+      }
+      &.return-dashboard{
+        margin: 30px 0px 20px;
+      }
+    }
+    .sy-alert--info{
+      margin-bottom: 10px;
+    }
+  }
+}
+@media (max-width: 480px) {
+  .ami-int-cnt {
+    .newdaterangesection{
+      .sy-form-group{
+        width:100px;
+        margin-bottom:0px;
+      }
+    }
+    .btn-group{
+      &.return-dashboard{
+        float:left;
+      }
+    }
+  }
+}
+
+/*IE fix*/
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .newdaterangesection{
+    width: 367px!important;
+    right: 0px!important;
+    top: 0px!important;
+  }
+  .newdaterangesection .sy-button--primary{
+    top:22px!important;
+    float:none!important;
+    position:absolute!important;
+  }
+}

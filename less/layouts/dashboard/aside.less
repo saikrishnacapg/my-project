@@ -1,0 +1,163 @@
+.main__aside {
+    .make-xs-column(12);
+    .make-sm-column(5);
+    .make-md-column(4);
+    .make-md-column-offset(0);
+    padding: 10px 20px 0;
+
+    .panel {
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .panel-header {
+        .clearfix();
+        margin: 10px 0 20px;
+    }
+
+    .list-group-item {
+        font-size: 11px;
+        padding-left: 0px;
+
+        .badge {
+            float: none;
+            left: 170px;
+            position: absolute;
+        }
+
+        .glyphicon {
+            color: @secondary-blue;
+        }
+
+        @media (min-width: @screen-sm) {
+            padding-left: 0;
+        }
+    }
+
+    .update-details-link {
+        .flex(@align: center, @justify: space-between);
+        padding-right: 0;
+    }
+
+    .online-support-link {
+        .flex(@align: center, @justify: space-between);
+        padding-right: 0;
+
+        .icon-help {
+            .flexCenter();
+            .circle(24px);
+            padding: 5px;
+            margin-right: 10px;
+            color: @white;
+            font-size: 1.85rem;
+            font-weight: bold;
+            background-color: @synergy-online-business-blue;
+        }
+
+        .text-content {
+            .flexVerticalCenter();
+        }
+    }
+}
+.horzLine {
+    border-bottom: 1px solid #ccc;
+    margin: 5px 0px 15px 0px;
+}
+.normalTxt,
+.normalTxt label {
+    font-weight: normal;
+    font-size: 12px;
+}
+.PopDiv {
+    border: 1px solid @black;
+    position: absolute;
+    z-index: 11;
+    background: @white;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+}
+.DselectLink {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 0px;
+}
+.showOnMobile {
+    display: none;
+}
+.showOnDesktop {
+    display: block;
+}
+.RelativeDiv {
+    position: relative;
+}
+
+.imgPaymentType {
+    .size(23px, 20px);
+    margin-left: -32px;
+    margin-top: -5px;
+}
+
+.cell {
+    padding: 10px;
+    border-bottom: 1px solid #b4d2dc;
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: arial, helvetica, verdana, sans-serif;
+}
+
+.icon-img,
+.billing-card {
+    .size(23px, 20px);
+}
+
+.FilterBox {
+    a {
+        cursor: pointer;
+    }
+}
+
+.update-details-banner {
+    padding: 15px;
+    position: relative;
+    background-color: #e5eaea;
+    font-family: "Proxima Nova Soft W03",Futura,"Trebuchet MS",Helvetica,Arial,Verdana,sans-serif;
+    font-size: 13px;
+    a {
+        color: inherit;
+        font-weight: bold;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    button {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+    table.usage td:before {
+        color: @black;
+    }
+}
+
+@media screen {
+    .noScreen {
+        display: none;
+    }
+}
+
+@media print {
+    .noPrint {
+        display: none;
+    }
+}

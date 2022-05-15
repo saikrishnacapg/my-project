@@ -1,0 +1,117 @@
+.account-header {
+  color: #fff;
+  position: relative;
+  min-height: 150px;
+
+  @media (min-width: @screen-sm) {
+    border-bottom: 6px solid @primary-green;
+    padding-bottom: 0;
+  }
+
+  .account-header__icon {
+    font-size: 27px;
+    left: 15px;
+    position: absolute;
+    top: 20px;
+
+    span[class*='sy-icon--'] {
+      color: #fff;
+    }
+  }
+
+  .account-header__info {
+    font-size: 12px;
+    margin: 0;
+    padding: 20px 0 20px 50px;
+
+    @media (min-width: (@menu-min-width + 1)) and (max-width: @screen-sm) {
+      padding-bottom: 60px;
+    }
+
+    h2 {
+      color: #fff;
+      font-weight: bold;
+      margin: 0 0 5px;
+
+      small {
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+
+    a {
+      border-bottom: 1px solid #fff;
+      color: #fff;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 4px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.account-option {
+    .account-avatar {
+        @media (min-width: 768px) {
+            display: none;
+        }
+    }
+}
+
+.mobile-nav {
+  display: none;
+  padding: 20px 20px 10px;
+
+  @media (max-width: @menu-min-width) {
+    display: block;
+  }
+
+  .sy-button--icon-left {
+    span[class*='sy-icon'] {
+      font-size: 21px;
+    }
+  }
+}
+
+.main-nav {
+  display: block;
+  position: absolute;
+
+  @media (max-width: @menu-min-width) {
+    display: block;
+    padding: 2px 17px 0 20px;
+    top: 160px;
+    width: 100%;
+    z-index: 10;
+
+    li {
+      display: block;
+      float: none;
+    }
+
+    a {
+      border-radius: 0;
+    }
+  }
+
+  @media (min-width: (@menu-min-width + 1)) {
+    bottom: 0;
+    margin: 0;
+
+    left: auto;
+    right: 20px;
+    top: auto;
+
+    &.ng-hide {
+      display: block !important; // override ng-hide because modernizr.touch isn't working
+    }
+  }
+
+  .sy-tabs {
+    border: none;
+  }
+}

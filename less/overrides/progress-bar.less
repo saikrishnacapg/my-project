@@ -1,0 +1,31 @@
+.make-sy-progress-bar( @height ) {
+
+	&:extend( .progress );
+
+	background: @secondary-grey;
+	border: 1px solid @secondary-blue-light;
+	border-radius: @height / 2;
+   	box-shadow: none;
+   	height: @height;
+   	margin: 0;
+
+   	.sy-strength-bar {
+		&:extend( .progress-bar );
+   	}
+
+   	.sy-progress-bar {
+		&:extend( .progress-bar, .progress-striped .progress-bar, .progress.active .progress-bar );
+
+		background-color: @secondary-cyan;
+		animation-name:none;
+		animation-duration:0s;
+		animation-delay:0s;
+	}
+
+}
+
+.sy-progress {
+	.make-sy-progress-bar( 14px );
+	&:extend( .progress-striped all, .active );
+}
+

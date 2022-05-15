@@ -1,0 +1,204 @@
+.make-sy-alert(@alert-type) {
+  &:extend(.alert);
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0 0 20px;
+  line-height: 1.8;
+
+  & when (@alert-type = info) {
+    &:extend(.alert-info);
+
+    background: #fff;
+    border: 1px solid @primary-blue;
+    color: @complimentary-black;
+
+    a {
+      text-decoration: underline;
+      &:hover {
+        color: @complimentary-blue;
+        text-decoration: none;
+      }
+    }
+  }
+
+  & when (@alert-type = warning) {
+    &:extend(.alert-warning);
+
+    background: #f4f7f9;
+    border: 1px solid #b4d2dc;
+    border-radius: 0;
+    color: #002c5a;
+    font-size: 12px;
+
+    @media (min-width: @screen-sm) {
+      font-size: 11px;
+      padding: 12px;
+    }
+  }
+
+  & when (@alert-type = danger) {
+    &:extend(.alert-danger);
+    border: none;
+    border-radius: 0;
+    color: @complimentary-red;
+    font-size: 12px;
+    @media (min-width: @screen-sm) {
+      font-size: 11px;
+      padding: 12px;
+    }
+  }
+
+  & when (@alert-type = notification) {
+    &:extend(.alert-danger);
+
+    border: none;
+    border-radius: 0;
+    color: @field-warning;
+    background-color: @complimentary-blue;
+    font-size: 12px;
+
+    @media (min-width: @screen-sm) {
+      font-size: 11px;
+      padding: 12px;
+    }
+  }
+
+  & when (@alert-type = outage) {
+    &:extend(.alert-info);
+
+    background: @field-outage;
+    border: 1px solid @primary-blue;
+    color: #fff;
+
+    a {
+      text-decoration: underline;
+      &:hover {
+        color: @complimentary-blue;
+        text-decoration: none;
+      }
+    }
+  }
+
+  & when (@alert-type = banner-notification) {
+    &:extend(.banner-notification);
+    background: #efbd46;
+    border: 1px solid @primary-blue;
+    color: @complimentary-black;
+    a {
+      text-decoration: underline;
+      &:hover {
+        color: @complimentary-blue;
+        text-decoration: none;
+      }
+    }
+  }
+
+  span[class*='sy-icon--'] {
+    color: @secondary-cyan;
+    float: left;
+    font-size: 24px;
+    margin: 0 10px 0 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.sy-alert--info {
+  .make-sy-alert(info);
+}
+
+.sy-alert--warning {
+  .make-sy-alert(warning);
+}
+
+.sy-alert--error, .sy-alert--danger {
+  .make-sy-alert(danger);
+  overflow: hidden;
+
+  // triangle
+  &:after {
+    border: 8px solid transparent;
+    border-bottom: 8px solid #f2dede;
+    content: '';
+    display: block;
+    height: 0;
+    left: 35px;
+    position: absolute;
+    top: -16px;
+    width: 0;
+  }
+
+  .login &:after {
+    display: none;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  span[class*='sy-icon--'] {
+    color: #999;
+    font-size: 11px;
+  }
+}
+
+.sy-alert--no-arrow {
+  &:after {
+    display: none;
+  }
+}
+
+.sy-alert--outage {
+  .make-sy-alert(outage);
+}
+
+.sy-alert--notification {
+  .make-sy-alert(notification);
+  overflow: hidden;
+
+  &:after {
+    border: 8px solid transparent;
+    border-bottom: 8px solid @complimentary-blue;
+    content: '';
+    display: block;
+    height: 0;
+    left: 35px;
+    position: absolute;
+    top: -16px;
+    width: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  span[class*='sy-icon--'] {
+    color: #999;
+    font-size: 11px;
+  }
+}
+.sy-alert--banner-notification {
+  .make-sy-alert(banner-notification);
+  overflow: hidden;
+  span[class*='sy-icon--'] {
+    color: #000000 !important;
+    float: left;
+    font-size: 24px;
+    margin: 0 10px 0 0;
+  }
+}
+
+.sy-form-error {
+  margin-top: 8px;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+  -webkit-transform: translate3d(0, 0, 1px);
+  transform: translate3d(0, 0, 1px);
+
+  @media (min-width: @screen-sm) {
+    width: 100%;
+  }
+}

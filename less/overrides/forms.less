@@ -1,0 +1,174 @@
+//== Forms
+//
+//##
+
+//** `<input>` background color
+@input-bg: #fff;
+//** `<input disabled>` background color
+@input-bg-disabled: @gray-lighter;
+
+//** Text color for `<input>`s
+@input-color: @gray;
+//** `<input>` border color
+@input-border: @complimentary-gray;
+//** `<input>` border radius
+@input-border-radius: @border-radius-base;
+//** Border color for inputs on focus
+@input-border-focus: #016ca6;
+
+//** Placeholder text color
+@input-color-placeholder: @gray-light;
+
+//** Default `.form-control` height
+@input-height-base: (@line-height-computed + (@padding-base-vertical * 2) + 2);
+//** Large `.form-control` height
+@input-height-large: (
+  ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2
+);
+//** Small `.form-control` height
+@input-height-small: (
+  floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) +
+    2
+);
+
+@legend-color: @gray-dark;
+@legend-border-color: #e5e5e5;
+
+//** Background color for textual input addons
+@input-group-addon-bg: @gray-lighter;
+//** Border color for textual input addons
+@input-group-addon-border-color: @input-border;
+
+.sy-form-group {
+  display: block;
+  .make-row();
+  margin: 0 0 20px;
+
+  @media (min-width: @screen-xs) {
+    display: block;
+  }
+
+  label {
+    color: @gray;
+    display: block;
+    font-size: 13px;
+    padding: 0;
+  }
+}
+
+select,
+input[type='text'],
+input[type='email'],
+input[type='number'],
+input[type='tel'],
+input[type='password'] {
+  font-size: 13px;
+
+  @media (min-width: @screen-xs) {
+    font-size: 15px;
+  }
+}
+
+.form-horizontal {
+  .clearfix();
+
+  position: relative;
+
+  .form-group {
+    margin: 0;
+
+    @media (min-width: @screen-xs) {
+      float: left;
+      margin: 0 10px 0 0;
+    }
+  }
+
+  label {
+    float: none;
+    font-size: 12px;
+    margin: 0 0 5px;
+    padding: 0 10px 0 0;
+    width: auto;
+
+    @media (min-width: @screen-sm) {
+      margin: 0 10px 0 0;
+    }
+  }
+}
+
+.form-horizontal.hidden-xs.active {
+  display: block !important;
+}
+
+.controls {
+  position: relative;
+}
+
+.pull-up-20 {
+  position: relative;
+  top: -20px;
+}
+
+.form-separator {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.dd-payment-type {
+  .form-must-complete {
+    display: none;
+  }
+}
+
+.form-must-complete {
+  font-weight: 800;
+  color: @gray;
+  bottom: -10px;
+  position: relative;
+}
+
+.one-click-register {
+    &-help{
+      position: relative;
+    }
+    &-dob,
+    &-password,
+    &-pointId {
+      margin-bottom: 29px;
+      padding-left: 0;
+    }
+    &-dob{
+      padding-right: 551px;
+    }
+    &-password{
+      padding-right: 0;
+    }
+    &-pointId{
+      padding-right: 41px;
+    }
+}
+
+.contactDetailsSubForm  .sy-form-group label {
+    color: #000;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.one-third {
+    width: 33%;
+}
+
+.two-third {
+    width: 66%;
+}
+
+.full-width {
+    width: 100%;
+}

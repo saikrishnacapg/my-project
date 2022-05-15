@@ -1,0 +1,117 @@
+.footer {
+    .container();
+    .flex(@direction: column, @align: center);
+    color: @global-text-colour;
+    font-size: 12px;
+    min-width: 100%;
+    padding: 15px;
+
+    @media (min-width: @screen-sm) {
+        padding-top: 20px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    @media (min-width: @screen-md) {
+        min-width: 0;
+        padding: 15px 0;
+    }
+
+    a {
+        color: @link-primary-blue;
+        font-size: 12px;
+        font-weight: bold;
+        margin-right: 20px;
+        text-decoration: none;
+        background-repeat: no-repeat;
+
+        &:hover {
+            color: @primary-green;
+        }
+
+        &.feedback-cta {
+            padding: 0 0 0 22px;
+            background-image: url(../img/understanding-energy-blue.svg);
+            background-size: contain;
+            background-position: 5px center;
+        }
+
+        &.icon {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+
+            &.icon--social-twitter {
+                background-image: url(../img/social-twitter-white.svg);
+            }
+            &.icon--social-facebook {
+                background-image: url(../img/social-facebook-white.svg);
+            }
+            &.icon--social-linkedin {
+                background-image: url(../img/social-linkedin-white.svg);
+            }
+            &.icon--social-youtube {
+                background-image: url(../img/social-youtube-white.svg);
+            }
+        }
+
+   
+    }
+
+    &__contact {
+        width: 100%;
+        a {
+            text-decoration: none;
+        }
+
+        @media (min-width: @screen-sm) {
+            padding: 0;
+            width: 50%;
+        }
+        @media (min-width: @screen-md) {
+            width: 100%;
+        }
+    }
+
+    &__logos {
+        .flex(@align: center, @justify: center);
+        width: 100%;
+        margin-top: 10px;
+
+        @media (min-width: @screen-sm) {
+            padding: 0;
+            margin-top: 0;
+            width: 50%;
+        }
+        
+    }
+
+    .social-media {
+        list-style: none;
+        margin: 0;
+        padding-left: 0;
+        line-height: 0;
+        display: block;
+
+        .social-media-item {
+            width: 35px;
+            height: 35px;
+            margin: 0 10px 0 0;
+            display: inline-block;
+
+            a {
+                font-size: 0;
+                background-size: 100%;
+                background-position: center;
+            }
+        }
+    }
+
+    .gte-logo {
+        .size(88px, 45px);
+        background: url(../img/GTE_Logo_Mono.svg) no-repeat center center / 100%;
+        margin-right: 0;
+        display: inline-block;
+    }
+}

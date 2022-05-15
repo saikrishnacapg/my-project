@@ -1,0 +1,194 @@
+/** CR5524 - Project Engage - At Risk Payment Arrangement **/
+
+.bpay-credit-card {
+	.bx-card {
+		width: 48%;
+		display: inline-block;
+		margin-right: 1.5%;
+
+		.image {
+			.size(40px, 60px);
+			background-size: 40px;
+			background-repeat: no-repeat;
+			float: left;
+		}
+
+		.way-to-pay-content {
+			width: 80%;
+			float: left;
+			margin-left: 15px;
+		}
+
+		&.baycard.way-to-pay-section,
+		&.creditcard.way-to-pay-section {
+			.width100();
+		}
+	}
+}
+
+.way-to-pay-section {
+	margin-bottom: 10px;
+}
+
+img.Bpayimg {
+	.size(44px, 59px);
+}
+
+.way-to-pay-content {
+	p,
+	h4 {
+		margin: 0;
+	}
+}
+
+a .baycard {
+	margin-bottom: 20px;
+}
+
+.arrangement {
+	&-label {
+		padding-left: 0;
+		margin-bottom: 5px;
+	}
+	&-value {
+		padding-left: 10px;
+	}
+	&-modify-value {
+		padding-left: 10px;
+	}
+	&-section {
+		padding: 10px 10px 0 20px;
+	}
+	&-title,
+	&-success {
+		margin-top: 0;
+	}
+	&-form-label {
+		margin-bottom: 5px;
+		font-size: 13px;
+		color: @label-text;
+		border: none;
+		font-weight: bold;
+	}
+	&-form-input option {
+		color: @black;
+	}
+	&-dropdown-container {
+		.dropdown-menu .arrangement-modify-dropdown a {
+			font-weight: normal;
+			padding: 3px 13px;
+		}
+
+		button {
+			font-size: inherit;
+			padding-left: 13px;
+			padding-right: 20px;
+		}
+
+		ul.dropdown-menu {
+			min-width: auto;
+			padding-right: 0px;
+		}
+
+		float: left;
+	}
+	&-form-calendar {
+		padding-left: 9px;
+	}
+}
+
+select {
+	&.arrangement-form-input {
+		padding-left: 5px;
+	}
+	&:required:invalid.arrangement-form-input {
+		color: @placeholder-text;
+	}
+}
+
+.arrangement-form-input,
+input.arrangement-form-input {
+	color: @black;
+	font-family: inherit;
+	font-size: 13px;
+	margin: 0;
+}
+
+.info-icon {
+	.sy-icon--circle_info:before {
+		font-size: 30px;
+		line-height: 40px;
+	}
+}
+
+.modify-label {
+	padding: 0 10px 0 0;
+}
+
+.label-frequency {
+	padding: 10px 10px 0 0;
+}
+
+.radio-frequency {
+	padding: 0;
+	width: 58.33%;
+	margin: 0;
+}
+
+.instalment-details {
+	span.label-date {
+		padding: 0 0 0 10px;
+		width: 48%;
+	}
+	span.label-amount {
+		padding: 0;
+		width: 50%;
+	}
+	&-label {
+		margin-bottom: 5px;
+	}
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.no-margin-bottom,
+.no-margin-bottom label.no-margin-bottom {
+	margin-bottom: 0;
+}
+
+.payment-method-message {
+	padding-left: 28px;
+}
+
+.instalments-tooltip {
+	font-size: 20px;
+	padding-left: 10px;
+	border: none;
+	background-color: @white;
+}
+
+.margin-left-20 {
+	margin-left: 20px;
+}
+
+.cancel-dd-message {
+	margin: 20px;
+}
+
+.payment-method-error {
+	position: static;
+}
+
+@media (max-width: 520px) {
+	.arrangement-value {
+		padding-left: 0;
+	}
+}
+
+@media print {
+	.print-instalments {
+		display: none;
+	}
+}

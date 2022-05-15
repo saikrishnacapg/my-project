@@ -1,0 +1,119 @@
+// this file contains the mixin functions for the app
+
+@import "lesshat";
+
+.margin-auto(){
+  margin-left: auto;
+  margin-right: auto;
+}
+/* overrides above mixin if argument is supplied. */
+.margin-auto(@width){
+  width: @width;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.transition(@colour, @time, @easing){
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
+}
+
+.transition(@colour, @time, @easing, @delay){
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
+}
+
+.transform(@x, @y, @z){
+  -webkit-transform: translate3d(@x,@y,@z);
+  -moz-transform: translate3d(@x,@y,@z);
+  -ms-transform: translate3d(@x,@y,@z);
+  -o-transform: translate3d(@x,@y,@z);
+  transform: translate3d(@x,@y,@z);
+}
+
+.btn-arrow(){
+  background-image: url("img/btn-arrow.png");
+  background-repeat: no-repeat;
+  background-position: 96%;
+  background-size: 15px 15px;
+}
+
+.button-variant-synergy(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  //font-weight: bold;
+  border-radius: 0;
+  text-align: left;
+  padding-left: 4%;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    color: @color;
+    background-color: darken(@background, 8%);
+    border-color: darken(@border, 12%);
+  }
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    //background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: @background;
+      border-color: @border
+    }
+  }
+}
+// buttons with no border
+.button-variant-synergy(@color; @background) {
+  color: @color;
+  background-color: @background;
+  border: none;
+
+
+  border-radius: 0;
+  text-align: left;
+  padding-left: 4%;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    color: @color;
+    background-color: darken(@background, 8%);
+    border: none;
+  }
+  &:active,
+  &.active,
+  .open .dropdown-toggle& {
+    //background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: @background;
+      border: none;
+    }
+  }
+}

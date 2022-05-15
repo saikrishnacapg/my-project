@@ -1,0 +1,108 @@
+// This need to be made generically responsive
+table.usage {
+  width: 100%;
+
+  th {
+    border-bottom: 1px solid @secondary-blue;
+    padding: 0 10px 10px;
+  }
+
+  td {
+    padding: 10px;
+  }
+
+  td:first-child {
+    padding-left: 35px;
+
+    span[class*='sy-icon--'] {
+      left: auto;
+      margin-left: -20px;
+      position: absolute;
+      top: 10px;
+
+      @media (min-width: @screen-md) {
+        left: 6px;
+        margin: 0;
+      }
+    }
+  }
+
+  td:last-child {
+    span[class*='sy-icon--'] {
+      font-size: 24px;
+      margin-left: 4px;
+      position: absolute;
+      top: -5px;
+    }
+  }
+
+  @media (max-width: @screen-sm) {
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
+
+    thead tr {
+      display: none;
+    }
+
+    tbody tr {
+      td:first-child {
+        padding-top: 15px;
+      }
+
+      td:last-child {
+        border-bottom: 1px solid @secondary-blue-light !important;
+        padding-bottom: 15px;
+      }
+    }
+
+    td {
+      text-align: right;
+      border: none !important;
+      line-height: 1;
+      position: relative;
+      padding-left: 50% !important;
+
+      .glyphicon {
+        float: left;
+      }
+    }
+
+    td:before {
+      color: @primary-blue;
+      font-weight: bold;
+      left: 0;
+      margin: auto 6px;
+      position: absolute;
+      white-space: nowrap;
+      width: 45%;
+    }
+
+    td:nth-of-type(1):before {
+      content: 'Bill period end date';
+    }
+    td:nth-of-type(2):before {
+      content: 'Number of billing days';
+    }
+    td:nth-of-type(3):before {
+      content: 'Average daily usage (units)';
+    }
+    td:nth-of-type(4):before {
+      content: 'Total usage for period';
+    }
+    td:nth-of-type(5):before {
+      content: 'Bill amount ($)';
+    }
+    td:nth-of-type(6):before {
+      content: 'Solar export (units)';
+    }
+    td:nth-of-type(7):before {
+      content: 'C02 (kg)';
+    }
+  }
+}

@@ -1,0 +1,80 @@
+@import "default-vars";
+
+@media (min-width: @screen-md) {
+  .thin-pad-right {
+    padding-right: 5px;
+  }
+
+  .thin-pad-left {
+    padding-left: 5px;
+  }
+}
+
+@media (min-width: @minTabletWidth) {
+  .well-login {
+    padding: 48px;
+  }
+
+  .pull-right-except-mobile {
+    float: right !important;
+  }
+
+  .span-inline-md-lg {
+    display: inline !important;
+  }
+}
+
+@media (max-width: @maxHandheldWidth) {
+  // Maximize size on mobile - at 15px each there was too much padding going on.
+  .well, .container, .panel-body.main {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .no-mobile-border {
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  .pull-right-on-mobile {
+    float: right !important;
+  }
+
+  .strip-horizontal-padding-on-mobile {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .text-center-mobile {
+    text-align: center;
+  }
+
+  // Accounts dropdown was going out of screen to the far left
+  .pull-right > .dropdown-menu {
+    max-width: 300px;
+    overflow-x: hidden;
+  }
+
+  // Adds the form group padding when on mobile devices for form groups fields that are split into two or more.
+  .mobile-form-group {
+    margin-bottom: 15px;
+  }
+}
+
+// Responsive modals - resize to best appropriate size.
+@media screen and (min-width: @minTabletWidth) {
+  .modal-dialog {
+    width: 700px;
+  }
+}
+@media screen and (min-width: @screen-md) {
+  .modal-dialog {
+    width: 750px;
+  }
+}
+@media screen and (min-width: @screen-lg) {
+  .modal-dialog {
+    width: 850px;
+  }
+}

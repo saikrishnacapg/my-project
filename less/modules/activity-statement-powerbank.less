@@ -1,0 +1,394 @@
+.activity-statement-powerbank {
+    table tbody tr td:nth-child(2) {
+        .consumption-bar {
+            height: 35px;
+            display: flex;
+            align-items: center;
+            span {
+                padding-left: 5px;
+            }
+        }
+    }
+    .dropdown {
+        &-select,
+        &-text {
+            width: 100%;
+        }
+        &-text {
+            display: flex;
+            align-items: center;
+        }
+        &-container {
+            .flex(column, wrap, @align: center);
+        }
+    }
+    .consumption {
+        &-breakdown-cell {
+            span {
+                display: inline-block;
+            }
+        }
+    }
+
+    // -- LAYOUT --//
+    .row {
+        .noPadding();
+        margin: 0 0 10px 0;
+    }
+    .column {
+        .flex(column);
+        width: 100%;
+        position: relative;
+    }
+    .column-gray {
+        .flex(column);
+        justify-content: space-between;
+        position: relative;
+        width: 100%;
+        background-color: #ececec;
+        padding: 10px;
+    }
+    .column-head,
+    .battery-column-head {
+        width: 100%;
+        font-size: 1.875rem;
+    }
+    .tertiary-heading {
+        .resetMarginPadding();
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .dropdown-container {
+        padding-bottom: 10px;
+        width:100%;
+        display:flex;
+    }
+    .content{
+        .fontSize(30);
+        border: 1px solid gray;
+        width: 100px;
+        background-color: #fff;
+        text-align: center;
+        border-radius:4px;
+        margin: 0;
+        padding-left: 0;
+    }
+    // -- COSTS/SAVINGS SECTION --//
+    .cost-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 0 20px;
+        &:first-of-type {
+            margin-top: 20px;
+        }
+        .cost-label-container {
+            display: flex;
+            flex: 6 1 0;
+        }
+        .cost-input-container {
+            flex: 1 1 0;
+            .resetMarginPadding();
+        }
+        label {
+            font-weight: normal;
+            margin: 0;
+        }
+        label,
+        input {
+            width: 100%;
+        }
+    }
+
+    // -- BATTERY --//
+    .battery {
+        &-column {
+            padding: 15px 0 0 0;
+        }
+        &-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 20px;
+        }
+        &-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 50%;
+            height:150px;
+            padding: 0;
+            margin: 20px 0 20px 20px;
+            border: 6px solid #000;
+            border-radius: 6px;
+        }
+        &-child {
+            position: absolute;
+            top:0;
+        }
+        &-percentage{
+            left:0;
+            height: 100%;
+        }
+        &-text{
+            text-align: center;
+            padding: 30px;
+            font-weight: bold;
+            font-size: 2rem;
+        }
+        &-tip {
+            border: 6px solid #000;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+            border-left: none;
+            width: 30px;
+            height: 50px;
+        }
+    }
+
+    // -- TIPS/DISCLAIMER --//
+    .tips {
+        padding-bottom: 20px;
+        .secondary-heading {
+            .fontSize(30);
+        }
+    }
+    .tip-header {
+        position: relative;
+    }
+    .tip-image-wrapper {
+        margin-right: 0;
+        margin-left: 0;
+        padding-left: 0;
+        float: left;
+        width: 120px;
+        padding-right: 30px;
+    }
+    .tip-introduction {
+        margin-left: 120px;
+    }
+    .tip-title {
+        display: block;
+        margin: 0 0 20px;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 1.4em;
+    }
+    .tip-intro {
+        margin: 5px 0 0;
+    }
+
+    .disclaimer {
+        .secondary-heading {
+            .fontSize(20);
+        }
+        .fontSize(18);
+    }
+
+    // -- OTHER CHARGES SECTION --//
+    .other-charges-container {
+        width: 100%;
+        .flex(@wrap: wrap, @justify: space-between, @align: center);
+    }
+    .other-charges-column {
+        .flex(@direction: column, @align: center);
+        width: 100%;
+        .other-charges-head {
+            display: flex;
+            padding-top: 10px;
+            text-align: center;
+            margin-left: 20px;
+        }
+        .other-charges-body {
+            .flex(@justify: center, @align: center);
+            .circle(150px);
+            font-size: 30px;
+        }
+        .background-sky {
+            background-color: @sky;
+        }
+        .background-teal {
+            background-color: @teal;
+        }
+        .background-apple {
+            background-color: @apple;
+        }
+    }
+
+    // -- TABLE --//
+    table {
+        margin-bottom: 10px;
+        table-layout: fixed;
+        width: 100%;
+    }
+    table,
+    .text-head-centre th,
+    .text-head-centre td {
+        text-align: center;
+    }
+    td:first-child {
+        padding-left: 10px;
+        text-align: left;
+    }
+    .cell-blank {
+        background-color: #535d6e;
+    }
+    .cell-total {
+        font-weight: bold;
+        text-align: right;
+    }
+    .text-bold {
+        font-weight: bold;
+    }
+    .text-underline{
+        text-decoration: underline;
+    }
+    .table-responsive-container {
+        overflow-x: auto;
+    }
+    .table-responsive {
+        table-layout: auto;
+        white-space: nowrap;
+        td,
+        th {
+            padding: 5px;
+        }
+    }
+    .consumption-label {
+        width: 150px;
+    }
+    .consumption-percentage {
+        width: 200px;
+    }
+    .consumption-peak,
+    .consumption-weekend-shoulder,
+    .consumption-off-peak,
+    .consumption-weekday-shoulder {
+        .flexCenter();
+        height: 100%;
+        font-weight: bold;
+    }
+    .content{
+        .fontSize(30);
+        border: 2px solid #fff;
+        width: 90px;
+        background-color: #fff;
+        text-align: center;
+        margin-left: 20px;
+        border-radius:4px;
+    }
+
+    // -- COLOURS --//
+    .colour-red {
+        background-color: @Synergy-red;
+    }
+    .colour-turqoise {
+        background-color: @Synergy-turqoise;
+    }
+    .colour-navy {
+        background-color: @Synergy-navy;
+    }
+    .colour-green {
+        background-color: @Synergy-dirty-green;
+    }
+    .colour-yellow {
+        background-color: @complimentary-yellow;
+    }
+    .colour-white {
+        background-color: @white;
+    }
+    .colour-red-battery {
+        background-color: #ff3823;
+    }
+    .colour-amber-battery {
+        background-color: #fec63d;
+    }
+    .colour-green-battery {
+        background-color: #72bb53;
+    }
+    .colour-white-battery {
+        background-color: @white;
+    }
+    .colour-red-text {
+        color: @complimentary-red;
+    }
+    .colour-green-text {
+        color: @apple;
+    }
+    .black-box-border {
+        border: 3px solid #000;
+    }
+    .red-box-border {
+        border: 3px solid #c21c09;
+    }
+    .green-box-border {
+        border: 3px solid #55ae3a;
+    }
+
+    // -- TOOLTIPS --//
+    .powerbank-tooltip {
+        border: none;
+        background-color: inherit;
+        &-battery-container {
+           position: relative;
+        }
+    }
+
+    // -- RESPONSIVE BREAKPOINTS --//
+    @media screen and (min-width: @screen-sm) {
+        .row {
+            .flex(@wrap: wrap);
+        }
+        .column {
+            width: 50%;
+            padding: 10px;
+        }
+        .column-gray {
+            width: 100%;
+        }
+        .battery-column {
+            width: 100%;
+            padding: 0 0 0 10px;
+        }
+        .other-charges-container {
+            flex-flow: row nowrap;
+            padding: 20PX;
+        }
+        .other-charges-column {
+        }
+        .cost-label-container,
+        .cost-input-container {
+            padding: 0;
+        }
+        .dropdown {
+            &-container {
+                flex-direction: row;
+            }
+            &-select,
+            &-text {
+                width: auto;
+            }
+            &-text {
+                margin-left: 20px;
+            }
+        }
+    }
+
+    @media screen and (min-width: @screen-md) {
+        .tertiary-heading {
+            .fontSize(30);
+        }
+        .secondary-heading {
+            .fontSize(20);
+        }
+        .table-responsive {
+            white-space: normal;
+            td,
+            th {
+                padding: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,98 @@
+// base folders and resources..
+@import "animate";
+@import "account-slider";
+@import "default-vars";
+@import "footer";
+@import "feature";
+@import "form";
+@import "ionic";
+@import "login";
+@import "modal";
+@import "mixins";
+@import "overrides";
+@import "pay-bill";
+@import "responsive";
+@import "tabmenu";
+@import "toolbar";
+
+body {
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica;
+}
+
+#wrapper {
+  min-height: 100%;
+  height: auto;
+  padding: 0 0 0;
+}
+
+.lg_logo {
+  width:321px;
+  height:135px;
+  @media (max-width: @maxHandheldWidth) {
+    width: 300px;
+    height: 125px;
+  }
+}
+
+.no-top-space {
+  padding-top: 0px !important;
+}
+
+.panel-group .panel {
+  overflow: visible;
+}
+
+.green-range input {
+  width: 90%;
+}
+
+.easy-green {
+  padding-right: 15px;
+}
+
+.help-block.error{
+ color: red;
+}
+
+.password-strength-meter{
+  .password-strength{
+    height: 10px;
+    margin-top: 6px;
+    margin-bottom: 0px
+  }
+  p{
+    font-family: monospace;
+  }
+}
+
+.pointer, .bill-table tr{
+    cursor: hand;
+    cursor: pointer;
+}
+
+span.required {
+  color: red;
+}
+
+.form-control-lg {
+  height: auto;
+}
+
+.top-buffer {
+  margin-top:5px;
+}
+
+.top-padding-lg {
+  padding-top:20px !important;
+}
+
+.btn-info {
+  background-color: #E5BF6D;
+  border-color: #E5BF6D;
+}
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open .dropdown-toggle.btn-info {
+  background-color: #D6992D;
+  border-color: #D6992D;
+}

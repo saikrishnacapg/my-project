@@ -1,0 +1,335 @@
+@overdue: #db3b26;
+@callout: #ebf3fe;
+@callout-border: #3d8af7;
+@border-color: #c0c0c0;
+
+@slider-background-color: #d9e1f3;
+@status-good: #088408;
+.overdue {
+  color: @overdue;
+}
+
+a.telephone-link {
+  color: @black;
+  text-decoration: underline;
+  &:hover,
+  &:visited,
+  &:active {
+    color: currentColor;
+  }
+}
+
+/* Case Management panel specific styles */
+.synergy-assist-case-management {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Proxima Nova Soft W03', Futura, 'Trebuchet MS', Helvetica, Arial,
+    Verdana, sans-serif;
+
+  h2 {
+    margin: 0 0 10px 0;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 10px;
+
+    th,
+    td {
+      .fontSize(20);
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    td {
+      border: 0;
+      padding: 10px 0 5px 0px;
+    }
+  }
+
+  .small-text {
+    .fontSize(18);
+    margin: 0;
+  }
+
+  .legend {
+    padding-bottom: 5px;
+  }
+
+  .indicator {
+    .circle(14px);
+    margin-right: 5px;
+
+    &-payments {
+      background-color: @synergy-navy;
+    }
+
+    &-contributions {
+      background-color: @synergy-yellow;
+    }
+
+    &-other-credits {
+      background-color: @atlantis;
+    }
+  }
+}
+
+.wrapper {
+  &-contribution-bar {
+    .size(100%, 15px);
+    margin: 20px 0 5px 0;
+    border: 1px solid @black;
+    border-radius: 25px;
+    background: transparent;
+    position: relative;
+    z-index: 6;
+    overflow: hidden;
+    .bar {
+      min-height: 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .bar-payments {
+      background-color: @synergy-navy;
+      z-index: 4;
+    }
+    .bar-synergy-contributions {
+      background-color: @synergy-yellow;
+      z-index: 3;
+    }
+    .bar-synergy-other-credits {
+      background-color: @atlantis;
+      z-index: 2;
+    }
+  }
+  &-legends {
+    padding: 15px 0 5px 0;
+  }
+}
+
+.panel-footer {
+  &.explore {
+    margin-top: 0;
+    padding-top: 5px;
+  }
+}
+
+.panel-case-review {
+  .fontSize(18);
+  margin: 15px 0;
+  background-color: @callout;
+  padding: 10px;
+  display: flex;
+  border: 1px solid @callout-border;
+  border-radius: 4px;
+
+  .icon-telephone {
+    .square(20px);
+    margin: 10px 20px 0 5px;
+  }
+}
+
+.panel-contribution {
+  .total-payments,
+  .synergy-contributions,
+  .synergy-other-credits {
+    .flexVerticalCenter();
+  }
+}
+
+/* Synergy assist plan templates styles */
+.synergy-assist-plan {
+  padding: 15px;
+  border: 1px solid @border-color;
+  border-radius: 4px;
+
+  h2 {
+    margin: 0 0 10px 0;
+  }
+  h2.heading {
+    margin: 0;
+  }
+
+  button {
+    padding: 5px 10px;
+  }
+
+  table {
+    width: 60%;
+    td {
+      padding-top: 10px;
+      border: 0;
+    }
+  }
+
+  .icon {
+    font-size: 2rem;
+    color: @black;
+    padding: 0;
+  }
+
+  .fine-print {
+    .fontSize(18);
+  }
+
+  .summary-table {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .wrapper {
+    &-slider {
+      padding-bottom: 30px;
+    }
+    &-frequency {
+      margin: 5px 0 15px;
+      .flexVerticalCenter();
+      justify-content: space-between;
+      .payment-frequency {
+        padding-left: 30px;
+      }
+    }
+
+    &-date-change {
+      font-weight: bold;
+    }
+
+    &-new-payment {
+      .flexCenter();
+      .fontSize(24);
+      font-weight: bold;
+      margin: 15px 0;
+
+      .input-amount {
+        max-width: 80px;
+        margin: 0 5px;
+        border-radius: 4px;
+        text-align: center;
+      }
+    }
+
+    &-plan-summary {
+      table tr:last-child {
+        .fontSize(24);
+        font-weight: bold;
+      }
+      .eligible {
+        margin: 0;
+        font-weight: bold;
+        color: @status-good;
+      }
+    }
+
+    &-terms-and-conditions {
+      display: flex;
+      align-items: flex-start;
+      margin-top: 20px;
+      p {
+        padding-left: 5px;
+      }
+    }
+
+    &-print-and-email {
+      display: flex;
+
+      button:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .button {
+    .textCenter();
+    padding: 5px 0;
+    background: @white;
+    border-radius: 4px;
+    border: 2px solid @synergy-yellow;
+    font-weight: bold;
+
+    &-payment-plan {
+      width: 50%;
+    }
+    &-print {
+      .flexCenter();
+      min-width: 120px;
+      max-height: 40px;
+      img {
+        width: 20px;
+      }
+    }
+  }
+
+  .upcoming-payments {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .payment-change-warning {
+    margin-top: 10px;
+  }
+}
+
+.custom-slider.rzslider {
+  .rz-bar {
+    background: @slider-background-color;
+    height: 2px;
+  }
+  .rz-selection {
+    background: @slider-background-color;
+  }
+  .rz-pointer {
+    .size(8px, 16px);
+    top: auto; /* to remove the default positioning */
+    bottom: 0;
+    background-color: @status-good;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    &:after {
+      display: none;
+    }
+  }
+  .rz-bubble {
+    bottom: 14px;
+  }
+  .rz-limit {
+    font-weight: bold;
+    color: @black;
+  }
+  .rz-tick {
+    .circle(10);
+    margin-left: -1px;
+    background: @slider-background-color;
+    top: -1px;
+  }
+
+  .rz-tick.rz-selected {
+    background: @status-good;
+  }
+}
+
+.status {
+  &-paid {
+    color: @status-good;
+  }
+  &-owing {
+    color: orange;
+  }
+  &-unpaid {
+    color: @overdue;
+  }
+  &-overdue {
+    color: @overdue;
+  }
+  &-due {
+    color: @overdue;
+  }
+  &-upcoming {
+    color: #000000;
+  }
+}

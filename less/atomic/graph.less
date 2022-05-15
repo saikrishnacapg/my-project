@@ -1,0 +1,102 @@
+.nv-bound-ticks .nv-lineChart .nv-x {
+  .tick {
+    display:none;
+  }
+}
+
+.sy-stream-graph {
+  position: relative;
+}
+.sy-stream-graph-placeholder {
+  height:350px;
+}
+
+.sy-stream-graph-axis path, .sy-stream-graph-axis line {
+  fill: none;
+  stroke: @primary-blue;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.sy-stream-graph-tooltip {
+  position: absolute;
+  z-index:20;
+  visibility: hidden;
+  background: rgba(0, 44, 90, 0.75);
+  padding: 5px 15px;
+  font-size: 15px;
+  color: white;;
+}
+
+.sy-stream-graph-vertical {
+  position: absolute;
+  z-index: 19;
+  width: 1px;
+  height: 420px;
+  top: 10px;
+  bottom: 30px;
+  left: 0px;
+  background: #fff;;
+}
+
+.sy-d3-graph {
+  position: relative;
+}
+.sy-line-graph-placeholder {
+  height: 480px;
+}
+
+.sy-line-graph-axis.path,
+.sy-line-graph-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.sy-line-graph.y.axis path {
+  fill: none;
+  stroke: @primary-blue;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+.sy-line-graph.x.axis path {
+  fill: none;
+  stroke: @primary-blue;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.channel-line {
+  fill: none;
+}
+
+.padded-table-5 {
+	td {
+		padding:5px !important;
+	}
+}
+
+.sy-line-graph-legend-key {
+  text-align: center;
+  height:10px;
+  width:10px;
+}
+.sy-line-graph-header-checkbox {
+  position: relative;
+  right: 38px;
+  top: 42px;
+}
+.sy-line-graph-checkbox {
+    position: absolute;
+    right: 35px;
+}
+
+.sy-line-graph-tooltip {
+  position: absolute;
+  z-index:20;
+  visibility: hidden;
+  background: rgba(0, 44, 90, 0.75);
+  padding: 5px 15px;
+  font-size: 15px;
+  color: white;;
+}

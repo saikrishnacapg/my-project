@@ -1,0 +1,68 @@
+
+@circle-radius-width: 120px;
+
+
+
+.make-splash-circle(@background; @color; @radius: @circle-radius-width; @font-size: 18pt) {
+    width: @radius;
+    height: @radius;
+    border-radius: unit(@radius/2, px);
+    font-size: @font-size;
+    color: @color;
+    line-height: @radius;
+    text-align: center;
+    background: @background;
+//    position: relative;
+//    left: -25px;
+//   top: -45px;
+}
+
+.make-splash-back(@brand) {
+	background-color: lighten(@brand, 45%);
+//	border: 3px solid @brand;
+	padding: 15px;
+	margin-top: 15px;
+	min-height: 200px;
+	
+	button {
+		background-color: lighten(@brand, 15%);
+		max-width: 180px;
+	}
+}
+
+.splash {
+
+    button {
+      width: 100%;
+      .rounded(0px);
+    }
+
+	&.splash-orange {
+		.make-splash-back(@synergy-brand-orange);
+		.splash-circle {
+			.make-splash-circle(@synergy-brand-orange, #000);
+		}
+	}
+	
+	&.splash-blue {
+		.make-splash-back(@synergy-brand-blue);
+		.splash-circle {
+			.make-splash-circle(@synergy-brand-blue, #000);
+		}
+	}
+	
+	&.splash-olive {
+		.make-splash-back(@synergy-brand-olive);
+		.splash-circle {
+			.make-splash-circle(@synergy-brand-olive, #000);
+		}
+	}
+	
+	&.splash-gray {
+		.make-splash-back(@synergy-brand-gray);
+		.splash-circle {
+			.make-splash-circle(@synergy-brand-gray, #000);
+		}
+	}
+	
+}

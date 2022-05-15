@@ -1,0 +1,65 @@
+//== Panels
+//
+//##
+
+@panel-bg: #fff;
+@panel-body-padding: 15px;
+@panel-border-radius: @border-radius-base;
+
+//** Border color for elements within panels
+@panel-inner-border: transparent;
+@panel-footer-bg: transparent;
+
+.panel {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	margin: 0;
+	padding: 15px 20px;
+}
+
+.panel-inner {
+	.clearfix();
+	margin-bottom: 20px;
+	padding: 0;
+	padding-top: 15px;
+}
+
+.panel-header,
+.panel-body,
+.panel-footer {
+	.clearfix();
+	padding: 0;
+}
+
+.panel-header {
+	margin: 0 0px;
+
+	h3 {
+		margin: 0;
+	}
+}
+
+// extra classes for laying out
+
+.panel-header__main {
+	.make-xs-column(8);
+	.make-sm-column(8);
+	padding: 0;
+}
+
+.panel-header__aside {
+	.make-xs-column(4);
+	.make-sm-column(4);
+	padding: 0;
+	text-align: right;
+}
+
+.panel-footer {
+	margin-top: 20px;
+
+	.form-group {
+		display: block;
+	}
+}

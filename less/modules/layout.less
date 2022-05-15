@@ -1,0 +1,55 @@
+.sy-form-group {
+  .clearfix();
+  margin: 0 0 20px;
+}
+
+.sy-form-group label,
+.sy-form-group input,
+.sy-form-group button,
+.sy-form-group a {
+  width: 100%;
+}
+
+.sy-element-full-width {
+  padding: 0;
+}
+
+.sy-element-left {
+  .clearfix();
+
+  padding: 0;
+
+  @media (min-width: @screen-sm) {
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 5px;
+  }
+}
+
+.sy-element-right {
+  .clearfix();
+  padding: 0;
+
+  @media (min-width: @screen-sm) {
+    padding-left: 5px;
+    padding-right: 0;
+  }
+}
+
+.sy-form-group--tooltip {
+  margin: 0;
+}
+
+.sy-form-group--tooltip .sy-element-right {
+  font-size: 16px;
+  margin-top: 6px;
+  padding-left: 5px;
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.sy-form-group--bullet .sy-element-left {
+  font-size: 26px;
+}

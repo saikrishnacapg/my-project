@@ -1,0 +1,69 @@
+// top menu
+@import "mixins";
+@import "default-vars";
+
+.navbar {
+  min-height: @topBarHeight;
+  background: @synergy-dark-blue;
+  background-color: @synergy-dark-blue;
+  margin: 0px;
+  border: 0px;
+}
+
+.navbar-right {
+  float: right !important;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: @synergy-white;
+}
+
+@media (max-width: @maxHandheldWidth) {
+  .nav.navbar-nav.navbar-right {
+    min-width:180px;
+  }
+  .navbar-nav .open .dropdown-menu {
+    top: 36px;
+    position: absolute;
+    float: left;
+    left: 0;
+    min-width: 180px;
+    background-color: #ffffff;
+  }
+}
+
+.navbar-default .navbar-nav > .dropdown >a .caret {
+  border-top-color: @synergy-white;
+}
+
+.navbar-default .navbar-nav > .dropdown >a:hover .caret,
+.navbar-default .navbar-nav > .dropdown >a:focus .caret,
+.navbar-default .navbar-nav > .dropdown >a .caret:hover,
+.navbar-default .navbar-nav > .dropdown >a .caret:focus {
+  border-top-color: @synergy-white;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: @synergy-white;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: @synergy-white;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background-color: #b0c2c7;
+  color: @synergy-white;
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+  color: @synergy-dark-blue;
+}

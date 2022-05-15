@@ -1,0 +1,158 @@
+.account-summary {
+    padding: 0;
+
+    h1 {
+        margin-bottom: 0;
+    }
+
+    .sy-block__header {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .sy-block__body {
+        border-top: 0px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 0px;
+
+        .panel {
+            .panel-header {
+                h2 {
+                    margin: 0 0 0;
+                }
+            }
+            .panel-body {
+                small {
+                    font-size: 75%;
+                }
+
+                .row {
+                    line-height: 1.8;
+                    margin-left: 0px;
+                    margin-right: 5px;
+
+                    .col-xs-7,
+                    .col-xs-8 {
+                        padding-left: 0px;
+                    }
+                }
+
+                .total-owing,
+                .payment-recent {
+                    color: #333;
+                }
+
+                .total-owing {
+                    background-color: #e5eaea;
+                    font-weight: 700;
+                    line-height: 2.3;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    width: 100%;
+                }
+
+                .debit-line {
+                    margin: 0;
+                    padding: 5px;
+                    line-height: 14px;
+                }
+
+                .no-right-padding {
+                    padding-right: 0px;
+                }
+            }
+        }
+    }
+
+    &-payments {
+        .flex-between {
+            .flex(@justify: space-between);
+        }
+
+        .recent {
+            padding: 5px;
+            font-weight: bold;
+            background-color: rgba(114, 187, 83, 0.5);
+        }
+
+        .payment-value {
+            min-width: 55px;
+        }
+
+        .payment-recent {
+            .content-text {
+                padding-bottom: 2px;
+            }
+        }
+    }
+}
+
+.account-options {
+    .panel-header {
+        .glyphicon {
+            color: @brand-primary;
+        }
+    }
+    span[class*='sy-icon--'] {
+        font-size: 24px;
+        display: inline-block;
+        vertical-align: top;
+    }
+    span[class*='sy-icon--'].active {
+        color: @complimentary-green-light;
+    }
+    span.action-text {
+        text-decoration: underline;
+        font-weight: bold;
+        color: @link-primary-blue;
+
+        &:hover {
+            color: @primary-green;
+            cursor: pointer;
+        }
+    }
+
+    row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+}
+.account-summary {
+    &__balance {
+        text-align: right;
+    }
+
+    &__bills {
+        .sy-form-group {
+            margin: 0;
+        }
+        .sy-button--col12 {
+            margin-bottom: 5px;
+        }
+    }
+}
+
+.imageIcon {
+    float: left;
+    width: 44px;
+    margin-left: 20px;
+    margin-right: 10px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.TextWrap {
+    float: left;
+    padding-left: 74px;
+    position: relative;
+}
+
+h4.select-inr-title {
+    color: #555555;
+}
+
+.row-label {
+    display: block;
+    padding: 10px 0;
+}

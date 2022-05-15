@@ -1,0 +1,33 @@
+.make-sy-badge(@bg-colour, @float-right: false) {
+	&:extend( .badge );
+
+	background: @bg-colour;
+	border-radius: 5px;
+	color: @primary-blue;
+	width: 40px;
+	padding: 2px 7px;
+	text-transform: uppercase;
+
+	// this is needed for "About this account" badges
+	& when ( @float-right = true ) {
+		position: absolute;
+		right: 40px;
+	}
+
+	&.sy-badge--pull-right {
+		right: 10px;
+	}
+}
+
+.sy-badge--on {
+	.make-sy-badge( @primary-yellow, true );
+}
+
+// default badge
+.sy-badge, .sy-badge--default, .sy-badge--off {
+	.make-sy-badge( @secondary-blue, true );
+}
+
+.sy-badge--default {
+	width: 70px;
+}

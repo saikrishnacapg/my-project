@@ -1,0 +1,29 @@
+.header {
+  .container();
+  height: 60px;
+  padding: 10px 20px;
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+
+  @media (min-width: @screen-sm) {
+    background: #fff;
+    height: auto;
+    padding: 5px 20px 0;
+    min-width: 100%;
+  }
+
+  @media (min-width: @screen-md) {
+    border-radius: 5px 5px 0 0;
+    margin: 20px auto 0;
+    min-width: 0;
+  }
+}
+.header__logo {
+  a {
+    display: block;
+  }
+}
+.header__logo a:focus {
+  outline: 1px solid #016ca6;
+}

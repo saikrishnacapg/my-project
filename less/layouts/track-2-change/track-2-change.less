@@ -1,0 +1,136 @@
+.t2c-goal
+{
+  p {
+    a {
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .panel-header{
+    h2{
+      font-size:1em;
+    }
+  }
+  .divider{
+    background: #016ca6;
+    height: 2px;
+    margin-bottom: 10px;
+  }
+  .track-title{
+    font-size: 0.9em;
+    text-align: center;
+    &.title-left{
+      text-align: left;
+    }
+  }
+
+  .reward-bar{
+    font-size: 11px;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin: 5px 0px;
+    .bar-container{
+      display: inline-block;
+      width: 100%;
+      margin: 15px 0px 10px;
+      .bar{
+        width: 24%;
+        float: left;
+        margin: 0 0.5%;
+        position:relative;
+        a{
+          display:inline-block;
+          width:100%;
+          &:focus{
+            text-decoration:none;
+            color:#016ca6;
+          }
+        }
+        .arrow{
+          width: 0px;
+          height: 0px;
+          border-left: 15px solid transparent;
+          border-right: 15px solid transparent;
+          border-top: 15px solid #EFBD46;
+          position: absolute;
+          top: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .content{
+          padding: 15px 5px;
+          border-radius: 3px;
+          color:#182124;
+          height: 60px;
+        }
+        .border-line{
+          height: 2px;
+          width: 96%;
+          margin: 4px auto;
+        }
+        span{
+          margin-top: 2px;
+          display: inline-block;
+          color:#182124;
+          font-size: 1em;
+          font-weight: bold;
+        }
+        .content-secondary{
+          font-size:11px;
+        }
+      }
+      .bar_1{
+        .content, .border-line{
+          background: #67c8ff;
+        }
+      }
+      .bar_2{
+        .content, .border-line{
+          background: #0ebfe9;
+        }
+      }
+      .bar_3{
+        .content, .border-line{
+          background: #05b8cc;
+        }
+      }
+      .bar_4{
+        .content, .border-line{
+          background: #6cabcd;
+        }
+      }
+    }
+  }
+  .faces-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .text{
+      font-size:0.9em;
+    }
+    .box{
+      width: 50%;
+      a:focus, a:active{
+        color:#016CA6
+      }
+    }
+  }
+  .t2c-goal-body-error{
+    .sorryMessage{margin: 35px 0px;}
+  }
+
+}
+.t2c-tooltip{
+    a:focus,a:hover, a:active{
+      color:#016CA6;
+      outline: 2px solid #016CA6;
+    }
+}
+@media (max-width:992px){
+  .t2c-goal .faces-container .text {
+    text-align: center;
+  }
+}

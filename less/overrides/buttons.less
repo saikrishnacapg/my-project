@@ -1,0 +1,196 @@
+.make-sy-button(@bg-colour, @text-colour: @primary-blue, @border-colour: transparent, @icon-colour: @complimentary-black-button, @width: auto) {
+  &:extend(.btn,
+  .btn-default);
+
+  background: @bg-colour;
+  border: none;
+  color: @text-colour;
+  display: inline-block;
+  font-size: @font-size-base;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding: 12px 10px;
+  width: 100%;
+
+  // conditions
+
+  & when not ( @border-colour = transparent ) {
+    padding: 10px 10px;
+    border: 2px solid @border-colour;
+  }
+
+  // hover and active events
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: lighten(@bg-colour, 7%);
+    color: @text-colour;
+    text-decoration: none;
+  }
+
+  // disabled
+
+  &[disabled] {
+    background: lighten(@bg-colour, 20%);
+    color: #666;
+
+    span[class*='sy-icon--'] {
+      color: #666;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      background: lighten(@bg-colour, 20%);
+      color: #666;
+
+      span[class*='sy-icon--'] {
+        color: #666;
+      }
+    }
+  }
+
+  // modifiers
+
+  &.sy-button--block {
+    &:extend(.btn-block);
+  }
+
+  &.sy-button--icon-left {
+    padding-left: 40px;
+    position: relative;
+
+    span[class*='sy-icon--'] {
+      font-size: 18px;
+      left: 12px;
+      position: absolute;
+      top: 7px;
+    }
+  }
+
+  &.sy-button--icon-right {
+    position: relative;
+
+    span[class*='sy-icon--'] {
+      position: absolute;
+    }
+
+    .caret {
+      margin-top: -3px;
+      right: 8px;
+      position: absolute;
+      top: 50%;
+    }
+  }
+
+  &.sy-button--block {
+    display: block;
+    overflow: hidden;
+  }
+
+  // icons
+  span[class*='sy-icon--'] {
+    color: @icon-colour;
+    margin: 2px 6px 3px 0;
+  }
+
+  // media queries
+  @media (min-width: @screen-sm) {
+    margin-bottom: 0;
+    padding: 8px 30px;
+
+    & when not ( @border-colour = transparent ) {
+      padding: 6px 28px;
+    }
+  }
+
+  & when ( @width = auto ) {
+    @media (min-width: @screen-sm) {
+      width: auto;
+    }
+  }
+
+  & when not ( @width = auto ) {
+    @media (min-width: @screen-sm) {
+      width: @width;
+    }
+  }
+}
+
+// this is the default button style
+.sy-button--default,
+.sy-button--blue {
+  .make-sy-button(@primary-white, @complimentary-black-button, @primary-yellow);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: @complimentary-black-button;
+    color: @primary-yellow;
+    border: none;
+    padding: 12px 10px;
+
+    @media (min-width: @screen-sm) {
+      padding: 8px 30px;
+    }
+
+    span[class*='sy-icon--'] {
+      color: @primary-yellow;
+    }
+  }
+}
+
+// this is the style for more important buttons
+.sy-button--primary,
+.sy-button--yellow {
+  .make-sy-button(@primary-yellow, @complimentary-black-button);
+  &:hover,
+  &:active,
+  &:focus {
+    background: @complimentary-black-button;
+    color: @primary-yellow;
+
+    span[class*='sy-icon--'] {
+      color: @primary-yellow;
+    }
+  }
+}
+
+// this is a special type of button
+.sy-button--white {
+  .make-sy-button(#fff, @text-color, @primary-yellow, @secondary-cyan);
+  font-size: 12px;
+  font-weight: normal;
+  padding: 9px 15px;
+}
+
+.sy-button--dropdown {
+  .make-sy-button(#fff, @text-color, @color-transparent, @secondary-cyan);
+  font-weight: normal;
+  font-size: 12px;
+  border: 1px solid @complimentary-gray;
+}
+
+.btn-group {
+  .clearfix();
+  display: block;
+}
+
+.btn-group .radio {
+  float: left;
+  margin: 0;
+  padding: 8px 20px;
+
+  &:first-child {
+    border-radius: 3px 0 0 3px;
+  }
+
+  &:last-child {
+    border-radius: 0 3px 3px 0;
+  }
+
+  &.active {
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1) inset;
+  }
+}

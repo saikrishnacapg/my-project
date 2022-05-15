@@ -1,0 +1,416 @@
+.sy-welcome {
+  padding-top: 0px;
+  border-bottom: none;
+}
+
+.sy-welcome__content {
+  h2 {
+    line-height: 1.6;
+    font-size: 20px;
+  }
+  h3 {
+    line-height: 1.6;
+    font-size: 16px;
+    color: #002c5a;
+    margin: 0px;
+  }
+
+  p:not(.small) {
+    line-height: 1.6;
+    font-size: 14px;
+  }
+}
+
+.sy-welcome__image {
+  width: 100%;
+  height: auto;
+}
+
+.sy-welcome__grid {
+  margin: 35px 0px;
+  text-align: center;
+
+  h2 {
+    padding-bottom: 45px;
+  }
+  h2.two-liner {
+    padding-bottom: 12px;
+  }
+  img {
+    width: 33%;
+  }
+}
+
+.sy-welcome .sy-welcome__header {
+  margin-top: 30px;
+  height: 46px;
+}
+
+.sy-welcome .sy-welcome__body {
+  padding: 30px;
+}
+
+.sy-icon--login-simple-name:before {
+  display: block;
+  content: ' ';
+  background-image: url(../img/login-mobile-simple.svg);
+  background-size: 28px 28px;
+  height: 28px;
+  width: 28px;
+}
+
+.no-script-text {
+  color: @primary-yellow;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 90px;
+}
+
+.aun-online {
+  width: 100%;
+  display: inline-block;
+}
+
+.aun-online {
+  .name-fields {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .name-fields label {
+    width: 16%;
+    float: left;
+  }
+  .name-fields .input-cntr {
+    float: left;
+    width: 84%;
+    position: relative;
+  }
+  .name-fields .input-cntr .sy-form-error {
+    margin-top: 42px;
+    width: 90%;
+    position: relative;
+  }
+  .name-fields .input-cntr .sy-form-error .inactive.sy-alert--danger {
+    margin-bottom: 0px;
+  }
+  .name-fields .input-cntr input {
+    width: 90%;
+    float: left;
+  }
+
+  .name-fields .input-cntr a {
+    float: right;
+    width: 5%;
+    margin-top: 5px;
+    text-decoration: none;
+  }
+
+  .telephone {
+    margin-top: 15px;
+  }
+
+  .telephone .landline-no {
+    float: left;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .name-fields .input-cntr .sy-form-error .sy-icon--remove_2 {
+    position: absolute;
+    left: -20px;
+    top: 0px;
+  }
+  .dob {
+    margin-top: 15px;
+  }
+  .dob .sy-form-error {
+    position: relative;
+  }
+  .telephone .sy-form-error {
+    position: relative;
+  }
+  .threePointIdentityChoice .sy-form-error {
+    position: relative;
+  }
+  .threePointIdentityChoice .sy-form-error .inactive.sy-alert--danger {
+    margin-bottom: 0px;
+  }
+  .mobilephone .sy-form-error {
+    position: relative;
+  }
+  .name-of-bill {
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .name-of-bill label {
+    float: left;
+  }
+
+  .name-of-bill .input-cntr {
+    width: 92%;
+    float: left;
+  }
+
+  .name-of-bill .input-cntr input {
+    width: 90%;
+    float: left;
+  }
+
+  .name-of-bill .input-cntr a {
+    width: 6%;
+    float: right;
+    text-decoration: none;
+    margin-top: 6px;
+  }
+  .name-of-bill .input-cntr a .sy-icon--circle_question_mark,
+  .name-fields .input-cntr a .sy-icon--circle_question_mark {
+    font-size: 16px;
+  }
+
+  .name-of-bill .input-cntr .sy-form-error {
+    margin-top: 41px;
+    width: 90%;
+    position: relative;
+  }
+  .name-of-bill .input-cntr .sy-form-error .inactive.sy-alert--danger {
+    margin-bottom: 0px;
+  }
+  .name-of-bill .input-cntr .sy-form-error .sy-icon--remove_2 {
+    position: absolute;
+    left: -20px;
+    top: 0px;
+  }
+  .name-of-bill .input-cntr .sy-form-error {
+    position: absolute;
+    left: -20px;
+    top: 0px;
+  }
+  .dob .dob-tooltip {
+    float: right;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .mobilephone .mobilephone-tooltip {
+    float: right;
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .telephone .telephone-tooltip {
+    float: right;
+    font-size: 16px;
+    text-decoration: none;
+  }
+}
+
+// Accessibility  START CSS
+
+.acc-radio-btn-group {
+  display: inline-block;
+  width: 100%;
+  margin: 15px 0px;
+
+  .acc-radio-btn {
+    display: inline-block;
+    margin-right: 2%;
+    width: 30%;
+  }
+}
+
+.acc-radio-btn input[type='radio'],
+.acc-chkBox-btn input[type='checkbox'] {
+  position: absolute;
+  outline: none;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+
+.acc-radio-btn input[type='radio'][disabled],
+.acc-chkBox-btn input[type='checkbox'][disabled],
+.acc-radio-btn input[type='radio'][disabled] + label,
+.acc-chkBox-btn input[type='checkbox'][disabled] + label {
+  cursor: not-allowed;
+}
+.acc-radio-btn input[type='radio'][disabled] + label:before,
+.acc-chkBox-btn input[type='checkbox'][disabled] + label:before {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+.acc-radio-btn input[type='radio']:focus + label:before,
+.acc-chkBox-btn input[type='checkbox']:focus + label:before {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border: 2px solid @outline;
+}
+.acc-radio-btn input[type='radio']:checked + label:after,
+.acc-chkBox-btn input[type='checkbox']:checked + label:after {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+.acc-radio-btn .no-borderradius input[type='radio'],
+.acc-chkBox-btn .no-borderradius input[type='checkbox'] {
+  background: transparent;
+  position: relative;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+.acc-radio-btn input[type='radio'] + label,
+.acc-chkBox-btn input[type='checkbox'] + label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 28px;
+}
+.acc-radio-btn .no-borderradius input[type='radio'] + label,
+.acc-chkBox-btn .no-borderradius input[type='checkbox'] + label {
+  padding: 0;
+}
+.acc-radio-btn input[type='radio'] + label:before {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  content: '';
+  background: #f1f1f1;
+  width: 14px;
+  height: 14px;
+  display: block;
+  border-radius: 3px;
+  border: 1px solid #cbcbcb;
+}
+.acc-chkBox-btn input[type='checkbox'] + label:before {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  content: '';
+  width: 18px;
+  height: 18px;
+  display: block;
+  border-radius: 3px;
+  border: 1px solid #747A7C;
+}
+.acc-radio-btn .no-borderradius input[type='radio'] + label:before,
+.acc-chkBox-btn .no-borderradius input[type='checkbox'] + label:before {
+  display: none;
+}
+.acc-radio-btn input[type='radio'] + label:after {
+  content: '✓';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #333333;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.acc-chkBox-btn input[type='checkbox'] + label:after {
+  font-family: 'Glyphicons Regular';
+  margin-right: 6px;
+  background: #182124;
+  border-radius: 3px;
+  color: #ececec;
+  content: '\E207';
+  display: block;
+  font-size: 12px;
+  height: 18px;
+  left: 0;
+  line-height: 17px;
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 18px;
+  opacity: 0;
+  font-weight: normal;
+}
+.acc-radio-btn .no-borderradius input[type='radio'] + label:after,
+.acc-chkBox-btn .no-borderradius input[type='checkbox'] + label:after {
+  display: none;
+}
+.acc-radio-btn-group.add-an-acc-radio-grp .acc-radio-btn {
+  width: 100%;
+}
+.acc-radio-btn-group.add-an-acc-radio-grp {
+  margin: 0px 0px 10px 0px;
+}
+
+/*==========  Radios  ==========*/
+.acc-radio-btn input[type='radio'] + label:before {
+  border-radius: 20px;
+}
+.acc-radio-btn input[type='radio'] + label:after {
+  background: #333333;
+  content: '';
+  top: 6px;
+  left: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 18px;
+}
+
+@media (max-width: 600px) {
+  .acc-radio-btn-group .acc-radio-btn {
+    display: inline-block;
+    margin-right: 2%;
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+
+.updateConcessionCardsForm .acc-radio-btn-group {
+  margin: 5px 0px;
+}
+.updateConcessionCardsForm .acc-radio-btn-group .acc-radio-btn {
+  width: 100%;
+}
+.myHouseForm .col-sm-6 .acc-radio-btn-group .acc-radio-btn {
+  width: 50%;
+  margin: 0px;
+}
+.myHouseForm .col-sm-6 .acc-radio-btn-group {
+  margin: 5px 0px;
+}
+.greenProductCode .acc-radio-btn-group {
+  margin: 5px 0px;
+}
+.greenProductCode .acc-radio-btn-group .acc-radio-btn,
+.paperlessForm .acc-radio-btn-group .acc-radio-btn,
+.download-type .acc-radio-btn-group .acc-radio-btn,
+.file-format .acc-radio-btn-group .acc-radio-btn {
+  width: 100%;
+}
+
+.paymentDetailsForm .acc-radio-btn-group {
+  width: 100%;
+  margin: 2px 0px 5px;
+}
+.paymentDetailsForm .acc-radio-btn-group .acc-radio-btn {
+  width: 100%;
+}
+.paymentDetailsForm .isSaveCard .acc-radio-btn-group .acc-radio-btn {
+  width: 30%;
+}
+.paymentDetailsForm .card-icon-group-label .card-icon {
+  top: 2px;
+  position: relative;
+}
+.paymentDetailsForm h4.select-inr-title {
+  margin-bottom: 5px;
+}
+.paymentForm .acc-radio-btn-group .acc-radio-btn {
+  width: 100%;
+}
+@media (min-width: 320px) {
+  .ddiForm .acc-radio-btn-group {
+    display: inline-block;
+    width: 58.33%;
+    margin: 0px;
+  }
+}
+// // Accessibility  END  CSS

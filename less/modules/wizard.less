@@ -1,0 +1,279 @@
+.make-sy-wizard() {
+  &:extend(.modal);
+  display: block;
+
+  .sy-wizard__container {
+    &:extend(.modal-content);
+
+    margin: 10px auto;
+    max-width: 600px;
+    padding: 5px 15px 0;
+    width: 94%;
+
+    @media (min-width: @screen-md) {
+      margin-top: 40px;
+    }
+  }
+
+  .sy-wizard__header {
+    &:extend(.modal-header);
+    padding: 10px 0 15px;
+
+    h1 {
+      color: @complimentary-black;
+      font-size: 18px;
+    }
+
+    .sy-icon--remove_2 {
+      font-size: 24px;
+      margin: 0;
+
+      &:hover,
+      &:active,
+      &:focus {
+        border: none;
+        color: darken(@secondary-cyan, 5%);
+        text-decoration: none;
+      }
+    }
+
+    a {
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .sy-wizard__utility {
+    &:extend(.modal-header);
+
+    margin-bottom: 10px;
+    padding: 12px 0;
+
+    h2 {
+      color: @complimentary-black;
+      font-size: 14px;
+      margin: 0 0 10px;
+    }
+  }
+
+  .sy-wizard__body {
+    &:extend(.modal-body);
+
+    font-size: 13px;
+    padding: 10px 0;
+
+    h2 {
+      font-size: 15px;
+      margin: 5px 0 20px;
+    }
+
+    a {
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sy-form-group {
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .sy-wizard__footer {
+    &:extend(.modal-footer);
+    min-height: 130px;
+    padding: 20px 0 60px;
+    position: relative;
+
+    @media (min-width: @screen-xs) {
+      min-height: 0;
+      padding: 20px 0 15px;
+    }
+
+    .sy-form-group {
+      margin: 0;
+    }
+  }
+
+  .sy-wizard-footer__left {
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+
+    @media (min-width: @screen-xs) {
+      float: left;
+      left: auto;
+      padding-left: 0;
+      padding-right: 5px;
+      position: relative;
+      top: auto;
+      width: 50%;
+    }
+  }
+
+  .sy-wizard-footer__right {
+    padding: 0;
+    width: 100%;
+    float: right;
+
+    @media (min-width: @screen-xs) {
+      padding-left: 5px;
+      padding-right: 0;
+      width: 50%;
+    }
+  }
+
+  .sy-wizard-footer__left button,
+  .sy-wizard-footer__right button {
+    display: block;
+    width: 100%;
+  }
+}
+
+.sy-wizard {
+  .make-sy-wizard();
+}
+
+.sy-wizard-success {
+  .sy-wizard-success__header {
+    &:extend(.modal-header);
+
+    padding: 0px;
+    margin-bottom: 15px;
+
+    h3 {
+      margin: 0 0 15px;
+    }
+  }
+
+  .sy-alert--info {
+    margin: 30px 0px 10px;
+  }
+}
+
+.sy-wizard-welcome {
+  border-bottom: 1px solid #ddd;
+
+  .sy-wizard-welcome__content {
+    color: @primary-blue;
+
+    h2 {
+      border-bottom: 1px solid #ddd;
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 20px;
+      padding: 20px 0;
+    }
+
+    p {
+      margin: 17px 0;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+// welcome
+
+.welcome .sy-wizard__header {
+  height: 46px;
+}
+
+.welcome .sy-wizard__body {
+  padding: 10px 10px 0;
+}
+
+.welcome .sy-wizard__footer {
+  border: none;
+  padding: 5px 0;
+}
+
+// inline
+
+.sy-wizard-inline {
+  display: table; // Defect 15, CR2768. long forms were overflowing the gradient container and leaving a blue line.
+  background: @primary-blue;
+  background: -webkit-linear-gradient(@primary-blue, #ececec);
+  background: -o-linear-gradient(@primary-blue, #ececec);
+  background: -moz-linear-gradient(@primary-blue, #ececec);
+  background: linear-gradient(@primary-blue, #ececec);
+  height: 100%;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 999;
+
+  .container {
+    max-width: 880px;
+  }
+
+  .header {
+    background: @primary-white;
+    max-width: 880px;
+  }
+
+  .header__logo {
+    float: left;
+    position: relative;
+    width: 50%;
+
+    img {
+      height: 50px;
+    }
+  }
+
+  .header__login {
+    float: left;
+    padding-right: 15px;
+    position: relative;
+    width: 50%;
+    text-align: right;
+
+    a {
+      color: #016ca6;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 16px 34px 0 0;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    span[class*='sy-icon--'] {
+      color: #58b4d2;
+      font-size: 28px;
+      right: 4px;
+      position: absolute;
+      top: 10px;
+    }
+  }
+
+  .hero {
+    background: #fff;
+    border-radius: 0 0 6px 6px;
+    padding: 10px 20px;
+  }
+
+  .sy-wizard {
+    position: relative;
+  }
+
+  .sy-wizard__container {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    max-width: none;
+    padding: 0;
+    width: 100%;
+  }
+}

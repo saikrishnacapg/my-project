@@ -1,0 +1,76 @@
+// Moved from the inline styled tag from bills.html file
+.newDate-cntr {
+    position: relative;
+}
+
+.newdaterangesection {
+    width: 367px;
+    right: 0px;
+    top: -17px;
+    float: right;
+
+    .form-group,
+    .sy-form-group {
+        display: inline-block;
+    }
+
+    .sy-form-group {
+        width: 115px;
+    }
+
+    .sy-button--primary {
+        padding: 7px 30px;
+        position: relative;
+        top: -2px;
+    }
+}
+
+.external-link {
+    margin-bottom: 10px;
+    &-inner {
+        float: right;
+    }
+}
+
+.table-cell {
+    padding: 10px;
+    color: #000;
+    border-bottom: 1px solid #b4d2dc;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: arial, helvetica, verdana, sans-serif;
+}
+
+@media (max-width: @screen-sm) {
+    .newdaterangesection {
+        float: none;
+        .sy-button--primary {
+            top: 0px;
+        }
+    }
+
+    .external-link-inner {
+        float: left;
+    }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .newdaterangesection {
+        width: 367px;
+        right: 0px;
+        top: 0px;
+
+        .sy-button--primary {
+            top: 22px;
+            float: none;
+            position: absolute;
+        }
+    }
+}
+
+// screen width break point for billing and payment history table
+@media (min-width:  @screen-sm) {
+    .billAndPaymentsTable {
+      max-width: 310px;
+    }
+  }

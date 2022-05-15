@@ -1,0 +1,113 @@
+//== Modals
+//
+//##
+
+//** Padding applied to the modal body
+@modal-inner-padding: 20px;
+
+//** Padding applied to the modal title
+@modal-title-padding: 15px;
+//** Modal title line-height
+@modal-title-line-height: @line-height-base;
+
+//** Background color of modal content area
+@modal-content-bg: #fff;
+//** Modal content border color
+@modal-content-border-color: rgba(0, 0, 0, 0.2);
+//** Modal content border color **for IE8**
+@modal-content-fallback-border-color: #999;
+
+//** Modal backdrop background color
+@modal-backdrop-bg: #222;
+//** Modal backdrop opacity
+@modal-backdrop-opacity: 0.85;
+//** Modal header border color
+@modal-header-border-color: #ddd;
+//** Modal footer border color
+@modal-footer-border-color: #ddd;
+
+@modal-lg: 550px;
+@modal-md: 550px;
+@modal-sm: 280px;
+
+body.modal-open {
+  overflow: auto;
+}
+
+.sy-wizard-modal {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.sy-wizard {
+  position: absolute;
+  overflow: inherit;
+}
+
+.must-complete {
+  font-weight: 800;
+  color: @gray;
+  padding: 0px 0px 10px 0px;
+}
+
+.modal {
+    &-body {
+        a {
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    }
+
+    &-footer {
+        .sy-form-group {
+          margin-bottom: 0;
+        }
+    }
+
+    &-payment-lock {
+        display: flex;
+        padding: 15px 0;
+
+        .sy-wizard & {
+            .secondary-heading {
+                margin: 0;
+                padding: 0 10px;
+            }
+        }
+        .sy-icon--circle_info {
+            font-size: 3rem;
+        }    
+    }
+    &-update-details {
+        padding: 15px;
+        display: flex;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        .sy-icon--circle_info {
+            font-size: 2.25rem;
+            display: inline-block;
+            margin-right: 10px;
+        }
+    }
+}
+
+.contact-name,
+.organisation-name {
+    .detail-update--info {
+        font-size: 1.35rem;
+        margin: 0 0 0 10px;
+        position: relative;
+        top: 2px;
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+.wrapper-modal {
+    position: relative;
+    z-index: 999;
+}

@@ -1,0 +1,107 @@
+// Inline style moved from home.html template.
+.sy-list.list-group {
+    margin-top: 20px;
+    line-height: 0px;
+}
+
+.list-acc-main {
+    display: flex;
+    width: 100%;
+    border-bottom: 0px;
+    line-height: 20px;
+}
+
+.list-acc-main:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
+.acc {
+    &-list {
+        float: left;
+        width: 50%;
+    
+        &-cntr {
+            width: 100%;
+            display: table;
+    
+            .acc-no h3 {
+                color: #016ca6;
+            }
+        }
+    
+        &-inner-cntr {
+            width: 100%;
+        }
+    }
+    
+    &-edit-action {
+        margin-top: 3px;
+    }
+}
+
+.pay-due-btn {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    margin-top: -18px;
+
+    #payNowBtn .sy-icon--chevron-right {
+        display: inline-block;
+        margin-left: 5px;
+        margin: 3px 0px 0px 5px;
+    }
+}
+
+.address small,
+.amt-due amt-due--inner {
+    margin: 0px;
+    line-height: 20px;
+}
+
+.account {
+    button {
+        min-width: 165px;
+    }
+
+    &-add {
+        padding: 15px;
+    }
+}
+
+@media (min-width: @screen-sm) {
+    .account {
+        &-add {
+            .flex(@justify: space-between);
+            button {
+                max-height: 35px;
+            }
+        }
+    }
+}
+
+
+@media (max-width: @screen-sm) {
+    .acc-list {
+        float: left;
+        width: 100%;
+        position: relative;
+        left: 10px;
+    }
+
+    .pay-due-btn {
+        vertical-align: middle;
+        display: inline-block;
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 10px 0px 0px 0px;
+        padding: 0px 10px;
+    }
+
+    .acc-edit-action {
+        margin-top: 3px;
+        padding-left: 0px;
+        position: relative;
+        left: 12px;
+    }
+}

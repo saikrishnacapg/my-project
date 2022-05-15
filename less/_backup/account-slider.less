@@ -1,0 +1,61 @@
+@import "mixins";
+@import "default-vars";
+
+@panelBorderColour: #999999;
+@panelMenuBgColour: #ffffff;
+@panelMenuBtnHoverColour: #e6e6e6;
+@menuTxtColour: #333333;
+//*/
+@smallPanelWidth: 40%;
+@largePanelWidth: 70%;
+
+@selectorMobileWidth: 100%;
+
+.accountSelector{
+	width: 100%;
+  	 
+  	.searchAccounts{
+  		width:@selectorMobileWidth;
+  	}
+  	 
+  	 ul {
+	display: block;
+	position: relative;
+	padding: 0;
+	font-size: 16px;
+	margin: 0px;
+	width: @selectorMobileWidth;
+}
+
+ul li {
+    position: relative;
+    padding: 6px 36px 6px 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: @menuTxtColour;
+//    border: 1px solid @panelBorderColour;
+    border-bottom: none;
+    .border-radius(0px);
+  }
+
+  ul li:last-child {
+    border-bottom: 1px solid @panelBorderColour;
+  }
+
+  ul > li {
+    background: url("@{img-folder}/listArrow.png") no-repeat right center;
+    background-color: @panelMenuBgColour;
+    border-top: 1px solid @panelBorderColour;
+    &:hover{
+      /*color: #ffffff;*/
+      /*text-decoration: none;*/
+      background-color: @panelMenuBtnHoverColour;
+      background-position:  right center;
+    }
+  }
+}
+
+.accountSelector-open .accountSelector{
+	top: @topBarHeight;
+}

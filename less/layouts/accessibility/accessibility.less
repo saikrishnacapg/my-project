@@ -1,0 +1,195 @@
+/** MAXIN **/
+.a_Selector {
+  text-decoration: underline;
+  color: @link-primary-blue;
+  cursor: pointer;
+  &:focus,
+  &:active,
+  &:hover {
+    color: @link-primary-blue;
+    text-decoration: none;
+  }
+}
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/** accessibility changes Global level - start **/
+
+.header a:focus,
+#wrapper a:focus,
+#wrapper .acc-no a:focus,
+#wrapper button:focus,
+.forFocus button:focus,
+.forFocus a:focus,
+.footer a:focus,
+.sy-button--default:focus {
+  outline: 2px solid @link-primary-blue;
+}
+
+#wrapper {
+  .account-header {
+    .account-header__info a:focus,
+    .main-nav a:focus {
+      outline: 2px solid #efbd46;
+    }
+  }
+  .acc-image a:focus .sy-icon--account-info-active {
+    margin-right: 0px;
+  }
+  .acc-no a {
+    display: inline-block;
+  }
+}
+
+.sy-button--default,
+.sy-button--blue,
+.account-option > a,
+.account-logout > a {
+  border: 1px solid @LimedSpruce;
+}
+
+.sy-button--primary,
+.sy-button--yellow {
+  border: 1px solid @border-primary;
+}
+
+@media (min-width: 768px) {
+  .sy-button--default:hover,
+  .sy-button--blue:hover,
+  .sy-button--default:active,
+  .sy-button--blue:active,
+  .sy-button--default:focus,
+  .sy-button--blue:focus {
+    border: 1px solid @LimedSpruce;
+    padding: 6px 30px;
+  }
+  .sy-button--primary,
+  .sy-button--yellow {
+    margin-bottom: 0;
+    padding: 6px 30px;
+  }
+}
+/*Accessibility -  design work - end*/
+
+/** Accessibility - Primary-secondary-buttons - styles - start **/
+.account-option > a,
+.account-logout > a,
+.btn--edit,
+.btn--inline,
+.energy-saver-filter .filter-button,
+.account-option > a:hover,
+.account-logout > a:hover {
+  border: 1px solid @LimedSpruce;
+}
+.submission-datalist--review {
+  .submission-datalist-edit {
+    .btn {
+      border: 1px solid @LimedSpruce;
+    }
+  }
+  .submission-datalist-group--active {
+    .submission-datalist-edit {
+      .btn--save {
+        border: 1px solid @LimedSpruce;
+      }
+    }
+  }
+}
+
+.filter-container .btn--submit,
+.form-input--button,
+.promo--action .btn,
+.promo-button,
+.submission-datalist .btn--restart,
+.submission-status-container--review .btn--confirm {
+  border: 1px solid @border-primary;
+}
+.submission-datalist--review .submission-datalist-edit .btn:focus,
+.submission-datalist--review .submission-datalist-edit .btn:hover {
+  border-color: @border-primary;
+}
+
+.user-utilities-container .btn.btn--keyline {
+  padding: 11px 20px;
+  border: 1px solid @border-primary;
+}
+/** Accessibility - Primary-secondary-buttons - styles - end **/
+
+/** Accessibility - Colour contrast changes for modals and form fields - Start **/
+.field-group--radio .form-input:checked + .form-label,
+.field-group--radio .form-input:checked + .form-label:before,
+.field-group--checkbox .form-input:checked + .form-label,
+.field-group--checkbox .form-input:checked + .form-label a,
+.field-group--radio .form-input:checked + .form-label {
+  color: #007a83;
+}
+.sy-icon--remove_2,
+.sy-alert--info span[class*='sy-icon--'],
+.sy-icon--circle_question_mark:before {
+  color: @link-primary-blue!important;
+}
+.sy-form-error .sy-icon--remove_2:before {
+  color: #747a7c !important;
+}
+.sy-wizard .sy-wizard__header .sy-icon--remove_2:hover,
+.sy-wizard .sy-wizard__header .sy-icon--remove_2:active,
+.sy-wizard .sy-wizard__header .sy-icon--remove_2:focus {
+  color: @primary-green!important;
+}
+.datepicker .sy-icon--chevron-left,
+.datepicker .sy-icon--chevron-right,
+.sy-icon--circle_info {
+  color: @link-primary-blue!important;
+}
+.sy-alert--outage .sy-icon--circle_info,
+.sy-alert--outage h2 {
+  color: @Synergy-white !important;
+}
+
+.sy-alert--outage-main .sy-icon--remove_2:before {
+  color: @Synergy-white !important;
+}
+
+.datepicker .sy-icon--chevron-left:hover,
+.datepicker .sy-icon--chevron-right:hover,
+.sy-icon--circle_question_mark:hover:before {
+  color: @primary-green!important;
+}
+
+/** Accessibility - Colour contrast changes for modals and form fields - End **/
+
+/** 18699 - Accessibility (Webkey IT comments) - Start **/
+.panel-header-container {
+  .panel-title {
+    width: 90%;
+  }
+  .title-info-icon {
+    position: relative;
+    top: 2px;
+    font-size: 16px;
+  }
+}
+
+#wrapper {
+  p {
+    a {
+      .a_Selector();
+    }
+  }
+  span {
+    a {
+      .a_Selector();
+    }
+  }
+}
+
+/** 18699 - Accessibility (Webkey IT comments) - Start **/

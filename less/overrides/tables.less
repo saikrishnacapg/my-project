@@ -1,0 +1,58 @@
+//== Tables
+//
+//## Customizes the `.table` component with basic values, each used across all table variations.
+
+//** Padding for `<th>`s and `<td>`s.
+@table-cell-padding: 8px;
+//** Padding for cells in `.table-condensed`.
+@table-condensed-cell-padding: 5px;
+
+//** Default background color used for all tables.
+@table-bg: transparent;
+//** Background color used for `.table-striped`.
+@table-bg-accent: #f9f9f9;
+//** Background color used for `.table-hover`.
+@table-bg-hover: #f5f5f5;
+@table-bg-active: @table-bg-hover;
+
+//** Border color for table and cell borders.
+@table-border-color: @secondary-blue-light;
+
+table {
+  margin-bottom: 0;
+
+  @media (min-width: @screen-sm) {
+    margin-bottom: 20px;
+  }
+}
+
+th {
+  color: @complimentary-black;
+  font-size: 12px;
+}
+
+td {
+  border-bottom: 1px solid @secondary-blue-light;
+  font-size: 12px;
+  position: relative;
+
+  a {
+    border-bottom: 1px solid @primary-blue;
+    font-weight: bold;
+    position: relative;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    span[class*='sy-icon--'] {
+      position: absolute;
+    }
+  }
+
+  span[class*='sy-icon--'] {
+    color: @secondary-cyan;
+    font-size: 18px;
+    margin: 0 5px 10px 0;
+  }
+}

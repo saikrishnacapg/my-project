@@ -1,0 +1,129 @@
+.sy-tab-container {
+  &:extend(.nav,
+  .nav-default);
+
+  @media (max-width: @screen-sm) {
+    padding: 0;
+  }
+}
+
+.sy-tabs.sy-tabs--responsive {
+  @media (max-width: @screen-sm) {
+    li {
+      margin: 0 0 2px;
+      width: 100%;
+    }
+
+    a {
+      border: 1px solid @complimentary-gray;
+      border-radius: 6px;
+      padding-left: 20px;
+
+      &:hover {
+        border: 1px solid @complimentary-gray;
+      }
+
+      &.active {
+        border: 1px solid @primary-green;
+      }
+    }
+  }
+}
+
+.sy-tabs {
+  &:extend(.nav,
+  .nav-tabs);
+
+  border-bottom: 4px solid @primary-green;
+  .clearfix();
+  margin: 0;
+  padding: 0;
+
+  li {
+    display: block;
+    float: left;
+    margin-right: 3px;
+  }
+
+  a {
+    background: @primary-white;
+    border: 1px solid @complimentary-gray;
+
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    color: @complimentary-black;
+    cursor: pointer;
+    display: block;
+    font-weight: bold;
+    outline: none;
+    padding: 13px 7px 10px;
+    white-space: nowrap;
+
+    &:hover {
+      background: @primary-blue;
+      border: 1px solid @complimentary-gray;
+      border-bottom: none;
+      color: @complimentary-black;
+      text-decoration: none;
+    }
+
+    &:focus {
+      text-decoration: none;
+    }
+
+    @media (min-width: @screen-xs) {
+      padding: 13px 15px 10px;
+    }
+
+    span[class*='sy-icon--'] {
+      color: @complimentary-black;
+      float: left;
+      font-size: 20px;
+      line-height: 1;
+      margin-right: 6px;
+      margin-top: -4px;
+
+      @media (min-width: @screen-xs) {
+        font-size: 24px;
+      }
+    }
+
+    span.coming-soon:before {
+      content: '';
+    }
+
+    span.coming-soon {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      width: 104px;
+      height: 60px;
+      background-color: #6c6;
+      position: relative;
+      font-size: 18px;
+    }
+
+    span.coming-soon:after {
+      content: '';
+    }
+  }
+
+  li.active {
+    a {
+      background: @primary-green;
+      border: 1px solid @primary-green;
+      color: #fff;
+
+      span[class*='sy-icon--'] {
+        color: #fff;
+      }
+    }
+  }
+
+  li:last-child a {
+    border-bottom: 1px solid @primary-green;
+
+    @media (min-width: @screen-xs) {
+      border-bottom: none;
+    }
+  }
+}

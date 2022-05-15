@@ -1,0 +1,83 @@
+.noMargin() {
+	margin: 0;
+}
+
+.noPadding() {
+	padding: 0;
+}
+
+.resetMarginPadding() {
+	.noMargin();
+	.noPadding();
+}
+
+/* sizing and shape mixins */
+
+.size(@width, @height) {
+	width: @width;
+	height: @height;
+}
+
+.square(@size) {
+	.size(@size, @size);
+}
+
+.circle(@size) {
+	.square(@size);
+	border-radius: 50%;
+}
+
+.width100() {
+	width: 100%;
+}
+
+/* positioning related mixins */
+.position(@type: absolute, @top: auto, @right: auto, @bottom: auto, @left: auto) {
+	position: @type;
+	top: @top;
+	right: @right;
+	bottom: @bottom;
+	left: @left;
+}
+
+.flex(@direction: row, @wrap: nowrap, @justify: initial, @align: initial) {
+	display: flex;
+	flex-flow: @direction @wrap;
+	justify-content: @justify;
+	align-items: @align;
+}
+
+.flexCenter(@direction:row) {
+	.flex(@justify: center, @align: center);
+}
+
+.flexVerticalCenter() {
+	display: flex;
+	align-items: center;
+}
+
+.absoluteCenter() {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.fixedOverlay(@zIndex: 99) {
+	.size(100%, 100%);
+	.position(fixed, 0, 0, 0, 0);
+	z-index: @zIndex;
+}
+
+.textCenter() {
+	text-align: center;
+}
+
+.divide(@size) {
+	@result: (@size / 16rem);
+}
+
+/* font related mixins */
+.fontSize(@size) {
+	font-size: .divide(@size) [ @result];
+}

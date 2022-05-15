@@ -1,0 +1,15 @@
+@import "../../node_modules/bootstrap/less/mixins";
+
+div.datepicker table tr td button:disabled {
+   .button-variant(gray, lightgray, lightgray);
+   border-radius: 0;
+}
+
+div.datepicker table tr td button:disabled span{
+  color: gray;
+  background-color: lightgray;
+}
+
+div.datepicker table tr:last-child {
+  background-color: white;
+}

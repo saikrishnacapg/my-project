@@ -1,0 +1,53 @@
+// No-background feature
+.white-background {
+  background-color: #FFFFFF;
+}
+
+.no-background {
+  background-color: #E3ECEE;
+}
+
+.no-border {
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.responsive-margin {
+  margin-left:25px;
+  margin-right:25px;
+  @media (max-width: @maxHandheldWidth) {
+    margin-left:2px;
+    margin-right:2px;
+  }
+}
+
+// Widen Feature
+@media (min-width: @screen-lg) {
+  .container {
+    width: 970px;
+  }
+  .container.widen {
+    width: 1170px;
+  }
+}
+
+// Balance Strap Feature
+.underline-border {
+  border-bottom: 1px solid !important;
+}
+
+// New Options Feature
+.panel-bare {
+  margin-bottom: 0px;
+  border-bottom-width: 0px;
+}
+
+.bigger-badge {
+  padding: 5px 8px;
+}
+
+// Strip Account Feature
+.text-medium {
+  font-size: 115%;
+}
