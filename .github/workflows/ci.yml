@@ -26,3 +26,6 @@ jobs:
           name: MyAccount-Artifact
           path: dist/myaccount.zip
           retention-days: 5
+      
+      - name: 'Checking Node js Version'
+      - run: node -v

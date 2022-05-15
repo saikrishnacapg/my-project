@@ -1,8 +1,11 @@
-FROM openjdk:8-jre-alpine
+FROM ubuntu:latest
 
-EXPOSE 8080
+RUN apt-get update && apt-get install -y curl
 
-COPY ./build/libs/my-app-1.0-SNAPSHOT.jar /usr/app/
-WORKDIR /usr/app
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
-ENTRYPOINT ["java", "-jar", "my-app-1.0-SNAPSHOT.jar"]
+RUN apt-get update && apt-get install nodejs
+
+RUN node -v
+
+RUN npm -v
