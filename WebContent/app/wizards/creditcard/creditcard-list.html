@@ -1,0 +1,26 @@
+<div ng-form="paymentDetailsForm" novalidate>
+    <h2>Saved cards</h2>
+</div>
+
+<div data-layout="form" ng-if="!myCtrl.hasStoredCards">
+    You have no saved cards. Save time and pay faster by <a ng-click="wizard.goForward()">adding your card</a> now.
+</div>
+<div data-layout="form" ng-if="myCtrl.hasStoredCards">
+    <div ng-repeat="card in myCtrl.storedCards track by $index">
+        <div>
+            <div class="sy-element-left col-sm-4">
+                <label>Card {{$index + 1}}:<!--<span style="color: red;" ng-if="myCtrl.isCardExpired($index)"> Expired</span>--></label>
+            </div>
+            <div class="sy-element-left col-sm-7 margin-left-5">
+                <label>Expiry</label>
+            </div>
+        </div>
+        <div sy-form-group  class="container-fluid no-padding-left-right">
+            <div disabled="true" class="sy-element-left col-sm-4 margin-top-10"><span>{{card.maskedCreditCardNumber}}</span><span sy-card-type="{{card.maskedCreditCardNumber}}"></span></div>
+            <div disabled="true" ng-if="!myCtrl.isCardExpired($index)" class="sy-element-right col-sm-1 margin-top-10"><span ng-bind="myCtrl.formatCardExpiryDate(card.expiryDate)"></span></div>
+            <div disabled="true" ng-if="myCtrl.isCardExpired($index)" class="sy-element-right col-sm-2  margin-top-10"><span style="color: red;" >Expired</span></div>
+           <div class="sy-element-left col-sm-4" ng-if="!myCtrl.isCardExpired($index)"> <button type="button" class="sy-button--default" ng-click="myCtrl.updateCardExpiry($index)">Update&nbsp;expiry</button></div>
+           <div class="sy-element-right col-sm-3"> <button type="button" class="sy-button--default" ng-click="myCtrl.requestStoredCardDeletion($index)">Delete card</button></div>
+        </div>
+    </div>
+</div>

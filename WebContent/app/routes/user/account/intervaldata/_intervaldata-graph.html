@@ -1,0 +1,61 @@
+<style>
+    /*Below print layout changes are relevant for Tabular tab under Interval Data
+      tab for business customers
+    */
+    @media print {
+
+        .main__header {
+            margin-bottom: -1px;
+        }
+        .account-header {
+            border-bottom: 1px solid black;
+            min-height: 95px !important;
+        }
+
+        .account-log-details,
+        .account-welcome-msg,
+        .user__welcome,
+        .panel-header,
+        .mobile-nav,
+        .sy-tabs,
+        .main-nav.sy-tab-container,
+        div .btn-group.pull-right,
+        #fetchMoreBtn,
+        #fetchMoreFutureBtn,
+        #fetchMoreBtn1,
+        #fetchMoreFutureBtn1,
+        #returnToDailyBtn,
+        .account-header__info > a {
+            display: none;
+        }
+
+        .main-nav.ng-hide {
+            display: none;
+        }
+
+        .account-header .account-header__info,
+        .account-header .account-header__info h2,
+        .account-header .account-header__info h2 small {
+            color: #182124;
+            font-weight: normal;
+        }
+
+        td a {
+            text-decoration: none !important;
+            color: #182124;
+            font-weight: normal;
+            border-bottom: none !important;
+        }
+    }
+</style>
+
+<div class="interval-data__graph">
+    <div id="intervalGraph" ng-if="intervalDataCtrl.displayGraph()">
+        <div ng-if="intervalDataCtrl.intervalData.isElectricity()" ng-include="'app/routes/user/account/intervaldata/_intervaldata-graph-elec.html'"></div>
+        <div ng-if="intervalDataCtrl.intervalData.isGas()" ng-include="'app/routes/user/account/intervaldata/_intervaldata-graph-gas.html'"></div>
+    </div>
+    <div ng-if="intervalDataCtrl.displayLookupErrorMessage()">
+        <h3 class="text-center" ng-bind="intervalDataCtrl.intervalData.message">
+        </h3>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="sy-form-error" >
+    <div ng-class="{'inactive': syAlertForCtrl.show,
+	                'sy-alert--notification' : syAlertForCtrl.field.warning && !syAlertForCtrl.field.$invalid,
+	                'sy-alert--danger': syAlertForCtrl.field.$invalid}"
+         ng-show="syAlertForCtrl.show
+            && (syAlertForCtrl.field.$invalid || syAlertForCtrl.field.warning)
+            && (syAlertForCtrl.submitAttempted || syAlertForCtrl.field.hasVisited  || syAlertForCtrl.field.$dirty)">
+		<span style="position: absolute; right: 0">
+			<a href ng-click="syAlertForCtrl.hideAlert()" alt="Close" title="Close">
+                <span class="sy-icon--remove_2"></span>
+            </a>
+		</span>
+        <span ng-transclude style="float: left; padding-right: 20px"></span>
+
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="controls">
+  <p>Simply start typing your Australian address and select it from the list that appears.</p>
+  <input type="text"
+         class="form-control"
+         id="address"
+         name="address"
+         ng-model="addressLookupCtrl.address"
+         data-animation="am-flip-x"
+         bs-options="result as result.label for result in quickSearch($viewValue)"
+         placeholder="Start Typing..."
+         ng-required="{{addressRequired}}"
+         analytics-on="change" analytics-event="mailing address lookup"
+         bs-typeahead
+         sy-is-address/>
+</div>

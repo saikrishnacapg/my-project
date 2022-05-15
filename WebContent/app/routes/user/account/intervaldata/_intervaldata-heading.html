@@ -1,0 +1,21 @@
+<h2 ng-bind="intervalDataCtrl.chartTitle()" class="text-center"></h2>
+<div class="panel" style="display: inline-block; vertical-align: middle" ng-if="intervalDataCtrl.intervalData.mode!=='Tabular'">
+     <label ng-if="intervalDataCtrl.intervalData.dayInterval > 0" class="text-center" >Select the graph to switch to daily view</label>
+     <label ng-if="intervalDataCtrl.intervalData.dayInterval == 0" class="text-center">Click the graph to return to the selected date range</label>
+</div>
+<div ng-if="intervalDataCtrl.intervalData.mode==='Tabular'">
+    <div ng-if="intervalDataCtrl.intervalData.dayInterval === 0">
+        <button id="returnToDailyBtn"
+                type="button"
+                class="sy-button--default pull-left"
+                ng-click="intervalDataCtrl.returnToDailyView()"
+                sy-busy-chevron="fetchMore"
+                busy-class="sy-icon--chevron-left pull-left">
+            Return to daily view
+        </button>
+    </div>
+</div>
+<div class="btn-group pull-right">
+    <label class="btn" ng-click="accountCtrl.openIntervalExport()"><span class="sy-icon--new_window"></span> Export</label>
+    <label class="btn" ng-click="intervalDataCtrl.printChart()"><span class="sy-icon--print"></span> Print</label>
+</div>

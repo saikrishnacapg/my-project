@@ -1,0 +1,35 @@
+<div class="mini" sy-card ready-when="!sasCtrl.product.loadingData" color="white" font-color="black-text"
+     card-title="sasCtrl.product.viewingPresentData ?  'Usage today' : 'Usage'" show-help="true" help-id="usage" icon="sy-icon--power">
+<!--<div class="mini" sy-card ready-when="!sasCtrl.product.loadingData" color="white" font-color="black-text">-->
+	<div sy-card-content>
+		<table ng-if="sasCtrl.currentPortrait.usageToday">
+			<tbody class="padded-table-5 absolute left-55">
+				<tr>
+					<td>
+						<strong ng-bind="sasCtrl.currentPortrait.usageToday.kwh + ' kWh'"></strong>
+					</td>
+					<td>
+						Used <span ng-bind="sasCtrl.product.viewingPresentData ? 'today' : 'this period'">today</span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong ng-bind="'$' + sasCtrl.currentPortrait.usageToday.cost"></strong>
+					</td>
+					<td>
+						Estimated cost
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<strong ng-bind="sasCtrl.currentPortrait.usageToday.co2Kg + ' kg'"></strong>
+					</td>
+					<td>
+						CO2 used
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+</div>

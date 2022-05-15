@@ -1,0 +1,50 @@
+<div ng-form="cardForm">
+    <div sy-form-group  data-layout="form" ng-controller="MsgCntlr">
+        <label class="control-label label-required" for="expiryMonth">Card expiry :</label>
+        <div sy-form-group data-layout="tooltip">
+            <div>
+                <div >
+                    <input id="expiryMonth"
+                        type="tel"
+                        name="expiryMonth"
+                        class="input-mini form-control"
+                        ng-model="cardModel.expiryMonth"
+                        placeholder="MM"
+                        maxlength="02"
+                        sy-pattern="MONTH"
+                        sy-move-focus 
+                        sy-validate-card-expiry
+                        required style="margin: 0; width:50px;display:inline">
+                    </input>
+                    <span style="display:inline">/</span>
+                    <input id="expiryYear"
+                        type="tel"
+                        name="expiryYear"
+                        class="input-mini form-control"
+                        ng-model="cardModel.expiryYear"
+                        placeholder="YY"
+                        maxlength="02"
+                        sy-pattern="YEAR"
+                        sy-move-focus 
+                        sy-validate-card-expiry
+                        required style="margin: 0; width:50px;display:inline">                       
+                    </input><br/>
+                    <label style="padding: 0px 0px 0px 8px;display: inline;" >Month</label>
+                    <label style="padding: 0px 0px 0px 24px;display: inline;" >Year</label>
+                </div>
+                
+                <div sy-alert-box="expiryMonth" sy-analytics-error="expiryMonth" style="width:60%">
+                    <p ng-show="!cardForm.expiryMonth.$error.syValidateCardExpiry">{{findMsgHTML('MA_E60')}}</p>
+                    <p ng-show="cardForm.expiryMonth.$error.syValidateCardExpiry">
+                            The expiry date is before today&apos;s date. Please enter a valid expiry date
+                    </p>
+                </div>
+                
+                <div ng-show="cardForm.expiryMonth.$valid" sy-alert-box="expiryYear" sy-analytics-error="expiryYear"  style="margin-left:60px;width:60%">
+                    <p ng-show="!cardForm.expiryYear.$error.syValidateCardExpiry" >{{findMsgHTML('MA_E61')}}</p>
+                    <p ng-show="cardForm.expiryYear.$error.syValidateCardExpiry"> The expiry date is before today&apos;s date. Please enter a valid expiry date</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

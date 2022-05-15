@@ -1,0 +1,34 @@
+<div ng-form="rebsForm">
+    <div sy-form-group>
+        <div class="control-label label-required">
+            <p>
+                New technical requirements for connecting and operating distributed energy systems that involve a
+                small renewable energy system (solar systems) to the Western Power distribution network are changing.
+                New solar systems from 14 February 2022 will be required to meet new
+                <a sy-doc-href="solar.emergency.management">emergency solar management</a> requirements.
+            </p>
+            <br/>
+            <p>
+                In an emergency solar management event, new and upgraded residential rooftop solar systems
+                with an inverter capacity of 5kVA or less must have the capability to be remotely turned off where a:
+            </p>
+            <ol>
+                <li>Synergy distributed energy buyback scheme application is received on or after 14 February 2022; or,</li>
+                <li>Synergy distributed energy buyback scheme application is received before 14 February 2022 and installed on or after 14 March 2022.</li>
+            </ol>
+            <br/>
+            <p>
+                Talk to your solar provider about how these changes impact your
+                solar system requirements and what is required to ensure your system meets the
+                <a href="https://www.westernpower.com.au/industry/manuals-guides-standards/basic-embedded-generation-connection-technical-requirements" target="_blank">Western Power Basic Embedded Generation Connection Technical Requirements</a>.
+            </p>
+        </div>
+    </div>
+    <div class="acc-chkBox-btn" sy-auto-focus="sy-auto-focus">
+        <input type="checkbox" ng-model="rebsCtrl.model.dvpmTermsAccepted" id="dvpmTermsAccepted" class="" />
+        <label for="dvpmTermsAccepted">
+            I understand that failure to comply with the Western Power Basic Embedded Generation Connection Technical Requirements
+            relating to emergency solar management from 14 February 2022 may impact my ability to connect and operate my solar system.
+        </label>
+    </div>
+</div>

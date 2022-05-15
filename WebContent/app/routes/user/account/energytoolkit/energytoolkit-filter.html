@@ -1,0 +1,36 @@
+<div class="btn-group visible-xs">
+	<button class="filter-button sy-button--white radio" ng-class="{'active':energyCtrl.showFilter}" ng-click="energyCtrl.toggleFilter()">Filter & Sort </button>
+</div>
+
+<div class="form-horizontal filter-options" ng-class="{'active':energyCtrl.showFilter}" >
+
+	<div class="filter-option">
+		<!-- <label>Type</label> -->
+		
+		<button type="button" class="sy-button--white sy-button--icon-left sy-button--block dropdown-toggle"
+				bs-dropdown="energyCtrl.tipCategories">
+			<span class="sy-icon--filter"></span> Type: <span ng-bind="energyCtrl.filterType.label"></span>
+            <span class="caret"></span>
+		</button>
+	</div>
+	<div class="filter-option">
+		<!-- <label>Status</label> -->
+		<button type="button" class="sy-button--white sy-button--icon-left sy-button--block dropdown-toggle"
+				data-html="1" 
+				template="app/routes/user/account/energytoolkit/_dropdown-status.html" bs-dropdown>
+			<span class="sy-icon--filter"></span> Status: <span ng-bind="energyCtrl.filterStatus.label"></span>
+            <span class="caret"></span>
+		</button>
+	</div>
+		<!-- 
+	<div class="filter-option">
+	<label>Sort by</label>
+		<button class="sy-button--white sy-button--icon-left sy-button--block" 
+				data-html="1" 
+				template="app/routes/user/account/energytoolkit/_dropdown-sort-by.html" bs-dropdown>
+			<span class="sy-icon--sorting"></span> Sort by: <span ng-bind="energyCtrl.filterSort.label"></span>
+		</button>
+		
+	</div>
+	 -->
+</div>

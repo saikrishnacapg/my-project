@@ -1,0 +1,94 @@
+<div class="panel-header" ng-if="ccCtrl.account.concessionDetails.statusMessage">
+    <div class="sy-alert--info">
+        <span ng-bind="ccCtrl.account.concessionDetails.statusMessage"></span>
+    </div>
+</div>
+
+<div ng-hide="ccCtrl.account.concessionDetails.cards">
+    <p>You currently have no concession cards registered to your account </p>
+</div>
+
+<div ng-show="ccCtrl.account.concessionDetails.cards">
+
+    <h3>Your details</h3>
+
+    <button type="button" class="sy-button--yellow sy-button--icon-left pull-right" ng-click="ccCtrl.editDependents()" ng-hide="ccCtrl.disableEdit()">
+        <span class="sy-icon--pencil"></span> Edit
+    </button>
+
+    <ul class="sy-no-list-style">
+        <li>
+            <strong>Name:</strong>
+            <span ng-bind="ccCtrl.account.concessionDetails.firstName"></span>
+            <span ng-bind="ccCtrl.account.concessionDetails.lastName"></span>
+        </li>
+        <li>
+            <strong>Number of dependents: </strong>
+            <span ng-bind="ccCtrl.account.concessionDetails.noOfDependents"></span>
+        </li>
+    </ul>
+
+    <h3 ng-show="ccCtrl.currentAccountCards">Concessions and rebates linked to this account</h3>
+
+    <div sy-form-group data-layout='edit' ng-repeat="card in ccCtrl.currentAccountCards | orderBy:'-active' track by $index">
+        <div>
+            <div class="col-sm-1 hidden-xs" ng-bind="($index + 1) + '.'"></div>
+            <div class="col-xs-12 col-sm-11">
+                <div> <strong>Card status: </strong> <span ng-bind="card.active ? 'Valid' : 'Expired'"></span> </div>
+                <div> <strong>Card issuer:</strong> {{card.cardIssuer}}</div>
+                <div> <strong>Card type:</strong> {{card.cardTypeText}}</div>
+                <div> <strong>Card number:</strong> {{card.cardNumber}} </div>
+                <div ng-show="card.nameOnCard"> <strong>Name On Card:</strong> <span ng-bind="card.nameOnCard"></span> </div>
+            </div>
+        </div>
+        <button type="button"
+                class="sy-button--dropdown"
+                data-animation="am-flip-x"
+                data-placement="bottom-left"
+                data-template="app/wizards/concessioncards/_concession-card-dropdown.html"
+                bs-dropdown>
+            <span>Change details</span>
+            <span class="caret"></span>
+        </button>
+    </div>
+
+    <div class="clearfix" ng-if="ccCtrl.otherAccountsCards.length">
+        <h3>Concessions linked to other accounts</h3>
+       <!-- <p>
+            You can change these details in My Account by selecting "change account" or call us on <strong sy-phone-number account-type="{{ccCtrl.account.contractAccountType}}"></strong> for assistance.
+        </p>-->
+        <p>
+            The below concessions are currently linked to other accounts. To update these concession details, you will need to manage these within the associated account via My Account or
+            call us on <strong sy-phone-number account-type="{{ccCtrl.account.contractAccountType}}"></strong>  for assistance.
+        </p>
+
+        <div class="form-group clearfix" ng-repeat="card in ccCtrl.otherAccountsCards track by $index">
+            <div class="col-sm-1 hidden-xs" ng-bind="($index + 1) + '.'"></div>
+            <div class="col-xs-12 col-sm-11">
+                <div> <strong> Card issuer: </strong> {{card.cardIssuer}} </div>
+                <div> <strong> Card type: </strong> {{card.cardTypeText}} </div>
+                <div> <strong>Card number:</strong> {{card.cardNumber}} </div>
+                <div> <strong>Card status: </strong> <span ng-bind="card.active ? 'Valid' : 'Expired'"></span> </div>
+                <div ng-show="card.nameOnCard"> <strong>Name On Card:</strong> <span ng-bind="card.nameOnCard"></span> </div>
+                <div> <strong> Linked to account : </strong> {{card.account}} </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix" ng-if="ccCtrl.noAccountCards.length" >
+        <h3>Concessions not currently linked to any accounts</h3>
+        <p>
+            Please call us on <strong sy-phone-number account-type="{{ccCtrl.account.contractAccountType}}"></strong> to update these details.
+        </p>
+        <div class="form-group clearfix" ng-repeat="card in ccCtrl.noAccountCards track by $index">
+            <div class="col-sm-1 hidden-xs" ng-bind="($index + 1) + '.'"></div>
+            <div class="col-xs-12 col-sm-11">
+                <div><strong>Card issuer:</strong> {{card.cardIssuer}}</div>
+                <div><strong>Card type:</strong> {{card.cardTypeText}}</div>
+                <div> <strong>Card number:</strong> {{card.cardNumber}} </div>
+                <div> <strong>Card status: </strong> <span ng-bind="card.active ? 'Valid' : 'Expired'"></span> </div>
+                <div ng-show="card.nameOnCard"> <strong>Name On Card:</strong> <span ng-bind="card.nameOnCard"></span> </div>
+            </div>
+        </div>
+    </div>
+</div>

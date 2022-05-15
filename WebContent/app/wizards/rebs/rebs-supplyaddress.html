@@ -1,0 +1,43 @@
+<div class="must-complete">All fields must be completed.</div>
+
+<div ng-form="rebsForm" sy-auto-focus="sy-auto-focus">
+
+    <div class="form-group">
+        <label class="label-required" for="supplyAddress">Supply address:</label>
+        <select id="supplyAddress"
+                class="form-control"
+                ng-multiple="false"
+                ng-model="rebsCtrl.model.meter.address"
+                ng-options="address.supplyAddress for address in [rebsCtrl.model.meter.address]" /> <!-- Refactored so that you have chosen your supply address at this point -->
+    </div>
+    <div sy-alert-box="supplyAddress">
+        <p>Please select an supply address.</p>
+    </div>
+
+    <div class="form-group" ng-if="rebsCtrl.model.hasMeters()">
+        <label class="label-required" for="meterNumber">Meter number:</label>
+        <select id="meterNumber"
+                class="form-control"
+                ng-multiple="false"
+                ng-model="rebsCtrl.model.meter.details"
+                ng-options="meter.masterMeterNumber for meter in rebsCtrl.model.meter.address.masterMeterDataList" />
+    </div>
+
+    <div class="form-group" ng-if="!rebsCtrl.model.hasMeters()">
+        <label for="supplyAddress">
+            No meter has been found at the selected supply address.
+            Is your property under construction?
+        </label>
+
+        <div sy-yes-no consent="rebsCtrl.model.meter.underConstruction"></div>
+
+        <p class="sy-alert--danger"
+            ng-if="rebsCtrl.displayConstructionError()">
+            Sorry, you will not be able to proceed with your application as there is no meter at the selected supply address and you have indicated that your property is not under construction.
+        </p>
+    </div>
+
+    <p class="help-block">
+        If your meter number is not included in the list, then it could be a sub-meter and you may not receive a bill from Synergy. Double check you've entered the correct supply address or confirm your connection with your landlord or property owner.
+    </p>
+</div>

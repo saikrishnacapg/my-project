@@ -1,0 +1,24 @@
+<div ng-controller="UnbilledCtrl as unbilledCtrl" ng-cloak>
+   <div class="ami-int-cnt" ng-if="!unbilledCtrl.hasValidationError">
+         <div class="" ng-repeat="record in unbilledCtrl.unbilledConsumptionDetails" ng-if="unbilledCtrl.showUnbilledInsight()">
+               <p  ng-if="unbilledCtrl.unbilledConsumptionDetails.length>1">Details of {{record.contract}}</p>
+               <h2 ng-if="record.startDate">Unbilled usage trends from {{record.startDate|date:'dd MMM'}} to {{record.endDate|date:'dd MMM'}}</h2>
+               <p class="content" ng-if="record.highestConsumptionDate">Highest usage day is <span class="capitalize">{{record.highestConsumptionDay}}</span> {{record.highestConsumptionDate|date:'dd MMM'}}.</p>
+               <p ng-if="record.lowestConsumptionDate">Lowest usage day is <span class="capitalize">{{record.lowestConsumptionDay}}</span> {{record.lowestConsumptionDate|date:'dd MMM'}}.</p>
+               <p ng-if="record.highestConsumptionDayWeek">On average you use the most electricity on a <span class="capitalize">{{record.highestConsumptionDayWeek}}</span> during the week.</p>
+               <p ng-if="record.highestConsumptionHrs">Highest usage hours are between {{record.highestConsumptionHrs}}.  </p>
+         </div>
+         <div class=""  ng-if="unbilledCtrl.isMultipleHighConsumption()">
+            <h2 ng-if="unbilledCtrl.unbilledConsumptionDetails.length>0 && unbilledCtrl.unbilledConsumptionDetails[0].startDate">Unbilled usage trends from {{unbilledCtrl.unbilledConsumptionDetails[0].startDate|date:'dd MMM'}} to {{unbilledCtrl.unbilledConsumptionDetails[0].endDate|date:'dd MMM'}}</h2>
+            <p class="content">We have found multiple high usage hours/days since your bill was issued.</p>
+         </div>
+         <div class=""  ng-if="unbilledCtrl.isMultipleLowConsumption()">
+           <h2 ng-if="unbilledCtrl.unbilledConsumptionDetails.length>0 && unbilledCtrl.unbilledConsumptionDetails[0].startDate">Unbilled usage trends from {{unbilledCtrl.unbilledConsumptionDetails[0].startDate|date:'dd MMM'}} to {{unbilledCtrl.unbilledConsumptionDetails[0].endDate|date:'dd MMM'}}</h2>
+           <p class="content">We have found multiple low usage hours/days since your bill was issued.</p>
+         </div>
+         <div class=""  ng-if="unbilledCtrl.isSubstitueDataPresent()">
+           <h2 ng-if="unbilledCtrl.unbilledConsumptionDetails.length>0 && unbilledCtrl.unbilledConsumptionDetails[0].startDate">Unbilled usage trends from {{unbilledCtrl.unbilledConsumptionDetails[0].startDate|date:'dd MMM'}} to {{unbilledCtrl.unbilledConsumptionDetails[0].endDate|date:'dd MMM'}}</h2>
+           <p class="content">We have found that some or all of your meter data is estimated</p>
+         </div>
+   </div>
+</div>

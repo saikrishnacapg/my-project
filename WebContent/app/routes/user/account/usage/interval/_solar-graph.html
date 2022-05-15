@@ -1,0 +1,12 @@
+<div class="interval-data__graph">
+    <div id="solarGraph" ng-if="solarCtrl.displayGraph()">
+        <div ng-if="solarCtrl.solar.isElectricity()" ng-include="'app/routes/user/account/usage/interval/_solar-graph-elec.html'"></div>
+    </div>
+    <div class="noPrint" ng-show="solarCtrl.solar.unAvailableDataFlag" style="text-align: center">
+        <div ng-hide="!solarCtrl.solar.latestData().hasValue" >Interval data is not available prior to {{ solarCtrl.solar.minDate}}. Please refer to the Energy usage tab for full energy usage history.</div>
+    </div>
+    <div ng-if="solarCtrl.displayLookupErrorMessage()">
+        <h3 class="text-center" ng-bind="solarCtrl.solar.message">
+        </h3>
+    </div>
+</div>

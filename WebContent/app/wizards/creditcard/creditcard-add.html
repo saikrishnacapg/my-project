@@ -1,0 +1,123 @@
+<div ng-form="paymentDetailsForm" novalidate>
+
+    <div class="form-group form-separator">
+        <div sy-server-include="MYACC_CC_CARD_ALERT"></div>
+    </div>
+    <div class="must-complete">All fields must be completed.</div>
+
+    <div ng-controller="MsgCntlr">
+        <div sy-form-group data-layout="form">
+            <label class="label-required" for="cardHolderName">Cardholder name:</label>
+
+            <div>
+                <div sy-form-group data-layout="tooltip">
+                <input type="text" ng-model="myCtrl.payData.newCard.cardHolderName"
+                       id="cardHolderName" name="cardHolderName"
+                       class="form-control" maxlength="60" sy-pattern="NAME" required ng-paste="$event.preventDefault()">
+                <a href id="showCardHolderHelp" alt="Help" title="Help"
+                   ng-click="myCtrl.showHelpText('Card Holder Name', ''{{findMsgHTML('H12')}}')')" alt="Help" title="Help">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+                </div>
+                <div sy-alert-box="cardHolderName">
+                    <p ng-show="paymentDetailsForm.cardHolderName.$error.required">{{findMsgHTML('MA_E20')}}</p>
+                    <p ng-show="paymentDetailsForm.cardHolderName.$error.pattern">{{findMsgHTML('E412')}}</p>
+
+                </div>
+            </div>
+        </div>
+
+        <div sy-form-group data-layout="form">
+            <label class="label-required" for="cardNumber">Card number:</label>
+
+            <div>
+                <div sy-card-type-picker="myCtrl.payData.newCard.cardType"
+                     card-number="myCtrl.payData.newCard.cardNumber">
+                    <input type="text" ng-model="myCtrl.payData.newCard.cardNumber"
+                           id="cardNumber" name="cardNumber"
+                           sy-pattern="CARD_NUMBER"
+                           ng-change="myCtrl.setCardType()"
+                           ng-required="true"
+                           sy-validate-card class="form-control" required>
+
+                    <div sy-alert-box="cardNumber">
+                        <p>
+                            {{findMsgHTML('MA_E22')}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div sy-form-group data-layout="form">
+            <label class="control-label label-required" for="expiryMonth">Card expiry:</label>
+            <div>
+                <input id="expiryMonth"
+                       type="text"
+                       name="expiryMonth"
+                       class="input-mini form-control"
+                       ng-model="myCtrl.payData.newCard.expiryMonth"
+                       placeholder="MM"
+                       maxlength="2"
+                       sy-pattern="MONTH"
+                       sy-validate-card-expiry
+                       sy-move-focus
+                       required style="margin: 0; width:50px;display:inline">
+                </input>
+
+                <span style="display:inline">/</span>
+
+                <input id="expiryYear"
+                       type="text"
+                       name="expiryYear"
+                       class="input-mini form-control"
+                       ng-model="myCtrl.payData.newCard.expiryYear"
+                       placeholder="YY"
+                       maxlength="2"
+                       sy-pattern="YEAR"
+                       sy-validate-card-expiry
+                       sy-move-focus
+                       required style="margin: 0; width:50px;display:inline">
+                </input><br/>
+                <span style="padding: 10px">Month</span>
+                <span style="padding: 14px">Year</span>
+
+                <div sy-alert-box="expiryMonth" sy-analytics-error="expiryMonth" style="width:60%">
+                    <p ng-show="!paymentDetailsForm.expiryMonth.$error.syValidateCardExpiry">{{findMsgHTML('MA_E60')}}</p>
+                    <p ng-show="paymentDetailsForm.expiryMonth.$error.syValidateCardExpiry">{{findMsgHTML('MA_E65')}}</p>
+                </div>
+                <div ng-show="paymentDetailsForm.expiryMonth.$valid" sy-alert-box="expiryYear" sy-analytics-error="expiryYear"  style="margin-left:60px;width:60%">
+                    <p ng-show="!paymentDetailsForm.expiryYear.$error.syValidateCardExpiry" >{{findMsgHTML('MA_E61')}}</p>
+                    <p ng-show="paymentDetailsForm.expiryYear.$error.syValidateCardExpiry"> {{findMsgHTML('MA_E65')}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div sy-form-group data-layout="form">
+            <label class="control-label label-required" for="card_csv">Card security code:</label>
+
+            <div>
+                <div sy-form-group data-layout="tooltip">
+                    <input type="text" name="card_csv"
+                           id="card_csv" ng-model="myCtrl.payData.newCard.cvv"
+                           ng-minlength="3" ng-maxlength="4" required
+                           sy-pattern="CSV_NUMBER"
+                           size="6" class="form-control" value="" autocomplete="off">
+                    <a href id="showPaymentCVVHelp" alt="Help" title="Help"
+                       ng-click="myCtrl.showHelpText('Card verification value (CVV)', 'The 3-digit CVV for Visa or Mastercard is located on the back of your card. The 4-digit CID for American Express is located just above the card number, on the right.')">
+                        <span class="sy-icon--circle_question_mark"></span>
+                    </a>
+                </div>
+
+                <div sy-alert-box="card_csv">
+                    <!--Not sure why errors for this control are not under paymentDetailsForm.card_csv but using just paymentDetailsForm-->
+                    <p ng-show="paymentDetailsForm.$error">{{findMsgHTML('MA_E39_1')}} {{myCtrl.payData.newCard.cardType ===
+                    'amex' ? 4 : 3}} {{findMsgHTML('MA_E39_2')}}</p>
+
+                    <p ng-show="paymentDetailsForm.$error.pattern">{{findMsgHTML('MA_E58')}} {{myCtrl.payData.newCard.cardType === 'amex' ? 4
+                      : 3}} {{findMsgHTML('MA_E59')}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

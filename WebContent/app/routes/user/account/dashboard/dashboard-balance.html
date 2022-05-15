@@ -1,0 +1,205 @@
+<div class="account-summary sy-block" ng-controller="DashboardBalanceCtrl as balanceCtrl">
+    <div class="sy-block__body">
+        <div class="panel col-md-6">
+            <div class="panel-header">
+                <div class="panel-header-container">
+                    <h1 class="visuallyhidden">Account Home</h1>
+                    <h2 class="pull-left panel-title">Account summary</h2>
+                    <a
+                        href="javascript:void(0);"
+                        title="Find out when your usage summary is updated"
+                        ng-click="balanceCtrl.showAccountSummaryInfo()"
+                        class="pull-right title-info-icon"
+                    >
+                        <span class="sy-icon--circle_info"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="panel-body account-summary-payments">
+                <section ng-repeat="r in balanceCtrl.accountBalanceSummary.directDebitbalanceList" ng-if="r.category == 8">
+                    <section class="payment-recent">
+                        <div class="content-text">Recent payments</div>
+                        <div class="recent flex-between content">
+                            <span class="payment-text">{{r.text}}</span>
+                            <span class="payment-value">{{r.amount}}</span>
+                        </div>
+                    </section>
+                </section>
+
+                <div ng-show="balanceCtrl.showViewArrangementbtn" class="p2p-account-summary">
+                    <div
+                        ng-if="balanceCtrl.currentDate <= balanceCtrl.showViewArrangementDetails.next_instalment_due_date &&
+                    (balanceCtrl.showViewArrangementDetails.status == '' || balanceCtrl.showViewArrangementDetails.status == '2')"
+                    >
+                        <p>You currently have a payment {{balanceCtrl.promiseToPayType}} in place.</p>
+                        <span class="col-xs-9 no-right-padding no-left-padding">
+                            <span ng-if="balanceCtrl.isSinglePayment">{{balanceCtrl.instalmentLabel | titleCase}} due</span>
+                            <span ng-if="!balanceCtrl.isSinglePayment">Next {{balanceCtrl.instalmentLabel}} due</span>
+                            <span
+                                ng-bind="balanceCtrl.showViewArrangementDetails.next_instalment_due_date | date : 'EEEE dd MMM yyyy'"
+                            ></span>
+                        </span>
+                        <span class="pull-right">{{balanceCtrl.showViewArrangementDetails.next_instalment_amount | currency}}</span>
+                    </div>
+                    <div
+                        ng-if="(balanceCtrl.showViewArrangementDetails.status == '3' || balanceCtrl.showViewArrangementDetails.status_text === 'still open' || balanceCtrl.showViewArrangementDetails.status == '2')
+                                && balanceCtrl.currentDate > balanceCtrl.showViewArrangementDetails.next_instalment_due_date"
+                    >
+                        <p ng-show="balanceCtrl.showViewArrangementDetails.due_by_today > 0">
+                            You have an amount overdue on your payment {{balanceCtrl.promiseToPayType}}.
+                        </p>
+                        <p ng-show="balanceCtrl.showViewArrangementDetails.due_by_today == 0">
+                            You currently have a payment {{balanceCtrl.promiseToPayType}} in place.
+                        </p>
+                        <span class="col-xs-9 no-right-padding no-left-padding">
+                            <p ng-show="balanceCtrl.showViewArrangementDetails.due_by_today > 0">Overdue</p>
+                            {{balanceCtrl.showViewArrangementDetails.next_instalment_due_date | date : "EEEE dd MMM yyyy" }}
+                        </span>
+                        <span class="pull-right">{{balanceCtrl.showViewArrangementDetails.due_by_today | currency}}</span>
+                    </div>
+                    <div ng-if="balanceCtrl.showViewArrangementDetails.status == '5'">
+                        <p>
+                            Your payment {{balanceCtrl.promiseToPayType}} has been cancelled as you have not made payments by the
+                            agreed due dates. Please make payment in full or contact us to discuss your overdue account.
+                        </p>
+                    </div>
+                    <div ng-if="balanceCtrl.showViewArrangementDetails.status == '1'">
+                        <span class="pull-left">
+                            Your payment {{balanceCtrl.promiseToPayType}} for
+                            {{balanceCtrl.showViewArrangementDetails.total_amount_promised | currency}} is complete
+                        </span>
+                    </div>
+                </div>
+
+                <div class="row" ng-show="!balanceCtrl.paymentArrangments && !balanceCtrl.isSynergyEngage">
+                    <span class="pull-left">{{balanceCtrl.accountBalanceSummary.additionalText}}</span>
+                </div>
+                <div
+                    class="debit-line flex-between"
+                    ng-hide="balanceCtrl.caseManagedCustomer"
+                    ng-repeat="r in balanceCtrl.accountBalanceSummary.directDebitbalanceList"
+                >
+                    <span class="payment-text" ng-if="r.category == 1">{{r.text}}</span>
+                    <span class="payment-value" ng-if="r.category == 1">{{r.amount}}</span>
+                    <span class="payment-text" ng-if="r.category !== '1' && r.category !== '8'">{{r.text}}</span>
+                </div>
+
+                <div class="total-owing flex-between">
+                    <span class="payment-text">{{balanceCtrl.accountBalanceSummary.accountBalance.text}}</span>
+                    <span class="payment-value">{{balanceCtrl.accountBalanceSummary.accountBalance.amount}}</span>
+                </div>
+                <p ng-show="balanceCtrl.paymentArrangments || balanceCtrl.hasOpenEngageP2P">
+                    <small>
+                        Payment {{balanceCtrl.promiseToPayType | titleCase}} included. Refer to your Payment
+                        {{balanceCtrl.promiseToPayType | titleCase}} letter for further information.
+                    </small>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="panel col-md-6">
+            <div class="panel-header">
+                <div>
+                    <div ng-if="accountCtrl.isAmiCustomer()">
+                        <span class="pull-left full-width" ng-show="balanceCtrl.showMeterReading">
+                            <section class="scheduled-billing-date">
+                                <span>{{accountCtrl.currentAccount.premiseDetails.selfRead?'Self read your meter by:':'Next scheduled billing
+                                date:'}} </span>
+                                <a ng-if="!accountCtrl.currentAccount.premiseDetails.selfRead" href="javascript:void(0);" title="Next scheduled billing date" ng-click="balanceCtrl.showNextScheduledDateInfo()" class="pull-right title-info-icon no-underline cursor-pointer" data-event="site-interaction" data-location="body" data-description="Next scheduled billing date" data-type="link">
+                                    <span class="sy-icon--circle_info"></span>
+                                </a>
+                            </section>
+                            <strong>{{balanceCtrl.ScheduleMeterReading}}</strong>
+                        </span>
+                        <span class="pull-left" ng-show="balanceCtrl.ShowFinalMeterReading">
+                            Final billing date:
+                            <br />
+                            <strong>{{balanceCtrl.ScheduleMeterReading}}</strong>
+                        </span>
+                    </div>
+                    <div ng-if="!accountCtrl.isAmiCustomer()">
+                        <span class="pull-left full-width" ng-show="balanceCtrl.showMeterReading">
+                            <section class="schedule-reading-date">
+                                <span>{{accountCtrl.currentAccount.premiseDetails.selfRead?'Self read your meter by:':'Next scheduled meter
+                                reading:'}}</span>
+                                <a ng-if="!accountCtrl.currentAccount.premiseDetails.selfRead" href="javascript:void(0);" title="Next scheduled meter reading" ng-click="balanceCtrl.showNextScheduledReadinginfo()" class="pull-right title-info-icon no-underline cursor-pointer" data-event="site-interaction" data-location="body" data-description="Next scheduled meter reading" data-type="link">
+                                    <span class="sy-icon--circle_info"></span>
+                                </a>
+                            </section>
+                            <strong>{{balanceCtrl.ScheduleMeterReading}}</strong>
+                        </span>
+                        <span class="pull-left" ng-show="balanceCtrl.ShowFinalMeterReading">
+                            Final meter reading date:
+                            <br />
+                            <strong>{{balanceCtrl.ScheduleMeterReading}}</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body account-summary__bills">
+                <div sy-form-group data-layout="default">
+                    <button
+                        id="payDueBtn"
+                        type="button"
+                        class="sy-button--primary sy-button--col12 dropdown-toggle"
+                        data-animation="am-flip-x"
+                        data-placement="bottom-right"
+                        ng-if="balanceCtrl.isPayable && !balanceCtrl.paymentInfo.directDebitExists"
+                        ng-click="accountCtrl.choosePaymentOptionIds();$hide()"
+                        analytics-on="click"
+                        analytics-event="Pay Bill"
+                        analytics-category="Button click"
+                        analytics-label="MA-Dashboard"
+                        data-analytics-event="Pay now"
+                    >
+                        Pay now
+                        <span class="sy-icon--chevron-right"></span>
+                    </button>
+                    <button
+                        id="viewArrangementBtn"
+                        type="button"
+                        class="sy-button--blue sy-button--col12"
+                        ng-if="balanceCtrl.showViewArrangementbtn"
+                        ng-show="!balanceCtrl.withdrawnP2P"
+                        ng-click="accountCtrl.openViewArrangement();$hide()"
+                        data-animation="am-flip-x"
+                        data-placement="bottom-right"
+                        analytics-on="click"
+                        analytics-event="View Arrangement"
+                        analytics-category="Button click"
+                        analytics-label="MA-Dashboard"
+                        data-analytics-event="View Arrangement"
+                    >
+                        View {{balanceCtrl.arrangementButtonText}}
+                    </button>
+                    <a
+                        id="viewLatestBillBtn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        type="button"
+                        class="sy-button--blue sy-button--col12"
+                        ng-if="balanceCtrl.latestBill"
+                        ng-href="{{balanceCtrl.latestBillLink()}}"
+                        data-analytics-event="Bill view last"
+                    >
+                        <span class="sy-icon--download-link"></span>
+                        View last bill &nbsp;&nbsp;
+                    </a>
+                    <button
+                        id="payNowBtn"
+                        type="button"
+                        class="sy-button--blue sy-button--col12 dropdown-toggle"
+                        data-animation="am-flip-x"
+                        data-placement="bottom-right"
+                        data-template="app/routes/user/account/dashboard/_pay-dropdown.html"
+                        bs-dropdown
+                    >
+                        Payment options
+                        <span class="caret"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

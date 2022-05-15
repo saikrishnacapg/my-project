@@ -1,0 +1,52 @@
+<ul class="dropdown-menu" data-role="menu">
+    <li role="presentation" class="visible-xs">
+        <a role="menuitem" href="">
+            <span class="user__name--mobile" ng-bind="userCtrl.userDisplayName"></span>
+        </a>
+    </li>
+    <li role="presentation" class="divider visible-xs"></li>
+
+    <li role="presentation">
+        <a role="menuitem" href="" ng-click="userCtrl.gotoHome();$hide()">
+            <span class="sy-icon--folder_open"></span> Accounts
+        </a>
+    </li>
+      <li role="presentation" ng-if="userCtrl.contractAccountAssigned()">
+        <a id="myDetailsLink" role="menuItem" href="" ng-click="userCtrl.openMyDetails();$hide()">
+            <span class="sy-icon--edit"></span> My details
+        </a>
+    </li>
+    <!-- 
+    <li role="presentation">
+        <a id="myDetailsLink" role="menuItem" href="" ng-click="userCtrl.openEnergyProfile();$hide()">
+            <span class="sy-icon--edit"></span> My Household Profile
+        </a>
+    </li>
+    -->
+   <!-- <li role="presentation">
+        <a role="menuitem" href="" ng-click="userCtrl.openCreditCard(null,{skipsignup: true});$hide()">
+            <span class="sy-icon&#45;&#45;edit"></span> Manage cards
+        </a>
+    </li>-->
+    <li role="presentation" ng-if="userCtrl.contractAccountAssigned()">
+        <a role="menuitem" href="" ng-click="userCtrl.openPaperless(null, {skipsignup: true});$hide()">
+            <span class="sy-icon--edit"></span> Notification preferences
+        </a>
+    </li>
+    <li role="presentation" ng-if="!userCtrl.contractAccountAssigned()">
+        <a role="menuitem" href="/moving.html">
+            <span class="sy-icon--moving-home"></span> Moving premise
+        </a>
+    </li>
+    <li role="presentation">
+        <a role="menuitem" href="" ng-click="userCtrl.openChangePassword();$hide()">
+            <span class="sy-icon--lock"></span> Change password
+        </a>
+    </li>
+    <!--<li role="presentation" class="divider"></li>
+    <li role="presentation">
+        <a role="menuitem" href="" ng-click="userCtrl.logout();$hide()">
+            <span class="sy-icon&#45;&#45;exit"></span> Log out
+        </a>
+    </li>-->
+</ul>

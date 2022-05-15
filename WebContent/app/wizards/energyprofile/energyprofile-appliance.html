@@ -1,0 +1,16 @@
+<div class="appliance col-xs-12" ng-class="{'active':applianceCtrl.houseProfile.appliances[applianceCtrl.appliance.name]}">    
+    <div class="col-xs-7 col-sm-9" style="padding: 0">
+        <img border="0" ng-src="{{applianceCtrl.imagesDir}}/{{applianceCtrl.appliance.imageUrl}}" style="margin-right: 10px" width="24" height="24" alt="{{applianceCtrl.appliance.name}}">
+        <span>{{applianceCtrl.appliance.description}}</span>
+    </div>
+    <div class="col-xs-5 col-sm-3" style="padding: 0">
+        <button class="sy-button--white pull-right" ng-click="applianceCtrl.incr()"  ng-show="applianceCtrl.houseProfile.appliances[applianceCtrl.appliance.name]==0"><span class="sy-icon--circle_plus"></span> Add</button>
+        <div sy-item-quantity
+             ng-model="applianceCtrl.houseProfile.appliances[applianceCtrl.appliance.name]"
+             sy-item-quantity-value="applianceCtrl.houseProfile.appliances[applianceCtrl.appliance.name]"
+             data-value="{{applianceCtrl.houseProfile.appliances[applianceCtrl.appliance.name]}}"
+             ng-show="applianceCtrl.houseProfile.appliances[applianceCtrl.appliance.name]"
+             class="pull-right">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="terms">
+
+    
+    <div class="terms__summary">
+        <p>You are about to set up green energy as follows:</p>
+        <span sy-green-info="greenCtrl.newGreenEnergy"></span>
+    </div>
+
+    <h2>Green Energy Request Service Agreement</h2>
+
+    <div class="terms__content" sy-server-include="MYACC_GREEN_INTRO"></div>
+
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="greenCtrl.newGreenEnergy.termsAccepted" id="greenTerms" class="" />
+            <label for="greenTerms">
+                <span sy-server-include="MYACC_GREEN_TERMS_NP" ng-if="greenCtrl.newGreenEnergy.greenProductCode === 'NP'"></span>
+                <span sy-server-include="MYACC_GREEN_TERMS_EG" ng-if="greenCtrl.newGreenEnergy.greenProductCode === 'EG'"></span>
+            </label>
+        </div>
+
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="greenCtrl.newGreenEnergy.privacyAccepted" id="privacyTerms"  />
+            <label for="privacyTerms">
+                I have read, understand and agree with the <a sy-doc-href="terms.synergy">Terms and Conditions</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.
+            </label>
+        </div>
+
+        <p>When you submit this application, <span ng-bind="greenCtrl.selectedProductDisplayName()"></span> will be applied to this account from the date of the last bill issued.</p>
+    </div>
+
+
+</div>

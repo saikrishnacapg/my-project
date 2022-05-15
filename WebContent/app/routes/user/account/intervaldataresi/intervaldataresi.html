@@ -1,0 +1,24 @@
+<div class="main interval-data" id="intervalDataContainer">
+
+    <div class="main__content full-width">
+
+        <div class="panel interval-data ">
+            <div class="panel-header">
+                <h1>{{accountCtrl.intervalDataResiInfo().tariffName}}</h1>
+            </div>
+            <div class="panel-header">
+                <div ng-include="'app/routes/user/account/intervaldataresi/_intervaldataresi-search.html'"></div>
+            </div>
+            <div class="panel-body">
+                <div class="interval-data__graph"  ng-include="'app/routes/user/account/intervaldataresi/_intervaldataresi-graph.html'"></div>
+                <div class="interval-data__nav"  ng-include="'app/routes/user/account/intervaldataresi/_intervaldataresi-navigation.html'"></div>
+                <br><br>
+            </div>
+            <div   ng-include="'app/routes/user/account/intervaldataresi/_intervaldataresi-tabs.html'"></div>
+        </div>
+    </div>
+
+
+
+</div>
+

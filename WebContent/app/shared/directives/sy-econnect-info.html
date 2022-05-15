@@ -1,0 +1,51 @@
+<div class="panel" ng-show="eConnect.isEligible">
+	<div class="panel-header">
+		<h1>
+			<img src="img/econnect_icon.svg" class="icon">
+			<span ng-show="eConnect.isActive == true">You're in the draw to win... good luck!</span>
+			<span ng-show="eConnect.isPaperless != eConnect.directDebitExists">2 down 1 to go!</span>
+			<span ng-show="!eConnect.isPaperless && !eConnect.directDebitExists">1 down 2 to go!</span>
+		</h1>
+	</div>
+	<div class="panel-body" ng-show="eConnect.isActive == true">
+		Thank you for signing up to the most convenient way to manage your energy account.
+		Now you'll be in with a chance to win $200 off your energy bill with our bi-monthly prize draws.
+		If you would like to know more, please refer to our <a sy-doc-href="terms.econnect">eConnect T&Cs.</a>
+	</div>
+	<div class="panel-body" ng-show="eConnect.isActive != true">
+		<p ng-show="!eConnect.showShortfall && !eConnect.isPaperless">
+		All you need to do now is switch to Paperless <span ng-show="!eConnect.directDebitExists">and Direct Debit to <b>pay your bill in full</b> whenever it's due </span>
+			to be eligible for <a sy-doc-href="terms.econnect">regular prize draws with eConnect</a>.
+		</p>
+		<p ng-show="!eConnect.showShortfall && !eConnect.directDebitExists && eConnect.isPaperless">
+			All you need to do now is set up Direct Debit to <b>pay your bill in full</b> whenever it's due - to be eligible for <a sy-doc-href="terms.econnect">regular prize draws with eConnect</a>.
+		</p>
+		<h2 ng-show="eConnect.showShortfall">Pay any shortfall via Direct Debit as well to be eligible to win</h2>
+		<p ng-show="eConnect.showShortfall">
+			Why not go one step further and pay any remaining balance whenever your bill is due via Direct Debit as well so you can be in with a chance to win <a sy-doc-href="terms.econnect">regular prize draws with eConnect</a>.
+		</p>
+		<button ng-show="!eConnect.showShortfall" class="sy-button--primary" ng-click="goToNextTask()" style="white-space:normal" >
+	        <span class="sy-icon--envelope"></span> {{nextTaskName}}
+	    </button>
+		<button ng-show="eConnect.showShortfall" class="sy-button--primary" ng-click="goToNextTask()">
+			<span class="sy-icon--envelope"></span> {{nextTaskName}}
+		</button>
+	</div>
+</div>
+
+<div class="panel" ng-show="eConnect.isPromoBox">
+
+	<div class="panel-header">
+		<div class="TextWrap">
+			<div class="imageIcon"><img src="img/icon_doc.png" width="44" /></div>
+			<h3>Great News! Your bill is now available in XLSX, CSV or XML format.</h3>
+		</div>
+
+
+	</div>
+	<div class="panel-body">
+		<p>You now have access to download your bill in a choice of formats from PDF, XLSX, CSV and XML to suit your business needs.</p>
+		<p>All eligible bills from 1 April 2017 are now available - to download go to the <a id="billPaymentID" href ng-click="goToNextTask()">'Bills and Payments' tab</a></p>
+
+	</div>
+</div>

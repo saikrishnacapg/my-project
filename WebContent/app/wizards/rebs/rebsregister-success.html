@@ -1,0 +1,23 @@
+<div sy-wizard-success real-time="true">
+    <h2> Your registration for My Account has been submitted </h2>
+    <div ng-show="contract.process === 'PHONE'">
+        <p>
+            We will be in touch with you via email to confirm your My Account set up has been completed.
+        </p>
+        <p>
+            You have also been sent an email confirming your submission.
+        </p>
+        <p>
+            For any enquiries please contact 1300 859 333
+        </p>
+    </div>
+
+    <div ng-hide="contract.process === 'PHONE'">
+        <p>
+            You have successfully registered for My Account and can now log in using the details provided.
+        </p>
+        <p>
+            An email confirmation of your registration will be sent to you shortly.
+        </p>
+    </div>
+</div>

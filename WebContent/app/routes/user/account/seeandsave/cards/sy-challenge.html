@@ -1,0 +1,23 @@
+<div class="medium pointer" sy-card ready-when="!sasCtrl.product.loadingData" color="white" font-color="black-text" ng-click="sasCtrl.challenge()">
+	<div sy-card-content class="center-x parent-center" ng-if="!sasCtrl.alertDefined()">
+        <div><i class="material-icons large sy-blue">add_alert</i></div>
+        <div><strong>Challenge yourself and set your usage goal!</strong></div>
+        <div class="element-bottom"><a sy-sas-help="saveTips" href="" data="sasCtrl.faqs" ng-click="$event.stopPropagation();">Tips to achieve your goal</a></div>
+	</div>
+    <div sy-card-content ng-if="sasCtrl.alertDefined()" id="challenge-card">
+        <div class="card-title black-text">
+            <span class="sy-orange">{{alert.value | round}} units</span> <span class="card-small-title">{{alert.type == 'day'? 'daily' : 'weekly'}} goal</span>
+        </div>
+        <div class="card-sub-title">
+            Units {{portrait.alert.delta > 0 ? 'remaining' : 'exceeded'}} {{portrait.alert.delta | abs | round}}
+            <!--<a ng-click="sasCtrl.challenge()">Edit</a>-->
+        </div>
+        <div class="relative sy-z-depth-2">
+            <div sy-nv-donut-graph data="portrait.alert.chart"></div>
+        </div>
+        <div id="challenge-percentage" class="card-title black-text center-x">
+            <span id="challenge-percentage-span" title="{{portrait.alert.ratio}}">{{portrait.alert.ratio}}%</span>
+        </div>
+        <div class="absolute top-180 left-0 full-width sy-z-depth-3 center-x"><a sy-sas-help="saveTips" data="sasCtrl.faqs" href="" ng-click="$event.stopPropagation();">Tips to achieve your goal</a></div>
+    </div>
+</div>

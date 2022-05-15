@@ -1,0 +1,66 @@
+<div class="response" id = "printableArea" ng-if="payCtrl.usabilla_surveytrigger('/ma/payment/bpoint-success')">
+ <div sy-wizard-success real-time="true">
+    <div class="row">
+        <div class="logo visible-print pull-left">
+            <img src="img/Synergy_logo_mono.svg" alt="Synergy">
+        </div>
+    </div>
+
+    <h2 class="payment-terms-summary-label">Your payment was successfully processed</h2>
+    <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Receipt number</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payResult.receiptNumber"></p>
+    </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Payment number</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payResult.paymentNumber"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Account number</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payResult.contractAccountNumber"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Cardholder name</h3>
+        <p class="inline payment-details-entry-value"  ng-bind="payCtrl.payResult.cardHolderName"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Card number</h3>
+        <p class="inline payment-details-entry-value"  ng-bind="payCtrl.payResult.maskedCardNumber"></p>
+     </div>
+    <!--<h3>Expiry date</h3>
+    <p ng-bind="payCtrl.payResult.expiryDate"></p>-->
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Card type</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.newCard.displayCardType"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Card surcharge</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.newCard.cardSurCharge"></p>
+     </div>
+     <div class="payment-details-entry" ng-if="payCtrl.transferp2pArrangementModel.p2pArrangementFlag && payCtrl.transferp2pArrangementModel.numberOfInstalments">
+         <h3 class="inline payment-details-entry-label">Number of instalments</h3>
+         <p class="inline payment-details-entry-value" ng-bind="payCtrl.transferp2pArrangementModel.numberOfInstalments"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Payment amount</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payResult.amountOriginalInDollars | currency:'$'"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Card surcharge amount</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payResult.amountSurchargeInDollars | currency"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Total paid</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payResult.amountInDollars | currency"></p>
+     </div>
+     <div class="payment-details-entry">
+        <h3 class="inline payment-details-entry-label">Date processed</h3>
+        <p class="inline payment-details-entry-value" ng-bind="payCtrl.payResult.paymentDate"></p>
+     </div>
+
+    <pay-receipt email-address="payCtrl.account.businessPartnerDetails.emailAddress" pay-result="payCtrl.payResult"></pay-receipt>
+
+</div>
+
+</div>
+

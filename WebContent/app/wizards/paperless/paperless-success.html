@@ -1,0 +1,40 @@
+<div sy-wizard-success real-time="false">
+    <h2 ng-if="paperlessCtrl.paperlessType=='P'">Paper has been successfully set up.</h2>
+    <h2 ng-if="paperlessCtrl.paperlessType=='E'">Paperless Email has been successfully set up.</h2>
+    <h2 ng-if="paperlessCtrl.paperlessType=='ES'">Paperless Email + SMS has been successfully set up.</h2>
+
+
+    <div ng-if="paperlessCtrl.accountList.length == 0 || !paperlessCtrl.updateMultipleAccounts">
+        <p>Your bills and all account related communications will be sent to {{paperlessCtrl.emailAddress}} for account number {{paperlessCtrl.account.contractAccountNumber}} at supply address {{paperlessCtrl.account.premiseAddress.label | capitalize}}.</p>
+        <p ng-if="paperlessCtrl.paperlessType=='E'">An email has been sent to confirm the change to your account.</p>
+        <p ng-if="paperlessCtrl.paperlessType=='ES'">An email and SMS have been sent to confirm the change to your account.</p>
+
+    </div>
+
+    <div ng-if="paperlessCtrl.accountList.length > 0 && paperlessCtrl.updateMultipleAccounts">
+        <p ng-if="paperlessCtrl.paperlessType=='E'">Your accounts listed below have been successfully switched to paperless:</p>
+        <p ng-if="paperlessCtrl.paperlessType=='ES'">Your accounts listed below have been successfully switched to paperless and SMS:</p>
+        <div class="list-group">
+        <div class="list-group-item clearfix">
+            <strong>{{paperlessCtrl.account.contractAccountNumber}}</strong>
+
+            <div>{{paperlessCtrl.account.premiseAddress.label | capitalize}}</div>
+        </div>
+        <div class="list-group-item clearfix" ng-repeat="account in paperlessCtrl.accountList">
+            <strong>{{account.contractAccountNumber}}</strong>
+
+            <div>{{account.address | capitalize}}</div>
+        </div>
+        </div>
+        <p ng-if="paperlessCtrl.paperlessType=='E'">Bills and all account related communication for the above accounts will be sent to {{paperlessCtrl.emailAddress}}. An email has been sent to confirm the change to your account.</p>
+        <p ng-if="paperlessCtrl.paperlessType=='ES'">Bills and all account related communications for the above accounts will be sent to {{paperlessCtrl.emailAddress}}. An email and SMS have been sent to confirm the change to your account.</p>
+    </div>
+
+    <p ng-if="paperlessCtrl.paperlessType=='ES'">Plus you&#39;ll get reminder messages on {{paperlessCtrl.sendSMSMobileNumber}} when your bill is ready to view or is due.</p>
+
+    <p ng-if="paperlessCtrl.accountList.length > 0 && !paperlessCtrl.updateMultipleAccounts">Please note that if you want to switch your other accounts to paperless, you will need to switch them individually.</p>
+
+    <p>You can access your bills and billing history in one central spot, 24/7 via My Account.</p>
+
+    <div sy-econnect-info account="paperlessCtrl.account" fetch="true"></div>
+</div>

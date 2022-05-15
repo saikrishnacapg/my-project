@@ -1,0 +1,16 @@
+<div sy-wizard-success ng-show="!myCtrl.updateMultipleAccounts">
+    <h2>Your details have been successfully updated for account number {{myCtrl.account.contractAccountNumber}}
+        at supply address {{myCtrl.account.premiseAddress.label | capitalize}}</h2>
+    <p>If you need to update the contact details of your other accounts, please update them individually.</p>
+</div>
+<div sy-wizard-success ng-show="myCtrl.updateMultipleAccounts">
+    <h2>Your details have been successfully updated for:</h2>
+    <ul>
+        <li>
+        Account Number <strong>{{myCtrl.account.contractAccountNumber}}</strong> at supply address {{myCtrl.account.premiseAddress.label | capitalize}}
+        </li>
+        <li ng-repeat="account in myCtrl.accountList">
+            Account Number <strong>{{account.contractAccountNumber}}</strong> at supply address {{account.address | capitalize}}
+        </li>
+    </ul>
+</div>

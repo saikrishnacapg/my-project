@@ -1,0 +1,50 @@
+<div ng-form="paymentForm" ng-controller="MsgCntlr" class="paymentForm">
+    
+    <div class="form-must-complete">All fields must be completed.</div>
+
+    <h3>Nominate your payment method</h3>
+    <div ng-show="useButtonSelector">
+        <div sy-form-group data-layout="split">
+            <button type="button" ng-class="(paymentModel.directDebitType == 'BANK') ? 'sy-button--blue' : 'sy-button--white'" style="font-size: 12px;padding: 14px;" ng-click="paymentModel.directDebitType = 'BANK';" analytics-event="formEvent" sy-analytics-payment-method="BANK">Bank account</button>
+            <button type="button" ng-class="(paymentModel.directDebitType == 'CARD') ? 'sy-button--blue' : 'sy-button--white'" style="font-size: 12px;" ng-click="paymentModel.directDebitType = 'CARD';" analytics-event="formEvent" sy-analytics-payment-method="CREDIT CARD">
+                Credit or Debit card
+                <br/><span class="surcharges-applies">(surcharge applies)</span>
+            </button>
+        </div>
+        <div class="payment-method-error" sy-alert-box="directDebitType">
+            <p ng-show="paymentForm.directDebitType.$error.required">{{findMsgHTML('MA_E40')}}</p>
+        </div>
+        <div style="position: relative; border: 1px solid #b4d2dc; border-radius: 4px; padding: 20px 15px 0 15px; margin: 15px 0;" ng-if="paymentModel.directDebitType === 'BANK'">
+            <div style="position: absolute; border-style: solid; border-color: transparent transparent #b4d2dc transparent; border-width: 8px 8px 8px 8px; top: -16px; left: 130px"></div>
+            <div style="position: absolute; border-style: solid; border-color: transparent transparent #ffffff transparent; border-width: 8px 8px 8px 8px; top: -15px; left: 130px"></div>
+            <sy-bank-details bank-model="paymentModel.bankDetails"></sy-bank-details>
+        </div>
+        <div style="position: relative; border: 1px solid #b4d2dc; border-radius: 4px; padding: 20px 15px 0 15px; margin: 15px 0" ng-if="paymentModel.directDebitType === 'CARD'">
+            <div style="position: absolute; border-style: solid; border-color: transparent transparent #b4d2dc transparent; border-width: 8px 8px 8px 8px; top: -16px; left: 415px"></div>
+            <div style="position: absolute; border-style: solid; border-color: transparent transparent #ffffff transparent; border-width: 8px 8px 8px 8px; top: -15px; left: 415px"></div>
+            <sy-card-details card-model="paymentModel.ccDetails"></sy-card-details>
+        </div>
+    </div>
+
+    <div ng-show="!useButtonSelector" sy-auto-focus="sy-auto-focus">
+        <div class="must-complete" style="margin-top:20px;margin-left:20px;">All fields required unless indicated as optional.</div>
+        <div sy-form-group data-layout="split" ng-show="{{!useButtonSelector}}" class="acc-radio-btn-group">
+            <div  class="acc-radio-btn">
+                <input type="radio" name="directDebitType" ng-model="paymentModel.directDebitType" value="BANK" class="" id="bankPayment" required sy-analytics-payment-method="BANK" />
+                <label for="bankPayment">Bank account</label>
+                <div sy-alert-box="directDebitType">
+                    <p ng-show="paymentForm.directDebitType.$error.required">{{findMsgHTML('MA_E58')}}</p>
+                </div>
+            </div>
+            <div  class="acc-radio-btn">
+                <input type="radio" name="directDebitType" ng-model="paymentModel.directDebitType" value="CARD" class="" id="cardPayment" required sy-analytics-payment-method="Credit CARD" />
+                <label for="cardPayment">Credit or Debit card</label>
+            </div>
+        </div>
+
+        <div style="padding: 0 15px;">
+            <sy-bank-details bank-model="paymentModel.bankDetails" ng-if="paymentModel.directDebitType === 'BANK'"></sy-bank-details>
+            <sy-card-details card-model="paymentModel.ccDetails" ng-if="paymentModel.directDebitType === 'CARD'"></sy-card-details>
+        </div>
+    </div>
+</div>

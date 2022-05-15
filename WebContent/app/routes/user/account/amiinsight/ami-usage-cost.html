@@ -1,0 +1,32 @@
+<div class="chart-accessable">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-if="dailyUsageCost">
+                    <p class="text heading-width"><b>Total cost for selected period {{dailyUsageCost}}</b>
+                        <a
+                                href="javascript:void(0);"
+                                title="Total cost for selected period"
+                                ng-click="amiIntervalCtrl.showHelpText('Total cost for selected period', 'app/routes/user/account/amiinsight/ami-interval-usage/templates/model-totalcost.html')"
+                                class="pull-right title-info-icon" style="text-decoration: none"
+                        >
+                            <span  class="sy-icon--circle_info"></span>
+                        </a>
+                        <a title="supply charges" sy-doc-href="synergy.pricecharges.brochure" target="_blank">
+                            Includes supply charges and GST
+                        </a>
+                    </p>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 pull-right">
+                    <div class="btn-group pull-right exportprint"  ng-if="amiIntervalCtrl.amiInterval.hasValue" >
+                        <label class="btn" ng-click="accountCtrl.openAMIIntervalExport()"><span class="sy-icon--new_window"></span> Export</label>
+                        <label class="btn" ng-click="amiIntervalCtrl.printChart()"><span class="sy-icon--print"></span> Print</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

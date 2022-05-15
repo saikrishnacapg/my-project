@@ -1,0 +1,23 @@
+<div class="main interval-data" id="intervalDataContainer">
+
+    <div class="main__content full-width">
+
+        <div class="panel interval-data ">
+            <div class="panel-header">
+                <h1>Interval data</h1>
+            </div>
+            <div class="panel-header">
+                <div ng-include="'app/routes/user/account/intervaldata/_intervaldata-search.html'"></div>
+            </div>
+
+            <div class="panel-body"  ng-show="intervalDataCtrl.intervalData.showfooter">
+                <div class="interval-data__tabs"  ng-include="'app/routes/user/account/intervaldata/_intervaldata-tabs.html'"></div>
+                <div class="interval-data__heading" ng-include="'app/routes/user/account/intervaldata/_intervaldata-heading.html'"></div>
+                <div class="interval-data__graph"  ng-include="'app/routes/user/account/intervaldata/_intervaldata-graph.html'"></div>
+                <div class="interval-data__nav"  ng-include="'app/routes/user/account/intervaldata/_intervaldata-navigation.html'"></div>
+                <div class="interval-data__footer"  ng-include="'app/routes/user/account/intervaldata/_intervaldata-footer.html'"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

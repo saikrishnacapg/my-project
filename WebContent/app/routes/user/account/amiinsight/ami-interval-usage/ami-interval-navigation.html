@@ -1,0 +1,55 @@
+
+
+<div class="footerTitleButtonContainer" ng-if="amiIntervalCtrl.amiInterval.dayInterval !== 0">
+
+    <div ng-if="amiIntervalCtrl.amiInterval.mode==='Tabular' &&  amiIntervalCtrl.amiInterval.dailyEstimateValue" class="estimated-footer-text">
+        <sup>*</sup>Your meter reading data has been estimated by the network operator, Western Power.
+    </div>
+
+    <h2 class="noPrint text-center amiIntervalFooterTitle" ng-bind="amiIntervalCtrl.footerTitle()"></h2>
+
+    <button id="fetchMoreBtn"
+            type="button"
+            class="sy-button--default pull-left ami-next-prev-btn"
+            ng-click="amiIntervalCtrl.previousInterval()"
+            sy-busy-chevron="fetchMore"
+            busy-class="sy-icon--chevron-left pull-left">
+        Previous
+    </button>
+
+    <button id="fetchMoreFutureBtn"
+            type="button"
+            class="sy-button--default pull-right ami-next-prev-btn"
+            ng-click="amiIntervalCtrl.nextInterval()"
+            sy-busy-chevron="fetchMore"
+            busy-class="sy-icon--chevron-right pull-right">
+        Next
+    </button>
+</div>
+<div ng-if="amiIntervalCtrl.amiInterval.dayInterval === 0">
+    <div ng-if="amiIntervalCtrl.amiInterval.mode==='Tabular' && amiIntervalCtrl.amiInterval.halfHourlyEstimateValue" class="estimated-footer-text">
+        <sup>*</sup>Your meter reading data has been estimated by the network operator, Western Power.
+    </div>
+
+    <h2 class="noPrint text-center amiIntervalFooterTitle" ng-bind="amiIntervalCtrl.footerTitle()"></h2>
+
+        <button id="fetchMoreBtn"
+                type="button"
+                class="sy-button--default pull-left ami-next-prev-btn ami-next-prev-days-btn"
+                ng-click="amiIntervalCtrl.previousInterval()"
+                sy-busy-chevron="fetchMore"
+                busy-class="sy-icon--chevron-left pull-left">
+            Previous day
+        </button>
+
+        <button id="fetchMoreFutureBtn"
+                type="button"
+                class="sy-button--default pull-right ami-next-prev-btn ami-next-prev-days-btn"
+                ng-click="amiIntervalCtrl.nextInterval()"
+                sy-busy-chevron="fetchMore"
+                busy-class="sy-icon--chevron-right pull-right">
+            Next day
+        </button>
+
+</div>
+

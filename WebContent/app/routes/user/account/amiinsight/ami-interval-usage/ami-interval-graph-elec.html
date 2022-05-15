@@ -1,0 +1,118 @@
+
+<div ng-if="amiIntervalCtrl.amiInterval.mode==='Consumption' ">
+    <div ng-if="amiIntervalCtrl.amiInterval.latestData().hasValue">
+        <div class="interval-data__heading" ng-include="'app/routes/user/account/amiinsight/ami-interval-usage/ami-interval-heading.html'"></div>
+        <div id="amiIntervalConsumptionChart" aria-labelledby="amiIntervalConsumptionDescription">
+
+            <div class="ami-interval-consumption-chart" chart-data="amiIntervalCtrl.amiInterval.latestData()" dirty-check="amiIntervalCtrl.amiInterval.timestamp" chart="amiIntervalCtrl.consumptionChart()"
+                 weekday-shoulder-values="{{amiIntervalCtrl.amiInterval.dayInterval == 0 ? 'weekdayShoulderKwhHalfHourlyValues': 'weekdayShoulderKwhDailyValues'}}"
+                 weekend-shoulder-values="{{amiIntervalCtrl.amiInterval.dayInterval == 0 ? 'weekendShoulderKwhHalfHourlyValues': 'weekendShoulderKwhDailyValues'}}"
+                 off-peak-values="{{amiIntervalCtrl.amiInterval.dayInterval == 0 ? 'offpeakKwhHalfHourlyValues': 'offpeakKwhDailyValues'}}"
+                 peak-values="{{amiIntervalCtrl.amiInterval.dayInterval == 0 ? 'peakKwhHalfHourlyValues': 'peakKwhDailyValues'}}"
+                 go-back-start-date="amiIntervalCtrl.goBackStartDate()" go-back-end-date="amiIntervalCtrl.goBackEndDate()" go-back-devices="amiIntervalCtrl.goBackDevices()"
+                 day-interval="amiIntervalCtrl.amiInterval.dayInterval" contract-account-number="amiIntervalCtrl.contractAccountNumber" mode="amiIntervalCtrl.amiInterval.mode"
+                 download="amiIntervalCtrl.amiInterval.download" generation-values="{{amiIntervalCtrl.amiInterval.dayInterval == 0 ? 'kwhHalfHourlyValuesGeneration': 'kwhDailyValuesGeneration'}}"
+                 show-generation="amiIntervalCtrl.showGeneration()"></div>
+        </div>
+        <span class="visuallyhidden" id="amiIntervalConsumptionDescription">This bar graph describes one week interval data for ami customers</span>
+    </div>
+    <div class="sy-alert--info ng-scope" ng-if="!amiIntervalCtrl.amiInterval.latestData().hasValue">
+        <span class="sy-icon--circle_info"></span>
+        <p>There is no interval data for this period of time. Please try searching a different date range.</p>
+    </div>
+
+</div>
+<div class="row">
+    <div ng-show="amiIntervalCtrl.amiInterval.mode==='Tabular'" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div ng-if="amiIntervalCtrl.amiInterval.dayInterval > 0" class="custom-table">
+            <div class="noPrint interval-data__heading">
+                <h2 ng-bind="amiIntervalCtrl.tableTitle()" class="text-center"></h2>
+            </div>
+            <table class="table-hover text-center table-responsive">
+                <caption class="visuallyhidden">Daily table view</caption>
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th ng-repeat-start="product in amiIntervalCtrl.amiInterval.productData" style="display: none;"></th>
+                    <th ng-if="product.basePeriod !=''" >{{product.basePeriod}} kWh</th>
+                    <th ng-if="product.period2 !=''" >{{product.period2}} kWh</th>
+                    <th ng-if="product.period3 !=''" >{{product.period3}} kWh</th>
+                    <th ng-if="product.period4 !=''" >{{product.period4}} kWh</th>
+                    <th ng-repeat-end="" style="display: none;"></th>
+                    <th ng-if="amiIntervalCtrl.showGeneration()">Generation</th>
+                    <th scope="col">Billing status</th>
+                    <th scope="col">Meter reading status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="maxKwDailyValue in amiIntervalCtrl.amiInterval.latestData().maxKwDailyValues track by $index" ng-init="firstIndex=$index">
+                    <td><a href="" target="_blank" ng-click="amiIntervalCtrl.clickNavigate($index)" style="text-decoration: underline">{{amiIntervalCtrl.tabularDate($index)}}</a></td>
+                    <td ng-repeat-start="product in amiIntervalCtrl.amiInterval.productData track by $index" style="display: none;"></td>
+                    <td ng-if="product.basePeriod !=''" >{{amiIntervalCtrl.amiInterval.tabularDataUpdated[$index][firstIndex].basePeriod | number:2 | noZeroes}}</td>
+                    <td ng-if="product.period2 !=''">{{amiIntervalCtrl.amiInterval.tabularDataUpdated[$index][firstIndex].period2 | number:2 | noZeroes}}</td>
+                    <td ng-if="product.period3 !=''" >{{amiIntervalCtrl.amiInterval.tabularDataUpdated[$index][firstIndex].period3 | number:2 | noZeroes}}</td>
+                    <td ng-if="product.period4 !=''">{{amiIntervalCtrl.amiInterval.tabularDataUpdated[$index][firstIndex].period4 | number:2 | noZeroes}}</td>
+                    <td ng-repeat-end style="display: none;"></td>
+                    <td ng-if="amiIntervalCtrl.showGeneration()">{{amiIntervalCtrl.amiInterval.latestData().kwhDailyValuesGeneration[$index] | number:2 | noZeroes}}</td>
+                    <td scope="row">{{amiIntervalCtrl.getBilledAndUnbilledStatus($index)}}</td>
+                    <td scope="row">{{amiIntervalCtrl.amiInterval.latestData().statusCodeDailyValues[$index]}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="amiIntervalCtrl.amiInterval.dayInterval === 0">
+            <div class="dailyView">
+                <button id="returnToDailyBtn"
+                        title="return to usage dashboard"
+                        type="button"
+                        class="sy-button--default pull-right"
+                        ng-click="amiIntervalCtrl.returnToDailyView()"
+                        sy-busy-chevron="fetchMore"
+                        busy-class="sy-icon--chevron-left pull-left">
+                    Return to usage dashboard
+                </button>
+            </div>
+            <div class="custom-table">
+                <table class="table-hover text-center table-responsive">
+                    <caption class="visuallyhidden">30 min usage</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Half Hour Date</th>
+                        <th scope="col">Time</th>
+                        <th ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].basePeriod !=''">
+                            {{amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].basePeriod}}
+                        </th>
+                        <th  ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period2 !=''">
+                            {{amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period2}}
+                        </th>
+                        <th  ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period3 !=''">
+                            {{amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period3}}
+                        </th>
+                        <th ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period4 !=''">
+                            {{amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period4}}
+                        </th>
+                        <th ng-if="amiIntervalCtrl.showGeneration()">
+                            Generation
+                        </th>
+                        <th scope="col">Billing status</th>
+                        <th scope="col">Meter reading status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="kwHalfHourValue in amiIntervalCtrl.amiInterval.latestData().kwHalfHourlyValues track by $index">
+                        <td scope="row">{{amiIntervalCtrl.amiInterval.latestData().startDate | date : 'dd/MM/y'}}</td>
+                        <td scope="row">{{amiIntervalCtrl.tabularTime($index, 30)}}</td>
+                        <td  ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].basePeriod !=''">{{amiIntervalCtrl.amiInterval.latestData().offpeakKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                        <td  ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period2 !=''">{{amiIntervalCtrl.amiInterval.latestData().peakKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                        <td  ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period3 !=''">{{amiIntervalCtrl.amiInterval.latestData().weekdayShoulderKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                        <td  ng-if="amiIntervalCtrl.amiInterval.latestData().retrieveIntervalDetails[0].period4 !=''">{{amiIntervalCtrl.amiInterval.latestData().weekendShoulderKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                        <td ng-if="amiIntervalCtrl.showGeneration()">{{amiIntervalCtrl.amiInterval.latestData().kwhHalfHourlyValuesGeneration[$index] | number:2 | noZeroes}}</td>
+                        <td scope="row">{{amiIntervalCtrl.getBilledAndUnbilledStatus(amiIntervalCtrl.amiInterval.latestData().startDate,"date")}}</td>
+                        <td scope="row">{{amiIntervalCtrl.amiInterval.latestData().statusCodeHalfHourlyValues[$index]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

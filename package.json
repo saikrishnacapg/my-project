@@ -1,0 +1,252 @@
+{
+  "name": "synergy-myaccount",
+  "version": "1.3.167",
+  "description": "Synergy My Account",
+  "devSettings": {
+    "username": "",
+    "password": ""
+  },
+  "main": "WebContent/app/app.js",
+  "scripts": {
+    "start": "gulp devconnect",
+    "build": "gulp serverbuild",
+    "lint": "eslint WebContent/**/*.js",
+    "install": "napa",
+    "test": "jest",
+    "test:debug": "jest --verbose",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "napa": {
+    "highstock-release": "https://github.com/highcharts/highstock-release/archive/v1.3.10.tar.gz",
+    "angular-bowser": "https://github.com/jacqueslareau/angular-bowser/archive/0.0.2.tar.gz"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "FormsEngine",
+      "node_modules",
+      "WebContent"
+    ],
+    "testPathIgnorePatterns": [
+      "dist/",
+      "/node_modules/",
+      "/__tests__/mock-utils/",
+      "/__tests__/mocks"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "verbose": true
+  },
+  "author": "Synergy - Alex W & Matt M",
+  "license": "private",
+  "webdriverVersions": {
+    "selenium": "2.39.0",
+    "chromedriver": "2.9",
+    "iedriver": "2.39.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "angular-mocks": "~1.8.2",
+    "babel-eslint": "^10.1.0",
+    "connect": "*",
+    "connect-prism": "*",
+    "del": "^5.1.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "event-stream": "*",
+    "gulp": "^4.0.2",
+    "gulp-angular-templatecache": "*",
+    "gulp-babel": "^8.0.0",
+    "gulp-bump": "3.2.0",
+    "gulp-cachebust": "0.0.11",
+    "gulp-clean": "*",
+    "gulp-concat": "*",
+    "gulp-connect": "5.7.0",
+    "gulp-cssmin": "*",
+    "gulp-filter": "6.0.0",
+    "gulp-inject": "~5.0.5",
+    "gulp-less": "*",
+    "gulp-load-plugins": "2.0.3",
+    "gulp-ngmin": "*",
+    "gulp-order": "1.2.0",
+    "gulp-protractor": "*",
+    "gulp-rename": "*",
+    "gulp-rev": "*",
+    "gulp-sass": "~4.1.0",
+    "gulp-sloc": "*",
+    "gulp-template": "*",
+    "gulp-terser": "^1.4.0",
+    "gulp-uglify": "*",
+    "gulp-zip": "5.0.1",
+    "jest": "^26.6.3",
+    "less": "*",
+    "napa": "^3.0.0",
+    "node-sass": "4.14.1",
+    "node-stringify": "0.2.1",
+    "npmfiles": "^0.1.3",
+    "prettier": "^2.1.2",
+    "protractor": "*",
+    "require-dir": "*",
+    "gulp-remove-code": "~1.0.2"
+  },
+  "dependencies": {
+    "angular": "~1.8.0",
+    "angular-animate": "~1.8.0",
+    "angular-busy": "~4.0.3",
+    "angular-cookies": "~1.8.0",
+    "angular-file-saver": "~1.1.3",
+    "angular-file-upload": "~2.6.0",
+    "angular-load": "~0.2.0",
+    "angular-local-storage": "~0.7.0",
+    "angular-motion": "~0.3.2",
+    "angular-nvd3": "https://github.com/krispo/angular-nvd3/archive/v0.1.1.tar.gz",
+    "angular-promise-tracker": "https://github.com/ajoslin/angular-promise-tracker/archive/v1.4.0.tar.gz",
+    "angular-sanitize": "~1.2.16",
+    "angular-strap": "^2.3.12",
+    "angular-touch": "~1.2.16",
+    "angular-ui-router": "^1.0.28",
+    "angularjs-slider": "^7.0.0",
+    "angulartics": "~0.15.17",
+    "bootstrap": "~3.4.1",
+    "bootstrap-additions": "https://github.com/mgcrea/bootstrap-additions/archive/v0.2.2.tar.gz",
+    "d3": "^3.3.13",
+    "enquire.js": "^2.1.1",
+    "jquery": "~3.5.0",
+    "jquery-waypoints": "~2.0.5",
+    "lodash-compat": "~3.8.0",
+    "materialize-css": "^0.99.0",
+    "moment": "~2.19.4",
+    "moment-range": "~1.0.1",
+    "angularjs-dropdown-multiselect": "^2.0.0-beta.10",
+    "apexcharts": "^3.19.3"
+  },
+  "overrides": {
+    "angular": {
+      "main": [
+        "./angular.js"
+      ]
+    },
+    "angular-animate": {
+      "main": [
+        "./angular-animate.js"
+      ]
+    },
+    "angular-cookies": {
+      "main": [
+        "./angular-cookies.js"
+      ]
+    },
+    "angular-motion": {
+      "ignore": [
+        "**"
+      ]
+    },
+    "angular-promise-tracker": {
+      "main": [
+        "./promise-tracker.js"
+      ]
+    },
+    "angular-sanitize": {
+      "main": [
+        "./angular-sanitize.js"
+      ]
+    },
+    "angularjs-slider": {
+      "main": [
+        "dist/rzslider.js"
+      ]
+    },
+    "angular-strap": {
+      "main": [
+        "dist/angular-strap.js",
+        "dist/angular-strap.tpl.js"
+      ]
+    },
+    "angular-busy": {
+      "ignore": [
+        "**/*.css"
+      ]
+    },
+    "angular-touch": {
+      "main": [
+        "./angular-touch.js"
+      ]
+    },
+    "angulartics": {
+      "main": [
+        "./src/angulartics.js",
+        "./src/angulartics-ga.js"
+      ]
+    },
+    "highstock-release": {
+      "main": [
+        "./highstock.src.js",
+        "./highcharts-more.src.js",
+        "./modules/exporting.src.js"
+      ]
+    },
+    "bootstrap": {
+      "ignore": [
+        "*"
+      ]
+    },
+    "bootstrap-additions": {
+      "ignore": [
+        "*"
+      ]
+    },
+    "jquery": {
+      "main": [
+        "./dist/jquery.js"
+      ]
+    },
+    "jquery-waypoints": {
+      "main": [
+        "./waypoints.js"
+      ]
+    },
+    "materialize-css": {
+      "main": [
+        "./dist/js/materialize.js"
+      ]
+    },
+    "moment-range": {
+      "main": [
+        "./lib/moment-range.js"
+      ]
+    },
+    "angular-nvd3": {
+      "main": [
+        "./dist/angular-nvd3.min.js"
+      ]
+    },
+    "enquire.js": {
+      "main": [
+        "./dist/enquire.js"
+      ]
+    },
+    "angular-ui-router": {
+      "main": [
+        "./release/angular-ui-router.js",
+        "./release/stateEvents.js"
+      ]
+    },
+    "angular-local-storage": {
+      "main": [
+        "./dist/angular-local-storage.js"
+      ]
+    },
+    "apexcharts": {
+      "main": [
+        "./dist/apexcharts.js"
+      ]
+    }
+  },
+  "resolutions": {
+    "angular": "~1.x",
+    "jquery": ">= 1.9.0"
+  }
+}

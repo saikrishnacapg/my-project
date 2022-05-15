@@ -1,0 +1,113 @@
+<div class="main account">
+    <div class="sy-block sy-welcome" ng-if="homeCtrl.displaySplash">
+        <div class="sy-block__body sy-welcome__body">
+            <div ng-include="'app/routes/user/home/_welcome-business.html'"></div>
+        </div>
+        <div class="sy-block__footer sy-welcome__footer">
+            <button class="sy-button--primary pull-right" ng-click="homeCtrl.dismissSplash()">Get started <span class="sy-icon--chevron-right"></span></button>
+        </div>
+    </div>
+
+    <div class="sy-block" ng-if="!homeCtrl.displaySplash">
+        <div class="sy-block__header">
+            <h1>Accounts</h1>
+            <p ng-show="userCtrl.contractAccountAssigned()">Select an account below.</p>
+            <a href="" ng-click="homeCtrl.showAccountMessage()">Can't find your new account?</a>
+
+            <p ng-hide="userCtrl.contractAccountAssigned()">There are no accounts currently linked.</p>
+            <div class="sy-block__body list-group-item addaccountbuttonalign clearfix" ng-if="!userCtrl.contractAccountAssigned()">
+                <div class="sy-block__body--inner">
+                    <h2>Add a new energy account</h2>
+                    <p ng-show="userCtrl.contractAccountAssigned()">This will link another account to your My Account</p>
+                    <p ng-hide="userCtrl.contractAccountAssigned()">This will link an account to your My Account.</p>
+                </div>
+                <div class="sy-block__body--Add-Acc" >
+                    <button class="pull-right-md sy-button--primary" ng-click="userCtrl.openLinkAccount()" analytics-on="click" analytics-event="Add account" analytics-category="Button click" analytics-label="MA -Account list" data-analytics-event="Remove account" >
+                        <span class="sy-icon--plus"></span> Add account
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="sy-block__body" ng-if="userCtrl.contractAccountAssigned()">
+            <p ng-show="userCtrl.accountList.length > 2">
+                <input type="search" class="form-control searchAccounts" placeholder="Account number or location"  ng-model="homeCtrl.searchText"/>
+            </p>
+            <div class="account-add">
+                <div class="">
+                    <h2>Add a new energy account</h2>
+                    <p ng-show="userCtrl.contractAccountAssigned()">This will link another account to your My Account</p>
+                    <p ng-hide="userCtrl.contractAccountAssigned()">This will link an account to your My Account.</p>
+                </div>
+                <button class="sy-button--primary" ng-click="userCtrl.openLinkAccount()" analytics-on="click" analytics-event="Add account" analytics-category="Button click" analytics-label="MA -Account list" data-analytics-event="Remove account" >
+                    <span class="sy-icon--plus"></span> Add account
+                </button>
+            </div>
+            <div class="sy-list list-group success marginnone" >
+                <div class="list-acc-main list-group-item clearfix" ng-repeat="account in userCtrl.accountList | filter:homeCtrl.searchText">
+                    <div class="acc-image">
+                        <a ui-sref="user.account.dashboard({'accountIdentifier': account.accountIdentifier})">
+                            <span ng-class="{'sy-icon--account-info-active': account.active, 'sy-icon--account-info-inactive':  !account.active}"></span>
+                        </a>
+                    </div>
+                    <div class="acc-list-inner-cntr">
+                        <div class="acc-list-cntr">
+                            <div class="acc-list">
+                                <div class="acc-no">
+                                    <a ui-sref="user.account.dashboard({'accountIdentifier': account.accountIdentifier})">
+                                        <h3 ng-bind="account.contractAccountNumber  | syContractAccountNumber"></h3>
+                                    </a>
+                                </div>
+                                <div class="address">
+                                    <small ng-bind="account.premiseAddress.label | capitalize"></small>
+                                </div>
+
+                                <div class="amt-due">
+                                    <div class='amt-due--inner'>
+                                        <small ng-show="!account.active" style="color: black;"><b>This account is inactive</b></small>
+                                        <div class='' ng-show="account.accountBalance.length > 0"  ng-repeat="r in account.accountBalance">
+                                            <small class="" ng-if="r.TXT_CATEGORY != 5"><strong>{{r.BALANCE_VAL}}</strong></small>
+                                            <small class="" ng-if="r.TXT_CATEGORY != 5"><strong>{{r.BALANCE_TXT}}</strong></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-repeat="r in account.accountBalance">
+                                <div  class="" ng-class="{'ng-show': !account.directDebitExists && r.TXT_CATEGORY == 5 && !(r.BALANCE_VAL.indexOf('cr') != -1) && r.BALANCE_VAL.replace('$','').replace(',','').replace('cr','') > 0, 'ng-hide':  !(!account.directDebitExists && r.TXT_CATEGORY == 5 && !(r.BALANCE_VAL.indexOf('cr') != -1) && r.BALANCE_VAL.replace('$','').replace(',','').replace('cr','') > 0)}" >
+                                    <div  class="pay-due-btn">
+                                        <button id="payNowBtn" class="sy-button--default btn-pay-amount-due" type="button"
+                                                ng-click="userCtrl.choosePaymentOptionIds(account.collective,account.active,account.contractAccountNumber);$hide()"
+                                                analytics-on="click" analytics-event="Pay Bill" analytics-category="Button click" analytics-label="MA-Account list" data-analytics-event="Pay now">
+                                                Pay now<span class="sy-icon--chevron-right pull-right"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="acc-edit-action">
+                            <small><a ui-sref="user.account.dashboard({'accountIdentifier': account.accountIdentifier})" analytics-on="click" analytics-event="View account" analytics-category="Link click" analytics-label="MA -Account list" data-analytics-event="View account" >View account</a></small>
+                            <small ng-if="account.pdfId != ''">|<a id="viewLatestBillBtn" target="_blank" rel="noopener noreferrer" ng-href="{{userCtrl.latestBillLink(account.contractAccountNumber,account.pdfId)}}"  analytics-on="click" analytics-event="View last bill" analytics-category="Link click" analytics-label="MA -Account list" data-analytics-event="View last bill" > View last bill</a></small>
+                            <small ng-if="userCtrl.contractAccountAssigned()"> |<a href="" ng-click="userCtrl.openUnlinkAccount(account.contractAccountNumber)" analytics-on="click" analytics-event="Remove account" analytics-category="Link click" analytics-label="MA -Account list" data-analytics-event="Remove account"> Remove account</a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sy-block__footer">
+            <p>
+                You can conveniently manage multiple energy accounts via My Account - just as long as:
+            </p>
+            <ul>
+                <li>You're the primary contact or an authorised representative on the account</li>
+                <li>The account is currently active or isn't already linked to another My Account profile</li>
+            </ul>
+            <p>Just have a copy of your bill or account details handy.</p>
+            <p>
+                Removing an account only removes it from your My Account profile - it doesn't close your account or change any services or products you've already registered for
+                e.g. Paperless or Direct Debit.
+            </p>
+            <p> Don't forget If you're moving in or out, you'll still need to submit a
+                <a href="/moving.html">moving request online</a>.</p>
+        </div>
+    </div>
+</div>

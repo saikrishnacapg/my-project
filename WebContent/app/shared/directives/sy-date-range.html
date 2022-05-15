@@ -1,0 +1,56 @@
+<div class="must-complete">All fields must be completed.</div>
+<div sy-form-group data-layout="default">
+    <label class="label-required" for="startDate">Start date: (dd/mm/yyyy)  <span class="sy-icon--calendar"></span></label>
+    <div sy-moment-selector
+         id="startDate"
+         name="startDate"
+         sy-model="data.startDate"
+         min="filter.start.min"
+         max="filter.start.max"
+         class="form-control"
+         default-synergy-max="true"
+         avoid-native="true"
+         required>
+    </div>
+</div>
+
+<div sy-form-group data-layout="default" style="margin-bottom:8px;">
+    <label class="label-required" for="endDate">End date: (dd/mm/yyyy)  <span class="sy-icon--calendar"></span></label>
+    <div sy-moment-selector
+         id="endDate"
+         name="endDate"
+         sy-model="data.endDate"
+         min="filter.end.min"
+         max="filter.end.max"
+         class="form-control"
+         default-synergy-max="true"
+         avoid-native="true"
+         required>
+    </div>
+</div>
+
+<div class="sy-form-error" ng-if="!ctrl.valid()" style="margin-top:0px;">
+    <div class="sy-alert--danger">
+        <p ng-if="ctrl.pastCutoffDate()">
+            Information before 01/09/2009 cannot be viewed online.
+        </p>
+        <p ng-if="ctrl.startDateAfterEndDate()">
+            Your start date must occur before your end date.
+        </p>
+        <p ng-if="ctrl.endDateIsInFuture()">
+            Sorry, you can't select a date in the future.
+        </p>
+        <p ng-if="ctrl.overMaxRange()">
+            Please limit your search to {{maxRangeText}}.
+        </p>
+        <p ng-if="ctrl.checkMoveInDate()">
+            Please enter a start date on or after your move in date {{filter.start.min}}
+        </p>
+        <p ng-if="ctrl.checkMoveOutDate()">
+            Please enter a end date on or before your move out date {{filter.end.max}}
+        </p>
+    </div>
+</div>
+<div>
+    <p class="help-block" ng-bind="data.helpText || ctrl.defaultHelpText"></p>
+</div>

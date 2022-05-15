@@ -1,0 +1,133 @@
+
+<style>
+    .header__user {
+        margin-top: 0px;
+        width: auto;
+    }
+
+    .account-welcome-msg .user__welcome{
+        padding-bottom: 5px;
+    }
+    .account-log-details{
+        float:left;
+    }
+    .account-log-details .account-avatar{
+        float: left;
+        margin: 6px 7px 0px 6px;
+        position: relative;
+        top: -2px;
+    }
+    .account-log-details .account-avatar .sy-icon--login-simple-name{
+        margin: 0px;
+        position: relative;
+        left: 0px;
+    }
+    .account-option, .account-logout{
+        float: left;
+        line-height:0px;
+    }
+    .account-option > a, .account-logout > a{
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-weight:bold;
+    }
+    .account-option a{
+        line-height: 20px;
+    }
+    @media (min-width: 768px){
+        .account-option > a:hover, .account-logout > a:hover{
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight:bold;
+            color:#EFBD46;
+            background:#333A3C;
+        }
+        .account-option > a:hover .user__name,
+        .account-logout > a:hover .user__name,
+        .account-option > a:hover .caret{
+            color:#EFBD46;
+        }
+    }
+    .account-logout a{
+        line-height: 20px;
+        margin-left: 10px;
+    }
+
+    @media (min-width: 768px){
+        .header__logo{
+            padding-bottom: 0px;
+        }
+        .header{
+            padding-top:10px;
+            padding-bottom:10px;
+        }
+    }
+    @media (max-width: 992px){
+        .header__user .account-logout .user__name{
+            color: #000000;
+            display: block;
+            font-size: 12px;
+        }
+    }
+    @media (max-width: 767px){
+        .header__logo{
+            margin-left:20px;
+        }
+        .account-option a {
+            line-height: 20px;
+            border: 0px;
+            padding: 0px;
+        }
+        .account-option a .caret{
+            margin-top: 16px;
+        }
+        .header__user {
+            top:13px;
+        }
+    }
+</style>
+
+<!-- navbar (fixed position) (z-index: 1030) -->
+<div class="header">
+
+    <div class="header__logo">
+        <a title="Synergy" href=""><img class="logo" alt="Synergy My Account homepage" src="img/logo/synergy-logo.svg" ng-click="userCtrl.gotoHome();" /></a>
+    </div>
+
+    <div class="header__user">
+
+        <div class="account-welcome-msg">
+            <span class="user__welcome">{{userCtrl.userDisplayName}}</span>
+        </div>
+        <div class="account-log-details">
+            <div class="account-option">
+                <a href=""
+                   aria-label="Show My Account options"
+                   sy-analytics-click=""
+                   analytics-event="Drop down menu" analytics-label="Account options" analytics-category="My Account"
+                   data-animation="am-flip-x"
+                   data-placement="bottom-right"
+                   data-template="app/routes/user/_user-dropdown.html"
+                   bs-dropdown>
+                    <div class="account-avatar">
+                        <span class="sy-icon--login-simple-name"></span>
+                    </div>
+                    <span class="user__name">Account options</span> <!--ng-bind="userCtrl.userDisplayName"-->
+                    <span class="caret"></span>
+                </a>
+            </div>
+            <div class="account-logout">
+                <a href="" data-animation="am-flip-x" data-placement="bottom-right"
+                   sy-analytics-click=""
+                   analytics-event="Log out" analytics-label="Log out" analytics-category="My Account"
+                   ng-click="userCtrl.logout();$hide()">
+                    <span class="user__name">Logout</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ui-view></div>

@@ -1,0 +1,23 @@
+<div class="medium" sy-card ready-when="!sasCtrl.product.loadingData" color="white" font-color="black-text"
+     card-title="'Usage'" show-help="true" help-id="usage" icon="sy-icon--flash">
+	<div sy-card-content>
+
+        <ul class="collapsible" data-collapsible="expandable" sy-collapsible>
+            <li>
+                <div class="collapsible-header"><i class="material-icons tiny sy-blue" ng-if="sasCtrl.isTimeBasedPricing()">keyboard_arrow_right</i>Units<span class="pull-right">{{portrait.usage.current.kwh | round}} kWh</span></div>
+                <div class="collapsible-body" ng-if="sasCtrl.isTimeBasedPricing()">
+                    <p>Peak usage<span class="pull-right">{{portrait.usage.current.peakKwh | round}} kWh</span></p>
+                    <p>Off peak usage<span class="pull-right">{{portrait.usage.current.offPeakKwh | round}} kWh</span></p>
+                </div>
+            </li>
+            <li ng-if="sasCtrl.isPricingAvailable()">
+                <div class="collapsible-header"><i class="material-icons tiny sy-blue" ng-if="sasCtrl.isTimeBasedPricing()">keyboard_arrow_right</i>Estimated cost<span class="pull-right">${{portrait.usage.current.cost | round}}</span></div>
+                <div class="collapsible-body"  ng-if="sasCtrl.isTimeBasedPricing()">
+                    <p>Peak cost<span class="pull-right">${{portrait.usage.current.peakCost | round}}</span></p>
+                    <p>Off peak cost<span class="pull-right">${{portrait.usage.current.offPeakCost | round}}</span></p>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</div>

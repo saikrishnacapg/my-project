@@ -1,0 +1,59 @@
+<div ng-if="intervalDataCtrl.intervalData.mode==='Consumption'">
+    <div id="gasConsumptionChart">
+        <div class="interval-data-gas-consumption-chart" chart-data="intervalDataCtrl.intervalData.latestData()" dirty-check="intervalDataCtrl.intervalData.timestamp" chart="intervalDataCtrl.gasConsumptionChart()"
+             chart-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="intervalDataCtrl.goBackStartDate()" go-back-end-date="intervalDataCtrl.goBackEndDate()" go-back-devices="intervalDataCtrl.goBackDevices()"
+             day-interval="intervalDataCtrl.intervalData.dayInterval" contract-account-number="intervalDataCtrl.contractAccountNumber" mode="intervalDataCtrl.intervalData.mode"
+             download="intervalDataCtrl.intervalData.download"></div>
+    </div>
+</div>
+<div ng-if="intervalDataCtrl.intervalData.mode==='Load Profile'">
+    <div id="gasLoadProfileChart">
+        <div class="load-profile-chart" chart-data="intervalDataCtrl.intervalData.latestData()" dirty-check="intervalDataCtrl.intervalData.timestamp" chart="intervalDataCtrl.gasLoadProfileChart()"
+             chart-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="intervalDataCtrl.goBackStartDate()" go-back-end-date="intervalDataCtrl.goBackEndDate()" go-back-devices="intervalDataCtrl.goBackDevices()"
+             day-interval="intervalDataCtrl.intervalData.dayInterval" contract-account-number="intervalDataCtrl.contractAccountNumber" mode="intervalDataCtrl.intervalData.mode"
+             download="intervalDataCtrl.intervalData.download"></div>
+    </div>
+</div>
+
+
+<div ng-if="intervalDataCtrl.intervalData.mode==='Tabular'" class="col-xs-12">
+    <div ng-if="intervalDataCtrl.intervalData.dayInterval > 0" class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover text-center">
+            <tr>
+                <th>Date</th>
+                <th>GJ</th>
+                <th>HHV</th>
+                <th>Peak Usage</th>
+                <th>Load Factor</th>
+                <th>Reading Status</th>
+            </tr>
+            <!-- Data isn't wrapped so we need to reference other values by index -->
+            <tr ng-repeat="gjDailyValue in intervalDataCtrl.intervalData.latestData().gjDailyValues track by $index">
+                <td><a href="" target="_blank" ng-click="intervalDataCtrl.clickNavigate($index)" style="text-decoration: underline">{{intervalDataCtrl.tabularDate($index)}}</a></td>
+                <td>{{gjDailyValue | number:2 | noZeroes}}</td>
+                <td>{{intervalDataCtrl.intervalData.latestData().hhvDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{intervalDataCtrl.intervalData.latestData().peakGjDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{intervalDataCtrl.intervalData.latestData().loadFactorDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{intervalDataCtrl.intervalData.latestData().readingTypeDailyValues[$index]}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-if="intervalDataCtrl.intervalData.dayInterval === 0"><br/>
+        <table class="table table-bordered table-condensed table-hover text-center white-background">
+            <tr>
+                <th>Hour Date</th>
+                <th>Time</th>
+                <th>GJ</th>
+                <th>Reading Status</th>
+            </tr>
+            <tr ng-repeat="gjHourlyValue in intervalDataCtrl.intervalData.latestData().gjHourlyValues track by $index">
+                <td>{{intervalDataCtrl.intervalData.latestData().startDate | date : 'dd/MM/y'}}</td>
+                <td>{{intervalDataCtrl.tabularTime($index, 60)}}</td>
+                <td>{{gjHourlyValue | number:2 | noZeroes}}</td>
+                <td>{{intervalDataCtrl.intervalData.latestData().readingTypeHourlyValues[$index]}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

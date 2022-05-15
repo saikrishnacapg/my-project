@@ -1,0 +1,85 @@
+<div sy-form-group data-layout="form" ng-if="accountAuth.credentials['customerName']" ng-controller="MsgCntlr">
+    <label class="label-required" for="customerName">Name on bill:</label>
+    <div>
+        <input type="text" id="customerName" name="customerName"
+               class="form-control" placeholder="Name on bill"
+               required
+               analytics-category="3Point ID"
+               sy-focus-me
+               ng-model="accountAuth.securityAnswers.mandatoryAccount.customerName"/>
+        <div sy-alert-box="customerName">
+            <p ng-show="accountAuth2Form.customerName.$error.required && accountAuth2Form.customerName.$invalid">
+                {{findMsgHTML('MA_E55')}}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div ng-repeat="account in accountAuth.securityAnswers.additionalAccounts track by $index">
+
+    <div sy-form-group data-layout="tooltip" class="pad-bottom-10">
+
+        <h4>Account {{$index+2}}</h4>
+
+        <div sy-form-group data-layout="tooltip">
+            <button class="btn btn-info pull-right" ng-click="accountAuth.removeAccount($index)">
+                Delete
+            </button>
+        </div>
+
+    </div>
+
+    <div sy-form-group data-layout="form">
+
+        <label class="label-required" for="accountNumber">Synergy account number:</label>
+
+        <div>
+            <div sy-form-group data-layout="tooltip">
+                <input type="text" id="accountNumber" name="accountNumber"
+                       placeholder="Account number" sy-is-number
+                       ng-minlength="8" ng-maxlength="12"
+                       ng-model="account.contractAccountNumber" ng-required="true"
+                       sy-focus-me
+                       class="form-control" />
+                <span class="sy-icon--ok_2"></span>
+            </div>
+            <div sy-alert-box="accountNumber">
+                <p ng-hide="account.contractAccountNumber">
+                    {{findMsgHTML('MA_E56')}}
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-if="accountAuth.credentials['customerName']"  sy-form-group data-layout="form">
+
+        <label class="label-required" for="customerName">Name on bill:</label>
+
+        <div>
+            <div sy-form-group data-layout="tooltip">
+                <input type="text" id="customerName" name="customerName"
+                       class=" form-control" placeholder="Name on bill"
+                       required
+                       analytics-on="change" analytics-event="formEvent"
+                       ng-model="account.customerName"/>
+                <a href ng-click="showCustomerNameHelp()" alt="Help" title="Help">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+            </div>
+
+            <div sy-alert-box="customerName">
+                <p ng-hide="account.customerName">
+                    {{findMsgHTML('MA_E57')}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="form-group clearfix">
+    <button class="btn btn-primary pull-right" ng-click="accountAuth.addAccount()">
+        Add another account
+    </button>
+</div>

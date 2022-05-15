@@ -1,0 +1,14 @@
+<div ng-form="rebsForm">
+
+	<div class="must-complete">All fields must be completed.</div>
+
+    <div sy-form-group data-layout="form">
+        <label class="label-required" for="supplyAddress">Supply address:</label>
+        <select id="supplyAddress"
+                class="form-control"
+                required
+                ng-multiple="false"
+                ng-model="rebsCtrl.selectedSupplyAddress"
+                ng-options="address.supplyAddress for address in rebsCtrl.model.supplyAddresses" />
+    </div>
+</div>

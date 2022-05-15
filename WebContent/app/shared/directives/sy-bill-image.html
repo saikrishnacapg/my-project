@@ -1,0 +1,11 @@
+<!-- DEBUGGING 
+<span ng-repeat="(name, obj) in billImageCtrl.BillDetailType"><a href="" ng-click="billImageCtrl.activate(name)">{{name}}</a> </span>
+<br>
+-->
+<h2 class="billImageHeader">{{billImageCtrl.message}}</h2>
+<div class="billImageContainer">
+	<div class="billImage {{billImageCtrl.type}}">
+		<div class="highlighter"></div>
+		<img id="showAccountNumberImage" ng-src="img/billimage_{{billImageCtrl.page}}.jpg" width="802" height="1097" alt="Bill Image">
+	</div>
+</div>

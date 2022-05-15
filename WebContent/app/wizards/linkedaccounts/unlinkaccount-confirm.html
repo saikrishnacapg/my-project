@@ -1,0 +1,25 @@
+<div class="terms">
+
+    <div class="terms__summary">
+        <p>You are about to unlink the following account:</p>
+        <ul>
+            <li>{{unlink.account.contractAccountNumber}}</li>
+            <li>{{unlink.account.premiseAddress.label}}</li>
+        </ul>
+    </div>
+    <div class="terms__content">
+        <p>If you have activated paperless billing on this account it will revert to paper billing.</p>
+        <p>By switching to paper based bills, a Paper based bill fee may apply.</p>
+        <p>You will be able to relink this account in the future (if it is still an active energy account).</p>
+        <p sy-econnect-deactivation-warning process="unlinking this account" account="unlink.account" ng-if="!unlink.LifestyleOrSolar"></p>
+        <p  ng-if="unlink.LifestyleOrSolar && unlink.eConnect"> Don’t forget, if you unlink this account you’ll no longer receive the extra 1% discount off your electricity charges on the {{unlink.productName}}.</p>
+    </div>
+
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="unlink.termsAccepted" id="Terms" class="" ng-true-value="'Yes'" ng-false-value="'No'" />
+            <label for="Terms">I want to remove this linked energy account from my online account.</label>
+        </div>
+    </div>
+</div>
+

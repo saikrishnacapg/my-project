@@ -1,0 +1,24 @@
+<div class="modal" tabindex="-1" role="dialog" style="display: block;z-index:1044" ng-controller="IdleWarningCtrl as idleCtrl">
+    <div class="sy-wizard">
+        <div class="sy-wizard__container"> <!-- modal-content //-->
+            <div class="sy-wizard__body">
+                <p class="text-center"><span class="sy-icon--clock" style="font-size: 3em;"></span></p>
+                <br>
+                <p class="text-center" style="font-size: 1.1em;">
+                    Your My Account session will close in 2 minutes due to inactivity.
+                    <br><br>
+                    <strong style="font-size: 1.2em;">Would you like to extend your session?</strong>
+                </p>
+            </div>
+
+            <div class="sy-wizard__footer">
+                <div id="modalModal_tray" ui-view="tray" sy-form-group data-layout="split">
+                    <button id="backBtn" type="button" class="sy-button--default pull-left" ng-click="idleCtrl.logout()">No</button>
+
+                    <button id="nextBtn" type="submit" class="sy-button--primary pull-right" ng-click="idleCtrl.resume()">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop in"></div>

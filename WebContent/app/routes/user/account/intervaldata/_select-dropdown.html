@@ -1,0 +1,34 @@
+<!--<ul class="dropdown-menu" data-role="menu">
+    &lt;!&ndash;
+    <li role="presentation">
+        <a role="menuitem" href="" ng-click="intervalSearchCtrl.lastWeek();$hide()">
+            <i class="sy-icon&#45;&#45;unshare"></i>&nbsp;Last week
+        </a>
+    </li>
+    <li role="presentation" class="divider">
+        &ndash;&gt;
+    </li>
+    <li role="presentation">
+        <a id="myDetailsLink" role="menuItem" href="" ng-click="intervalSearchCtrl.lastYear();$hide()">
+            <i class="sy-icon&#45;&#45;unshare"></i>&nbsp;Same period last year
+
+        </a>
+    </li>
+    <li role="presentation" class="divider">
+    </li>
+    <li role="presentation">
+        <a role="menuitem" href="" ng-click="intervalSearchCtrl.search();$hide()">
+            <i class="sy-icon&#45;&#45;calendar"></i>&nbsp;Custom range
+
+        </a>
+    </li>
+</ul>-->
+
+<ul tabindex="-1" class="select dropdown-menu" ng-show="$isVisible()" role="select">
+    <li ng-if="$showAllNoneButtons"><div class="btn-group" style="margin-bottom: 5px; margin-left: 5px">
+        <button class="btn btn-default btn-xs" ng-click="$selectAll()">All</button>
+        <button class="btn btn-default btn-xs" ng-click="$selectNone()">None</button></div></li>
+    <li role="presentation" ng-repeat="match in $matches" ng-class="{active: $isActive($index)}">
+        <a style="cursor: default" role="menuitem" tabindex="-1" ng-click="$select($index, $event)">
+            <!--<i class="{{$iconCheckmark}} pull-right" ng-if="$isMultiple && $isActive($index)"></i>-->
+            <span ng-bind="match.label"></span></a></li></ul>

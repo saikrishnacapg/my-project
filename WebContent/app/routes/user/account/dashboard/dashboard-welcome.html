@@ -1,0 +1,14 @@
+<!-- note not currently used -->
+<div class="panel margin-top-10" ng-controller="DashboardWelcomeCtrl as welcomeCtrl" ng-show="welcomeCtrl.showSuggestions">
+    <div class="panel-header margin-bottom-5">
+        <img class="left-float pad-h-10 margin-minus-5-v" src="img/welcome/welcome-icon.png" alt="Welcome to Synergy My Account" />
+        <h1>Make the most of My Account</h1>
+    </div>
+    <div class="panel-body">
+        <ol>
+            <li ng-repeat="suggestion in welcomeCtrl.suggestionList">
+                <a ng-click="suggestion.action()" href="" ng-bind="suggestion.description"></a>
+            </li>
+        </ol>
+    </div>
+</div>

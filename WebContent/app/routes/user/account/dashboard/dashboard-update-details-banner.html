@@ -1,0 +1,7 @@
+<div class="update-details-banner" ng-if="!accountCtrl.updateDetailsCookieExist">
+    <button ng-click="accountCtrl.hideUpdateDetailsBanner()">&#128473;</button>
+    <div class="banner-text">
+        {{ accountCtrl.getUpdateDetailMessage() }}
+        <a href="" ng-click="accountCtrl.goToUpdateScreen()">Click here to update</a>.
+    </div>
+</div>

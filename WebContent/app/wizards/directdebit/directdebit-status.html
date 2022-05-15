@@ -1,0 +1,235 @@
+<div
+	ng-if="signUpCtrl.account.paymentInfo.directDebitExists"
+	ng-show="!signUpCtrl.activeP2PSetting"
+	class="sy-alert--info"
+	style="margin-bottom: 30px !important"
+>
+	<h2>Pay full amount when bill is due</h2>
+	<div style="margin-left: 20px">
+		<div ng-if="signUpCtrl.account.paymentInfo.directDebitDetails.directDebitType == 'BANK'">
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>BSB:</label>
+				<div ng-bind="signUpCtrl.account.paymentInfo.directDebitDetails.bankDetails.bsbNumber |syBankBSPMask"></div>
+			</div>
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>Account number:</label>
+				<div
+					ng-bind="signUpCtrl.account.paymentInfo.directDebitDetails.bankDetails.accountNumber | syBankAccountMask"
+				></div>
+			</div>
+		</div>
+		<div ng-if="signUpCtrl.account.paymentInfo.directDebitDetails.directDebitType == 'CARD'">
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>Card number:</label>
+				<div ng-bind="signUpCtrl.account.paymentInfo.directDebitDetails.ccDetails.maskedCreditCardNumber"></div>
+			</div>
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>Card expiry (mm/yy):</label>
+				<div sy-form-group data-layout="split" class="margin-bottom-none">
+					<div ng-bind="signUpCtrl.account.paymentInfo.directDebitDetails.ccDetails.expiryDate | date:'MM/yy'"></div>
+					<a href="" ng-click="signUpCtrl.updateCardExpiry('FULL')" style="text-decoration: underline">
+						Update expiry date
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div sy-form-group data-layout="split" class="margin-bottom-none">
+		<button class="sy-button--white" ng-click="signUpCtrl.cancelDirectDebit('due')" analytics-event="formEvent">
+			Cancel Direct Debit
+		</button>
+		<button class="sy-button--yellow" ng-click="signUpCtrl.setupPayment('FULL')">Nominate new account</button>
+		<div ng-if="signUpCtrl.rebsRefundEnabled">
+			<strong>Please note:</strong>
+			By cancelling Direct Debit, you're no longer eligible to have your REBS payments automatically sent to your bank
+			account.
+		</div>
+	</div>
+</div>
+
+<div ng-if="signUpCtrl.account.paymentInfo.directDebitInstalmentExists" class="sy-alert--info">
+	<h2>Pay regular small amounts towards my bill</h2>
+	<div style="margin-left: 20px">
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<label>Payment frequency:</label>
+			<div ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.paymentFreq | titleCase"></div>
+		</div>
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<label>Instalment amount:</label>
+			<div ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.amount | currency:$:2"></div>
+		</div>
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<label>Start date:</label>
+			<div ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.startDate | date:'dd/MM/yy'"></div>
+		</div>
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<label>End date:</label>
+			<div>
+				<span ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.endDate | date:'dd/MM/yy'"></span>
+				<a href ng-show="signUpCtrl.account.paymentInfo.cancelPendingFlag" ng-click="showCancelInfo()">
+					<span class="sy-cancel-flag"></span>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div style="margin-left: 20px" class="">
+		<div ng-if="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.directDebitType == 'BANK'">
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>BSB:</label>
+				<div
+					ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.bankDetails.bsbNumber | syBankBSPMask"
+				></div>
+			</div>
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>Account number:</label>
+				<div
+					ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.bankDetails.accountNumber | syBankAccountMask"
+				></div>
+			</div>
+		</div>
+
+		<div ng-if="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.directDebitType == 'CARD'">
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>Card number:</label>
+				<div
+					ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.ccDetails.maskedCreditCardNumber"
+				></div>
+			</div>
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<label>Card expiry (mm/yy):</label>
+				<div sy-form-group data-layout="split" class="margin-bottom-none">
+					<div
+						ng-bind="signUpCtrl.account.paymentInfo.directDebitInstalmentDetails.ccDetails.expiryDate | date:'MM/yy'"
+					></div>
+					<a href="" ng-click="signUpCtrl.updateCardExpiry('SPLIT')" style="text-decoration: underline">
+						Update expiry date
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div sy-form-group data-layout="split" class="margin-bottom-10">
+		<div>
+			<button
+				class="sy-button--white"
+				ng-if="!signUpCtrl.account.paymentInfo.cancelPendingFlag"
+				ng-click="signUpCtrl.cancelDirectDebit('instalment')"
+				analytics-event="formEvent"
+			>
+				Cancel instalments
+			</button>
+		</div>
+		<button class="sy-button--yellow" ng-click="signUpCtrl.updateInstalments()">Update instalments</button>
+	</div>
+</div>
+
+<div ng-if="signUpCtrl.directDebitP2PExists" class="sy-alert--info">
+	<h2>Your payment plan</h2>
+	<div class="margin-left-20" ng-if="!signUpCtrl.promiseToPayDetails.isSinglePayment">
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<div class="margin-bottom-5">
+				<span class="arrangement-form-label">Payment frequency:</span>
+			</div>
+			<span ng-bind="signUpCtrl.promiseToPayDetails.instalmentFrequency | titleCase"></span>
+		</div>
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<div class="margin-bottom-5">
+				<span class="arrangement-form-label">Number of instalments:</span>
+			</div>
+			<span ng-bind="signUpCtrl.promiseToPayDetails.numberOfInstalments"></span>
+		</div>
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<div class="margin-bottom-5">
+				<span class="arrangement-form-label">Start date:</span>
+			</div>
+			<span ng-bind="signUpCtrl.promiseToPayDetails.startDate | date:'dd/MM/yy'"></span>
+		</div>
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<div class="margin-bottom-5">
+				<span class="arrangement-form-label">End date:</span>
+			</div>
+			<span ng-bind="signUpCtrl.promiseToPayDetails.endDate | date:'dd/MM/yy'"></span>
+		</div>
+	</div>
+
+	<div class="margin-left-20" ng-if="signUpCtrl.promiseToPayDetails.isSinglePayment">
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<div class="margin-bottom-5">
+				<span class="arrangement-form-label">Payment amount:</span>
+			</div>
+			<span ng-bind="signUpCtrl.promiseToPayDetails.extensionAmount | currency:$:2"></span>
+		</div>
+		<div sy-form-group data-layout="split" class="margin-bottom-5">
+			<div class="margin-bottom-5">
+				<span class="arrangement-form-label">Extended date:</span>
+			</div>
+			<span ng-bind="signUpCtrl.promiseToPayDetails.startDate | date:'dd/MM/yy'"></span>
+		</div>
+	</div>
+
+	<div class="margin-left-20">
+		<div ng-if="signUpCtrl.promiseToPayDetails.paymentDetails.payment_method === 'bank'">
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<div class="margin-bottom-5">
+					<span class="arrangement-form-label">BSB:</span>
+				</div>
+				<span ng-bind="signUpCtrl.promiseToPayDetails.paymentDetails.bsb_number | syBankBSPMask"></span>
+			</div>
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<div class="margin-bottom-5">
+					<span class="arrangement-form-label">Account number:</span>
+				</div>
+				<span ng-bind="signUpCtrl.promiseToPayDetails.paymentDetails.bank_account | syBankAccountMask"></span>
+			</div>
+		</div>
+
+		<div ng-if="signUpCtrl.promiseToPayDetails.paymentDetails.payment_method === 'card'">
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<div class="margin-bottom-5">
+					<span class="arrangement-form-label">Card number:</span>
+				</div>
+				<span ng-bind="signUpCtrl.promiseToPayDetails.paymentDetails.cc_num"></span>
+			</div>
+			<div sy-form-group data-layout="split" class="margin-bottom-5">
+				<div class="margin-bottom-5">
+					<span class="arrangement-form-label">Card expiry (mm/yy):</span>
+				</div>
+				<div class="margin-bottom-none">
+					<span ng-bind="signUpCtrl.promiseToPayDetails.paymentDetails.cc_expiry"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div sy-form-group data-layout="split" class="margin-bottom-10">
+		<div></div>
+		<button class="sy-button--yellow" ng-click="signUpCtrl.openViewArrangement()">View payment plan</button>
+	</div>
+</div>
+
+<div
+	ng-if="!signUpCtrl.account.paymentInfo.directDebitExists"
+	ng-show="!signUpCtrl.activeP2PSetting"
+	class="sy-alert--info"
+>
+	<h2>Pay full amount when bill is due</h2>
+	<p>Forget the hassle of remembering to pay any possible shortfall whenever your bill payment is due.</p>
+	<div sy-form-group data-layout="form" class="margin-bottom-none">
+		<div></div>
+		<button class="sy-button--yellow" ng-click="signUpCtrl.setupPayment('FULL')">
+			Set up Direct Debit to pay bill in full when due
+		</button>
+	</div>
+</div>
+
+<div ng-if="!signUpCtrl.account.paymentInfo.directDebitInstalmentExists" class="sy-alert--info">
+	<h2>Pay regular small amounts towards my bill</h2>
+	<p>Set up small regular payments so it's easier for you to manage your energy bills.</p>
+	<p>You get to choose how much you want to pay and when, to help reduce the size of your bill when it comes.</p>
+	<div sy-form-group data-layout="split" class="margin-bottom-none">
+		<div></div>
+		<button class="sy-button--yellow" ng-click="signUpCtrl.setupInstalments()">Set up regular small payments</button>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+<div ng-form="myDetailsForm">
+    <div class="sy-alert--info">
+        Select an account below to view your details.
+    </div>
+    <input type="search" class="form-control searchAccounts" placeholder="Search accounts"  ng-model="searchText" ng-if="myCtrl.accountList.length > 3"/>
+    <div class="my-details list-group">
+        <a class="list-group-item clearfix"
+           href=""
+           ng-repeat="account in myCtrl.accountList | filter:searchText"
+           ng-click="myCtrl.selectAccount(account.contractAccountNumber)">
+            <strong>{{account.contractAccountNumber}}</strong>
+            <div>{{account.premiseAddress.label | capitalize}}</div>
+        </a>
+    </div>
+</div>

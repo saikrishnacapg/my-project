@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <br/>
+
+            <div ng-if="sasCtrl.faqs">
+
+                <h2>Information to help you save</h2>
+                <div ng-repeat="faq in sasCtrl.faqs">
+                    <a ng-href="{{faq.url}}" ng-bind="faq.description" target="_blank" rel="noopener noreferrer"></a>
+                </div>
+                <br/><br/>
+            </div>
+
+            <h2>Help us improve by providing feedback</h2>
+            <br/>
+            <button class="sy-button--default"
+                    type="button"
+                    ng-click="accountCtrl.openFeedback()">
+                <span class="sy-icon--edit"></span>
+                Submit feedback
+            </button>
+        </div>
+    </div>
+</div>

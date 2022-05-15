@@ -1,0 +1,24 @@
+<div class="col-sm-5 col-xs-7 no-padding-left-right">
+    <div class="col-sm-1 col-xs-1 no-padding-left-right acc-radio-btn-group">
+        <div class="acc-radio-btn">
+            <input type="radio"  ng-if="!payCtrl.isCardExpired($index)"   name="cardIndex" ng-model="payCtrl.payData.cardIndex" id="card{{$index}}" value="{{$index}}" ng-value="{{$index}}" />
+            <label  for="card{{$index}}" sy-card-type="{{card.maskedCreditCardNumber}}">{{card.maskedCreditCardNumber}}</label>
+        </div>
+    </div>
+</div>
+<div class="col-sm-2 col-xs-2 no-padding-left-right right-15">
+    <span class="lblTxt">
+        <span disabled="true" ng-if="!payCtrl.isCardExpired($index)" ng-bind="payCtrl.formatCardExpiryDate(card.expiryDate)"
+                                style="margin: 0 11px 0 0;">{{payCtrl.formatCardExpiryDate(card.expiryDate)}}</span>
+        <span class="expire" ng-if="payCtrl.isCardExpired($index)">Expired</span>
+    </span>
+</div>
+<div class="col-sm-5 col-xs-3 no-padding-left-right right-15">
+    <a ng-if="!payCtrl.isCardExpired($index)" href id="btnupdateSCD" ng-click="payCtrl.updateCardDeatils($index)">
+        Update
+    </a>
+    <span ng-if="!payCtrl.isCardExpired($index)">&nbsp;|</span>
+    &nbsp; <a href id="btndeleteSCD" ng-click="payCtrl.requestStoredCardDeletion($index)">Delete</a>
+</div>
+
+

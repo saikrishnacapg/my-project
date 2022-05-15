@@ -1,0 +1,25 @@
+<p>
+	<button class="sy-button--primary sy-button--icon-left sy-button--block" 
+			ng-click="accountCtrl.openEnergyProfile()" 
+			style="padding-left: 50px; text-align: left">
+		<span class="sy-icon--edit" style="left: 20px"></span> 
+		My household profile
+	</button>
+</p>
+<p ng-if="energyCtrl.tips">
+	<a class="sy-button--default sy-button--icon-left sy-button--block"
+			style="padding-left: 50px; text-align: left" 
+			ng-href="{{energyCtrl.tipsPdfUrl()}}"
+			data-animation="am-flip-x">
+		<span class="sy-icon--download-link" style="left: 20px"></span> 
+		Download tips
+	</a>
+</p>
+<p ng-if="energyCtrl.tips">
+	<button class="sy-button--default sy-button--icon-left sy-button--block"
+			style="padding-left: 50px; text-align: left"
+			ng-click="energyCtrl.emailPdf()" >
+			<span class="sy-icon--envelope" style="left: 20px"></span> 
+			Email tips
+	</button>
+</p>

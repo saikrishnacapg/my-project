@@ -1,0 +1,66 @@
+<div id="rebs-application-status">
+
+    <!--<div class="status-header" style="margin:15px;" ng-show="rebsCtrl.model.applicationStatus() == 1">
+        We're currently processing your application
+    </div>
+    <div class="status-header" style="margin:15px;" ng-show="rebsCtrl.model.applicationStatus() == 4">
+        You're now ready to connect your new system
+    </div>-->
+    <div class="status-header" style="margin:15px;">
+        <p>Synergy Reference Number: <strong ng-bind="rebsCtrl.model.getApplicationReferenceNumber()"></strong></p>
+    </div>
+
+    <div class="sy-app-status" current-step="rebsCtrl.model.applicationStatus()" step="1">
+        <div class="sy-app-status-title">Step 1- Apply to Synergy for a reference number</div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() == 1">
+            <p>We've successfully received your application to connect a distributed energy system and we're currently processing your application.</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() != 1">
+            <p>Your application to Synergy has been accepted. Your Synergy Reference number which you will need to complete step 2 is <strong ng-bind="rebsCtrl.model.getApplicationReferenceNumber()"></strong>.</p>
+        </div>
+    </div>
+
+    <div class="sy-app-status" current-step="rebsCtrl.model.applicationStatus()" step="2">
+        <div class="sy-app-status-title" data-progress-text="Please complete">Step 2- Apply to Western Power using your reference number</div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() < 2">
+            <p>After step 1, you or your solar provider will need to use your Synergy Reference Number to apply to Western Power for approval to connect your system to the network.</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() == 2">
+            <div class="sy-app-status-intro">
+                <p>You or your solar provider will need to apply to Western Power for approval to connect your system to the network.</p>
+            </div>
+            <p>This requires the completion of an Application to connect embedded generation to the Western Power network form. The form and information regarding connecting a small-scale energy system can be found at westernpower.com.au</p>
+            <p>You must include the Synergy reference number <strong ng-bind="rebsCtrl.model.getApplicationReferenceNumber()"></strong> when completing the form or your Western Power connection application may be delayed.</p>
+            <p>Western Power will assess the application, and notify you of their connection approval in writing.</p>
+            <p>For systems under 5kW it typically takes 5-6 business days for Western Power to process applications, however, it may take 10 business days on some occasions.  For systems between 5-30kW, which need specialist technical design and scrutiny, the process typically takes 10-15 business days, and could take up to 30 business days for more complex applications.</p>
+            <p>Once Western Power has approved your system they will notify Synergy directly to arrange a meter upgrade.</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() > 2">
+            <p>Western Power has approved your application and a meter upgrade or reconfiguration is being arranged.</p>
+        </div>
+    </div>
+
+    <div class="sy-app-status" current-step="rebsCtrl.model.applicationStatus()" step="3" is-final="true">
+        <div class="sy-app-status-title">Step 3- Arrange for your solar supplier to install your new system</div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() < 3">
+            <p>After step 2 is completed, Synergy will arrange for Western Power to complete a meter upgrade or replacement at your property.</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() >= 3">
+            <p>Western Power has successfully received and processed your application and they'll now be upgrading your meter.</p>
+            <p>This usually takes 1-5 business days in the Perth metropolitan area, and 5-10 business days in regional WA.</p>
+            <p>Western Power will leave a notice in your meter box when your meter upgrade has been completed. Following this, your solar supplier will be able to connect your new system.</p>
+        </div>
+    </div>
+
+    <!--<div class="sy-app-status" current-step="rebsCtrl.model.applicationStatus()" step="4">
+        <div class="sy-app-status-title" data-completed-text="Ready to connect">Step 4 -Your solar supplier completing the installation of your system </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() < 4">
+            <p>You must complete steps 1-3 before your system can be connected to the network.</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() == 4">
+            <p>Congratulations - your application has been successfully completed and your bi-directional meter has been installed. Your solar supplier can now install your new system and you'll soon be generating your own renewable energy. </p>
+        </div>
+    </div>-->
+</div>
+
+<div ng-include="'app/wizards/rebs/status/_download-application.html'"></div>

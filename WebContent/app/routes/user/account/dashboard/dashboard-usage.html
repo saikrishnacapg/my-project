@@ -1,0 +1,95 @@
+<div ng-controller="DashboardUsageCtrl as dashboardUsageCtrl">
+
+    <div class="panel" ng-if="accountCtrl.isCollective()">
+        <div class="panel-header">
+            <h2>Collective account</h2>
+        </div>
+        <div class="panel-body">
+            There are {{accountCtrl.currentAccount.collectiveDetails.childAccounts.length}} accounts in this
+            collective
+        </div>
+    </div>
+
+    <div class="account-history panel ami-account-summary"
+        ng-if="accountCtrl.isAmiCustomer() && !accountCtrl.isCollective()"
+        ng-class="{true:'col-md-6',false:'col-md-12'}[dashboardUsageCtrl.isResidential]">
+        <div class="panel-header">
+            <div class="panel-header-container">
+                <h2 class="pull-left panel-title">
+                    Energy usage
+                </h2>
+                <a href="javascript:void(0);" title="Energy usage tooltip" ng-click="dashboardUsageCtrl.amiEnergyToolTip()" class="pull-right title-info-icon">
+                    <span class="sy-icon--circle_info"></span>
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div ng-include="'app/routes/user/account/dashboard/ami/ami-acccount-summary-chart.html'"></div>
+        </div>
+        <div class="form-horizontal panel-footer">
+            <a href class="sy-button--default" title="Display usage dashboard" ng-class="{true:'sy-button--block'}[dashboardUsageCtrl.isResidential]"
+               ng-click="accountCtrl.gotoUsage()">
+                <span ng-hide="accountCtrl.isCollective()">Display usage dashboard</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="account-history panel" ng-if="!accountCtrl.isAmiCustomer() && !accountCtrl.isCollective()"
+         ng-class="{true:'col-md-6',false:'col-md-12'}[dashboardUsageCtrl.isResidential]">
+        <div class="panel-header">
+            <h2>
+                <a title="Usage history graph explainer" href="" ng-click="dashboardUsageCtrl.showUsageHistoryInfo()" class="pull-right">
+                    <span class="sy-icon--circle_info"></span>
+                </a>
+                Usage history
+            </h2>
+        </div>
+        <div class="panel-body" ng-if="dashboardUsageCtrl.noSummary">
+            <p>There are no usage statistics available. To view statistics go to the Usage tab above.</p>
+            <br/>
+        </div>
+        <div class="panel-body" ng-if="!dashboardUsageCtrl.noSummary">
+            <div sy-usage-summary-chart
+                 id="usage-summary-chart"
+                 consumption-summary="accountCtrl.currentAccount.consumptionSummary">
+            </div>
+        </div>
+        <div class="form-horizontal panel-footer">
+            <a href class="sy-button--default" title="Show more usage"
+               ng-class="{true:'sy-button--block'}[dashboardUsageCtrl.isResidential]"
+               ng-click="accountCtrl.gotoUsage()">
+                <span class="sy-icon--more"></span>
+                <span ng-hide="accountCtrl.isCollective()">Show more usage</span>
+            </a>
+        </div>
+    </div>
+    <div class="account-history panel col-md-6" ng-if="accountCtrl.isResidential && !accountCtrl.isCollective() && !accountCtrl.IsT2cCustomer() && !accountCtrl.isCaseManagedCustomer()">
+        <div class="panel-header">
+            <h2 ng-if="!accountCtrl.isResiAmiCustomer()">Energy tool</h2>
+            <h2 ng-if="accountCtrl.isResiAmiCustomer()">Energy tips</h2>
+        </div>
+
+        <div ng-class="accountCtrl.isAmiCustomer() || accountCtrl.isResiAmiCustomer() ?'energytool_content':''">
+            <div class="panel-body text-center energytool_img_mar_top">
+                <img src="img/energytoolquestion.png" alt="" title="Energy tips" class="energytool_img_align" />
+            </div>
+            <div class="panel-body energytool_img_mar__frombottom">
+                <p>Check out our interactive calculators and tips to learn more about how you use energy at home.</p>
+            </div>
+        </div>
+        <div class="form-horizontal panel-footer" ng-if="accountCtrl.isResidential">
+            <a ui-sref="user.account.energytoolbox" title="Explore energy saving tips" ng-click="accountCtrl.isVisible = false"
+               class="sy-button--default sy-button--block">
+                <span ng-if="!accountCtrl.isResiAmiCustomer()">Explore our energy tools</span>
+                <span ng-if="accountCtrl.isResiAmiCustomer()">Explore energy saving tips</span>
+            </a>
+        </div>
+    </div>
+    <div class="t2c-goal panel col-md-6" ng-if="accountCtrl.isResidential && !accountCtrl.isCollective() && accountCtrl.IsT2cCustomer()">
+        <div ui-view="t2cView"></div>
+    </div>
+
+    <div class="t2c-goal panel col-md-6" ng-if="accountCtrl.isResidential && !accountCtrl.isCollective() && accountCtrl.isCaseManagedCustomer()">
+        <div ui-view="synergyAssistView"></div>
+    </div>
+</div>

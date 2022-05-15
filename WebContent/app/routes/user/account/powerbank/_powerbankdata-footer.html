@@ -1,0 +1,39 @@
+<br>
+<div>
+    <div ng-if="powerbankDataCtrl.powerbankData.hasData" class="panel-inner">
+        <p> <b>Disclaimer:</b> - This data is indicative of energy consumed and exported (if applicable) and should not be used for bill calculation purposes. While all care is taken with the data there may be discrepancies between the data and the data provided by Western Power for the purposes of calculating the bill.</p>
+
+    </div>
+
+    <br>
+    <div style="background-color:#e5eaea;border-radius:4px" class="panel" >
+        <br>
+        <h2>FAQs</h2>
+        <br>
+        <div class="form-group" style="display: inline-block; vertical-align: top;  ">
+           <!-- <img class="icon" src="img/green-teal.svg"/>-->
+            <br>
+            <br>
+        </div>
+        <div class="form-group" style="display: inline-block "><span><b>When does the battery offset my usage?</b> <br>
+
+Your virtually stored energy will offset your usage during the peak period from 3pm to 9pm every day.
+        </span></div>
+        <br/>
+        <div class="form-group" style="display: inline-block ">
+          <!--  <img src="img/blue-ice.svg" class="icon"/>-->
+            <br>
+            <br>
+
+        </div>
+        <div class="form-group" style="display: inline-block; vertical-align: top;  "><span><b>What happens if I do not use all of the energy I store in the battery during the day?</b> <br>
+               At midnight every day your stored energy allocation resets to 0kW. Any excess energy that is not consumed will be purchased from you as normal at the Solar Energy Buyback Rate (which has the same rate as the Renewable Energy Buyback Scheme (REBS)) and show as a credit on your Synergy bill.
+            <br>
+            <br>
+             <a href="{{powerbankDataCtrl.powerbankData.productName=='Battery Smart Plan'? 'https://www.synergy.net.au/Sites/PowerBank/FAQs':'https://www.synergy.net.au/Sites/PowerBank-2/FAQs'}}">View more FAQs</a>
+        </span></div>
+
+
+    </div>
+
+</div>

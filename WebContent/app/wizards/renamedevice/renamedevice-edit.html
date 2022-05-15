@@ -1,0 +1,26 @@
+<div ng-form="renamedeviceForm" role="form">
+    <div class="form-group" ng-if="redCtrl.intervalDeviceResponse.message">
+        <div ng-class="{'sy-alert--danger': redCtrl.intervalDeviceResponse.error, 'sy-alert--info': !redCtrl.intervalDeviceResponse.error}" ng-bind-html="redCtrl.intervalDeviceResponse.message">
+        </div>
+    </div>
+
+    <div class="must-complete">All fields must be completed.</div>
+    
+    <div class="form-group">
+        <label class="control-label" for="intervalDevice">Device:</label>
+
+        <select class="form-control" id="intervalDevice" ng-model="redCtrl.deviceCustomisation.intervalDevice" ng-options="d.displayLabel for d in redCtrl.intervalDevices" required />
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="customName">Name:</label>
+
+        <input type="text" name="customName" id="customName" class="form-control" ng-model="redCtrl.deviceCustomisation.customName" ng-minlength="1" ng-maxlength="50" required  />
+
+		<div sy-alert-box="customName">
+	        <p ng-show="renamedeviceForm.customName.$error.maxlength">Meter name cannot be longer that 50 characters.</p>
+	        <p ng-show="renamedeviceForm.customName.$error.minlength">Meter name must have a value.</p>
+        </div>
+    </div>
+
+</div>

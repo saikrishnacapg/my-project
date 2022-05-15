@@ -1,0 +1,9 @@
+<div class="interval-data__graph">
+    <div id="solarGraph" ng-if="amiIntervalCtrl.displayGraph()">
+        <div ng-if="amiIntervalCtrl.amiInterval.isElectricity()" ng-include="'app/routes/user/account/amiinsight/ami-interval-usage/ami-interval-graph-elec.html'"></div>
+    </div>
+    <div ng-if="amiIntervalCtrl.displayLookupErrorMessage()">
+        <h3 class="text-center" ng-bind="amiIntervalCtrl.amiInterval.message">
+        </h3>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+
+<style>
+    .dailyView{
+        margin-bottom: 20px;
+        float: left;
+        width: 100%;
+    }
+</style>
+<div ng-if="solarCtrl.solar.mode==='Consumption' ">
+    <div ng-if="solarCtrl.solar.latestData().hasValue">
+        <div class="interval-data__heading" ng-include="'app/routes/user/account/usage/interval/_solar-heading.html'"></div>
+        <div id="solarconsumptionChart" style="padding:0px;" >
+            <div class="solar-consumption-chart" chart-data="solarCtrl.solar.latestData()" dirty-check="solarCtrl.solar.timestamp" chart="solarCtrl.consumptionChart()"
+                 weekday-shoulder-values="{{solarCtrl.solar.dayInterval == 0 ? 'weekdayShoulderKwhHalfHourlyValues': 'weekdayShoulderKwhDailyValues'}}"
+                 weekend-shoulder-values="{{solarCtrl.solar.dayInterval == 0 ? 'weekendShoulderKwhHalfHourlyValues': 'weekendShoulderKwhDailyValues'}}"
+                 off-peak-values="{{solarCtrl.solar.dayInterval == 0 ? 'offpeakKwhHalfHourlyValues': 'offpeakKwhDailyValues'}}"
+                 peak-values="{{solarCtrl.solar.dayInterval == 0 ? 'peakKwhHalfHourlyValues': 'peakKwhDailyValues'}}"
+                 go-back-start-date="solarCtrl.goBackStartDate()" go-back-end-date="solarCtrl.goBackEndDate()" go-back-devices="solarCtrl.goBackDevices()"
+                 day-interval="solarCtrl.solar.dayInterval" contract-account-number="solarCtrl.contractAccountNumber" mode="solarCtrl.solar.mode"
+                 download="solarCtrl.solar.download" generation-values="{{solarCtrl.solar.dayInterval == 0 ? 'kwhHalfHourlyValuesGeneration': 'kwhDailyValuesGeneration'}}"
+                 show-generation="solarCtrl.showGeneration()"></div>
+        </div>
+    </div>
+    <div class="sy-alert--info ng-scope" ng-if="!solarCtrl.solar.latestData().hasValue">
+        <span class="sy-icon--circle_info"></span>
+        <p>There is no interval data for this period of time. Please try searching a different date range.</p>
+    </div>
+
+</div>
+
+<div ng-if="solarCtrl.solar.mode==='Tabular'" class="col-xs-12" style="margin-top:10px">
+    <div ng-if="solarCtrl.solar.dayInterval > 0" class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover text-center table-responsive">
+            <!-- <tr>
+                <th>Date</th>
+                <th ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].basePeriod !=''" >{{solarCtrl.solar.latestData().retrieveIntervalDetails[0].basePeriod}} kWh</th>
+                <th ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period2 !=''" >{{solarCtrl.solar.latestData().retrieveIntervalDetails[0].period2}} kWh</th>
+                <th ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period3 !=''" >{{solarCtrl.solar.latestData().retrieveIntervalDetails[0].period3}} kWh</th>
+                <th ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period4 !=''" >{{solarCtrl.solar.latestData().retrieveIntervalDetails[0].period4}} kWh</th>
+                <th ng-if="solarCtrl.showGeneration()">Generation</th>
+
+            </tr>
+            <tr ng-repeat="maxKwDailyValue in solarCtrl.solar.latestData().maxKwDailyValues track by $index">
+                <td><a href="" target="_blank" ng-click="solarCtrl.clickNavigate($index)" style="text-decoration: underline">{{solarCtrl.tabularDate($index)}}</a></td>
+                <td ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].basePeriod !=''" >{{solarCtrl.solar.latestData().offpeakKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period2 !=''">{{solarCtrl.solar.latestData().peakKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period3 !=''">{{solarCtrl.solar.latestData().weekdayShoulderKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period4 !=''">{{solarCtrl.solar.latestData().weekendShoulderKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+                
+                <td ng-if="solarCtrl.showGeneration()">{{solarCtrl.solar.latestData().kwhDailyValuesGeneration[$index] | number:2 | noZeroes}}</td>
+            </tr> -->
+            <tr>
+                <th>Date</th>
+                <th ng-repeat-start="product in solarCtrl.solar.productData" style="display: none;"></th>
+                <th ng-if="product.basePeriod !=''" >{{product.basePeriod}} kWh</th>
+                <th ng-if="product.period2 !=''" >{{product.period2}} kWh</th>
+                <th ng-if="product.period3 !=''" >{{product.period3}} kWh</th>
+                <th ng-if="product.period4 !=''" >{{product.period4}} kWh</th>
+                <th ng-repeat-end="" style="display: none;"></th>
+                <th ng-if="solarCtrl.showGeneration()">Generation</th>
+            </tr>
+            
+            <tr ng-repeat="maxKwDailyValue in solarCtrl.solar.latestData().maxKwDailyValues track by $index" ng-init="firstIndex=$index">
+                <td><a href="" target="_blank" ng-click="solarCtrl.clickNavigate($index)" style="text-decoration: underline">{{solarCtrl.tabularDate($index)}}</a></td>
+                <td ng-repeat-start="product in solarCtrl.solar.productData track by $index" style="display: none;"></td>
+                <td ng-if="product.basePeriod !=''" >{{solarCtrl.solar.tabularDataUpdated[$index][firstIndex].basePeriod | number:2 | noZeroes}}</td>
+                <td ng-if="product.period2 !=''">{{solarCtrl.solar.tabularDataUpdated[$index][firstIndex].period2 | number:2 | noZeroes}}</td>
+                <td ng-if="product.period3 !=''" >{{solarCtrl.solar.tabularDataUpdated[$index][firstIndex].period3 | number:2 | noZeroes}}</td>
+                <td ng-if="product.period4 !=''">{{solarCtrl.solar.tabularDataUpdated[$index][firstIndex].period4 | number:2 | noZeroes}}</td>
+                <td ng-repeat-end style="display: none;"></td>
+                <td ng-if="solarCtrl.showGeneration()">{{solarCtrl.solar.latestData().kwhDailyValuesGeneration[$index] | number:2 | noZeroes}}</td>
+                
+            </tr>
+        </table>
+    </div>
+    <div ng-if="solarCtrl.solar.dayInterval === 0">
+
+        <div class="dailyView">
+            <button id="returnToDailyBtn"
+                type="button"
+                class="sy-button--default pull-left"
+                ng-click="solarCtrl.returnToDailyView()"
+                sy-busy-chevron="fetchMore"
+                busy-class="sy-icon--chevron-left pull-left">
+                Return to daily view
+            </button>
+        </div>
+
+        <table class="table table-bordered table-condensed table-hover text-center">
+            <tr>
+                <th>Half Hour Date</th>
+                <th>Time</th>
+                <!--<th>
+                    kWh <a href id="showkWhHelp" ng-click="solarCtrl.showHelpText('kWh', 'app/routes/user/account/intervaldata/templates/modal-kwhhelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>
+                </th>
+                <th>
+                    kW <a href id="showkWHelp" ng-click="solarCtrl.showHelpText('kW', 'app/routes/user/account/intervaldata/templates/modal-kwhelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>
+                </th>
+                <th>
+                    kVA <a href id="showkVAHelp" ng-click="solarCtrl.showHelpText('kVA', 'app/routes/user/account/intervaldata/templates/modal-kvahelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>
+                </th>
+                <th>
+                    Power Factor <a href id="showPowerFactorHelp" ng-click="solarCtrl.showHelpText('Power Factor', 'app/routes/user/account/intervaldata/templates/modal-powerfactorhelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>
+                </th>
+                <th>Reading Status</th>-->
+                <th ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].basePeriod !=''">
+                    {{solarCtrl.solar.latestData().retrieveIntervalDetails[0].basePeriod}} <!--<a href id="showkWhHelp" ng-click="solarCtrl.showHelpText('kWh', 'app/routes/user/account/intervaldata/templates/modal-kwhhelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>-->
+                </th>
+                <th  ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period2 !=''">
+                    {{solarCtrl.solar.latestData().retrieveIntervalDetails[0].period2}} <!--<a href id="showkWHelp" ng-click="solarCtrl.showHelpText('kW', 'app/routes/user/account/intervaldata/templates/modal-kwhelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>-->
+                </th>
+                <th  ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period3 !=''">
+                    {{solarCtrl.solar.latestData().retrieveIntervalDetails[0].period3}} <!--<a href id="showkVAHelp" ng-click="solarCtrl.showHelpText('kVA', 'app/routes/user/account/intervaldata/templates/modal-kvahelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>-->
+                </th>
+                <th ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period4 !=''">
+                    {{solarCtrl.solar.latestData().retrieveIntervalDetails[0].period4}} <!--<a href id="showPowerFactorHelp" ng-click="solarCtrl.showHelpText('Power Factor', 'app/routes/user/account/intervaldata/templates/modal-powerfactorhelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>-->
+                </th>
+                <th ng-if="solarCtrl.showGeneration()">
+                       Generation <!--<a href id="showGenerationHelp" ng-click="solarCtrl.showHelpText('Power Factor', 'app/routes/user/account/intervaldata/templates/modal-powerfactorhelp.html')"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>-->
+                </th>
+            </tr>
+            <tr ng-repeat="kwHalfHourValue in solarCtrl.solar.latestData().kwHalfHourlyValues track by $index">
+                <td>{{solarCtrl.solar.latestData().startDate | date : 'dd/MM/y'}}</td>
+                <td>{{solarCtrl.tabularTime($index, 30)}}</td>
+                <!--<td>{{solarCtrl.tabularKwh(solarCtrl.solar.latestData().peakKwhHalfHourlyValues[$index], solarCtrl.solar.latestData().offpeakKwhHalfHourlyValues[$index]) | number:2 | noZeroes}}</td>
+                <td>{{kwHalfHourValue | number:1 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().kvaHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().powerFactorHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().statusCodeHalfHourlyValues[$index]}}</td>-->
+                <td  ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].basePeriod !=''">{{solarCtrl.solar.latestData().offpeakKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                <td  ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period2 !=''">{{solarCtrl.solar.latestData().peakKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                <td  ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period3 !=''">{{solarCtrl.solar.latestData().weekdayShoulderKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                <td  ng-if="solarCtrl.solar.latestData().retrieveIntervalDetails[0].period4 !=''">{{solarCtrl.solar.latestData().weekendShoulderKwhHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+                <td ng-if="solarCtrl.showGeneration()">{{solarCtrl.solar.latestData().kwhHalfHourlyValuesGeneration[$index] | number:2 | noZeroes}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<!--
+<div class="sy-alert--info ng-scope" ng-if="!solarCtrl.solar.latestData().hasValue">
+    <span class="sy-icon--circle_info"></span>
+    <h2>Hang tight while we wait for the data to arrive</h2>
+    <br>
+    <p>Unfortunately there is nothing to show here. This means we are just waiting to receive your first meter read
+        on the new plan. Once you receive your first bill, come back and visit again.</p>
+
+    <p>If you've already accessed the (extra) usage data here, then something has gone wrong under the hood. This means we’ll be busy trying to get it back up and running for you as quickly as possible. Please try again soon.</p>
+
+</div>
+
+-->

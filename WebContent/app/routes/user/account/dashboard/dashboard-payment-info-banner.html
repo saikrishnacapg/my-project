@@ -1,0 +1,34 @@
+<div class="panel">
+	<div sy-cta>
+		<div class="sy-alert--info" style="overflow: hidden">
+
+            <div  ng-if="(accountCtrl.bannerCode=='01' || accountCtrl.bannerCode=='02')">
+                <h2 style="clear: both">
+                    <span class="sy-icon--circle_info"></span>WA Small Business and Charity Tariff Offset
+                </h2>
+                <p style="margin-top: 20px" ng-if="accountCtrl.bannerCode=='01'">
+                    Good news! Your energy account is eligible for the WA Small Business and Charity Tariff Offset. You don't need to do a thing. Your energy account will be automatically credited from {{accountCtrl.bannerDate}}. Simply refer to your next bill or visit the 'Bills and payments' section for details of this credit. Additional information about this credit is also available on <a href="https://www.synergy.net.au/Covid-19/Helping-you-in-your-business?utm_id=nat067008379008014" target="_blank">our website</a>.
+                </p>
+                <p style="margin-top: 20px" ng-if="accountCtrl.bannerCode=='02'">
+                    Good news! Your energy account has been credited with the WA Small Business and Charity Tariff Offset. Simply refer to your next bill or visit the 'Bills and payments' section for details of this credit. Additional information about this credit is also available on <a href="https://www.synergy.net.au/Covid-19/Helping-you-in-your-business?utm_id=nat067008379008014" target="_blank">our website</a>.
+                </p>
+            </div>
+
+			<div ng-if="(accountCtrl.bannerCode=='06' || accountCtrl.bannerCode=='07' || accountCtrl.bannerCode=='08')">
+				<h2 style="clear: both">
+					<span class="sy-icon--circle_info"></span>WA Government EAP Boost Payment
+                </h2>
+				<p style="margin-top: 20px" ng-if="accountCtrl.bannerCode=='06'">
+                    Good news! Your energy account is eligible for the WA Government EAP Boost Payment. You don't need to do a thing. Your energy account will be automatically credited from {{accountCtrl.bannerDate}}. Simply refer to your next bill or visit the 'Bills and payments' section for details of this payment. Additional information about this payment is also available on <a href="https://www.synergy.net.au/Covid-19/Helping-you-at-home?utm_id=nat067008378008014" target="_blank">our website</a>.
+				</p>
+                <p style="margin-top: 20px" ng-if="accountCtrl.bannerCode=='07'">
+                    Good news! Your energy account is eligible for the WA Government EAP Boost Payment. You don't need to do a thing. Your energy account will be automatically credited by the 5th business day of {{accountCtrl.bannerDate}}, and appear on your next bill following this date. Simply refer to your next bill or visit the 'Bills and payments' section for details of this payment. Additional information about this payment is also available on <a href="https://www.synergy.net.au/Covid-19/Helping-you-at-home?utm_id=nat067008378008014" target="_blank">our website</a>.
+                </p>
+                <p style="margin-top: 20px" ng-if="accountCtrl.bannerCode=='08'">
+                    Good news! Your energy account has been credited with the WA Government EAP Boost Payment. Simply refer to your next bill or visit the 'Bills and payments' section for details of this payment. Additional information about this payment is also available on <a href="https://www.synergy.net.au/Covid-19/Helping-you-at-home?utm_id=nat067008378008014" target="_blank">our website</a>.
+                </p>
+			</div>
+
+		</div>
+	</div>
+</div>

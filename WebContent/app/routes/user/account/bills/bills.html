@@ -1,0 +1,489 @@
+<div class="main">
+    <div class="main__content">
+        <div class="panel">
+            <div class="responsive-sub-divs"></div>
+            <div class="panel-header" ng-if="billsCtrl.cutoffDateReached()">
+                <div class="sy-alert--info">Information beyond 2009 is not available online.</div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-6 pull-left">
+                        <h1>Billing & payment history</h1>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-8 col-lg-6 pull-right">
+                        <div class="newdaterangesection">
+                            <div sy-form-group data-layout="default">
+                                <label class="label-required" for="startDate">
+                                    <span class="sy-icon--calendar"></span>
+                                    Start date:
+                                </label>
+                                <div
+                                    sy-moment-selector
+                                    id="startDate"
+                                    name="startDate"
+                                    sy-model="billsCtrl.startDate"
+                                    min="filter.start.min"
+                                    max="filter.start.max"
+                                    class="form-control"
+                                    default-synergy-max="true"
+                                    avoid-native="true"
+                                    required
+                                ></div>
+                            </div>
+                            <div sy-form-group data-layout="default">
+                                <label class="label-required" for="endDate">
+                                    <span class="sy-icon--calendar"></span>
+                                    End date:
+                                </label>
+                                <div
+                                    sy-moment-selector
+                                    id="endDate"
+                                    name="endDate"
+                                    sy-model="billsCtrl.endDate"
+                                    min="filter.end.min"
+                                    max="filter.end.max"
+                                    class="form-control"
+                                    default-synergy-max="true"
+                                    avoid-native="true"
+                                    required
+                                ></div>
+                            </div>
+                            <div class="sy-form-error" ng-if="!billsCtrl.valid()" style="margin-top: 0px">
+                                <div class="sy-alert--danger">
+                                    <p ng-if="billsCtrl.pastCutoffDate()">Information before 01/09/2009 cannot be viewed online.</p>
+                                    <p ng-if="billsCtrl.startDateAfterEndDate()">Your start date must occur before your end date.</p>
+                                    <p ng-if="billsCtrl.endDateIsInFuture()">Sorry, you can't select a date in the future.</p>
+                                    <p ng-if="billsCtrl.overMaxRange()">Please limit your search to two years.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button
+                                    class="sy-button--primary"
+                                    ng-click="billsCtrl.searchDisplay()"
+                                    ng-disabled="!(billsCtrl.startDate && billsCtrl.endDate && billsCtrl.valid())"
+                                >
+                                    Display
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 pull-right external-link">
+                        <div class="btn-group external-link-inner">
+                            <label class="dropdown label--functional">
+                                <a href="" bs-dropdown="">
+                                    <span class="sy-icon--new_window"></span>
+                                    <span>Export</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="" ng-click="billsCtrl.exportTableToPDF()" ng-model="billsCtrl.selectedExportType">PDF</a></li>
+                                    <li><a href="" ng-click="billsCtrl.exportTableToCSV()" ng-model="billsCtrl.selectedExportType">CSV</a></li>
+                                </ul>
+                            </label>
+                            <label class="label--functional" ng-click="billsCtrl.printBillHistory()">
+                                <a href="">
+                                    <span class="sy-icon--print"></span>
+                                    Print
+                                </a>
+                            </label>
+                            <label class="label--functional" ng-click="accountCtrl.openBillHistoryExport()">
+                                <a href="">
+                                    <span class="sy-icon--envelope"></span>
+                                    Email
+                                </a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="tip__utility" ng-if="accountCtrl.showUnBilledBannerFirst || accountCtrl.showUnBilledBannerSec">
+                            <div ng-include="'app/routes/user/account/dashboard/dashboard-unbilled-banner.html'"></div>
+                        </div>
+						       <div class="tip__utility" ng-if="accountCtrl.showDuplicateBillBanner && accountCtrl.isResidential">
+							        <div ng-include="'app/routes/user/account/dashboard/dashboard-duplicate-banner.html'"></div>
+						       </div>
+                        <div
+                            id="dvBillingTable"
+                            name="dvBillingTable"
+                            class="table-responsive trBor"
+                            style="margin-top: 20px"
+                            ng-if="billsCtrl.billData.records && billsCtrl.billData.records.length"
+                        >
+                            <table class="billing">
+                                <thead>
+                                    <tr>
+                                        <th>Billing Event</th>
+                                        <th>Date</th>
+                                        <th>Amount</th>
+                                        <th ng-if="showDueDate">Due date</th>
+                                        <th>Download as</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="bill in billsCtrl.billData.records | filter: billsCtrl.filterByBillCode">
+                                        <!-- ng-class="{'success':bill.isPayment, 'danger':checkOverDue(bill.payment)}"//-->
+                                        <!-- note the date format below with the extra ' - ' preceding it for formatting only when the properties exist  -->
+                                        <td class="billAndPaymentsTable">
+                                            <span ng-if="bill.billingCode === 'DP'">
+                                                <img src="img/debit_card.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'CC'">
+                                                <img src="img/credit_card_via_ivr_web.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'CP'">
+                                                <img src="img/centrelink.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'AP'">
+                                                <img src="img/australia-post.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'BP'">
+                                                <img src="img/BPAY_bill.svg" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'RF' || bill.billingCode === 'RC' ">
+                                                <img src="img/refund.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span
+                                                ng-if="bill.billingCode === 'ER' || bill.billingCode === 'EB' || bill.billingCode === 'WC' || bill.billingCode === 'WT' || bill.billingCode === 'ST' || bill.billingCode === 'SC'"
+                                            >
+                                                <img src="img/Concessions.svg" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'OP'">
+                                                <img src="img/oneoffpayment.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'HG' || bill.billingCode === 'HC'">
+                                                <img src="img/hugs-green.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'SA'">
+                                                <img src="img/synergy-assist.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span ng-if="bill.billingCode === 'ED'">
+                                                <img src="img/credit-cancelled.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <span
+                                                ng-if="bill.billingCode !== 'BP' && bill.billingCode !== 'AP'&& bill.billingCode !== 'CP'&& bill.billingCode !== 'CC'&& bill.billingCode !== 'DP'&& bill.billingCode !== 'RF'&& bill.billingCode !== 'RC' && bill.billingCode !== 'ER' && bill.billingCode !== 'EB' && bill.billingCode !== 'OP' && bill.billingCode!=='HG' && bill.billingCode!=='HC' && bill.billingCode!=='WC' && bill.billingCode!=='WT' && bill.billingCode!=='SA' && bill.billingCode!=='ED' && bill.billingCode !== 'ST' && bill.billingCode !== 'SC'"
+                                            >
+                                                <img src="img/all_other_payment.png" class="imgPaymentType" alt="" />
+                                            </span>
+                                            <strong>{{bill.description}}</strong>
+                                            <br />
+                                            <sub>
+                                                {{bill.supplyPeriodStartDate |
+                                                    date:'dd/MM/yyyy'}} {{bill.supplyPeriodEndDate | date:' - dd/MM/yyyy'}}
+                                            </sub>
+                                        </td>
+                                        <td>{{bill.postingDate | date:'dd/MM/yyyy'}}</td>
+                                        <td>
+                                            {{billsCtrl.getPositiveAmount(bill.amount) | currency}}
+                                            <span ng-show="((bill.amount >= 0) && (bill.isBill || bill.billingCode==='RF'))">dr</span>
+                                            <span
+                                                ng-show="((bill.amount < 0) && (bill.isBill || bill.billingCode==='RF' || bill.billingCode==='TR'))"
+                                            >
+                                                cr
+                                            </span>
+                                            <span ng-show="bill.isPayment">cr</span>
+                                        </td>
+                                        <td ng-if="showDueDate">{{bill.dueDate | date:'dd/MM/yyyy'}}</td>
+                                        <td>
+                                            <div ng-show="bill.ccReceiptNo">
+                                                <span>
+                                                    <a href="" ng-click="billsCtrl.ccLinkReciept(bill)">PDF</a>
+                                                </span>
+                                            </div>
+                                            <div ng-show="bill.isBill">
+                                                <span>
+                                                    <a
+                                                        href=""
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        ng-href="{{billsCtrl.billLink(bill, 'PDF')}}"
+                                                        ng-click="billsCtrl.eventTracking('bill')"
+                                                        data-analytics-event="Bill Download"
+                                                    >
+                                                        PDF
+                                                    </a>
+                                                </span>
+
+                                                <span
+                                                    ng-if="billsCtrl.billFormatEligiblity && billsCtrl.downloadEligiblityByDate(bill.postingDate)"
+                                                >
+                                                    |
+                                                    <a
+                                                        href=""
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        ng-href="{{billsCtrl.billLink(bill, 'XLSX')}}"
+                                                        ng-click="billsCtrl.eventTracking('bill')"
+                                                        data-analytics-event="Bill Download"
+                                                    >
+                                                        XLSX
+                                                    </a>
+                                                    |
+                                                    <a
+                                                        href=""
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        ng-href="{{billsCtrl.billLink(bill, 'CSV')}}"
+                                                        ng-click="billsCtrl.eventTracking('bill')"
+                                                        data-analytics-event="Bill Download"
+                                                    >
+                                                        CSV
+                                                    </a>
+                                                    |
+                                                    <a
+                                                        href=""
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        ng-href="{{billsCtrl.billLink(bill, 'XML')}}"
+                                                        ng-click="billsCtrl.eventTracking('bill')"
+                                                        data-analytics-event="Bill Download"
+                                                    >
+                                                        XML
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div
+                            id="dvBillingTableToPrint"
+                            name="dvBillingTableToPrint"
+                            class="table-responsive trBor noScreen"
+                            style="margin-top: 20px; border: 1px solid #000"
+                        >
+                            <table border="0" width="100%" cellpadding="0" cellspacing="0" style="border: 1px solid #000">
+                                <tr>
+                                    <td align="left">
+                                        <div style="padding: 20px 20px 20px 20px" class="logo visible-print pull-left">
+                                            <img
+                                                alt="Synergy"
+                                                height="56"
+                                                src="https://www.synergy.net.au/~/media/Images/Email-headers/Solar/logo.png"
+                                                style="border-width: 0px"
+                                                width="139"
+                                            />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; border-top: 1px solid #00008b; border-bottom: 3px solid #002670">
+                                        <div style="float: left; width: 50px">
+                                            <img src="img/account_gray.png" width="30" style="color: #aac53e" class="imgPaymentType" />
+                                        </div>
+                                        <div
+                                            style="
+                                                float: left;
+                                                font-size: 12px;
+                                                margin: 0;
+                                                color: #000;
+                                                padding: 0px;
+                                                font-family: arial, helvetica, verdana, sans-serif;
+                                            "
+                                        >
+                                            <h2 style="padding-top: 0px; margin-top: 0px">
+                                                Account {{billsCtrl.account.contractAccountNumber | syContractAccountNumber}} |
+                                                <small>{{billsCtrl.account.productDetails.energyProductLabel}}</small>
+                                            </h2>
+                                            <span>{{billsCtrl.account.premiseAddress.label | capitalize}}</span>
+                                            <br />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0px">
+                                        <table
+                                            border="0"
+                                            width="100%"
+                                            text-align="center"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            style="padding: 20px 20px 120px 20px; margin: 0 auto"
+                                        >
+                                            <tr>
+                                                <td colspan="3" class="cell">
+                                                    Billing and payment history
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="table-cell">
+                                                    Billing Event
+                                                </td>
+                                                <td class="table-cell">
+                                                    Date
+                                                </td>
+                                                <td class="table-cell">
+                                                    Amount
+                                                </td>
+                                            </tr>
+                                            <tr><td colspan="3"></td></tr>
+                                            <tr ng-repeat="bill in billsCtrl.billData.records | filter: billsCtrl.filterByBillCode">
+                                                <td class="cell">
+                                                    <span ng-if="bill.billingCode === 'DP'">
+                                                        <img src="img/debit_card.png" class="billing-card" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'CC'">
+                                                        <img src="img/credit_card_via_ivr_web.png" class="billing-card" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'CP'">
+                                                        <img src="img/centrelink.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'AP'">
+                                                        <img src="img/australia-post.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'BP'">
+                                                        <img src="img/BPAY_bill.svg" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'RF' || bill.billingCode === 'RC' ">
+                                                        <img src="img/refund.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span
+                                                        ng-if="bill.billingCode === 'ER' || bill.billingCode === 'EB' || bill.billingCode === 'WC' || bill.billingCode === 'WT'  || bill.billingCode === 'ST'  || bill.billingCode === 'SC'"
+                                                    >
+                                                        <img src="img/Concessions.svg" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'OP'">
+                                                        <img src="img/oneoffpayment.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'HG' || bill.billingCode === 'HC'">
+                                                        <img src="img/hugs-green.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'SA'">
+                                                        <img src="img/synergy-assist.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span ng-if="bill.billingCode === 'ED'">
+                                                        <img src="img/credit-cancelled.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span
+                                                        ng-if="bill.billingCode !== 'BP' && bill.billingCode !== 'AP'&& bill.billingCode !== 'CP'&& bill.billingCode !== 'CC'&& bill.billingCode !== 'DP'&& bill.billingCode !== 'RC'&& bill.billingCode !== 'RF' && bill.billingCode !== 'ER' && bill.billingCode !== 'EB' && bill.billingCode !== 'OP' && bill.billingCode !== 'HG' && bill.billingCode !== 'HC' && bill.billingCode !== 'ED' && bill.billingCode !== 'WC' && bill.billingCode !== 'WT' && bill.billingCode  !== 'ST' && bill.billingCode  !== 'SC'"
+                                                    >
+                                                        <img src="img/all_other_payment.png" class="icon-img" alt="" />
+                                                    </span>
+                                                    <span
+                                                        style="
+                                                            padding: 10px;
+                                                            color: #000;
+                                                            font-size: 12px;
+                                                            font-family: arial, helvetica, verdana, sans-serif;
+                                                            text-align: center;
+                                                        "
+                                                    >
+                                                        {{bill.description}}
+                                                    </span>
+                                                </td>
+                                                <td class="cell">
+                                                    {{bill.postingDate | date:'dd/MM/yyyy'}}
+                                                </td>
+                                                <td class="cell">
+                                                    {{billsCtrl.getPositiveAmount(bill.amount) | currency}}
+                                                    <span ng-show="((bill.amount >= 0) && (bill.isBill || bill.billingCode === 'RF'))">dr</span>
+                                                    <span
+                                                        ng-show="((bill.amount < 0) && (bill.isBill || bill.billingCode === 'RF' || bill.billingCode === 'TR'))"
+                                                    >
+                                                        cr
+                                                    </span>
+                                                    <span ng-show="bill.isPayment">cr</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-body" style="margin: 0px 20px" ng-hide="billsCtrl.billData.records.length > 0">
+                        <p>
+                            There is no billing data for this date range. Please try another date range. If this is a newly
+                            established account we may not have any information to show you yet.
+                        </p>
+                    </div>
+                    <!--Filter Checkbox list for Desktop-->
+                    <div class="col-md-3 showOnDesktop" ng-if="billsCtrl.billData.records && billsCtrl.billData.records.length">
+                        <div class="sy-alert--info">
+                            <div class="FilterBox">
+                                <div>Filter billing events</div>
+
+                                <div class="normalTxt">
+                                    <div ng-show="billsCtrl.selectDisplay">
+                                        <a
+                                            href=""
+                                            id="SelectAll"
+                                            value="SelectAll"
+                                            ng-click="billsCtrl.selectAll(billsCtrl.billchoiceList); billsCtrl.eventTracking('select')"
+                                        >
+                                            Select all
+                                        </a>
+                                    </div>
+                                    <div ng-show="billsCtrl.deSelectDisplay">
+                                        <a
+                                            href=""
+                                            id="DeselectAll"
+                                            value="DeselectAll"
+                                            ng-click="billsCtrl.deSelectAll(billsCtrl.billchoiceList)"
+                                        >
+                                            Deselect all
+                                        </a>
+                                    </div>
+                                    <br />
+
+                                    <div ng-repeat="billChoice in billsCtrl.billchoiceList">
+                                        <div
+                                            ng-if="billsCtrl.hideCBType(billChoice.value)"
+                                            ng-class="{'oneoffpaymentfilter': billChoice.id === 'OP' || billChoice.id === 'HC' || billChoice.id === 'WC'  || billChoice.id === 'WT' || billChoice.id === 'TR' || billChoice.id === 'ST' || billChoice.id === 'SC'}"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                id="{{billChoice.id}}"
+                                                value="{{billChoice.value}}"
+                                                ng-model="billChoice.checked"
+                                                ng-init="billsCtrl.selectAll(billsCtrl.billchoiceList)"
+                                            />
+                                            <label for="{{billChoice.id}}">{{billChoice.label}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="horzLine"></div>
+                                <input
+                                    type="button"
+                                    id="ApplyFilter"
+                                    class="sy-button--primary"
+                                    value="Apply filter"
+                                    ng-click="billsCtrl.checkOptions(billsCtrl.billchoiceList); billsCtrl.eventTracking('filter')"
+                                />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button
+                        id="searchBtn"
+                        type="button"
+                        class="sy-button--default pull-right"
+                        ng-click="billsCtrl.search()"
+                        style="display: none"
+                        sy-busy-chevron="fetchMore"
+                        busy-class="sy-icon--search"
+                    >
+                        Search
+                    </button>
+                    <button
+                        id="fetchMoreBtn"
+                        type="button"
+                        class="sy-button--default pull-left"
+                        ng-click="billsCtrl.fetchPreviousRecords()"
+                        sy-busy-chevron="fetchMore"
+                        style="display: none"
+                        busy-class="sy-icon--more pull-left"
+                        ng-disabled="billsCtrl.cutoffDateReached()"
+                    >
+                        &nbsp;Show more
+                    </button>
+                    <div class="clearfix"></div>
+                    <div sy-server-include="MYACC_BILLS_ACCESSIBILITY"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

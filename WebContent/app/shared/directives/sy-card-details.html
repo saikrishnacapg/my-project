@@ -1,0 +1,38 @@
+<div class="form-group form-separator">
+    <div sy-server-include="MYACC_CC_CARD_ALERT"></div>
+</div>
+<div  ng-form="cardForm" ng-controller="MsgCntlr">
+    <div sy-form-group data-layout="form">
+        <label class="label-required" for="creditCardHolder">Cardholder name:</label>
+        <div >
+            <div sy-form-group data-layout="tooltip">
+                <input type="text" ng-model="cardModel.creditCardHolder"
+                       id="creditCardHolder" name="creditCardHolder"
+                       class="form-control" maxlength="60" sy-pattern="NAME" required ng-paste="$event.preventDefault()">
+                <a href ng-click="showCardHolderNameInfo()"><span class="sy-icon&#45;&#45;circle_question_mark"></span></a>
+                <div sy-alert-box="creditCardHolder" sy-analytics-error="creditCardHolder">
+                    <p ng-show="cardForm.creditCardHolder.$error.required">{{findMsgHTML('MA_E20')}}</p>
+                    <p ng-show="cardForm.creditCardHolder.$error.pattern">{{findMsgHTML('E412')}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form">
+        <label for="cardNumber" class="control-label label-required">Card number:</label>
+        <div sy-form-group data-layout="tooltip">
+            <div>
+                <div sy-card-type-picker="cardModel.cardType" card-number="cardModel.cardNumber">
+                    <input type="text" ng-model="cardModel.cardNumber" id="cardNumber" name="cardNumber" sy-pattern="CARD_NUMBER" sy-validate-card ng-maxlength="16" maxlength="16" class="form-control" required />
+                </div>
+                <div sy-alert-box="cardNumber" sy-analytics-error="cardNumber">
+                    <p ng-show="cardForm.cardNumber.$error.syValidateCard">{{findMsgHTML('MA_E22')}}</p>
+                    <p ng-show="cardForm.cardNumber.$error.required">{{findMsgHTML('MA_E22')}}</p>
+                    <p ng-show="cardForm.cardNumber.$error.pattern">{{findMsgHTML('MA_E23')}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <sy-card-expiry card-model="cardModel"></sy-card-expiry>
+</div>

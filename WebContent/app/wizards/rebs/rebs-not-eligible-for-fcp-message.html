@@ -1,0 +1,15 @@
+<div>
+    <p ng-if="rebsCtrl.model.isFCPEligibleFlag()" class="form-caveat form-caveat--notice form-caveat--notice-blue">
+        This premises is not eligible for distributed energy system.<br/><br>
+        The premises is eligible for the future communities plan which will give you a cheaper rate for electricity used between 9am and 3pm.
+        You are invited to join the pilot at no cost. For more information please visit <a title="Sign-up for Future communities plan" target="_blank" sy-doc-href="fcp.details">Sign-up for Future
+        communities plan</a>.
+    </p>
+    <p ng-if="rebsCtrl.model.isFCPAppliedFlag()" class="form-caveat form-caveat--notice form-caveat--notice-blue">
+        This premises has an existing application for the Future Communities Plan and is not eligible for distributed energy system.
+    </p>
+    <p ng-if="rebsCtrl.model.isFCPEnableFlag()" class="form-caveat form-caveat--notice form-caveat--notice-blue">
+        This premises is not eligible for distributed energy system as it is a Future Communities Plan enabled premises.
+        For more information visit our <a title="Future Communities Plan Information" target="_blank" sy-doc-href="fcp.details.mimo">Future Communities Plan Information Page</a>.
+    </p>
+</div>

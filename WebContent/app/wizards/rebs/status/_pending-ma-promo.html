@@ -1,0 +1,21 @@
+<p>
+    This supply address currently has a pending application (Synergy reference number <strong ng-bind="rebsCtrl.model.getApplicationReferenceNumber()"></strong>). You should have received an email if you made your application within 24 hours. If you haven’t received a response from us within 24 hours, please contact us.
+</p>
+<p>
+    If you would like to cancel a pending application please contact us on <a href="tel:131353">13 13 53</a>. Please have your Synergy reference number available when you call.
+</p>
+
+<div class="sy-alert--info" id="my-account-promo">
+    <div id="registered-promo" ng-show="rebsCtrl.hasMARegistered">
+        <p ng-hide="rebsCtrl.model.isApproved()">By signing in to My Account you can view and track the status of your application online wherever you are on your smartphone, tablet or laptop.</p>
+        <p ng-show="rebsCtrl.model.isApproved()">By signing in to My Account you can view your current solar power system details online wherever you are on your smartphone, tablet or laptop.</p>
+
+        <p>Just click Login to My Account below to proceed to the My Account login page.</p>
+    </div>
+    <div id="yet-to-register-promo" ng-hide="rebsCtrl.hasMARegistered">
+        <p ng-hide="rebsCtrl.model.isApproved()">We've noticed that your account for <span ng-bind="rebsCtrl.model.meter.address.supplyAddress"></span> has not yet been linked to My Account. By registering this account with My Account you can view and track the status of your application online wherever you are on your smartphone, tablet or laptop.</p>
+        <p ng-show="rebsCtrl.model.isApproved()">We've noticed that your account for <span ng-bind="rebsCtrl.model.meter.address.supplyAddress"></span> has not yet been linked to My Account. By registering this account with My Account you can view your current solar power system details online wherever you are on your smartphone, tablet or laptop.</p>
+
+        <p>Just click Register for My Account below to complete your registration.</p>
+    </div>
+</div>

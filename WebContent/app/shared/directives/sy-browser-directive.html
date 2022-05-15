@@ -1,0 +1,19 @@
+<div class="material">
+    <div class="unsupportedBrowser" ng-if="syBrowserCtrl.isBrowserIncompatible() && !syBrowserCtrl.hide">
+        <div class="main">
+            <div ng-if="syBrowserCtrl.showIncompatible">
+                <div sy-server-include="BROWSER_INCOMPATIBLE_ALERT"></div>
+            </div>
+            <div ng-if="syBrowserCtrl.showUnsupported && !syBrowserCtrl.IE_browser">
+                <div sy-server-include="BROWSER_UNSUPPORTED_ALERT"></div>
+            </div>
+
+            <button ng-hide="syBrowserCtrl.IE_browser" ng-click="syBrowserCtrl.closeBanner()" class="alert-close close">Close</button>
+        </div>
+    </div>
+
+    <div class="unsupportedBrowser" ng-if="syBrowserCtrl.IE_browser">
+        <div sy-server-include="BROWSER_UNSUPPORTED_ALERT_IE"></div>
+</div>
+
+</div>

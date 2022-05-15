@@ -1,0 +1,59 @@
+<div ng-if="solarCtrl.solar.mode==='Consumption'">
+    <div id="gasConsumptionChart">
+        <div class="interval-data-gas-consumption-chart" chart-data="solarCtrl.solar.latestData()" dirty-check="solarCtrl.solar.timestamp" chart="solarCtrl.gasConsumptionChart()"
+             chart-values="{{solarCtrl.solar.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="solarCtrl.goBackStartDate()" go-back-end-date="solarCtrl.goBackEndDate()" go-back-devices="solarCtrl.goBackDevices()"
+             day-interval="solarCtrl.solar.dayInterval" contract-account-number="solarCtrl.contractAccountNumber" mode="solarCtrl.solar.mode"
+             download="solarCtrl.solar.download"></div>
+    </div>
+</div>
+<div ng-if="solarCtrl.solar.mode==='Load Profile'">
+    <div id="gasLoadProfileChart">
+        <div class="load-profile-chart" chart-data="solarCtrl.solar.latestData()" dirty-check="solarCtrl.solar.timestamp" chart="solarCtrl.gasLoadProfileChart()"
+             chart-values="{{solarCtrl.solar.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="solarCtrl.goBackStartDate()" go-back-end-date="solarCtrl.goBackEndDate()" go-back-devices="solarCtrl.goBackDevices()"
+             day-interval="solarCtrl.solar.dayInterval" contract-account-number="solarCtrl.contractAccountNumber" mode="solarCtrl.solar.mode"
+             download="solarCtrl.solar.download"></div>
+    </div>
+</div>
+
+
+<div ng-if="solarCtrl.solar.mode==='Tabular'" class="col-xs-12">
+    <div ng-if="solarCtrl.solar.dayInterval > 0" class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover text-center">
+            <tr>
+                <th>Date</th>
+                <th>GJ</th>
+                <th>HHV</th>
+                <th>Peak Usage</th>
+                <th>Load Factor</th>
+                <th>Reading Status</th>
+            </tr>
+            <!-- Data isn't wrapped so we need to reference other values by index -->
+            <tr ng-repeat="gjDailyValue in solarCtrl.solarData.latestData().gjDailyValues track by $index" ng-click="solarCtrl.clickNavigate($index)">
+                <td>{{solarCtrl.tabularDate($index)}}</td>
+                <td>{{gjDailyValue | number:2 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().hhvDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().peakGjDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().loadFactorDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().readingTypeDailyValues[$index]}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-if="solarCtrl.solar.dayInterval === 0">
+        <table class="table table-bordered table-condensed table-hover text-center white-background">
+            <tr>
+                <th>Hour Date</th>
+                <th>Time</th>
+                <th>GJ</th>
+                <th>Reading Status</th>
+            </tr>
+            <tr ng-repeat="gjHourlyValue in solarCtrl.solar.latestData().gjHourlyValues track by $index" ng-click="solarCtrl.clickNavigate($index)">
+                <td>{{solarCtrl.solar.latestData().startDate}}</td>
+                <td>{{solarCtrl.tabularTime($index, 60)}}</td>
+                <td>{{gjHourlyValue | number:2 | noZeroes}}</td>
+                <td>{{solarCtrl.solar.latestData().readingTypeHourlyValues[$index]}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

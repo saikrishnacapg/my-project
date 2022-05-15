@@ -1,0 +1,131 @@
+<div ng-controller="MsgCntlr">
+	<div ng-form="viewArrangementDetailsForm" class="viewArrangementDetailsForm">
+		<div class="must-complete">
+			<span ng-if="viewArrangementCtrl.viewArrangementDetails.hasP2PDirectDebit && viewArrangementCtrl.isBank">
+				Your {{viewArrangementCtrl.paymentsLabel}} have been scheduled using bank account
+				{{viewArrangementCtrl.maskedPaymentDetails | syBankAccountMask}}.
+			</span>
+			<span ng-if="viewArrangementCtrl.viewArrangementDetails.hasP2PDirectDebit && viewArrangementCtrl.isCard">
+				Your {{viewArrangementCtrl.paymentsLabel}} have been scheduled using card
+				{{viewArrangementCtrl.maskedPaymentDetails}}.
+			</span>
+			<span ng-if="!viewArrangementCtrl.viewArrangementDetails.hasP2PDirectDebit">
+				Remember to pay {{viewArrangementCtrl.amountsLabel}} by the due date, or your account may be affected.
+			</span>
+			<span  ng-if="!viewArrangementCtrl.isAtRisk || (viewArrangementCtrl.isAtRisk && !viewArrangementCtrl.engageP2P)">
+				If your circumstances change and you're unable to pay {{viewArrangementCtrl.amountsLabel}}, please call us on
+				<span style="white-space:nowrap;" >{{viewArrangementCtrl.getCustomerAccountTypePhone()}}.</span>
+			</span>
+			<span ng-if="viewArrangementCtrl.isAtRisk && viewArrangementCtrl.engageP2P">
+				If your circumstances change and you're unable to pay {{viewArrangementCtrl.amountsLabel}}, you can modify your
+				payment plan below. If you have any further questions please call us on
+				{{viewArrangementCtrl.getCustomerAccountTypePhone()}}
+			</span>
+		</div>
+		<div
+			class="no-margin-bottom sy-alert--info ng-scope row"
+			ng-if="viewArrangementCtrl.hasNewBill || viewArrangementCtrl.isOverdue"
+		>
+			<div class="col-sm-1">
+				<span class="sy-icon--circle_info"></span>
+			</div>
+			<div class="col-sm-11 col-xs-10" ng-if="viewArrangementCtrl.hasNewBill && !viewArrangementCtrl.isOverdue">
+				<span>
+					You have a new bill of {{viewArrangementCtrl.newBillAmount}} due on {{viewArrangementCtrl.newBillDueDate}}
+					that is not included in your current arrangement.
+				</span>
+				<span ng-if="viewArrangementCtrl.eligibleToAmend && !viewArrangementCtrl.trackToChangeCustomer">
+					You can modify your arrangement to include this amount below.
+				</span>
+			</div>
+			<div class="col-sm-11 col-xs-10" ng-if="!viewArrangementCtrl.hasNewBill && viewArrangementCtrl.isOverdue">
+				<span>
+					You have an overdue amount of {{viewArrangementCtrl.overdueAmount}} that is not included in your current
+					arrangement.
+				</span>
+				<span ng-if="viewArrangementCtrl.eligibleToAmend && !viewArrangementCtrl.trackToChangeCustomer">
+					You can modify ﻿your arrangement to include this amount below.
+				</span>
+			</div>
+			<div class="col-sm-11 col-xs-10" ng-if="viewArrangementCtrl.hasNewBill && viewArrangementCtrl.isOverdue">
+				<span>
+					You have an overdue amount of {{viewArrangementCtrl.overdueAmount}} and a new bill of
+					{{viewArrangementCtrl.newBillAmount}} due on {{viewArrangementCtrl.newBillDueDate}} that is not included in
+					your current arrangement.
+				</span>
+				<span ng-if="viewArrangementCtrl.eligibleToAmend && !viewArrangementCtrl.trackToChangeCustomer">
+					You can modify your arrangement to include this amount below.
+				</span>
+			</div>
+		</div>
+		<div class="payment-arrangement-table">
+			<div class="section-row heading">
+				<div class="content">
+					<b ng-if="!viewArrangementCtrl.isSinglePayment">Instalment date</b>
+					<b ng-if="viewArrangementCtrl.isSinglePayment">Payment date</b>
+				</div>
+				<div class="content">
+					<b>Amount</b>
+				</div>
+				<div class="content">
+					<b>Status</b>
+				</div>
+			</div>
+			<div
+				class="section-row"
+				ng-class="pa.status == 'Overdue' ? 'outstanding' : ''"
+				ng-repeat="pa in viewArrangementCtrl.data"
+			>
+				<div class="content"><p>{{pa.payment_date_promised | date : "EEEE dd MMM yyyy" }}</p></div>
+				<div class="content">
+					<p ng-show="pa.status != 'Paid'">{{pa.outstanding_amount | currency }}</p>
+					<p ng-show="pa.status == 'Paid'">{{pa.payment_amount_promised | currency }}</p>
+				</div>
+				<div class="content"><p>{{pa.status}}</p></div>
+			</div>
+
+			<div class="section-row heading" ng-show="!viewArrangementCtrl.isPaymentExtension">
+				<div class="content"><b>Total owing</b></div>
+				<div class="content">
+					<p>{{viewArrangementCtrl.viewArrangementDetails.p2p_header.total_amount_outstanding | currency }}</p>
+				</div>
+				<div class="content"><p></p></div>
+			</div>
+
+			<div class="section-row heading" ng-show="!viewArrangementCtrl.isPaymentExtension">
+				<div class="content"><b>Arrangement total</b></div>
+				<div class="content">
+					<p>{{viewArrangementCtrl.viewArrangementDetails.p2p_header.total_amount_promised | currency }}</p>
+				</div>
+				<div class="content"><p></p></div>
+			</div>
+		</div>
+		<div ng-show="viewArrangementCtrl.paidFlag">
+			<p>* Please note, the payment amounts will automatically be adjusted when a payment is made.</p>
+		</div>
+		<div class="payment-arg-print">
+			<div class="arrangement-dropdown-container" ng-if="viewArrangementCtrl.showDropdown">
+				<button
+					type="button"
+					class="sy-button--dropdown"
+					data-animation="am-flip-x"
+					data-placement="bottom-left"
+					data-template="app/wizards/view-arrangement/_arrangement-modify-dropdown.html"
+					bs-dropdown
+				>
+					<span>Change details</span>
+					<span class="caret"></span>
+				</button>
+			</div>
+			<div class="print-btn-cntr">
+				<button
+					onclick="window.print();return false;"
+					analytics-on="print"
+					class="sy-button--default btn icon icon--black icon--printer"
+				>
+					Print
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

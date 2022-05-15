@@ -1,0 +1,8 @@
+<h2>All done! Thanks for opting in to the most convenient way to pay your Synergy bill.</h2>
+<p>Direct Debit has now been set up for account number <span ng-bind="signUpCtrl.account.contractAccountNumber"></span>.</p>
+<p>It may take up to 24 hours for these changes to reach your account.</p>
+<div sy-econnect-info account="signUpCtrl.account" fetch="true" showshortfall="signUpCtrl.model.paymentType == 'SPLIT'"></div>
+<p>If you need any more information please visit our
+    <a sy-doc-href="faq.payments.residential" ng-show="signUpCtrl.isResidential">help and advice section</a>
+    <a sy-doc-href="faq.payments.business" ng-show="!signUpCtrl.isResidential">help and advice section</a>.
+</p>

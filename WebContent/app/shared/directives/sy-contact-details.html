@@ -1,0 +1,435 @@
+<div ng-form="contactDetailsSubForm" class="contactDetailsSubForm" ng-controller="MsgCntlr">
+    <div class="form-group" ng-if="!exclude['name'] && isREBSFlow()">
+        <label for="firstName">First name: <span ng-if="isRequired()" class="label-required"></span></label>
+        <input type="text"
+               id="firstName_ID"
+               name="firstName"
+               placeholder="First name"
+               class="inline-input form-control"
+               ng-change="modifiedFields.firstName = contactDetails.firstName"
+               ng-required="isRequired()"
+               ng-model="contactDetails.firstName"
+               ng-readonly="readOnlyFields.firstName"
+               sy-pattern="NAME">
+        <div sy-alert-box="firstName">
+            <p ng-show="contactDetailsSubForm.firstName.$error.required">
+                {{findMsgHTML('MA_E1')}}
+            </p>
+            <p ng-show="contactDetailsSubForm.firstName.$error.pattern">
+                {{findMsgHTML('E412')}}
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-if="!exclude['name'] && isREBSFlow()">
+        <label for="lastName">Last name:<span ng-if="isRequired()" class="label-required"></span></label>
+        <input type="text"
+               id="lastName_ID"
+               name="lastName"
+               placeholder="Last name"
+               class="inline-input form-control"
+               ng-change="modifiedFields.lastName = contactDetails.lastName"
+               ng-required="isRequired()"
+               ng-model="contactDetails.lastName"
+               ng-readonly="readOnlyFields.lastName"
+               sy-pattern="NAME">
+        <div sy-alert-box="lastName">
+            <p ng-show="contactDetailsSubForm.lastName.$error.required">
+                {{findMsgHTML('MA_E2')}}
+            </p>
+            <p ng-show="contactDetailsSubForm.lastName.$error.pattern">
+                {{findMsgHTML('E412')}}
+            </p>
+        </div>
+    </div>
+
+    <div class="contact-name"  ng-if="!isREBSFlow()">
+        <div class="form-group" ng-if="!exclude['name'] && contactDetails.companyName ==''">
+            <label for="firstName">First name: <span ng-if="isRequired()" class="label-required"></span></label>
+            <span id="firstName" ng-model="contactDetails.firstName">{{contactDetails.firstName | capitalize}}</span>
+        </div>
+
+        <div class="form-group" ng-if="!exclude['name'] && contactDetails.companyName ==''">
+            <label for="lastName">Last name:<span ng-if="isRequired()" class="label-required"></span></label>
+            <span id="lastName" ng-model="contactDetails.lastName">{{contactDetails.lastName | capitalize}}</span>
+            <span class="sy-icon--circle_info detail-update--info cursor" ng-click="contactDetailsCtrl.openDetailsModal()"></span>
+        </div>
+    </div>
+    <div class="organisation-name form-group" ng-if="!exclude['name'] && contactDetails.companyName !='' && !(isREBSFlow())">
+        <label for="organisationname">Organisation name:<span ng-if="isRequired()" class="label-required"></span></label>
+        <span id="organisationname" ng-model="contactDetails.companyName">{{contactDetails.companyName | capitalize}}</span>
+        <span class="sy-icon--circle_info detail-update--info cursor" ng-click="contactDetailsCtrl.openDetailsModal()"></span>
+    </div>
+
+    <div class="form-group" ng-if="!exclude['dateOfBirth']">
+        <label class="label-required" for="dateOfBirth">Date of birth: (dd/mm/yyyy)</label>
+        <div class="controls">
+
+            <div sy-moment-selector
+                 id="dateOfBirth"
+                 name="dateOfBirth"
+                 sy-model="contactDetails.dateOfBirth"
+                 class="form-control"
+                 default-synergy-max="true"
+                 required>
+            </div>
+            <div sy-alert-box="dateOfBirth">
+                <p ng-show="contactDetailsSubForm.dateOfBirth.$error.required || contactDetailsSubForm.dateOfBirth.$error.date">
+                    {{findMsgHTML('MA_E3')}}
+                </p>
+                <p ng-show="contactDetailsSubForm.dateOfBirth.$error.max">
+                    {{findMsgHTML('MA_E13')}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-if="!exclude['company']">
+
+        <label for="companyName">Company name:<span ng-if="isRequired()" class="label-required"></span></label>
+        <input type="text"
+               id="companyName"
+               name="companyName"
+               placeholder="Company name"
+               class="inline-input form-control"
+               ng-change="modifiedFields.companyName = contactDetails.companyName"
+               ng-required="isRequired()"
+               ng-model="contactDetails.companyName"
+               ng-readonly="readOnlyFields.companyName">
+        <div sy-alert-box="companyName">
+            <p ng-show="contactDetailsSubForm.companyName.$error.required">
+                {{findMsgHTML('MA_E4')}}
+            </p>
+        </div>
+
+    </div>
+
+    <div class="form-group" ng-if="!exclude['phone']">
+        <p class="label-required">Please provide at least one mobile or landline number.</p>
+        <label for="mobileTelephone">Mobile number:</label>
+
+        <!-- Radio button for phone type -->
+
+        <div class="acc-radio-btn-group">
+            <div class="acc-radio-btn">
+                <input  type="radio"
+                        name="typeOfMobileLocal"
+                        id="typeOfMobileLocal"
+                        value="LOCAL"
+                        ng-model="contactDetails.typeOfMobile"
+                        ng-click="contactDetailsCtrl.handleMobileRadio($event)"
+                        ng-required="isRequired() ? contactDetailsCtrl.noPhoneNumbersPresent() : false">
+                <label for="typeOfMobileLocal">Local</label>
+            </div>
+
+            <div class="acc-radio-btn">
+                <input type="radio"
+                       name="typeOfMobileInternational"
+                       id="typeOfMobileInternational"
+                       value="INT"
+                       ng-model="contactDetails.typeOfMobile"
+                       ng-click="contactDetailsCtrl.handleMobileRadio($event)"
+                       ng-required="isRequired() ? contactDetailsCtrl.noPhoneNumbersPresent() : false">
+                <label for="typeOfMobileInternational">International</label>
+            </div>
+        </div>
+
+        <div sy-form-group class="float-left one-third" ng-if="contactDetails.typeOfMobile === 'INT'">
+            <select ng-model="contactDetails.mobileTelephoneCountry"
+                    name="mobileTelephoneCountry" id="mobileTelephoneCountry"
+                    class="form-control"
+                    ng-required="isRequired() ? contactDetailsCtrl.mobileCountryCodeRequired() : false"
+                    sy-pattern="/^(?!AU).[A-Z]$/"
+                    ng-change="modifiedFields.mobileTelephoneCountry = contactDetails.mobileTelephoneCountry"
+                    ng-options="mobilearea.countrycode as mobilearea.countryname for mobilearea in contactDetailsCtrl.internationalAreas">
+            </select>
+            <div sy-alert-box="mobileTelephoneCountry" class="float-left one-third">
+                <p ng-show="contactDetailsSubForm.mobileTelephoneCountry.$error.required">
+                    {{findMsgHTML('MA_E7')}}
+                </p>
+                <p ng-show="contactDetailsSubForm.mobileTelephoneCountry.$error.pattern">
+                    {{findMsgHTML('MA_E7')}}
+                </p>
+            </div>
+        </div>
+
+        <div sy-form-group class="float-right two-third" ng-if="contactDetails.typeOfMobile === 'INT'">
+            <input type="text"
+                   placeholder="Mobile number"
+                   name="mobileTelephoneInt"
+                   id="mobileTelephoneInt"
+                   ng-model="contactDetails.mobileTelephone"
+                   class="form-control"
+                   ng-change="modifiedFields.mobileTelephone = contactDetails.mobileTelephone"
+                   ng-required="isRequired() ? contactDetailsCtrl.noPhoneNumbersPresent() : false"
+                   ng-pattern="mobileIntPattern()"
+                   mobilevalidate-no
+                   sy-remove-space="sy-remove-space"
+                   ng-minlength="1" ng-maxlength="20">
+            <div sy-alert-box="mobileTelephoneInt" class="float-right two-third">
+                <p ng-show="contactDetailsSubForm.mobileTelephoneInt.$error.required">
+                    {{findMsgHTML('MA_E8')}}
+                </p>
+                <p ng-show="contactDetailsSubForm.mobileTelephoneInt.$error.pattern">
+                    {{findMsgHTML('MA_E14')}}
+                </p>
+                <p ng-show="!contactDetailsSubForm.mobileTelephoneInt.$error.pattern && (contactDetailsSubForm.mobileTelephoneInt.$error.minlength || contactDetailsSubForm.mobileTelephoneInt.$error.maxlength)">
+                    {{findMsgHTML('MA_E14')}}
+                </p>
+            </div>
+        </div>
+
+        <div sy-form-group class="float-left full-width" ng-if="contactDetails.typeOfMobile === 'LOCAL'">
+            <input  type="text"
+                    placeholder="Mobile number"
+                    name="mobileTelephone"
+                    id="mobileTelephoneInternational"
+                    ng-model="contactDetails.mobileTelephone"
+                    class="form-control"
+                    ng-change="updateMobileNumber()"
+                    ng-required="isRequired() ? contactDetailsCtrl.noPhoneNumbersPresent() : false"
+                    ng-minlength="10" ng-maxlength="10"
+                    ng-pattern="mobilePattern()"
+                    mobilevalidate-no
+                    sy-remove-space="sy-remove-space"
+                    sy-input-zero-prefix="sy-input-zero-prefix"
+                    ng-blur="isMobileValid()"/>
+            <div sy-alert-box="mobileTelephone">
+                <p ng-show="contactDetailsSubForm.mobileTelephone.$error.pattern">
+                    {{findMsgHTML('MA_E9')}}
+                </p>
+                <p ng-show="contactDetailsSubForm.mobileTelephone.$error.required">
+                    {{findMsgHTML('MA_E8')}}
+                </p>
+                <p ng-show="!contactDetailsSubForm.mobileTelephone.$error.pattern && (contactDetailsSubForm.mobileTelephone.$error.minlength || contactDetailsSubForm.mobileTelephone.$error.maxlength)">
+                    {{findMsgHTML('MA_E9')}}
+                </p>
+
+            </div>
+        </div>
+        <div class="alert sy-alert--warning" ng-if="invalidMobile">
+            {{findMsgHTML('MA_E16')}}
+        </div>
+    </div>
+
+    <div ng-if="!exclude['phone']" class="form-group">
+        <label for="telephoneNumber">Landline number:</label>
+
+        <!-- Radio button for phone type -->
+        <div class="acc-radio-btn-group" >
+            <div class="acc-radio-btn">
+                <input  type="radio" id="typeOfLandPhoneLocal" name="typeOfLandPhoneLocal" value="LOCAL"
+                        ng-model="contactDetails.typeOfLandPhone"
+                        ng-click="contactDetailsCtrl.handleLandlineRadio($event)"
+                        ng-required="isRequired() ? contactDetailsCtrl.noPhoneNumbersPresent() : false">
+                <label for="typeOfLandPhoneLocal">Local</label>
+            </div>
+
+            <div class="acc-radio-btn">
+                <input type="radio" id="typeOfLandPhoneInternational" name="typeOfLandPhoneInternational" value="INT" ng-model="contactDetails.typeOfLandPhone"
+                       ng-click="contactDetailsCtrl.handleLandlineRadio($event)"
+                       ng-required="isRequired() ? contactDetailsCtrl.noPhoneNumbersPresent() : false">
+                <label for="typeOfLandPhoneInternational">International</label>
+            </div>
+
+            <div class="acc-radio-btn">
+                <input type="radio" id="typeOfLandPhoneOther" name="typeOfLandPhoneOther" value="OTHER" ng-model="contactDetails.typeOfLandPhone"
+                       ng-click="contactDetailsCtrl.handleLandlineRadio($event)"
+                       ng-checked="contactDetails.typeOfLandPhone === 'OTHER'"
+                       ng-required="isRequired() ? contactDetailsCtrl.noPhoneNumbersPresent() : false">
+                <label for="typeOfLandPhoneOther">Other (e.g. 1800 etc)</label>
+            </div>
+        </div>
+
+        <div sy-form-group class="float-left one-third" ng-if="contactDetails.typeOfLandPhone == 'LOCAL'">
+            <select ng-model="contactDetails.telephoneNumberCountry"
+                    name="telephoneNumberLocal"
+                    id="telephoneNumberLocal"
+                    ng-init="contactDetails.telephoneNumberCountry = contactDetails.telephoneNumberCountry === 'UNKNOWN' ? null : contactDetails.telephoneNumberCountry || '08'"
+                    class="form-control"
+                    ng-required="isRequired() ? contactDetailsCtrl.areaCodeRequired() : false"
+                    ng-change="modifiedFields.telephoneNumberCountry = contactDetails.telephoneNumberCountry"
+                    ng-options="area.id as area.name for area in contactDetailsCtrl.localAreas"></select>
+
+            <div sy-alert-box="telephoneNumberCountry" class="float-left one-third" ng-if="contactDetails.typeOfLandPhone === 'INT'">
+                <p>Please select a country telephone code.</p>
+            </div>
+            <div sy-alert-box="telephoneNumberLocal" class="float-left one-third" ng-if="contactDetails.typeOfLandPhone === 'LOCAL'">
+                <p>Please select a telephone code.</p>
+            </div>
+        </div>
+
+        <!-- TODO: Bad stuff going on here. These should be separate fields with their own ng-model which are submitted to the server. Too much client side fiddling going on. -->
+        <div sy-form-group class="float-right two-third" ng-if="contactDetails.typeOfLandPhone === 'LOCAL'">
+            <input type="text"
+                    placeholder="Landline number"
+                    name="telephoneNumber"
+                    ng-model="contactDetails.telephoneNumber"
+                    class="form-control"
+                    ng-change="modifiedFields.telephoneNumber = contactDetails.telephoneNumber"
+                    sy-pattern="LAND_NUMBER"
+                    sy-remove-space="sy-remove-space"
+                    landlinevalidate-no
+                    ng-minlength="8" ng-maxlength="8">
+
+            <div sy-alert-box="telephoneNumber" class="float-right two-third">
+                <p ng-show="contactDetailsSubForm.telephoneNumber.$error.pattern">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+                <p ng-show="!contactDetailsSubForm.telephoneNumber.$error.pattern && (contactDetailsSubForm.telephoneNumber.$error.minlength || contactDetailsSubForm.telephoneNumber.$error.maxlength)">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+                <p ng-show="contactDetailsSubForm.telephoneNumber.$error.required">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+            </div>
+        </div>
+
+        <div sy-form-group class="float-left one-third" ng-if="contactDetails.typeOfLandPhone === 'INT'">
+            <select ng-model="contactDetails.telephoneNumberCountry" ng-if="contactDetails.typeOfLandPhone === 'INT'"
+                name="telephoneNumberCountry"
+                id="telephoneNumberCountry"
+                class="form-control"
+                ng-required="isRequired() ? contactDetailsCtrl.areaCodeRequired() : false"
+                ng-change="modifiedFields.telephoneNumberCountry = contactDetails.telephoneNumberCountry"
+                ng-options="area.countrycode as area.countryname for area in contactDetailsCtrl.internationalAreas"></select>
+            <div sy-alert-box="telephoneNumberCountry" class="float-left one-third" ng-if="contactDetails.typeOfLandPhone === 'INT'">
+                <p>Please select a country telephone code.</p>
+            </div>
+            <div sy-alert-box="telephoneNumberLocal" class="float-left one-third" ng-if="contactDetails.typeOfLandPhone === 'LOCAL'">
+                <p>Please select a telephone code.</p>
+            </div>
+        </div>
+
+        <div sy-form-group class="float-right two-third" ng-if="contactDetails.typeOfLandPhone === 'INT'">
+            <input type="text"
+                    placeholder="Landline number"
+                    name="telephoneNumber"
+                    ng-model="contactDetails.telephoneNumber"
+                    class="form-control"
+                    ng-change="modifiedFields.telephoneNumber = contactDetails.telephoneNumber"
+                    sy-pattern="LAND_NUMBER"
+                    sy-remove-space="sy-remove-space"
+                    landlinevalidate-no
+                    ng-minlength="1" ng-maxlength="20">
+
+            <div sy-alert-box="telephoneNumber" class="float-right two-third">
+                <p ng-show="contactDetailsSubForm.telephoneNumber.$error.pattern">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+                <p ng-show="!contactDetailsSubForm.telephoneNumber.$error.pattern && (contactDetailsSubForm.telephoneNumber.$error.minlength || contactDetailsSubForm.telephoneNumber.$error.maxlength)">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+                <p ng-show="contactDetailsSubForm.telephoneNumber.$error.required">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+            </div>
+        </div>
+
+        <div sy-form-group class="float-left full-width" ng-if="contactDetails.typeOfLandPhone === 'OTHER'">
+            <input type="text"
+                    placeholder="Landline number"
+                    name="telephoneNumberOther"
+                    id="telephoneNumberOther"
+                    ng-model="contactDetails.telephoneNumber"
+                    class="form-control"
+                    ng-change="modifiedFields.telephoneNumberOther = contactDetails.telephoneNumberOther"
+                    sy-pattern="OTHER_NUMBER"
+                    sy-remove-space="sy-remove-space"
+                    ng-minlength="6" ng-maxlength="20">
+            <div sy-alert-box="telephoneNumberOther">
+                <p ng-show="contactDetailsSubForm.telephoneNumberOther.$error.pattern">
+                    {{findMsgHTML('MA_E6')}}
+                </p>
+                <p ng-show="!contactDetailsSubForm.telephoneNumberOther.$error.pattern && (contactDetailsSubForm.telephoneNumberOther.$error.minlength || contactDetailsSubForm.telephoneNumberOther.$error.maxlength)">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div sy-form-group class="form-group" ng-if="!exclude['emailAddress']">
+        <label for="emailAddress">Email address:<span ng-if="isRequired()" class="label-required"></span></label>
+
+        <input type="text"
+               id="emailAddress"
+               name="emailAddress"
+               placeholder="Email address"
+               ng-model="contactDetails.emailAddress"
+               ng-change="updateEmail()"
+               ng-required="isRequired()"
+               class="form-control"
+               ng-pattern="emailPattern()"
+               sy-validate-email/>
+
+        <div sy-alert-box="emailAddress">
+            <p ng-show="contactDetailsSubForm.emailAddress.$error.email">{{findMsgHTML('MA_E17')}}</p>
+            <p ng-show="contactDetailsSubForm.emailAddress.$error.required">{{findMsgHTML('MA_E25')}}</p>
+            <p ng-show="contactDetailsSubForm.emailAddress.$error.pattern">{{findMsgHTML('MA_E17')}}</p>
+            <p ng-show="!contactDetailsSubForm.emailAddress.syValidateEmail">{{findMsgHTML('MA_E26')}}</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-if="!exclude['emailAddressConfirm']">
+        <label for="emailAddressConfirm">Confirm email address:<span ng-if="isRequired()" class="label-required"></span></label>
+
+        <input type="email"
+               id="emailAddressConfirm"
+               name="emailAddressConfirm"
+               placeholder="Confirm email address"
+               class="form-control"
+               ng-required="isRequired()"
+               ng-model="contactDetails.emailAddressConfirm"
+               sy-match="contactDetails.emailAddress"/>
+
+        <div sy-alert-box="emailAddressConfirm">
+            <p ng-show="contactDetailsSubForm.emailAddressConfirm.$error.email">{{findMsgHTML('MA_E17')}}</p>
+            <p ng-show="contactDetailsSubForm.emailAddressConfirm.$error.required">{{findMsgHTML('MA_E10')}}</p>
+            <p ng-show="contactDetailsSubForm.emailAddressConfirm.$error.syMatch">{{findMsgHTML('MA_E18')}}</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-if="!exclude['furtherInfo']">
+        <label for="furtherInfo">
+            <strong>I would like to receive further information about Synergy products and services by email</strong>
+            <input id="furtherInfo" type="checkbox" class="sy-checkbox" ng-model="contactDetails.furtherInfo" ng-true-value="true" ng-false-value="false">
+        </label>
+    </div>
+
+    <div class="form-group layout__form" ng-if="!exclude['mailingAddress']">
+        <div class="layout__form--left">
+            <label class="control-label">Postal address:<span ng-if="isRequired()" class="label-required"></span></label>
+        </div>
+        <div class="layout__form--right">
+            <span ng-if="!inlineAddress">
+                <div ng-repeat="addressSuggestion in contactDetailsCtrl.addressSuggestions">
+                    <label for="address_{{$index}}">
+                        <input type="radio"
+                               class="sy-radio"
+                               name="address"
+                               id="address_{{$index}}"
+                               ng-value="addressSuggestion"
+                               ng-required="isRequired()"
+                               ng-click="contactDetails.mailingAddress = addressSuggestion"
+                               ng-checked="contactDetails.mailingAddress.label === addressSuggestion.label || contactDetailsCtrl.addressSuggestions.length === 1">
+                        {{addressSuggestion.label}}
+                    </label>
+                </div>
+                <button class="btn sy-button--default" ng-click="contactDetailsCtrl.addAddress()"
+                        analytics-on="click" analytics-event="formEvent" analytics-label="addAddress">New address</button>
+            </span>
+
+            <span ng-if="inlineAddress">
+                <div sy-address-search address-type="mailing" address="contactDetails.mailingAddress" address-required="true" error-msg="Please note, a postal address is required"></div>
+            </span>
+
+            <input type="hidden" ng-model="contactDetails.mailingAddress" ng-required="isRequired()">
+
+            <div sy-alert-box="mailingAddress">
+                <p ng-show="contactDetailsSubForm.mailingAddress.$error.required">
+                    {{findMsgHTML('MA_E19')}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

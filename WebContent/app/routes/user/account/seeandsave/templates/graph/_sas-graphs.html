@@ -1,0 +1,20 @@
+<div class="row" ng-if="sasCtrl.product.loadingData">
+    <div class="sy-line-graph-placeholder relative" sy-loader-while switch="!sasCtrl.product.loadingData" size="big" color="blue" absolute-center="true"></div>
+</div>
+
+<div class="row" ng-if="!sasCtrl.product.loadingData">
+
+    <div class="relative sy-z-depth-2" ng-class="sasCtrl.product.displayData ? 'col-sm-9' : 'col-sm-12'">
+
+        <div sy-nv-line-graph data="chartsData.line" label-y="Power (W)" ng-show="sasCtrl.product.graph === 'line'" shrink-when="sasCtrl.product.displayData"
+             ng-class="{'nv-bound-ticks': !sasCtrl.viewingPresentData()}"></div>
+
+        <div sy-nv-pie-graph data="chartsData.pie" ng-show="sasCtrl.product.graph === 'pie'" shrink-when="sasCtrl.product.displayData"></div>
+
+        <div sy-nv-multibar-graph data="chartsData.bar" label-y="Cost ($)" ng-show="sasCtrl.product.graph === 'bar'" shrink-when="sasCtrl.product.displayData" show-controls="sasCtrl.isTimeBasedPricing()"></div>
+
+    </div>
+
+    <div ng-if="!sasCtrl.isMobile()" ng-include="'app/routes/user/account/seeandsave/templates/graph/_sas-table.html'" class="table-wrapper" ng-class="sasCtrl.product.displayData ? 'col-sm-3' : 'hidden'" sy-fade-in when="sasCtrl.product.displayData" ></div>
+
+</div>

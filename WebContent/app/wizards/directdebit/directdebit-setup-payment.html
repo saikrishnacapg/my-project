@@ -1,0 +1,7 @@
+<sy-payment-method payment-model="signUpCtrl.model.directDebit" ng-if="signUpCtrl.model.paymentType == 'FULL'" use-button-selector="true"></sy-payment-method>
+<div ng-if="signUpCtrl.model.Type == 'New Setup'">
+<sy-payment-method payment-model="signUpCtrl.model.instalment" ng-if="signUpCtrl.model.paymentType == 'SPLIT'" use-button-selector="true"></sy-payment-method>
+</div>
+<div ng-if="signUpCtrl.model.Type == 'Update Setup'">
+<sy-ddi-payment-method payment-model="signUpCtrl.model.instalment" ng-if="signUpCtrl.model.paymentType == 'SPLIT'" use-button-selector="true"></sy-ddi-payment-method>
+</div>

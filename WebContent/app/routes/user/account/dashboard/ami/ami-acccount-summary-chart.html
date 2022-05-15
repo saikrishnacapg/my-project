@@ -1,0 +1,82 @@
+<div class="usage-bar-chart" ng-controller="AmiAcSummaryCtrl as amiAcSummaryCtrl">
+
+    <div ng-if="amiAcSummaryCtrl.showChart && amiAcSummaryCtrl.isActiveAcWithUnbilledAmounts()">
+        <div class="content">
+            <p class="text"><b>Total unbilled tariff charge is {{amiAcSummaryCtrl.totalUnbilledAmount}}</b></p>
+            <a title="Link to supply charges and GST" sy-doc-href="synergy.pricecharges.brochure"
+               target="_blank">
+                Includes supply charges and GST
+            </a>
+            <p><b>&#42;Prices are subject to change</b></p>
+        </div>
+
+        <div class="low">
+            <div class="bar-chart" ng-style="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.lowest)<amiAcSummaryCtrl.fixedHeightValue && {'transform': 'rotate(0deg)', 'height': '50px', 'margin-top': '150px','line-height': '2.429', 'text-align': 'center'}">
+                <span ng-if="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.lowest)<amiAcSummaryCtrl.fixedHeightValue">{{amiAcSummaryCtrl.lowestConsumptionAmount}}</span>
+                <div class="remove-cursor bar"
+                     ng-style="{'height':amiAcSummaryCtrl.barHeight.lowest || '40%'}">
+                    <span ng-if="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.lowest)>=amiAcSummaryCtrl.fixedHeightValue">{{amiAcSummaryCtrl.lowestConsumptionAmount}}</span>
+                </div>
+            </div>
+            <div class="bar-legend">
+                <div class="remove-cursor">
+                    <span class="text">Lowest day</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="avg">
+            <div class="bar-chart" ng-style="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.average)<amiAcSummaryCtrl.fixedHeightValue && {'transform': 'rotate(0deg)', 'height': '50px', 'margin-top': '150px','line-height': '2.429', 'text-align': 'center' }">
+                <span ng-if="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.average)<amiAcSummaryCtrl.fixedHeightValue">${{amiAcSummaryCtrl.averageConsumptionAmount}}</span>
+                <div class="remove-cursor bar"
+                     ng-style="{'height':amiAcSummaryCtrl.barHeight.average || '60%'}">
+                    <span ng-if="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.average)>=amiAcSummaryCtrl.fixedHeightValue">${{amiAcSummaryCtrl.averageConsumptionAmount}}</span>
+
+                </div>
+            </div>
+            <div class="bar-legend">
+                <div class="remove-cursor">
+                    <span class="text">Average day</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="high">
+            <div class="bar-chart" ng-style="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.highest)<amiAcSummaryCtrl.fixedHeightValue && {'transform': 'rotate(0deg)', 'height': '50px', 'margin-top': '150px','line-height': '2.429', 'text-align': 'center' }">
+                <span ng-if="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.highest)<amiAcSummaryCtrl.fixedHeightValue">{{amiAcSummaryCtrl.highestConsumptionAmount}}</span>
+                <div class="remove-cursor bar"
+                     ng-style="{'height':amiAcSummaryCtrl.barHeight.highest || '80%'}">
+                    <span ng-if="amiAcSummaryCtrl.removePercentage(amiAcSummaryCtrl.barHeight.highest)>=amiAcSummaryCtrl.fixedHeightValue">{{amiAcSummaryCtrl.highestConsumptionAmount}}</span>
+                </div>
+            </div>
+            <div class="bar-legend">
+                <div class="remove-cursor">
+                    <span class="text">Highest day</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="energyusage_content"
+         ng-if="amiAcSummaryCtrl.showChart && !amiAcSummaryCtrl.isActiveAcWithUnbilledAmounts()">
+        <div class="panel-body"
+             ng-if="amiAcSummaryCtrl.showChart && amiAcSummaryCtrl.isActiveAcWithNoUnbilledAmounts()">
+            <p>There is no unbilled Energy Usage data for this account.</p>
+            <br />
+            <p>All the data received from the network provider (Western Power) is available on the Usage summary
+                dashboard.
+            </p>
+        </div>
+        <div class="panel-body" ng-if="amiAcSummaryCtrl.showChart && amiAcSummaryCtrl.isActiveAcWithSubstituteData()">
+            <p>We have found that some or all of your meter data is estimated.</p>
+            <br />
+            <p>All the data received from the network provider (Western Power) is available on the Usage summary
+                dashboard.
+            </p>
+        </div>
+        <div class="panel-body" ng-if="amiAcSummaryCtrl.showChart && !amiAcSummaryCtrl.isActiveAccount">
+            <p>There is no unbilled Energy Usage data for this account because it has been closed.</p>
+            <br />
+            <p>You can still view your previous billing data and payments details under the Bills and Payments tab.</p>
+        </div>
+    </div>
+</div>

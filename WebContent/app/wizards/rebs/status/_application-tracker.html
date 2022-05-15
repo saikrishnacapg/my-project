@@ -1,0 +1,27 @@
+<div ng-controller="RebsApplicationStatusCtrl as statusCtrl" ng-init="statusCtrl.supplyAddress = rebsCtrl.model.meter.address" >
+    <div class="sy-tab-container">
+        <ul class="sy-tabs">
+            <li ng-class="{'active': statusCtrl.selection==='status'}">
+
+                <a id="myUsageLink" href="" ng-click="statusCtrl.selection = 'status'">
+                    <span class="sy-icon--charts"></span> Application status
+                </a>
+
+            </li>
+            <li ng-class="{'active': statusCtrl.selection === 'details'}"
+                ng-if="statusCtrl.supplyAddress.applicationStatus.applicationApproval || rebsCtrl.model.isApproved()">
+                <a id="myAccountLink" href="" ng-click="statusCtrl.selection = 'details'">
+                    <span class="sy-icon--file"></span> Details of your system
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-if="statusCtrl.selection==='status' && rebsCtrl.model.applicationIsForNew()"
+         ng-include="'app/wizards/rebs/status/_rebs-new-application-status.html'"></div>
+
+    <div ng-if="statusCtrl.selection==='status' && !rebsCtrl.model.applicationIsForNew()"
+         ng-include="'app/wizards/rebs/status/_rebs-system-change-application-status.html'"></div>
+
+    <div ng-if="statusCtrl.selection==='details'" ng-include="'app/wizards/rebs/status/_rebs-installation-details.html'"></div>
+</div>

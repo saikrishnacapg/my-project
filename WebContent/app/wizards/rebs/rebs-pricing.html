@@ -1,0 +1,105 @@
+<div ng-form="rebsForm">
+    <div class="terms" ng-if="rebsCtrl.model.intervalExchangeRequired()">
+        <div class="terms__content">
+            <h3>Meter upgrade acceptance</h3>
+            <p>In order to connect your distributed energy system, you will require a meter upgrade which will incur a fee. This service will require a temporary power disruption. Please refer to the following fees.</p>
+            <ul class="default-list">
+                <li>
+                    Meter upgrade fee: $<span ng-bind="rebsCtrl.pricingModel.meterIntervalPriceInDollars"></span>
+                </li>
+            </ul>
+
+        </div>
+        <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+            <div class="acc-chkBox-btn">
+                <input type="checkbox" ng-model="rebsCtrl.model.intervalMeterConcent" id="pricingTerms" class="" name="pricingTerms"/>
+                <label for="pricingTerms">
+                    I accept that a meter upgrade will require a temporary power disruption and will incur a fee and I agree to pay the applicable fee. <span class="label-required"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="terms" ng-if="rebsCtrl.model.exchangeRequired() && !rebsCtrl.model.intervalExchangeRequired()" sy-auto-focus="sy-auto-focus">
+        <div class="terms__content">
+            <h3>Meter upgrade acceptance</h3>
+            <p>
+                In order to connect your distributed energy system, you will require a meter upgrade which will incur a fee. This service will require a temporary power disruption. Please refer to the following fees.
+            </p>
+
+            <ul class="default-list" ng-if="rebsCtrl.model.phase()== 3">
+                <li>
+                    Meter upgrade fee: $<span ng-bind="rebsCtrl.pricingModel.meterExchangePhase3PriceInDollars.toFixed(2)"></span>
+                </li>
+            </ul>
+
+            <ul class="default-list" ng-if="rebsCtrl.model.phase()== 1">
+                <li>
+                    Meter upgrade fee: $<span ng-bind="rebsCtrl.pricingModel.meterExchangePhase1PriceInDollars.toFixed(2)"></span>
+                </li>
+            </ul>
+
+        </div>
+        <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+            <div class="acc-chkBox-btn">
+                <input type="checkbox" ng-model="rebsCtrl.model.exchangeConsent" id="pricingTerms_MeterEx" class="" name="pricingTerms" />
+                <label for="pricingTerms_MeterEx">
+                    I accept that a meter upgrade will require a temporary power disruption and will incur a fee and I agree to pay the applicable fee.
+                </label>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="terms" ng-if="rebsCtrl.model.reconfigurationRequired() && !rebsCtrl.model.exchangeRequired() && !rebsCtrl.model.intervalExchangeRequired()" sy-auto-focus="sy-auto-focus">
+        <div class="terms__content">
+            <h3>Meter reprogram acceptance</h3>
+            <p>
+                In order to connect your distributed energy system, you will require a meter reprogram which will incur a fee. This service will require a temporary power disruption. Please refer to the following fees.
+            </p>
+
+           <ul class="default-list">
+                <li>
+                    Meter reprogram fee: $<span ng-bind="rebsCtrl.pricingModel.meterReconfigurationPriceInDollars.toFixed(2)"></span>
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+            <div class="acc-chkBox-btn">
+                <input type="checkbox" ng-model="rebsCtrl.model.reconfigurationConsent" id="pricingTerms_MeterRe" name="pricingTerms" class="" />
+                <label for="pricingTerms_MeterRe">
+                    I accept that a meter reprogram will require a temporary power disruption and will incur a fee and I agree to pay the applicable fee. <span class="label-required"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="terms" ng-if="rebsCtrl.model.intervalReconfigurationRequired() && !rebsCtrl.model.reconfigurationRequired() && !rebsCtrl.model.exchangeRequired() && !rebsCtrl.model.intervalExchangeRequired()" sy-auto-focus="sy-auto-focus">
+        <div class="terms__content">
+            <h3>Meter reprogram acceptance</h3>
+            <p>
+                In order to connect your distributed energy system, you will require a meter reprogram which will incur a fee. This service will require a temporary power disruption. Please refer to the following fees.
+            </p>
+
+            <ul class="default-list">
+                <li>
+                    Meter reprogram fee: $<span ng-bind="rebsCtrl.pricingModel.meterReconfigurationPriceInDollars.toFixed(2)"></span>
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+            <div class="acc-chkBox-btn">
+                <input type="checkbox" ng-model="rebsCtrl.model.reconfigurationConsent" id="pricingTerms_IntervalRe" name="pricingTerms" class="sy-checkbox" />
+                <label for="pricingTerms_IntervalRe">
+                    I accept that a meter reprogram will require a temporary power disruption and will incur a fee and I agree to pay the applicable fee. <span class="label-required"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

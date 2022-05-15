@@ -1,0 +1,66 @@
+<div ng-controller="MsgCntlr">
+    <div ng-form="paymentbankDetailsForm" class="paymentbankDetailsForm" novalidate>
+        <div>
+            <h3 class="paymentbankDetailsForm-heading" >Nominate your bank account</h3>
+            <p class="paymentbankDetailsForm-description">Please check the details are correctly entered to avoid issues with your payment.</p>
+            <div>
+                <div sy-form-group data-layout="form" ng-form="bankForm" ng-controller="MsgCntlr">
+                    <label class="control-label label-required" for="accountName">Account holder name:</label>
+                    <div sy-form-group data-layout="tooltip">
+                        <div>
+                            <input type="text" ng-model="oneOffPaymentCtrl.payData.instalment.bankDetails.accountName" id="accountName" name="accountName" class="form-control" sy-pattern="NAME" ng-required="true" maxlength="60" ng-paste="$event.preventDefault()">
+                            <div sy-alert-box="accountName" sy-analytics-error="accountName">
+                                <p ng-show="bankForm.accountName.$error.required">{{findMsgHTML('MA_E41')}}</p>
+                                <p ng-show="bankForm.accountName.$error.pattern">{{findMsgHTML('MA_E42')}}</p>
+                                <p ng-show="bankForm.accountName.$error.pattern">{{findMsgHTML('E412')}}</p>
+                            </div>
+                        </div>
+                        <a href ng-click="showBankAccountName()" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+                        <div></div>
+                    </div>
+                </div>
+
+                <div sy-form-group data-layout="form" ng-controller="MsgCntlr">
+                    <label class="control-label label-required" for="bsbNumber">BSB:</label>
+                    <div sy-form-group data-layout="tooltip">
+                        <div>
+                            <input type="tel" id="bsbNumber" name="bsbNumber" class="form-control" ng-model="oneOffPaymentCtrl.payData.instalment.bankDetails.bsbNumber" maxlength="7" ng-required="true" sy-bsb-mask>
+                            <div sy-alert-box="bsbNumber" sy-analytics-error="bsbNumber"><p>{{findMsgHTML('MA_E43')}}</p></div>
+                        </div>
+                        <a href ng-click="showBsbInfo()" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+                    </div>
+                </div>
+
+                <div sy-form-group data-layout="form" ng-controller="MsgCntlr">
+                    <label class="control-label label-required" for="accountNumber">Account number:</label>
+                    <div sy-form-group data-layout="tooltip">
+                        <div>
+                            <input type="tel" id="accountNumber" name="accountNumber" class="form-control" ng-model="oneOffPaymentCtrl.payData.instalment.bankDetails.accountNumber" sy-is-number ng-minlength="1" maxlength="9" ng-required="true">
+                            <div sy-alert-box="accountNumber" sy-analytics-error="accountNumber"><p>{{findMsgHTML('MA_E44')}}</p></div>
+                        </div>
+                        <a href ng-click="showAccountNumberInfo()" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+                    </div>
+                </div>
+
+                <div sy-form-group data-layout="form">
+                    <label class="control-label label-required" for="amount">Payment amount ($):</label>
+                    <div>
+                        <div sy-form-group data-layout="tooltip">
+                            <input ng-disabled="oneOffPaymentCtrl.transferp2pArrangementModel.p2pArrangementFlag" class="form-control" type="number" sy-pattern="PAYMENT_CURRENCY" ng-model="oneOffPaymentCtrl.payData.instalment.amount" required
+                                   sy-amount-field-validation totalOwningAmount="{{oneOffPaymentCtrl.totalOwningAmount}}" customerAmountlimit="{{oneOffPaymentCtrl.customerAmountlimit}}"
+                                   id="amount" name="amount" placeholder="$" min="20.00"/>
+                            <a href id="showPaymentAmountHelp" ng-if="!oneOffPaymentCtrl.transferp2pArrangementModel.p2pArrangementFlag" ng-click="oneOffPaymentCtrl.showHelpText('Payment amount', '{{findMsgHTML('MA_H40')}}')"  alt="Help" title="Help">
+                                <span class="sy-icon--circle_question_mark"></span>
+                            </a>
+                        </div>
+                        <div sy-alert-box="amount" sy-analytics-error="amount" >
+                            <p ng-if="!paymentbankDetailsForm.amount.$error.min && !paymentbankDetailsForm.amount.$error.syAmountFieldValidation && paymentbankDetailsForm.amount.$error">Please enter digits only, no spaces or commas. </p>
+                            <p ng-if="paymentbankDetailsForm.amount.$error.min">{{findMsgHTML('MA_E45_3')}}</p>
+                            <p ng-if="paymentbankDetailsForm.amount.$error.syAmountFieldValidation">{{findMsgHTML('MA_E45_2')}} {{oneOffPaymentCtrl.maxAmountlimitErrorLabel | currency}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

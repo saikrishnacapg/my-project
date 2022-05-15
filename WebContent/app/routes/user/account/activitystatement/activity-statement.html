@@ -1,0 +1,211 @@
+<div class="activity-statement" id="activity-statement-chart">
+	<div class="material">
+		<div id="activityStatementCompatible" ng-if="ActivityStatementCtrl.isCompatible() && !ActivityStatementCtrl.hide">
+				<div >
+					<p class="text-padding">
+						Browser upgrade required
+					</p>
+					<div class="padding-left"> We're sorry, but this activity statement isn't fully supported by your browser. We recommended trying a newer browser like Google Chrome, Mozilla Firefox or Microsoft Edge to
+						view the statement.
+					</div>
+					<button ng-click="ActivityStatementCtrl.closeBanner()" class="alert-close close">Close</button>
+				</div>
+		</div>
+		</div>
+	<div class="panel">
+		<div class="panel-body">
+			<div style="background: #ececec;" class="page-padding">
+				<div class="date-selector calendar-padding">
+					<div class="padding-right bold">Selected period</div>
+						<div class="calendar-width" sy-form-group data-layout="default">
+							<label class="label-required font-style" for="startDate">
+								<span class="sy-icon--calendar"></span>
+								Start date:
+							</label>
+							<div
+									sy-moment-selector
+									id="startDate"
+									name="startDate"
+									sy-model="ActivityStatementCtrl.startDate"
+									min="ActivityStatementCtrl.filter.start.min"
+									max="ActivityStatementCtrl.filter.end.max"
+									class="form-control"
+									default-synergy-max="true"
+									avoid-native="true"
+									required
+							></div>
+
+							<div class="sy-form-error" ng-if="!ActivityStatementCtrl.valid()">
+								<div class="sy-alert--danger">
+									<p ng-if="ActivityStatementCtrl.pastCutoffDate()">
+										Information before 01/09/2009 cannot be viewed online.
+									</p>
+									<p ng-if="ActivityStatementCtrl.startDateAfterEndDate()">
+										Your start date must occur before your end date.
+									</p>
+									<p ng-if="ActivityStatementCtrl.endDateIsInFuture()">Sorry, you can't select a date in the future.</p>
+									<p ng-if="ActivityStatementCtrl.overMaxRange()">The earliest day they can select is 01 July 2020.</p>
+								</div>
+							</div>
+						</div>
+						<div class="calendar-width"  sy-form-group data-layout="default">
+							<label class="label-required font-style" for="endDate">
+								<span class="sy-icon--calendar"></span>
+								End date:
+							</label>
+							<div
+									sy-moment-selector
+									id="endDate"
+									name="endDate"
+									sy-model="ActivityStatementCtrl.endDate"
+									min="ActivityStatementCtrl.filter.start.min"
+									max="ActivityStatementCtrl.filter.end.max"
+									class="form-control"
+									default-synergy-max="true"
+									avoid-native="true"
+									required
+							></div>
+						</div>
+						<div sy-form-group class="padding-display-button" >
+							<button
+									class="sy-button--primary"
+									ng-disabled="!(ActivityStatementCtrl.startDate && ActivityStatementCtrl.endDate && ActivityStatementCtrl.valid())"
+									ng-click="ActivityStatementCtrl.searchDisplay()">
+								Display
+							</button>
+						</div>
+				</div>
+				<div class="usage-compare">
+					<span class="bold"> Your progress on Midday Saver</span>
+				</div>
+				<div class="row bg-grey padding-progress-text" style="">
+					<div class="div-width savings">
+						<span ng-show="ActivityStatementCtrl.ctrlActivityServices.noData" class='no-data' >
+							There is no data for this period of time. Please try searching a different date range.
+						</span>
+					</div>
+					<div class="div-width savings">
+						<div class="div-left">
+							<span>Your <b>costs</b> on Midday Saver plan for selected period </span>
+							<a	href="javascript:void(0);"
+									title=""
+									ng-click="ActivityStatementCtrl.showHelpText('', 'app/routes/user/account/activitystatement/templates/modal-first-box.html')"
+									class="pull-right title-info-icon" style="text-decoration: none">
+								<span  class="sy-icon--circle_info"></span>
+							</a>
+						</div>
+						<div class="div-right">
+							<div class="savings">
+								<p class="content black-box-border ">$ {{ActivityStatementCtrl.ctrlActivityServices.midDaySaver}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="div-width savings">
+						<div class="div-left">
+							<span><b>Costs if you were on </b>Home Plan A1 for selected period </span>
+							<a
+									href="javascript:void(0);"
+									title=""
+									ng-click="ActivityStatementCtrl.showHelpText('', 'app/routes/user/account/activitystatement/templates/modal-second-box.html')"
+									class="pull-right title-info-icon" style="text-decoration: none"
+							>
+								<span  class="sy-icon--circle_info "></span>
+							</a>
+						</div>
+
+						<div class="div-right">
+							<div class="savings" >
+								<p class="content black-box-border">$ {{ActivityStatementCtrl.ctrlActivityServices.a1Tariff}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="div-width savings" ng-hide="ActivityStatementCtrl.ctrlActivityServices.noData">
+
+						<div class="div-left">
+							<span> Savings on Midday Saver for the selected period* </span>
+							<a
+									href="javascript:void(0);"
+									title=""
+									ng-click="ActivityStatementCtrl.showHelpText('', 'app/routes/user/account/activitystatement/templates/modal-third-box.html')"
+									class="pull-right title-info-icon" style="text-decoration: none"
+							>
+								<span  class="sy-icon--circle_info "></span>
+							</a>
+						</div>
+
+						<div class="div-right">
+							<div class="savings" ng-show="ActivityStatementCtrl.ctrlActivityServices.showGreenText">
+								<p class="content green-box-border">$ {{ActivityStatementCtrl.ctrlActivityServices.DiffMidDaySaverAndA1}}</p>
+							</div>
+							<div class="savings" ng-show="ActivityStatementCtrl.ctrlActivityServices.showRedText">
+								<p  class="content red-box-border">$ {{ActivityStatementCtrl.ctrlActivityServices.DiffMidDaySaverAndA1}}</p>
+							</div>
+							<div class="savings" ng-show="ActivityStatementCtrl.ctrlActivityServices.showBlackText">
+								<p   class="content black-box-border">$ {{ActivityStatementCtrl.ctrlActivityServices.DiffMidDaySaverAndA1}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="div-width savings">
+						<div class="div-left">
+							<span> Savings on Midday Saver since 20 November 2020*</span>
+							<a
+									href="javascript:void(0);"
+									title=""
+									ng-click="ActivityStatementCtrl.showHelpText('', 'app/routes/user/account/activitystatement/templates/modal-forth-box.html')"
+									class="pull-right title-info-icon" style="text-decoration: none"
+							>
+								<span  class="sy-icon--circle_info "></span>
+							</a>
+						</div>
+
+						<div class="div-right">
+							<div class="savings" >
+								<div class="savings" ng-show="ActivityStatementCtrl.ctrlActivityServices.showNovGreenText">
+									<p  class="content green-box-border">$ {{ActivityStatementCtrl.ctrlActivityServices.diffAmount}}</p>
+								</div>
+								<div class="savings" ng-show="ActivityStatementCtrl.ctrlActivityServices.showNovRedText">
+									<p   class="content red-box-border">$ {{ActivityStatementCtrl.ctrlActivityServices.diffAmount}}</p>
+								</div>
+								<div class="savings" ng-show="ActivityStatementCtrl.ctrlActivityServices.showNovBlackText">
+									<p   class="content black-box-border">$ {{ActivityStatementCtrl.ctrlActivityServices.diffAmount}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="">
+						<div class="usage-compare">
+							<span class="bold"> Compare your usage or costs to 12 Months prior</span>
+							<a
+									href="javascript:void(0);"
+									title=""
+									ng-click="ActivityStatementCtrl.showHelpText('', 'app/routes/user/account/activitystatement/templates/usage-compare-info.html')"
+									class="pull-right title-info-icon" style="text-decoration: none"
+							>
+								<span  class="sy-icon--circle_info font"></span>
+							</a>
+						</div>
+					</div>
+					<div class="acc-radio-btn-group div-width">
+						<div class="sec">
+							<div class="acc-radio-btn radio-button-padding">
+								<input type="radio" id="typeOfPercentageDisplay"  name="displayOption" value="percentage" ng-model="ActivityStatementCtrl.displayOption">
+								<label ng-style="ActivityStatementCtrl.displayOption=='percentage' && {'font-weight':'800'}" for="typeOfPercentageDisplay">Display % of usage (units) by the time bands</label><br>
+							</div>
+						</div>
+						<div class="sec">
+							<div class="acc-radio-btn radio-button-padding">
+								<input type="radio" id="typeOfDollarDisplay" name="displayOption" value="dollar" ng-model="ActivityStatementCtrl.displayOption">
+								<label  ng-style="ActivityStatementCtrl.displayOption=='dollar' && {'font-weight':'800'}" for="typeOfDollarDisplay">Display $ cost by the time bands</label><br>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div ng-include="'app/routes/user/account/activitystatement/yearly-comparison-graph.html'"></div>
+			</div>
+			<div ng-include="'app/routes/user/account/activitystatement/activity-statement-saving-text.html'"></div>
+			<div ng-include="'app/routes/user/account/activitystatement/activity-statement-disclaimer.html'"></div>
+		</div>
+	</div>
+</div>

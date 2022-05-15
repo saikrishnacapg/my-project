@@ -1,0 +1,115 @@
+<div ng-form="ddiForm" class="ddiForm" ng-controller="MsgCntlr">
+    <h3>Set up your payment plan</h3>
+    <div style="padding: 10px 20px 0 20px;">
+        <div class="must-complete">All fields required unless indicated as optional.</div>
+        <div sy-form-group>
+            <div class="col-sm-5" style="padding: 0 10px 0 0;">
+                <label class="label-required" style="padding-top: 10px;">Payment frequency</label>
+            </div>
+            <div class="col-sm-7 acc-radio-btn-group" style="padding: 0;" ng-init="signUpCtrl.model.instalment.paymentFreq = signUpCtrl.model.instalment.paymentFreq || 'FORTNIGHTLY'">
+                <div  class="acc-radio-btn" sy-auto-focus="sy-auto-focus">
+                    <input type="radio" ng-model="signUpCtrl.model.instalment.paymentFreq" value="MONTHLY" class="sy-radio" id="monthly" required/>
+                    <label for="monthly" style="width: 80px; display: inline-block;" ng-if="signUpCtrl.account.paymentInfo.billCycle !== 'M'">Monthly</label>
+                </div>
+                <div  class="acc-radio-btn">
+                    <input type="radio" ng-model="signUpCtrl.model.instalment.paymentFreq" value="FORTNIGHTLY" class="sy-radio" id="fortnightly"/>
+                    <label for="fortnightly" style="width: 100px; display: inline-block;">Fortnightly</label>
+                </div>
+                <div class="acc-radio-btn">
+                    <input type="radio" ng-model="signUpCtrl.model.instalment.paymentFreq" value="WEEKLY" class="sy-radio" id="weekly"/>
+                    <label for="weekly" style="width: 60px; display: inline-block;">Weekly</label>
+                </div>
+            </div>
+        </div>
+
+        <div sy-form-group>
+            <div class="col-sm-5" style="padding: 0 10px 0 0;">
+                <label class="label-required">How much each time?</label>
+            </div>
+            <div class="col-sm-7" style="padding: 0;">
+                <div ng-if="!signUpCtrl.isResidential"> <input  class="form-control" type="number" sy-pattern="PAYMENT_CURRENCY" ng-model="signUpCtrl.model.instalment.amount"  name="instalmentAmount" placeholder="$" required min="20" />
+                    <div sy-alert-box="instalmentAmount" sy-analytics-error="instalmentAmount">
+                        <p ng-if="ddiForm.instalmentAmount.$error.min">{{findMsgHTML('MA_E45')}}</p>
+                        <p ng-if="!ddiForm.instalmentAmount.$error.min  && ddiForm.instalmentAmount.$error">{{findMsgHTML('MA_E46')}}</p>
+                    </div>
+                </div>
+                <div ng-if="signUpCtrl.isResidential">
+                    <input  class="form-control" type="number" sy-pattern="PAYMENT_CURRENCY" ng-model="signUpCtrl.model.instalment.amount" required name="instalmentAmount" placeholder="$" min="20.00" max="500.00"/>
+                    <div sy-alert-box="instalmentAmount" sy-analytics-error="instalmentAmount">
+                        <p ng-if="ddiForm.instalmentAmount.$error.min">{{findMsgHTML('MA_E45')}}</p>
+                        <p ng-if="ddiForm.instalmentAmount.$error.max">{{findMsgHTML('MA_E45_1')}}</p>
+                        <p ng-if="!ddiForm.instalmentAmount.$error.min && !ddiForm.instalmentAmount.$error.max && ddiForm.instalmentAmount.$error">{{findMsgHTML('MA_E46')}}</p>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div sy-form-group>
+            <div class="col-sm-5" style="padding: 0 10px 0 0;">
+                <label class="label-required">When do you want the payments to start?</label>
+            </div>
+            <div class="col-sm-7" style="padding: 0;">
+                <div sy-moment-selector
+                     id="startDate"
+                     name="startDate"
+                     sy-model="signUpCtrl.model.instalment.startDate"
+                     min="signUpCtrl.minDate"
+                     max="signUpCtrl.maxDate"
+                     class="form-control sy-icon--calendar"
+                     date-disabled="signUpCtrl.disabled(date, mode)"
+                     avoid-native="true"
+                     autocomplete="off"
+                     x-autocompletetype=""
+                     required>
+
+                </div>
+<!--                exclude-weekends="false"
+                exclude-holidays="false"-->
+                <div sy-alert-box="startDate" sy-analytics-error="startDate">
+                    <p ng-show="ddiForm.startDate.$error.excludeWeekends || ddiForm.startDate.$error.excludeHolidays">{{findMsgHTML('MA_E47')}}</p>
+                    <p ng-show="ddiForm.startDate.$error.min">{{findMsgHTML('MA_E48')}}</p>
+                    <p ng-show="ddiForm.startDate.$error.max">{{findMsgHTML('MA_E49')}}</p>
+                    <p ng-show="!ddiForm.startDate.$error.min && !ddiForm.startDate.$error.max && (ddiForm.startDate.$error.required || ddiForm.startDate.$error.date)">{{findMsgHTML('MA_E50')}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sy-alert--info" ng-if="signUpCtrl.showStartDateWarning">
+            <span class="sy-icon--circle_info"></span>
+            <p>Just letting you know that we'll process your payment on the next business day instead.</p>
+        </div>
+
+        <div sy-form-group>
+            <div class="col-sm-5" style="padding: 0 10px 0 0;">
+                <label>Do you want to set an end date for your payments? (optional)</label>
+            </div>
+            <div class="col-sm-7" style="padding: 0;">
+                <div sy-moment-selector
+                     id="endDate"
+                     name="endDate"
+                     sy-model="signUpCtrl.model.instalment.endDate"
+                     past="false"
+                     min="signUpCtrl.model.instalment.startDate"
+                     class="form-control sy-icon--calendar"
+                     avoid-native="true"
+                     placeholder="dd/mm/yyyy"
+                      autocomplete="off"
+                     x-autocompletetype="">
+                </div>
+                <div sy-alert-box="endDate" sy-analytics-error="endDate">
+                    <p ng-show="ddiForm.endDate.$error.excludeWeekends || ddiForm.endDate.$error.excludeHolidays">{{findMsgHTML('MA_E47')}}</p>
+                    <p ng-show="ddiForm.endDate.$error.min">{{findMsgHTML('MA_E51')}}.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sy-alert--info" ng-if="signUpCtrl.showEndDateWarning">
+            <span class="sy-icon--circle_info"></span>
+            <p>Just letting you know that we'll process your final payment on the next business day instead.</p>
+        </div>
+
+    </div>
+</div>

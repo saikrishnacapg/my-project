@@ -1,0 +1,4 @@
+
+<div ng-include="'app/wizards/rebs/status/_application-tracker.html'" ng-if="rebsCtrl.model.recentApproval()"></div>
+<div ng-include="'app/wizards/rebs/status/_rebs-installation-details.html'" ng-if="!rebsCtrl.model.recentApproval()"></div>
+

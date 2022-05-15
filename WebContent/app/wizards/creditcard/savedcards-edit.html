@@ -1,0 +1,37 @@
+<div ng-if="SavecardexpiryCtrl.model.paymentType === 'UPDATE'">
+    <div sy-form-group data-layout="form">
+        <label>Name on card: </label>
+        <span ng-bind="SavecardexpiryCtrl.model.directDebit.ccDetails.creditCardHolder"></span>
+    </div>
+
+    <div sy-form-group data-layout="form" >
+        <label>Card number: </label>
+        <span ng-bind="SavecardexpiryCtrl.model.directDebit.ccDetails.maskedCreditCardNumber"></span>
+    </div>
+
+
+    <div sy-form-group data-layout="form" >
+        <label>Card type: </label>
+        <span ng-bind="SavecardexpiryCtrl.getCreditCardType(SavecardexpiryCtrl.model.directDebit.ccDetails.creditCardType)"></span>
+    </div>
+
+    <div class="must-complete">All fields must be completed.</div>
+    
+    <sy-card-expiry card-model="SavecardexpiryCtrl.model.directDebit.ccDetails"></sy-card-expiry>
+</div>
+
+<div ng-if="SavecardexpiryCtrl.model.paymentType === 'SPLIT'">
+    <div sy-form-group data-layout="form">
+        <label>Name on card: </label>
+        <span ng-bind="SavecardexpiryCtrl.model.instalment.ccDetails.creditCardHolder"></span>
+    </div>
+
+    <div sy-form-group data-layout="form" >
+        <label>Card number: </label>
+        <span ng-bind="SavecardexpiryCtrl.model.instalment.ccDetails.maskedCreditCardNumber"></span>
+    </div>
+
+    <div class="must-complete">All fields must be completed.</div>
+
+    <sy-card-expiry card-model="SavecardexpiryCtrl.model.instalment.ccDetails"></sy-card-expiry>
+</div>

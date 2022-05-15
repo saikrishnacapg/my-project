@@ -1,0 +1,11 @@
+<div class="step__title" ng-click="statusTitle.open()">
+    <span class="pull-left" ng-class="{ false: 'sy-icon--ok_2', true: 'sy-icon--right_arrow' }[stepCtrl.inProgress]" ng-if="!stepCtrl.waiting"></span>
+    <h3 class="pull-left">
+        <span ng-transclude></span>
+        <span class="step__status" ng-if="stepCtrl.completed" ng-bind="'(' + statusTitle.completedText + ')'"></span>
+        <span class="step__status" ng-if="stepCtrl.inProgress" ng-bind="'(' + statusTitle.progressText + ')'"></span>
+    </h3>
+    <span class="step-expand pull-right"
+          ng-class="{false:'sy-icon--plus',true:'sy-icon--minus'}[stepCtrl.open]">
+    </span>
+</div>

@@ -1,0 +1,44 @@
+<div class="ami-int-cnt">
+                    <div ng-if="amiCtrl.amiDataLoaded">
+                        <div ng-if="!amiCtrl.isSingleDayAmiInsight">
+                            <section>
+                                <div class="pull-left box">
+                                    <div ng-if="amiCtrl.billedDataAvailable"
+                                         ng-include="'app/routes/user/account/amiinsight/billed/billed.html'"></div>
+                                    <div ng-if="!amiCtrl.billedDataAvailable && amiCtrl.unbilledDataAvailable"
+                                         ng-include="'app/routes/user/account/amiinsight/unbilled/unbilled.html'"></div>
+                                </div>
+
+                                <div class="pull-right cntr-right mrg-top-15 box">
+                                    <div ng-if="amiCtrl.billedDataAvailable && amiCtrl.unbilledDataAvailable"
+                                         ng-include="'app/routes/user/account/amiinsight/unbilled/unbilled.html'"></div>
+                                    <div ng-if="!amiCtrl.unbilledDataAvailable || !amiCtrl.billedDataAvailable">
+                                        <h2>Check out our energy saving calculators </h2>
+                                        <ul>
+                                            <li ng-if="!accountCtrl.isPodFCPFlag"><a title="Save with solar and battery" target="_blank"
+                                                   sy-doc-href="energytool.savewithsolar">Save with solar and battery</a>
+                                            </li>
+                                            <li><a title="Reduce your bill" target="_blank"
+                                                   sy-doc-href="energytool.reduceyourbill">Reduce your bill</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <section class="disclaimer-cntr">
+                        <div class="disclaimer box">
+                            <h2>DISCLAIMERS</h2>
+                            <ul>
+                                <li>Electricity metering consumption data is provided by Western Power, typically within 2 Business days of collection from the meter.</li>
+                                <li>All dollar amounts include supply charges and are GST inclusive.</li>
+                                <li>Other fees and charges, such as late payment fees, may be applicable.</li>
+                                <li>Billed and unbilled consumption billing periods may include estimated data.</li>
+                                <li>A unit of energy is measured by KWh (Kilowatt hours) for electricity or GJ (Gigajoule) for gas.</li>
+                                <li>Gas consumption data is obtained from ATCO Gas Australia.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+

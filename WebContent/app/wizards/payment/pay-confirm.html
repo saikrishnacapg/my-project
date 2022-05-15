@@ -1,0 +1,112 @@
+<div class="terms">
+    <div class="terms__summary">
+
+        <p class="payment-terms-summary-label">You are about to make the following payment:</p>
+
+        <div class="payment-details-entry">
+            <h3 class="inline payment-details-entry-label">Payment number</h3>
+            <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.paymentNumber"></p>
+        </div>
+
+        <div ng-if="payCtrl.isStoredCardPayment() && payCtrl.hasStoredCards" ng-init="storedCard = payCtrl.getStoredCard()">
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Cardholder name</h3>
+                <p class="inline payment-details-entry-value" ng-bind="storedCard.cardHolderName"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card</h3>
+                <p class="inline payment-details-entry-value" ng-bind="storedCard.maskedCreditCardNumber"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Expires</h3>
+                <p class="inline payment-details-entry-value" ng-bind="storedCard.expiryDate | date:'MM/yy'"></p>
+            </div>
+
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card type</h3>
+                <p class="inline payment-details-entry-value" ng-bind="storedCard.displayCardType"></p>
+            </div>
+
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card surcharge</h3>
+                <p class="inline payment-details-entry-value" ng-bind="storedCard.cardSurCharge"></p>
+            </div>
+
+            <div class="payment-details-entry" ng-if="payCtrl.transferp2pArrangementModel.p2pArrangementFlag && payCtrl.transferp2pArrangementModel.numberOfInstalments">
+                <h3 class="inline payment-details-entry-label">Number of instalments:</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.transferp2pArrangementModel.numberOfInstalments"></p>
+            </div>
+
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Payment amount</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.amount  | currency"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card surcharge amount</h3>
+                <p class="inline payment-details-entry-value" ng-bind="storedCard.cardTransactionFee | currency"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Total amount</h3>
+                <p class="inline payment-details-entry-value" ng-bind="storedCard.totalPaymentAmount | currency"></p>
+            </div>
+
+
+        </div>
+        <div ng-if="!payCtrl.hasStoredCards || payCtrl.payData.cardIndex === -1 ">
+            <div  class="payment-details-entry" ng-if="payCtrl.existingAccount">
+                <h3 class="inline payment-details-entry-label">Save this card</h3>
+                <p class="inline payment-details-entry-value">{{payCtrl.payData.newCard.saveCard}}</p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Cardholder name</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.newCard.cardHolderName"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card number</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.newCard.cardNumber | syMaskCard"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card expiry</h3>
+                <p class="inline payment-details-entry-value">{{payCtrl.payData.newCard.expiryMonth}}/{{payCtrl.payData.newCard.expiryYear}}</p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card security code</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.newCard.cvv"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card type</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.newCard.displayCardType"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card surcharge</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.newCard.cardSurCharge"></p>
+            </div>
+
+            <div class="payment-details-entry" ng-if="payCtrl.transferp2pArrangementModel.p2pArrangementFlag && payCtrl.transferp2pArrangementModel.numberOfInstalments">
+                <h3 class="inline payment-details-entry-label">Number of instalments</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.transferp2pArrangementModel.numberOfInstalments"></p>
+            </div>
+
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Payment amount</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.amount | currency"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Card surcharge amount</h3>
+                <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.cardTransactionFee | currency"></p>
+            </div>
+            <div class="payment-details-entry">
+                <h3 class="inline payment-details-entry-label">Total amount</h3>
+               <p class="inline payment-details-entry-value" ng-bind="payCtrl.payData.totalPaymentAmount | currency"></p>
+            </div>
+        </div>
+    </div>
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="payCtrl.payData.termsAccepted" id="payTerms" class="sy-checkbox">
+            <label for="payTerms">
+                <strong class="label-required">I have read, understand and agree with the  <a sy-doc-href="terms.paymentconditions">Payment terms & conditions</a>, <a sy-doc-href="terms.website">Website terms of use</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and  <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these terms & conditions.</strong>
+            </label>
+        </div>
+    </div>
+</div>

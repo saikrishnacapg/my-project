@@ -1,0 +1,70 @@
+<div sy-wizard-success  real-time="true">
+    <div class="sy-wizard-success__header">
+        <!--<h2>Your Direct Debit for {{cancelCtrl.cancelLabel}} has been cancelled</h2>-->
+        <h2>Your Direct Debit for bill payments has been cancelled</h2>
+        <p>An email is on its way to your inbox confirming this cancellation. It may take up to 24 hours for these changes to reach your account.</p>
+        <span ng-if="cancelCtrl.instalmentPaymentValue">
+        <p sy-econnect-deactivation-info process="cancellation of your regular Direct Debit" account="cancelCtrl.account"></p>
+        </span>
+    </div>
+    <h2>Please help us to make Direct Debit better.</h2>
+    <p>Please take a moment to let us know why you changed your mind about Direct Debit.</p>
+    <p>Why did you cancel your Direct Debit payment option?</p>
+    <div sy-form-group data-layout="split">
+        <div>
+            <label>
+                <input type="checkbox" ng-model="cancelCtrl.feedback.privacy.checked" value="Security / Privacy concern" class="sy-checkbox" id="nominated"/>
+                {{cancelCtrl.feedback.privacy.label}}
+            </label>
+            <label>
+                <input type="checkbox" ng-model="cancelCtrl.feedback.bankFees.checked" value="Overdrawn/late payment fees from your bank" class="sy-checkbox" id="bankFees" />
+                {{cancelCtrl.feedback.bankFees.label}}
+            </label>
+            <label>
+                <input type="checkbox" ng-model="cancelCtrl.feedback.ccFees.checked" value="Credit card transaction fees" class="sy-checkbox" id="ccFees" />
+                {{cancelCtrl.feedback.ccFees.label}}
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" ng-model="cancelCtrl.feedback.visibility.checked" value="Lack of control and visibility on my payments" class="sy-checkbox" id="card" />
+                {{cancelCtrl.feedback.visibility.label}}
+            </label>
+            <label>
+                <input type="checkbox" ng-model="cancelCtrl.feedback.reconcile.checked" value="Unable to reconcile instalment payments and balance on bill" class="sy-checkbox" id="reconcile" />
+                {{cancelCtrl.feedback.reconcile.label}}
+            </label>
+            <label>
+                <input type="checkbox" ng-model="cancelCtrl.feedback.other.checked" value="Other (please specify)" class="sy-checkbox" id="other" />
+                {{cancelCtrl.feedback.other.label}}
+            </label>
+        </div>
+        <div ng-if="cancelCtrl.feedback.other.checked">
+            <label class="label-required">Please specify</label>
+            <div>
+                <input class="form-control" type="text" name="otherReason" ng-model="cancelCtrl.feedback.other.reason" required/>
+                <div sy-alert-box="otherReason">
+                    <p>Please specify a reason</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="acc-chkBox-btn">
+        <input type="checkbox" ng-model="cancelCtrl.contactMe" class="" id="contactMe" />
+        <label for="contactMe">I would like to be contacted regarding my feedback</label>
+    </div>
+
+    
+    <div ng-if="cancelCtrl.contactMe">
+        <div class="must-complete">All fields must be completed.</div>
+        
+        <label class="label-required">Day time number or email address:</label>
+        <div>
+            <input class="form-control" name="otherReason" ng-model="cancelCtrl.contactEmail" required/>
+            <div sy-alert-box="otherReason">
+                <p>Please provide a contact email address</p>
+            </div>
+        </div>
+    </div>
+</div>

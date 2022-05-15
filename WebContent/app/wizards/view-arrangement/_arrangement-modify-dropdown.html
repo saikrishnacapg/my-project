@@ -1,0 +1,39 @@
+<ul class="dropdown-menu" data-role="menu">
+	<li role="presentation" class="arrangement-modify-dropdown">
+		<a
+			role="menuitem"
+			href=""
+			ng-if="viewArrangementCtrl.isAtRisk && viewArrangementCtrl.eligibleToAmend"
+			ng-click="viewArrangementCtrl.modifyArrangement('MODIFY')"
+		>
+			Modify
+		</a>
+		<a
+			role="menuitem"
+			href=""
+			ng-if="viewArrangementCtrl.viewArrangementDetails.hasP2PDirectDebit"
+			ng-click="viewArrangementCtrl.modifyArrangement('UPDATE_PAYMENT')"
+		>
+			Update payment details
+		</a>
+		<a role="menuitem" href="" ng-if="viewArrangementCtrl.isAtRisk" ng-click="viewArrangementCtrl.cancelArrangement()">
+			Cancel
+		</a>
+		<a
+			role="menuitem"
+			href=""
+			ng-if="viewArrangementCtrl.isAtRisk && !viewArrangementCtrl.viewArrangementDetails.hasP2PDirectDebit"
+			ng-click="viewArrangementCtrl.modifyArrangement('UPDATE_PAYMENT')"
+		>
+			Setup Direct Debit
+		</a>
+		<a
+			role="menuitem"
+			href=""
+			ng-if="viewArrangementCtrl.viewArrangementDetails.hasP2PDirectDebit"
+			ng-click="viewArrangementCtrl.modifyArrangement('CANCEL_DD')"
+		>
+			Cancel Direct Debit
+		</a>
+	</li>
+</ul>

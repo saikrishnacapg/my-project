@@ -1,0 +1,12 @@
+<div ng-if="!signUpCtrl.model.cardComplete">
+    <p>
+        Please wait while your direct debit request is processed...
+    </p>
+</div>
+<div ng-show="signUpCtrl.model.cardComplete">
+    <div sy-iframe height="425" width="100%" scrolling="no" style="overflow: hidden;width:100%; height: 100%;"
+         framesrc="signUpCtrl.model.url" form-data="signUpCtrl.model.urlData"
+         onload="iframeloaded(this)"></div>
+    <!--framesrc="signUpCtrl.model.url" form-data="signUpCtrl.model.urlData"-->
+
+</div>

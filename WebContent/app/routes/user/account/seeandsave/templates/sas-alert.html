@@ -1,0 +1,45 @@
+<form name="alertForm" ng-controller="SeeAndSaveAlertCtrl as alertCtrl">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div >
+
+                <strong>Now you can see your energy, it's time to start saving. Challenge your business to stay under your energy goal.</strong>
+                <p class="pad-top-15 pad-bottom-10">Your business is using <strong>{{data.dailyAverage ? data.dailyAverage : 'N/A'}} kWh</strong> per day and <strong>{{data.weeklyAverage ? data.weeklyAverage : 'N/A'}} kWh</strong> per week on average.</p>
+                <p class="pad-bottom-10">
+                    <span ng-if="data.type == 'day'">Your daily goal will reset at midnight.</span>
+                    <span ng-if="data.type == 'week'">Your goal will reset at midnight every Monday.</span>
+                </p>
+                <div>
+                    <div class="col-xs-12 col-md-6 pad-left-0">
+                        <label class="control-label">Goal period: </label>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 pad-left-0">
+                        <div class="col-xs-12 col-md-6 no-margin-top">
+                            <input type="radio" class="sy-radio" name="type" ng-model="data.type" id="alertTypeDaily" analytics-category="See and save" value="'day'" ng-value="'day'">
+                            Daily
+                        </div>
+                        <div class="col-xs-12 col-md-6 no-margin-top">
+                            <input type="radio" class="sy-radio" name="type" ng-model="data.type" id="alertTypeWeekly" analytics-category="See and save" value="'week'" ng-value="'week'">
+                            Weekly
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 pad-left-0">
+                        <label class="control-label">Set your limit (kWh): </label>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 pad-left-0">
+                        <input type="number" name="value" ng-model="data.value" id="alertThreshold" analytics-category="See and save" class="form-control margin-minus-5-l" required min="1" >
+                        <div sy-alert-box="value">
+                            <p ng-show="alertForm.value.$error.required && !alertForm.value.$error.min && !alertForm.value.$error.number">Oops! You haven’t entered a goal.</p>
+                            <p ng-show="alertForm.value.$error.min">Please enter a value greater or equal to 1 for your usage goal.</p>
+                            <p ng-show="alertForm.value.$error.number">Please enter a number for your usage goal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

@@ -1,0 +1,19 @@
+<div>
+	<div class="card-image" ng-if="imageSrc">
+	  <img class="activator" ng-src="{{imageSrc}}">
+	</div>
+	<div class="card-content" ng-class="fontColor">
+	
+		<div class="card-title" ng-class="fontColor">
+			<span ng-class="icon"></span>{{cardTitle()}}<i class="mdi-navigation-more-vert right" ng-if="hasReveal" ng-click="toggleReveal()"></i>
+
+            <a href="" sy-sas-help="{{helpId}}" class="pull-right" ng-if="showHelpButton">
+                <span class="sy-icon--circle_info"></span>
+            </a>
+		</div>
+		
+		<div sy-loader-while absolute-center="true" switch="loaderSwitch()" size="medium" color="blue"></div>
+
+		<div ng-transclude ng-if="loaderSwitch()"></div>
+	</div>
+</div>

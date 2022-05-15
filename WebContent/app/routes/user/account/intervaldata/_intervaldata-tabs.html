@@ -1,0 +1,15 @@
+<div class="panel panel-inner">
+
+<div class="sy-tab-container">
+    <ul class="sy-tabs sy-tabs--responsive">
+        <li ng-repeat="tab in intervalDataCtrl.intervalData.tabs" ng-hide="!intervalDataCtrl.intervalData.showTab(tab)" ng-class="{'active': intervalDataCtrl.intervalData.tabIsActive(tab)}">
+            <a href="" ng-click="intervalDataCtrl.intervalData.setTabMode(tab)">
+                <tab-heading>
+                    <span ng-class="tab.icon"></span>
+                    {{tab.title}}
+                </tab-heading>
+            </a>
+        </li>
+    </ul>
+</div>
+</div>

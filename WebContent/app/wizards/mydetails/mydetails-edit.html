@@ -1,0 +1,22 @@
+<div ng-form="myDetailsForm">
+
+	<!--  note that this directive includes its own sub-form -->
+    <div sy-contact-details
+         contact-details="myCtrl.newContactDetails"
+         modified-fields="myCtrl.modifiedFields"
+         address-suggestions="myCtrl.suggestions"
+         exclude="myCtrl.exclusionFields"
+         read-Only-Fields="myCtrl.mydetailsReadOnlyFields"
+         add-address="addAddress()"
+         is-required="true"></div>
+	    
+	<div class="terms">
+        <div class="terms__acceptance">
+            <div class="acc-chkBox-btn">
+                <input type="checkbox" ng-model="myCtrl.newContactDetails.termsAndConditions"
+                       ng-true-value="'Yes'" ng-false-value="'No'" id="detailTerms"/>
+                        <label for="detailTerms"><strong>I have read, understand and agree with the <a sy-doc-href="terms.synergy">Terms and Conditions</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.</strong></label>
+            </div>
+        </div>
+    </div>
+</div>

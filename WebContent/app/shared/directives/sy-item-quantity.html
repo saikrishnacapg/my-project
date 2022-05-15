@@ -1,0 +1,19 @@
+<div class="sy-number">
+	<input 	type="number" 
+			class="sy-number__input" 
+			pattern="\d*" 
+			step="1" 
+			min="{{quantity.min}}" 
+			max="{{quantity.max}}" 
+			value="{{quantity.value}}" 
+			ng-model="syItemQuantityValue"
+			ng-change="quantity.change()"
+			onclick="this.select()"
+            id="{{name}}Input"
+            />
+
+	<button class="sy-number__button--up" ng-click="quantity.inc()"
+            analytics-on="click" analytics-event="formEvent" analytics-label="{{name}}-inc">+</button>
+	<button class="sy-number__button--down" ng-click="quantity.dec()"
+            analytics-on="click" analytics-event="formEvent" analytics-label="{{name}}-inc">&ndash;</button>
+</div>

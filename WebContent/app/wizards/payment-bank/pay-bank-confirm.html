@@ -1,0 +1,49 @@
+<div class="terms">
+    <div class="terms__summary">
+        <h3>We're almost done! Please check the following details are correct:</h3>
+
+        <h3 class="inline" style="width:165px;margin-right:20px">Payment number:</h3>
+        <p  class="inline" ng-bind="oneOffPaymentCtrl.payData.paymentNumber"></p>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px" >Account holder name:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payData.instalment.bankDetails.accountName"></p>
+        </div>
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">BSB:</h3>
+            <p class="inline" ng-bind="oneOffPaymentCtrl.payData.instalment.bankDetails.bsbNumber"></p>
+        </div>
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Account number:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payData.instalment.bankDetails.accountNumber"></p>
+        </div>
+
+        <div ng-if="oneOffPaymentCtrl.numberOfInstalments">
+            <h3 class="inline" style="width:166px;margin-right:20px">Number of instalments:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.numberOfInstalments"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Payment amount:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payData.instalment.amount | currency:'$'"></p>
+        </div>
+
+    </div>
+    <div class="terms hidden-print">
+        <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+            <div class="acc-chkBox-btn">
+                <input type="checkbox" ng-model="oneOffPaymentCtrl.payData.termsAccepted" id="oopTerms" class="sy-checkbox" />
+                <label for="oopTerms">By submitting this one-off bank account payment, I acknowledge and agree:<br/><br/></label>
+                <div class="oop-termcondition">
+                    <p>This payment will be made using the Direct Debit facility.</p>
+                    <ol type="a">
+                        <li>Conditions of the Direct Debit Service Agreement Terms and Conditions apply to your one-off bank account payment other than condition 1 and 9 in "Our commitment to you". I have read and understood the <a sy-doc-href="terms.directdebit"> Direct Debit Service Agreement Terms and Conditions </a> and consent to the nominated bank account or card being debited in accordance with the Direct Debit Service Agreement Terms and Conditions.</li>
+                        <li>The Direct Debit agreement will take effect on {{oneOffPaymentCtrl.payData.todayDate | date : "dd MMM yyyy"  }} and cease once your payment is received or cancelled in accordance with the agreements terms and conditions.</li>
+                        <li>I am authorised to enter into this Direct Debit agreement.</li>
+                        <li>I have read and understood the <a sy-doc-href="terms.privacy"> Privacy Policy </a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a>.</li>
+                    </ol>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>

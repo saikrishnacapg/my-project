@@ -1,0 +1,106 @@
+<div ng-form="signUpForm">
+    <h2>Switch to Paperless</h2>
+    
+    <div class="must-complete">All fields required unless indicated as optional.</div>
+
+    <p>
+        Save on paperwork and get your bills and other account related notifications delivered straight to your inbox.<br/>
+        Plus, we'll send you SMS reminders whenever your bill arrives or is due to be paid.
+        <!--(see <a sy-doc-href="terms.paperless">terms and conditions</a> for details).-->
+    </p>
+
+    <!--<p>
+        You'll still receive a copy of your bill just with less trees involved. Plus, it's a more convenient way to open
+        it, print it or file it.
+    </p>-->
+
+    <p>
+        We'll deliver your bills to:
+    </p>
+    <label for="emailAddress">Email:<span class="label-required"></span></label>
+    <input type="email"
+           id="emailAddress"
+           name="emailAddress"
+           placeholder="Email address"
+           ng-model="rrCtrl.paperlessEmailAddress"
+           ng-required="true"
+           class="form-control"
+           sy-pattern="EMAIL_ADDRESS"
+           sy-validate-email
+            />
+
+    <div sy-alert-box="emailAddress">
+        <p ng-show="signUpForm.emailAddress.$error.email">Please provide a valid email address (e.g.
+            yourname@example.com).</p>
+
+        <p ng-show="signUpForm.emailAddress.$error.required">Please provide an email address.</p>
+
+        <p ng-show="signUpForm.emailAddress.$error.pattern">Please provide a valid email address (e.g.
+            yourname@example.com).</p>
+
+        <p ng-show="!signUpForm.emailAddress.syValidateEmail">Double check your email is correct. If you are happy with
+            it, then please ignore this message.</p>
+    </div>
+    <br>
+
+    <input type="checkbox" ng-model="rrCtrl.model.showSMSMobileNumber" id="showSMSMobileNumber"/>&nbsp;<label
+        for="showSMSMobileNumber">(Optional) Plus, we'll send SMS reminders to the following mobile:</label>
+
+    <div ng-if="rrCtrl.model.showSMSMobileNumber">
+        <div style="float: left;width: 33%">
+            <select ng-model="rrCtrl.model.mobileTelephoneCountry"
+                    name="mobileTelephoneCountry" id="mobileTelephoneCountry"
+                    class="form-control"
+                    ng-required="true"
+                    sy-pattern="/^(?!AU).[A-Z]$/"
+                    ng-options="mobilearea.countrycode as mobilearea.countryname for mobilearea in rrCtrl.model.internationalAreas">
+            </select>
+
+            <div sy-alert-box="mobileTelephoneCountry" style="float: left;width: 33%;">
+                <p ng-show="signUpForm.mobileTelephoneCountry.$error.required">
+                    Please select a country code for mobile.
+                </p>
+
+                <p ng-show="signUpForm.mobileTelephoneCountry.$error.pattern">
+                    Please select a country code for mobile.
+                </p>
+            </div>
+        </div>
+
+
+        <div style="float: right;width: 66%">
+            <div class="controls">
+                <input type="tel"
+                       name="sendSMSMobileNumber"
+                       id="sendSMSMobileNumber"
+                       class="form-control"
+                       placeholder="Enter your mobile number"
+                       ng-model="rrCtrl.model.sendSMSMobileNumber"
+                       ng-required="true"
+                       sy-is-number-ignore-spaces
+                       ng-minlength="9"
+                       ng-maxlength="10"/>
+            </div>
+            <div sy-alert-box="sendSMSMobileNumber" style="float: right;width: 66%">
+                <p ng-show="signUpForm.sendSMSMobileNumber.$error.required">
+                    Please provide a telephone or mobile number.
+                </p>
+
+                <p ng-show="signUpForm.sendSMSMobileNumber.$error.syIsNumberIgnoreSpaces">
+                    Please provide a valid contact number.
+                </p>
+
+                <p ng-show="signUpForm.sendSMSMobileNumber.$error.minlength || signUpForm.sendSMSMobileNumber.$error.maxlength">
+                    Please provide a valid contact number.
+                </p>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+
+    <p><br/><a sy-doc-href="terms.paperless">Read the Paperless Terms and Conditions</a></p>
+
+</div>
+
+

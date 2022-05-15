@@ -1,0 +1,223 @@
+<style>
+    .newDate-cntr{
+        position:relative;
+    }
+    .newdaterangesection{
+        width: 367px;
+        position: absolute;
+        right: 0px;
+        top: -24px;
+    }
+    .newdaterangesection .sy-form-group{
+        width: 115px;
+        display: inline-block;
+    }
+    .newdaterangesection .form-group{
+        display: inline-block;
+    }
+    .newdaterangesection .sy-button--primary{
+        padding: 7px 30px;
+        position: relative;
+        top: -2px;
+    }
+    .collectiveUserDropdown{
+        margin: 7px 0px;
+    }
+    @media (max-width: 878px) {
+        .newdaterangesection {
+            width: 100%;
+            position: relative;
+            right: 0px;
+            top: 0;
+            max-width:367px;
+        }
+        .newdaterangesection .sy-button--primary {
+            padding: 7.5px 30px;
+            position: relative;
+            top: 0px;
+        }
+        .collectiveUserDropdown{
+            margin: 0px 0px;
+        }
+    }
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        .newdaterangesection{
+            width: 367px!important;
+            position: absolute!important;
+            right: 0px!important;
+            top: -24px!important;
+        }
+        .newdaterangesection .sy-button--primary{
+            top:-5px!important;
+            float:left;
+        }
+    }
+
+    /*Below print layout changes are relevant for Usage Summary
+         and Interval Data tables.
+       */
+    @media print {
+
+        .main__header {
+            margin-bottom: -1px;
+        }
+        .account-header {
+            border-bottom: 1px solid black;
+            min-height: 95px !important;
+        }
+
+        .account-log-details,
+        .account-welcome-msg,
+        .user__welcome,
+        .panel-header,
+        .mobile-nav,
+        .sy-button--white.sy-button--icon-left
+        .sy-tabs.sy-tabs--responsive.active,
+        .sy-tab-container,
+        .newdaterangesection,
+        div .btn-group.pull-right,
+        #fetchMoreBtn,
+        #fetchMoreFutureBtn,
+        #returnToDailyBtn,
+        .account-header__info > a {
+            display: none;
+        }
+
+        .main-nav.ng-hide {
+            display: none !important;
+        }
+
+        .account-header .account-header__info,
+        .account-header .account-header__info h2,
+        .account-header .account-header__info h2 small {
+            color: #182124;
+            font-weight: normal;
+        }
+
+        td a {
+            text-decoration: none !important;
+            color: #182124;
+            font-weight: normal;
+            border-bottom: none !important;
+        }
+
+    }
+</style>
+
+<div class="main">
+
+    <div class="main__content">
+        
+
+        <div class="panel">
+            <div class="panel-header" >
+                <h1 ng-show="usageCtrl.mode != 'ami-interval'">Usage history</h1>
+                <h1 ng-show="usageCtrl.mode == 'ami-interval'">Usage dashboard</h1>
+            </div>
+
+           	<div class="panel-body collectiveUserDropdown" ng-if="usageCtrl.account.collective && !accountCtrl.isSellbackProduct">
+           		Select child account:
+           		<select class="form-control" ng-options="ch as ch.label for ch in usageCtrl.account.collectiveDetails.childAccounts" ng-model="usageCtrl.childAccount" ng-change="usageCtrl.selectChildAccount()">
+           			<option value="">-- Child account: --</option>
+           		</select>
+           	</div>
+
+            <div class="panel-body" >
+                <div class="newDate-cntr">
+                    <div class="newdaterangesection" ng-show="usageCtrl.mode != 'interval' && usageCtrl.mode != 'ami-interval' && usageCtrl.mode != 'unbilled'">
+                        <div sy-form-group data-layout="default">
+                            <label class="label-required" for="startDate"><span class="sy-icon--calendar"></span>Start date:</label>
+                            <div sy-moment-selector
+                                 id="startDate"
+                                 name="startDate"
+                                 sy-model="usageCtrl.startDate"
+                                 min="filter.start.min"
+                                 max="filter.start.max"
+                                 class="form-control"
+                                 default-synergy-max="true"
+                                 avoid-native="true"
+                                 required>
+                            </div>
+                        </div>
+                        <div sy-form-group data-layout="default" >
+                            <label class="label-required" for="endDate"><span class="sy-icon--calendar"></span>End date:</label>
+                            <div sy-moment-selector
+                                 id="endDate"
+                                 name="endDate"
+                                 sy-model="usageCtrl.endDate"
+                                 min="filter.end.min"
+                                 max="filter.end.max"
+                                 class="form-control"
+                                 default-synergy-max="true"
+                                 avoid-native="true"
+                                 required>
+                            </div>
+                        </div>
+                        <div class="sy-form-error" ng-if="!usageCtrl.valid()" style="margin-top:0px;">
+                            <div class="sy-alert--danger">
+                                <p ng-if="usageCtrl.pastCutoffDate()">
+                                    Information before 01/09/2009 cannot be viewed online.
+                                </p>
+                                <p ng-if="usageCtrl.startDateAfterEndDate()">
+                                    Your start date must occur before your end date.
+                                </p>
+                                <p ng-if="usageCtrl.endDateIsInFuture()">
+                                    Sorry, you can't select a date in the future.
+                                </p>
+                                <p ng-if="usageCtrl.overMaxRange()">
+                                    Please limit your search to two years.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                           <!-- <label>&nbsp;</label><br />-->
+                            <button class="sy-button--primary" ng-click="usageCtrl.searchDisplay()" ng-disabled="!(usageCtrl.startDate && usageCtrl.endDate && usageCtrl.valid())">
+                               Display
+                            </button>
+                        </div>
+                    </div>
+
+                    <div ng-include="'app/routes/user/account/usage/usage-tabs.html'"></div>
+                    <div ng-if="usageCtrl.consumptionData.records && usageCtrl.consumptionData.records.length || usageCtrl.mode == 'interval'">
+                        <div ng-include="'app/routes/user/account/usage/usage-graphs.html'"></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="panel-body" ng-hide="usageCtrl.consumptionData.records.length > 0 || usageCtrl.mode == 'interval'">
+		        <p>There is no usage data for this date range. Please try another date range. If this is a newly established account we may not have any information to show you yet.</p>
+            </div>
+
+            <div class="panel-footer" ng-show="usageCtrl.mode != 'interval' || usageCtrl.mode != 'ami-interval'">
+
+                <button id="searchBtn"
+                        type="button"
+                        class="sy-button--default pull-right"
+                        style="display:none"
+                        ng-click="usageCtrl.search()"
+                        sy-busy-chevron="fetchMore"
+                        busy-class="sy-icon--search">
+                    Search
+                </button>
+
+                <button id="fetchMoreBtn"
+                        type="button"
+                        class="sy-button--default pull-left"
+                        ng-click="usageCtrl.fetchPreviousRecords()"
+                        sy-busy-chevron="fetchMore"
+                        style="display:none"
+                        busy-class="sy-icon--chevron-left pull-left"
+                        ng-disabled="usageCtrl.cutoffDateReached()">
+                    &nbsp;
+                    Show more
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="panel" ng-if="!accountCtrl.doesCookieExist('RecontractingBanner')">
+    <div sy-banner>
+        <span class="cta__close">
+            <span class="sy-icon--remove_2" ng-click="accountCtrl.createCookie('RecontractingBanner')"></span>
+        </span>
+        <div class="sy-alert--info sy-banner">
+            <h2 class="sy-banner-header">
+                <span class="sy-icon--circle_info"></span>Your business plan is expiring soon.
+            </h2>
+            <p class="sy-banner-text">
+                We have tailored a renewal offer based on your business’s current plan and usage. Renew now to stay connected with the WA energy experts. We’ve made sign up easy, review your renewal offer.
+            </p>
+            <button class="sy-button--primary" ng-click="accountCtrl.redirectToSite()"  rel="noopener noreferrer" >Review offer</button>
+        </div>
+    </div>
+</div>

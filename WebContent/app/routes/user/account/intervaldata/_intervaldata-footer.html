@@ -1,0 +1,37 @@
+<br>
+<div class="panel">
+    <div ng-if="intervalDataCtrl.intervalData.mode==='Consumption'" class="panel-inner">
+        <p> <b>kWh</b> - A kilowatt-hour (kWh) is a measure of energy consumed over a period of time. 1 kWh = 1 kW (kilowatt) x 1 hour (time period).</p>
+        <p>Interval data is indicative of energy consumed and exported (if applicable) and should not be used for bill calculation purposes.  While all care is taken with the data there may be discrepancies between the data and the data provided by Western Power for the purposes of calculating the bill.</p>
+    </div>
+
+    <div ng-if="intervalDataCtrl.intervalData.mode==='Load Profile' && intervalDataCtrl.intervalData.dayInterval>0" class="panel-inner">
+        <p><b>kVAr</b> - A kilovolt-amp reactive (kVAr) is a unit of measurement of Reactive Power (voltage X amps reactive ),  also known as  Magnetising Power needed to energise electric motors and transformers.</p>
+
+        <p><b>KW</b> - Real Power (kW) is the power that actually drives the equipment and performs useful, productive work.  It is also called Working Power or Active Power.</p>
+        <!--<p>Interval data is indicative of energy consumed and exported (if applicable) and should not be used for bill calculation purposes.  While all care is taken with the data there may be discrepancies between the data and the data provided by Western Power for the purposes of calculating the bill.</p>-->
+    </div>
+
+    <div ng-if="intervalDataCtrl.intervalData.mode==='Load Profile' && intervalDataCtrl.intervalData.dayInterval===0" class="panel-inner">
+        <p> <b>kVAr</b> - A kilovolt-amp reactive (kVAr) is a unit of measurement of Reactive Power (voltage X amps reactive ),  also known as  Magnetising Power needed to energise electric motors and transformers.</p>
+
+        <p><b>KW</b> - Real Power (kW) is the power that actually drives the equipment and performs useful, productive work.  It is also called Working Power or Active Power.</p>
+
+        <p><b> Power Factor</b> - The Power Factor is a measure of how efficiently electrical power is used in your system and is defined as the ratio of Real (Working) Power to Apparent (Total) Power.</p>
+       <!-- <p>Interval data is indicative of energy consumed and exported (if applicable) and should not be used for bill calculation purposes.  While all care is taken with the data there may be discrepancies between the data and the data provided by Western Power for the purposes of calculating the bill.</p>-->
+    </div>
+
+    <div ng-if="intervalDataCtrl.intervalData.mode==='Power Factor'" class="panel-inner">
+        <p> <b>Power Factor</b> - The Power Factor is a measure of how efficiently electrical power is used in your system and is defined as the ratio of Real (Working) Power to Apparent (Total) Power. </p>
+        <!--<p>Interval data is indicative of energy consumed and exported (if applicable) and should not be used for bill calculation purposes.  While all care is taken with the data there may be discrepancies between the data and the data provided by Western Power for the purposes of calculating the bill.</p>-->
+    </div>
+
+    <div ng-if="intervalDataCtrl.intervalData.mode==='Load Factor'" class="panel-inner">
+        <p> <b>Load Factor</b> - Measures how constant energy demand is over a period of time. Load factor is calculated by dividing the Average kW Demand by the Maximum kW Demand for a given period. A load factor of 1 (ie. the average and the maximum demand are equal) means that the electric system exhibits a high level of efficiency.</p>
+        <!--<p>Interval data is indicative of energy consumed and exported (if applicable) and should not be used for bill calculation purposes.  While all care is taken with the data there may be discrepancies between the data and the data provided by Western Power for the purposes of calculating the bill.</p>-->
+    </div>
+
+    <div ng-if="intervalDataCtrl.intervalData.mode==='Tabular'"  class="panel-inner">
+
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<p class="control-label">
+    <strong>I have read, understand and agree with the <a sy-doc-href="terms.synergy">Terms and Conditions</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.</strong>
+</p>
+
+<button class="sy-button--default pull-left" ng-click="goBack()">{{backMsg}}</button>
+
+<div class="btn-group ">
+    <input type="button" class="sy-button--default" value="No">
+    <input type="button" class="sy-button--primary"
+           ng-click="next()" value="Yes" required="">
+</div>

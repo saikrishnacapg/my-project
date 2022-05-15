@@ -1,0 +1,127 @@
+<div ng-if="paperlessCtrl.isPaperless()">
+    <p>You are currently signed up for paperless billing and will no longer receive a paper bill in the mail.</p>
+
+    <p>Your bills are being sent to <strong ng-bind="paperlessCtrl.emailAddress"></strong></p>
+
+    <p ng-if="paperlessCtrl.rebsAutoRefundActive">
+        <strong>Please note:</strong> By cancelling paperless billing, you're no longer eligible to have your REBS
+        payments automatically sent to your bank account.
+    </p>
+
+    <p sy-econnect-deactivation-warning process="switching off Paperless" account="paperlessCtrl.account"></p>
+</div>
+
+<div ng-if="!paperlessCtrl.isPaperless()" ng-form="paperlessForm" ng-controller="MsgCntlr"  sy-auto-focus="sy-auto-focus">
+    <h2>Switch to Paperless</h2>
+
+    <p>
+        Save on paperwork and get your bills and all account related notifications delivered straight to your
+        inbox.<br/>
+        Plus, we'll send you SMS reminders whenever your bill arrives or is due to be paid.
+    </p>
+
+    <p>
+        We'll deliver your bills to:
+    </p>
+    <label for="emailAddress">Email: <span ng-if="isRequired()" class="label-required"></span></label>
+    <input type="email"
+           id="emailAddress"
+           name="emailAddress"
+           placeholder="Email address"
+           ng-model="paperlessCtrl.emailAddress"
+           ng-required="true"
+           class="form-control"
+           sy-pattern="EMAIL_ADDRESS"
+           sy-validate-email/>
+
+    <div sy-alert-box="emailAddress">
+        <p ng-show="paperlessForm.emailAddress.$error.email">{{findMsgHTML('MA_E24')}}</p>
+
+        <p ng-show="paperlessForm.emailAddress.$error.required">{{findMsgHTML('MA_E25')}}</p>
+
+        <p ng-show="paperlessForm.emailAddress.$error.pattern">{{findMsgHTML('MA_E24')}}</p>
+
+        <p ng-show="!paperlessForm.emailAddress.$error.email && !paperlessForm.emailAddress.$error.required && !paperlessForm.emailAddress.syValidateEmail">
+            {{findMsgHTML('MA_E26')}}.</p>
+    </div>
+    <br/>
+    <div class="acc-chkBox-btn">
+        <input type="checkbox" ng-model="paperlessCtrl.showSMSMobileNumber" id="showSMSMobileNumber"/>
+        <label for="showSMSMobileNumber">{{findMsgHTML('MA_E27')}}:</label>
+    </div>
+    <div ng-if="paperlessCtrl.showSMSMobileNumber">
+        <div style="float: left;width: 33%">
+            <select ng-model="paperlessCtrl.mobileTelephoneCountry"
+                    name="mobileTelephoneCountry" id="mobileTelephoneCountry"
+                    class="form-control"
+                    ng-required="true"
+                    ng-options="mobilearea.countrycode as mobilearea.countryname for mobilearea in paperlessCtrl.internationalAreas">
+            </select>
+
+            <div sy-alert-box="mobileTelephoneCountry" style="float: left;width: 33%;">
+                <p ng-if="paperlessForm.mobileTelephoneCountry.$error.required">
+                    {{findMsgHTML('MA_E7')}}
+                </p>
+
+                <p ng-if="paperlessForm.mobileTelephoneCountry.$error.pattern">
+                    {{findMsgHTML('MA_E7')}}
+                </p>
+            </div>
+        </div>
+
+
+        <div style="float: right;width: 66%">
+            <div class="controls">
+                <input type="tel"
+                       name="sendSMSMobileNumber"
+                       id="sendSMSMobileNumber"
+                       class="form-control"
+                       placeholder="Enter your mobile number"
+                       ng-model="paperlessCtrl.sendSMSMobileNumber"
+                       ng-required="true"
+                       sy-is-number
+                       ng-minlength="10"
+                       ng-maxlength="10"/>
+            </div>
+            <div sy-alert-box="sendSMSMobileNumber" style="float: right;width: 66%">
+                <p ng-show="paperlessForm.sendSMSMobileNumber.$error.required">
+                    {{findMsgHTML('MA_E28')}}
+                </p>
+
+                <p ng-show="paperlessForm.sendSMSMobileNumber.$error.syIsNumber">
+                    {{findMsgHTML('MA_E29')}}
+                </p>
+
+                <p ng-show="paperlessForm.sendSMSMobileNumber.$error.minlength || paperlessForm.sendSMSMobileNumber.$error.maxlength">
+                    {{findMsgHTML('MA_E29')}}
+                </p>
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </div>
+    <br/>
+    <div class="acc-chkBox-btn">
+        <input type="checkbox" ng-model="paperlessCtrl.termsAccepted" id="paperlessTerms" name="paperlessTerms" ng-required="true"/>
+        <label for="paperlessTerms" style="display:inline;">I have read, understand and agree with the
+            <a sy-doc-href="terms.paperless">Paperless Terms and Conditions</a>,
+            <a sy-doc-href="terms.privacy">Privacy Policy</a>and
+            <a sy-doc-href="terms.collections">Collection of Information Statement</a>
+            and I am authorised to enter into these Terms & Conditions.
+        </label>
+    </div>
+
+    <div sy-alert-box="paperlessTerms">
+        <p ng-show="paperlessForm.paperlessTerms.$error.required">
+            {{findMsgHTML('MA_E30')}}
+        </p>
+    </div>
+    <!--<div class="terms__acceptance">
+        <div class="controls">-->
+
+
+    <!--class="sy-checkbox"</div>
+</div>-->
+</div>
+
+

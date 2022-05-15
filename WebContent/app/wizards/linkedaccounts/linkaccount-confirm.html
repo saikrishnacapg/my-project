@@ -1,0 +1,17 @@
+<div class="terms">
+
+    <div class="terms__summary">
+        <p>You are about to link the following account:</p>
+        <label>Contract account number</label>
+        <p ng-bind="link.account.contractAccountNumber"></p>
+    </div>
+
+    <div class="terms__acceptance " sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="link.termsAndConditions" ng-true-value="'Yes'" ng-false-value="'No'" id="Terms"/>
+            <label for="Terms">I want to link this energy account to my online account.</label>
+        </div>
+    </div>
+
+</div>
+

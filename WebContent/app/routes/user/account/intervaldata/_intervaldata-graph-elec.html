@@ -1,0 +1,134 @@
+<div ng-if="intervalDataCtrl.intervalData.mode==='Consumption'">
+    <div ng-if="intervalDataCtrl.intervalData.latestData().hasValue">
+        <div id="consumptionChart" style="padding:0px;">
+            <div class="interval-data-consumption-chart" chart-data="intervalDataCtrl.intervalData.latestData()" dirty-check="intervalDataCtrl.intervalData.timestamp" chart="intervalDataCtrl.consumptionChart()"
+                 off-peak-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'offpeakKwhHalfHourlyValues': 'offpeakKwhDailyValues'}}"
+                 peak-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'peakKwhHalfHourlyValues': 'peakKwhDailyValues'}}"
+                 weekday-shoulder-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'weekdayShoulderKwhHalfHourlyValues': 'weekdayShoulderKwhDailyValues'}}"
+                 go-back-start-date="intervalDataCtrl.goBackStartDate()" go-back-end-date="intervalDataCtrl.goBackEndDate()" go-back-devices="intervalDataCtrl.goBackDevices()"
+                 day-interval="intervalDataCtrl.intervalData.dayInterval" contract-account-number="intervalDataCtrl.contractAccountNumber" mode="intervalDataCtrl.intervalData.mode"
+                 download="intervalDataCtrl.intervalData.download" interval-details="intervalDataCtrl.intervalData.intervalDetailsData()"
+                 generation-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'kwhHalfHourlyValuesGeneration': 'kwhDailyValuesGeneration'}}"
+                 show-generation="intervalDataCtrl.showGeneration()">
+            </div>
+        </div>
+    </div>
+    <div class="sy-alert--info ng-scope" ng-if="!intervalDataCtrl.intervalData.latestData().hasValue">
+        <span class="sy-icon--circle_info"></span>
+        <p>There is no interval data for this period of time. Please try searching a different date range.</p>
+    </div>
+</div>
+
+<div ng-if="intervalDataCtrl.intervalData.mode==='Load Profile' && intervalDataCtrl.intervalData.dayInterval>0">
+   <div id="dailyElecLoadProfileChart">
+       <div class="daily-elec-load-profile-chart" chart-data="intervalDataCtrl.intervalData.latestData()" dirty-check="intervalDataCtrl.intervalData.timestamp" chart="intervalDataCtrl.dailyElecLoadProfileChart()"
+            go-back-start-date="intervalDataCtrl.goBackStartDate()" go-back-end-date="intervalDataCtrl.goBackEndDate()" go-back-devices="intervalDataCtrl.goBackDevices()"
+            day-interval="intervalData.dayInterval" contract-account-number="intervalDataCtrl.contractAccountNumber" mode="intervalDataCtrl.intervalData.mode"
+            download="intervalDataCtrl.intervalData.download"></div>
+   </div>
+</div>
+
+<div ng-if="intervalDataCtrl.intervalData.mode==='Load Profile' && intervalDataCtrl.intervalData.dayInterval===0">
+   <div id="singleDayElecLoadProfileChart">
+       <div class="single-day-elec-load-profile-chart" chart-data="intervalDataCtrl.intervalData.latestData()" dirty-check="intervalDataCtrl.intervalData.timestamp" chart="intervalDataCtrl.singleDayElecLoadProfileChart()"
+            kva-values="kvaHalfHourlyValues" kw-values="kwHalfHourlyValues"
+            power-factor-values="powerFactorHalfHourlyValues"
+            go-back-start-date="intervalDataCtrl.goBackStartDate()" go-back-end-date="intervalDataCtrl.goBackEndDate()" go-back-devices="intervalDataCtrl.goBackDevices()"
+            day-interval="intervalDataCtrl.intervalData.dayInterval" contract-account-number="intervalDataCtrl.contractAccountNumber" mode="intervalDataCtrl.intervalData.mode"
+            download="intervalDataCtrl.intervalData.download" interval-details="intervalDataCtrl.intervalData.intervalDetailsData()"></div>
+   </div>
+</div>
+
+<div ng-if="intervalDataCtrl.intervalData.mode==='Power Factor'">
+   <div id="powerFactorChart">
+       <div class="power-factor-chart" chart-data="intervalDataCtrl.intervalData.latestData()" dirty-check="intervalDataCtrl.intervalData.timestamp" chart="intervalDataCtrl.powerFactorChart()"
+            chart-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'powerFactorHalfHourlyValues': 'averagePowerFactorDailyValues'}}"
+            go-back-start-date="intervalDataCtrl.goBackStartDate()" go-back-end-date="intervalDataCtrl.goBackEndDate()" go-back-devices="intervalDataCtrl.goBackDevices()"
+            day-interval="intervalDataCtrl.intervalData.dayInterval" contract-account-number="intervalDataCtrl.contractAccountNumber" mode="intervalDataCtrl.intervalData.mode"
+            download="intervalDataCtrl.intervalData.download"></div>
+   </div>
+</div>
+
+<div ng-if="intervalDataCtrl.intervalData.mode==='Load Factor'">
+   <div id="loadFactorChart">
+       <div class="load-factor-chart" chart-data="intervalDataCtrl.intervalData.latestData()" dirty-check="intervalDataCtrl.intervalData.timestamp" chart="intervalDataCtrl.loadFactorChart()"
+            chart-values="{{intervalDataCtrl.intervalData.dayInterval == 0 ? 'loadFactorHalfHourlyValues': 'averageLoadFactorDailyValues'}}"
+            go-back-start-date="intervalDataCtrl.goBackStartDate()" go-back-end-date="intervalDataCtrl.goBackEndDate()" go-back-devices="intervalDataCtrl.goBackDevices()"
+            day-interval="intervalDataCtrl.intervalData.dayInterval" contract-account-number="intervalDataCtrl.contractAccountNumber" mode="intervalDataCtrl.intervalData.mode"
+            download="intervalDataCtrl.intervalData.download"></div>
+   </div>
+</div>
+
+<div ng-if="intervalDataCtrl.intervalData.mode==='Tabular'" class="col-xs-12" style="margin-top:10px">
+   <div ng-if="intervalDataCtrl.intervalData.dayInterval > 0" class="table-responsive">
+       <table class="table table-bordered table-condensed table-hover text-center table-responsive">
+           <tr>
+               <th>Date</th>
+               <th ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].basePeriod !=''" >{{intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].basePeriod}} kWh</th>
+               <th ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period2 !=''" >{{intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period2}} kWh</th>
+               <th ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period3 !=''" >{{intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period3}} kWh</th>
+               <th ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period4 !=''" >{{intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period4}} kWh</th>
+               <!--<th>Peak kWh</th>
+               <th>Off Peak kWh</th>-->
+               <th>Average Power Factor</th>
+               <th>Average Load Factor</th>
+               <th>Power Factor @ Max kWh</th>
+               <th>Max kW</th>
+               <th>Reading Status</th>
+               <th ng-if="intervalDataCtrl.showGeneration()">Generation</th>
+           </tr>
+           <tr ng-repeat="maxKwDailyValue in intervalDataCtrl.intervalData.latestData().maxKwDailyValues track by $index">
+               <td><a href="" target="_blank" ng-click="intervalDataCtrl.clickNavigate($index)" style="text-decoration: underline">{{intervalDataCtrl.tabularDate($index)}}</a></td>
+
+
+               <td ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].basePeriod !=''" >{{intervalDataCtrl.intervalData.latestData().offpeakKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+               <td ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period2 !=''">{{intervalDataCtrl.intervalData.latestData().peakKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+               <td ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period3 !=''">{{intervalDataCtrl.intervalData.latestData().weekdayShoulderKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+               <td ng-if="intervalDataCtrl.intervalData.latestData().retrieveIntervalDetails[0].period4 !=''">{{intervalDataCtrl.intervalData.latestData().weekendShoulderKwhDailyValues[$index] | number:2 | noZeroes}}</td>
+
+               <!--
+               <td>{{intervalDataCtrl.intervalData.latestData().peakKwhDailyValues[$index] | number:0 | noZeroes}}</td>
+               <td>{{intervalDataCtrl.intervalData.latestData().offpeakKwhDailyValues[$index] | number:0 | noZeroes}}</td>-->
+               <td>{{intervalDataCtrl.intervalData.latestData().averagePowerFactorDailyValues[$index] | number:2 | noZeroes}}</td>
+               <td>{{intervalDataCtrl.intervalData.latestData().averageLoadFactorDailyValues[$index] | number:2 | noZeroes}}</td>
+               <td>{{intervalDataCtrl.intervalData.latestData().powerFactorAtMaxKwDailyValues[$index] | number:2 | noZeroes}}</td>
+               <td>{{maxKwDailyValue | number:0 | noZeroes}}</td>
+               <td>{{intervalDataCtrl.intervalData.latestData().statusCodeDailyValues[$index]}}</td>
+               <td ng-if="intervalDataCtrl.showGeneration()">{{intervalDataCtrl.intervalData.latestData().kwhDailyValuesGeneration[$index] | number:2 | noZeroes}}</td>
+           </tr>
+       </table>
+   </div>
+   <div ng-if="intervalDataCtrl.intervalData.dayInterval === 0">
+
+       <table class="table table-bordered table-condensed table-hover text-center">
+           <tr>
+               <th>Half Hour Date</th>
+               <th>Time</th>
+               <th>
+                   kWh <a href id="showkWhHelp" ng-click="intervalDataCtrl.showHelpText('kWh', 'app/routes/user/account/intervaldata/templates/modal-kwhhelp.html')" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+               </th>
+               <th>
+                   kW <a href id="showkWHelp" ng-click="intervalDataCtrl.showHelpText('kW', 'app/routes/user/account/intervaldata/templates/modal-kwhelp.html')" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+               </th>
+               <th>
+                   kVAr <a href id="showkVAHelp" ng-click="intervalDataCtrl.showHelpText('kVAr', 'app/routes/user/account/intervaldata/templates/modal-kvahelp.html')" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+               </th>
+               <th>
+                   Power Factor <a href id="showPowerFactorHelp" ng-click="intervalDataCtrl.showHelpText('Power Factor', 'app/routes/user/account/intervaldata/templates/modal-powerfactorhelp.html')" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+               </th>
+               <th>Reading Status</th>
+               <th ng-if="intervalDataCtrl.showGeneration()">Generation</th>
+           </tr>
+           <tr ng-repeat="kwHalfHourValue in intervalDataCtrl.intervalData.latestData().kwHalfHourlyValues track by $index">
+               <td>{{intervalDataCtrl.intervalData.latestData().startDate | date : 'dd/MM/y'}}</td>
+               <td>{{intervalDataCtrl.tabularTime($index, 30)}}</td>
+               <td>{{intervalDataCtrl.tabularKwh(intervalDataCtrl.intervalData.latestData().peakKwhHalfHourlyValues[$index], intervalDataCtrl.intervalData.latestData().offpeakKwhHalfHourlyValues[$index], intervalDataCtrl.intervalData.latestData().weekdayShoulderKwhHalfHourlyValues[$index]) | number:2 | noZeroes}}</td>
+               <td>{{kwHalfHourValue | number:1 | noZeroes}}</td>
+               <td>{{intervalDataCtrl.intervalData.latestData().kvaHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+               <td>{{intervalDataCtrl.intervalData.latestData().powerFactorHalfHourlyValues[$index] | number:2 | noZeroes}}</td>
+               <td>{{intervalDataCtrl.intervalData.latestData().statusCodeHalfHourlyValues[$index]}}</td>
+               <td ng-if="intervalDataCtrl.showGeneration()">{{intervalDataCtrl.intervalData.latestData().kwhHalfHourlyValuesGeneration[$index] | number:2 | noZeroes}}</td>
+           </tr>
+       </table>
+   </div>
+</div>

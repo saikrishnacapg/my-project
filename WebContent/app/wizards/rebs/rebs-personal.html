@@ -1,0 +1,99 @@
+<div class="must-complete">All fields must be completed.</div>
+<div ng-form="rebsForm" sy-auto-focus="sy-auto-focus">
+    <div class="form-group">
+        <label class="label-required" for="contractAccountNumber">Contract account number:</label>
+        <input type="text"
+               name="contractAccountNumber"
+               id="contractAccountNumber"
+               class="form-control"
+               placeholder="Contract account number"
+               ng-readonly="rebsCtrl.model.personalDetailsReadOnlyFields.contractAccountNumber"
+               ng-model="rebsCtrl.model.contractAccountNumber"
+               ng-required="false" />
+    </div>
+
+    <div sy-contact-details
+         contact-details="rebsCtrl.model.customer"
+         exclude="rebsCtrl.model.personalDetailsExcludeFields"
+         read-only-fields="rebsCtrl.model.personalDetailsReadOnlyFields"
+         is-required="true" is-mandatory-msg="No"></div>
+
+    <div class="form-group">
+        <label class="label-required" for="contactPhoneNumber">Contact phone number:</label>
+        <input type="text"
+               name="contactPhoneNumber"
+               id="contactPhoneNumber"
+               class="form-control"
+               placeholder="Contact phone number"
+               ng-model="rebsCtrl.model.customer.contactPhoneNumber"
+               required
+               sy-is-number-ignore-spaces
+               ng-minlength="6"
+               ng-maxlength="10" />
+        <div sy-alert-box="contactPhoneNumber">
+            <p ng-show="rebsForm.contactPhoneNumber.$error.required">
+                Please provide a contact phone number.
+            </p>
+            <p ng-show="rebsForm.contactPhoneNumber.$error.syIsNumberIgnoreSpaces">
+                Telephone number must be numeric.
+            </p>
+            <p ng-show="rebsForm.contactPhoneNumber.$error.minlength || rebsForm.contactPhoneNumber.$error.maxlength">
+                There's no dial tone here. Please enter a valid contact number.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="emailAddress">Email address:<span ng-if="!rebsCtrl.model.getQueryParameters()" class="label-required"></span></label>
+
+        <input type="email"
+               id="emailAddress"
+               name="emailAddress"
+               placeholder="Email address"
+               ng-model="rebsCtrl.model.customer.emailAddress"
+               ng-required="!rebsCtrl.model.getQueryParameters()"
+               sy-pattern="EMAIL_ADDRESS"
+               class="form-control"
+               ng-blur="rebsCtrl.isEmailValid()"/>
+
+        <div ng-show="rebsForm.emailAddress.hasVisited && rebsForm.emailAddress.$invalid || rebsForm.emailAddress.$invalid">
+            <p class="sy-alert--danger" ng-if="rebsForm.emailAddress.$error.email">Please provide a valid email address (e.g. yourname@example.com).</p>
+            <p class="sy-alert--danger" ng-if="rebsForm.emailAddress.$error.required">Please provide an email address.</p>
+            <p class="sy-alert--danger" ng-if="rebsForm.emailAddress.$error.pattern">Please provide a valid email address (e.g. yourname@example.com).</p>
+        </div>
+        <div class="alert sy-alert--warning" ng-if="rebsCtrl.invalidEmail">
+            The email address you have entered is not valid. Please enter a valid email address.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="label-required" for="customer.type">Customer type:</label>
+        <select id="customer.type"
+                name="customer.type"
+                class="form-control"
+                ng-multiple="false"
+                ng-model="rebsCtrl.model.customer.type"
+                ng-required="true"
+                ng-options="customerType for customerType in rebsCtrl.model.constructor.customerTypes">
+            <option value=""></option>
+        </select>
+        <div sy-alert-box="customer.type">
+            <p>Please provide a Customer Type.</p>
+        </div>
+    </div>
+    <!--code starts here-->
+    <div  class="terms__acceptance" ng-if="rebsCtrl.model.customer.type=='Business' || rebsCtrl.model.customer.type=='Educational Institution' || rebsCtrl.model.customer.type=='Non-profit organisation'">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="rebsCtrl.model.gstRelevant" id="GSTTerms"  class="" name="GSTTerms"  />
+            <label for="GSTTerms">Are you ready for GST ?</label>
+        </div>
+    </div>
+
+<!--code ends here-->
+    <div class="form-group">
+        <p class="help-block">
+            Please note these customer details are only used for the purpose of this application.
+            If you make changes to your customer details, your Synergy account will not be updated.
+        </p>
+    </div>
+</div>

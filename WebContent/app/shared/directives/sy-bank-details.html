@@ -1,0 +1,38 @@
+<div sy-form-group data-layout="form" ng-form="bankForm" ng-controller="MsgCntlr">
+    <label class="control-label label-required" for="accountName">Account holder name:</label>
+    <div sy-form-group data-layout="tooltip">
+        <div>
+            <input type="text" ng-model="bankModel.accountName" id="accountName" name="accountName" class="form-control" ng-required="true" sy-pattern="NAME" maxlength="60" ng-paste="$event.preventDefault()" >
+            <div sy-alert-box="accountName" sy-analytics-error="accountName">
+                <p ng-show="bankForm.accountName.$error.required">{{findMsgHTML('MA_E41')}}</p>
+                <p ng-show="bankForm.accountName.$error.pattern">{{findMsgHTML('MA_E42')}}</p>
+                <p ng-show="bankForm.accountName.$error.pattern">{{findMsgHTML('E412')}}</p>
+
+            </div>
+        </div>
+        <a href ng-click="showAccountHolderNameInfo()" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+        <div></div>
+    </div>
+</div>
+
+<div sy-form-group data-layout="form" ng-controller="MsgCntlr">
+    <label class="control-label label-required" for="bsbNumber">BSB:</label>
+    <div sy-form-group data-layout="tooltip">
+        <div>
+            <input type="tel" id="bsbNumber" name="bsbNumber" class="form-control" ng-model="bankModel.bsbNumber" maxlength="7" ng-required="true" sy-bsb-mask>
+            <div sy-alert-box="bsbNumber" sy-analytics-error="bsbNumber"><p>{{findMsgHTML('MA_E43')}}</p></div>
+        </div>
+        <a href ng-click="showBsbInfo()" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+    </div>
+</div>
+
+<div sy-form-group data-layout="form" ng-controller="MsgCntlr">
+    <label class="control-label label-required" for="accountNumber">Account number:</label>
+    <div sy-form-group data-layout="tooltip">
+        <div>
+            <input type="tel" id="accountNumber" name="accountNumber" class="form-control" ng-model="bankModel.accountNumber" sy-is-number ng-minlength="1" maxlength="9" ng-required="true">
+            <div sy-alert-box="accountNumber" sy-analytics-error="accountNumber"><p>{{findMsgHTML('MA_E44')}}</p></div>
+        </div>
+        <a href ng-click="showAccountNumberInfo()" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+    </div>
+</div>

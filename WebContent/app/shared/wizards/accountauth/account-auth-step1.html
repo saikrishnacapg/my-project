@@ -1,0 +1,60 @@
+<div ng-controller="MsgCntlr">
+    <div ng-form role="form" name="accountAuth1Form" novalidate="">
+    <!--
+       <!-- <div>
+            <h2>What type of customer are you?</h2>
+            <div class="form-group col-md-offset-1 pad-bottom-10">
+                <label class="normal-text" for="customerRESD">
+                    <input type="radio" ng-model="accountAuth.credentials.contractAccountType" value="RESD" class="sy-radio" id="customerRESD" required />
+                    Person
+                </label>
+                <label class="normal-text" for="customerSME">
+                    <input type="radio" ng-model="accountAuth.credentials.contractAccountType" value="SME" class="sy-radio" id="customerSME" required />
+                    Small/Medium Business
+                </label>
+                <label class="normal-text" for="customerIC">
+                    <input type="radio" ng-model="accountAuth.credentials.contractAccountType" value="I&C" class="sy-radio" id="customerIC" required />
+                    Large Business
+                </label>
+            </div>
+        </div>
+    -->
+
+        <div class="must-complete">All fields must be completed.</div>
+
+        <div sy-form-group data-layout="form">
+
+                <label class="control-label label-required" for="accountNumber">Synergy account number:</label>
+
+            <div>
+                <div sy-form-group data-layout="tooltip">
+                    <input type="text" id="accountNumber" name="accountNumber"
+                            ng-model="accountAuth.credentials.contractAccountNumber"
+                            class="form-control"
+                            placeholder="Account number"
+                            sy-focus-me
+                            sy-is-number-ignore-spaces
+                            required ng-minlength="8" ng-maxlength="12"
+                            analytics-category="3Point ID"/>
+                    <a href id="showAccountNumberHelp" ng-click="showAccountNumberHelp()" analytics-on="click" analytics-event="infoButton" analytics-category="3Point ID" analytics-label="Account number"alt="Help" title="Help">
+                        <span class="sy-icon--circle_question_mark"></span>
+                    </a>
+                </div>
+                <div sy-alert-box="accountNumber">
+                    <p ng-show="accountAuth1Form.accountNumber.$error.syIsNumberIgnoreSpaces">
+                        {{findMsgHTML('MA_E54')}}
+                    </p>
+
+                    <p ng-show="accountAuth1Form.accountNumber.$error.required">
+                        {{findMsgHTML('MA_E56')}}
+                    </p>
+
+                    <p ng-show="accountAuth1Form.accountNumber.$error.minlength || accountAuth1Form.accountNumber.$error.maxlength">
+                        {{findMsgHTML('MA_E57')}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

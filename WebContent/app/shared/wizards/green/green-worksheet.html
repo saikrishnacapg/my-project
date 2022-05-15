@@ -1,0 +1,98 @@
+<div class="green-worksheet">
+    <div class="panel panel-inner">
+        <h2 class="text-center label-required">
+            Your {{editgreenCtrl.model.title}} contribution: <span sy-green-info="greenflowCtrl.newGreenEnergy" sy-contribution-only></span>
+        </h2>
+
+        <div sy-range-shim ng-model="greenflowCtrl.newGreenEnergy.greenProductPlanAmount"
+             name="greenRange"
+             min="0" max="{{editgreenCtrl.model.units.contributionsMax}}"
+             step="{{editgreenCtrl.model.units.contributionsMin}}" syrs-fallback="editgreenCtrl.model.units.contributions"
+             syrs-id="myContribution" class="green-range"></div>
+    </div>
+
+    <div class="green-worksheet__values">
+        <span ng-if="greenflowCtrl.newGreenEnergy.greenProductCode=='EG'">
+            <p>Renewable energy certificates (RECs) representing an amount equal to approximately <strong>{{editgreenCtrl.greenCalculation.consumptionOffsetPercentage.toFixed(2)}}%</strong> of your electricity consumption will be purchased from nationally accredited GreenPower renewable energy sources. **</p>
+        </span>
+
+        <span ng-if="greenflowCtrl.newGreenEnergy.greenProductCode=='NP'">
+            <p>The premium you pay for <strong>{{editgreenCtrl.greenCalculation.consumptionOffsetPercentage.toFixed(2)}}%</strong> of your electricity consumption will be used to purchase renewable energy certificates (RECs) produced from nationally accredited GreenPower renewable energy sources.</p>
+        </span>
+
+        <span ng-if="greenflowCtrl.newGreenEnergy.greenProductCode=='EF'">
+            <p><strong>{{editgreenCtrl.greenCalculation.consumptionOffsetPercentage.toFixed(2)}}%</strong> of your electricity consumption will be offset by Synergy through greenhouse gas reduction programs.</p>
+        </span>
+
+        <div ng-if="greenflowCtrl.newGreenEnergy.greenProductCode!='EG'">
+            <br/>
+
+            <p>
+                It is estimated {{greenflowCtrl.newGreenEnergy.greenProductCode === 'EF' ? 'EarthFriendly' : 'NaturalPower '}} will cost you
+                <strong>${{editgreenCtrl.greenCalculation.extraDollarsPerWeek.toFixed(2)}}</strong>/week or <strong>${{editgreenCtrl.greenCalculation.extraDollarsPerBill.toFixed(2)}}</strong>/bill extra. **
+            </p>
+        </div>
+
+    </div>
+
+    <br/>
+
+    <div class="green-worksheet__savings">
+        <h2>How will you help the environment?</h2>
+
+        <div class="saving" >
+            <span class="legend sy-icon--leaf"></span><p>Approximately {{editgreenCtrl.greenCalculation.co2OffsetTonnes}} tonnes of C0<sub>2</sub> will be saved each year, comparable to</p>
+        </div>
+
+        <div class="saving" >
+            <span class="legend sy-icon--car"></span>
+            <p>
+                Removing {{editgreenCtrl.greenCalculation.offsetCars}} cars running for a year *
+            </p>
+        </div>
+
+        <div class="saving" >
+            <span class="legend sy-icon--home"></span>
+            <p>
+                Powering your house for {{editgreenCtrl.greenCalculation.offsetHousesPerMonth}}
+                <span ng-bind="editgreenCtrl.greenCalculation.offsetHousesPerMonth == 1 ? 'month' : 'months'"></span>
+                *
+            </p>
+        </div>
+    </div>
+
+    <div class="green-worksheet__footnote">
+        <p>
+            * Calculations are benchmarked on a Toyota Camry 2.5L, average fuel consumption of 7.8L/100km travelling 15,000 km in a year.
+        </p>
+
+        <p >
+            **
+                Based on your average daily usage of {{greenflowCtrl.greenSimulation.averageDailyConsumption}} units and a billing cycle of {{greenflowCtrl.greenSimulation.noOfDays}} days -
+                <a href="" ng-click="editgreenCtrl.letMeEdit()" ng-if="!editgreenCtrl.editableUsage">edit these details here</a>.
+        </p>
+    </div>
+
+    <div class="row green-worksheet__usage" ng-if="editgreenCtrl.editableUsage" ng-class="{'alert-flash': editgreenCtrl.editableAlert}">
+        <div class="col-xs-6">
+            <label>Average daily usage (units)</label><br/>
+            <div sy-item-quantity
+                 ng-model="greenflowCtrl.greenSimulation.averageDailyConsumption"
+                 name="averageDailyConsumption"
+                 sy-item-quantity-value="greenflowCtrl.greenSimulation.averageDailyConsumption"
+                 data-value="{{greenflowCtrl.greenSimulation.averageDailyConsumption}}"
+                 step="0.1" min="0.1" max="1000" sy-maxlength="6" sy-precision="3">
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <label>Billing period (days)</label><br/>
+            <div sy-item-quantity
+                 ng-model="greenflowCtrl.greenSimulation.noOfDays"
+                 name="billingPeriodDays"
+                 sy-item-quantity-value="greenflowCtrl.greenSimulation.noOfDays"
+                 data-value="{{greenflowCtrl.greenSimulation.noOfDays}}"
+                 min="1" max="365">
+            </div>
+        </div>
+    </div>
+</div>

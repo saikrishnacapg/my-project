@@ -1,0 +1,28 @@
+<div class="mini" sy-card ready-when="sasCtrl.portrait.active" color="white" font-color="black-text"
+    card-title="'Current status'" show-help="true" help-id="status" icon="sy-icon--flash">
+	<div sy-card-content>
+		<table>
+			<tbody class="padded-table-5 absolute left-55">
+				<tr>
+					<td>Device status</td>
+					<td>
+						<strong ng-bind="sasCtrl.portrait.active ? 'Active' : 'Inactive'"></strong>
+					</td>
+				</tr>
+				<tr ng-show="sasCtrl.portrait.temperature">
+					<td>Temperature</td>
+					<td>
+						<strong>{{sasCtrl.portrait.temperature}} <sup>o</sup>C </strong>
+					</td>
+				</tr>
+				<tr>
+					<td>Last update</td>
+					<td>
+						<strong ng-bind="sasCtrl.portrait.lastUpdate"></strong>
+					</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+</div>

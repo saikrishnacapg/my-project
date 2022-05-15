@@ -1,0 +1,54 @@
+<div ng-form="contactDetailsSubForm">
+
+    <div>
+        <div sy-form-group data-layout="form" ng-if="myCtrl.displayContactDetails.companyName ==''">
+
+            <label class="control-label" for="firstName">First name:</label>
+            <input type="text" id="firstName" class="form-control" ng-value="myCtrl.displayContactDetails.firstName" disabled="true" />
+        </div>
+
+        <div sy-form-group data-layout="form" ng-if="myCtrl.displayContactDetails.companyName ==''">
+            <label class="control-label" for="lastName">Last name:</label>
+            <input type="text" id="lastName" class="form-control" ng-value="myCtrl.displayContactDetails.lastName" disabled="true" />
+        </div>
+
+        <div sy-form-group data-layout="form" ng-if="myCtrl.displayContactDetails.companyName !=''">
+            <label class="control-label" for="organisationname">Organisation name:</label>
+            <input type="text" id="organisationname" class="form-control" ng-value="myCtrl.displayContactDetails.companyName" disabled="true"/>
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form">
+        <label class="control-label" for="telephoneNumber">Telephone:</label>
+        <input type="text" id="telephoneNumber" class="form-control" ng-value="myCtrl.displayContactDetails.telephoneNumber" disabled="true"/>
+
+    </div>
+
+    <div sy-form-group data-layout="form">
+        <label class="control-label" for="mobileTelephone">Mobile:</label>
+        <input type="text" id="mobileTelephone" class="form-control" ng-value="myCtrl.displayContactDetails.mobileTelephone" disabled="true" />
+
+    </div>
+
+    <div sy-form-group data-layout="form">
+        <label class="control-label" for="emailAddress">Email address:</label>
+        <input type="text" id="emailAddress" class="form-control" ng-value="myCtrl.displayContactDetails.emailAddress" disabled="true"/>
+    </div>
+
+    <div sy-form-group data-layout="form">
+        <label class="control-label" for="mailingAddress">Postal address</label>
+        <input type="text" id="mailingAddress" class="form-control form-control-lg" ng-value="myCtrl.displayContactDetails.mailingAddress.label" disabled="true"/>
+    </div>
+    <div sy-form-group data-layout="form" ng-if="myCtrl.newStoredCards">
+        <label class="control-label">My Cards</label>
+
+        <div class="controls">
+            <ul>
+                <li ng-repeat="storedCard in myCtrl.newStoredCards" ng-bind="storedCard.maskedCreditCardNumber">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>

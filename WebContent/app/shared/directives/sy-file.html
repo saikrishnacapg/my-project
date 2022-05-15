@@ -1,0 +1,39 @@
+<div>
+    <div class="html5-fileupload" ng-if="fileCtrl.hasFileAPI">
+        <input id="html5-control" type="button" class="input-button" value="Choose File" id="button">
+
+        <label for="syFileHTML5" id="html5-label"></label>
+
+        <input type="file"
+               style="visibility: hidden;"
+               name="syFileHTML5"
+               ng-model="fileCtrl.file"
+               id="syFileHTML5"
+               accept="image/png,image/jpg,image/jpeg,application/pdf"
+               nv-file-select=""
+               uploader="fileCtrl.uploader"
+               required/>
+
+        <div sy-alert-box="syFileHTML5">
+            <p>Please attach the customer consent form.</p>
+        </div>
+
+        <p style="margin: -15px 0px 15px 0px;" ng-bind="fileCtrl.fileName()"></p>
+    </div>
+    <div class="iframe-fileupload" ng-if="!fileCtrl.hasFileAPI">
+        <input type="file"
+               name="syFileManual"
+               ng-model="fileCtrl.file"
+               id="syFileManual"
+               accept="image/png,image/jpg,image/jpeg,application/pdf"
+               nv-file-select=""
+               uploader="fileCtrl.uploader"
+               required/>
+
+        <div sy-alert-box="syFileManual">
+            <p>Please attach the customer consent form.</p>
+        </div>
+
+        <p style="margin: -15px 0px 15px 0px;" ng-bind="fileCtrl.fileName()"></p>
+    </div>
+</div>

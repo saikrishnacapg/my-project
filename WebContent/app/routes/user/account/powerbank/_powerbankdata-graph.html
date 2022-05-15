@@ -1,0 +1,19 @@
+<div class="interval-data__graph">
+           <div id="consumptionChart" ng-if="powerbankDataCtrl.powerbankData.hasData" style="padding:0px;">
+            <div class="powerbank-consumption-chart" chart-data="powerbankDataCtrl.powerbankData.latestData()" dirty-check="powerbankDataCtrl.powerbankData.timestamp" chart="powerbankDataCtrl.consumptionChart()"
+                 go-back-start-date="powerbankDataCtrl.goBackStartDate()" go-back-end-date="powerbankDataCtrl.goBackEndDate()"
+                 day-interval="powerbankDataCtrl.powerbankData.dayInterval" contract-account-number="powerbankDataCtrl.contractAccountNumber" mode="powerbankDataCtrl.powerbankData.mode"
+                 download="powerbankDataCtrl.powerbankData.download"
+                >
+            </div>
+               <!--show-generation="powerbankDataCtrl.showGeneration()"-->
+    </div>
+    <div class="sy-alert--info ng-scope" ng-if="!powerbankDataCtrl.powerbankData.hasData">
+        <span class="sy-icon--circle_info"></span>
+        <p>There is no interval data for this period of time. Please try searching a different date range.</p>
+    </div>
+    <div ng-if="powerbankData.displayLookupErrorMessage()">
+        <h3 class="text-center" ng-bind="powerbankDataCtrl.powerbankData.message">
+        </h3>
+    </div>
+</div>

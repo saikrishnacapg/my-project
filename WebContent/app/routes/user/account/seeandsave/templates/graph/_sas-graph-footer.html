@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button id="searchBtn"
+                type="button"
+                class="sy-button--default pull-right"
+                ng-click="sasCtrl.dateSearch()">
+            <span class="sy-icon--search"></span>
+            Select dates
+        </button>
+
+        <!-- Cost extract descoped from pilot release. You can add this back in to have a dropdown on click and have various download types.
+        <button type="button" class="pull-left sy-button--default" bs-dropdown="dropdown"
+                data-template="app/routes/user/account/seeandsave/templates/graph/_sas--csv-dropdown.html"
+                aria-haspopup="true" aria-expanded="false">
+            <span class="sy-icon--download_alt"></span> Download as CSV
+        </button>-->
+
+        <button type="button" class="pull-left sy-button--default" ng-click="sasCtrl.reset()" id="reset">
+            <span class="sy-icon--refresh"></span> Reset
+        </button>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<ng-form name="myAppliancesForm">
+	    
+	<div>
+		<h2>My appliances</h2>
+		<p ng-if="energyprofileCtrl.account.feaDetails.isFirstTimeMigratingUser">Here are the appliances you setup on your Switch the Future profile. Check that these are still correct and add or remove where required. You can then move to the final step to check your energy saving tips.</p>
+		<p ng-if="!energyprofileCtrl.account.feaDetails.isFirstTimeMigratingUser">Please provide the information on the form below to allow us to show more accurate comparison data with households like yours.</p>
+	</div>
+
+	<div class="form-group">
+
+
+		<div  ng-repeat="category in energyprofileCtrl.appliances">
+	        <div class="row" style="margin: 0;">
+	           
+	            <h2 style="margin: 30px 0 13px; text-align: center"> {{category.name}}</h2>
+	           
+	        </div>
+	        <div class="row" style="margin: 0;">
+	        
+            	<div ng-repeat="appliance in category.appliances|orderBy:'name'" sy-appliance appliance="appliance" house-profile="energyprofileCtrl.houseProfile" ></div>
+	        </div>
+        </div>
+    </div>
+	    
+</ng-form>

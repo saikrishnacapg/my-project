@@ -1,0 +1,4 @@
+<div ng-form="instForm">
+    <sy-ddi-payment-method payment-model="signUpCtrl.model.instalment" use-button-selector="true"></sy-ddi-payment-method>
+    <div ng-show="signUpCtrl.model.instalment.directDebitType !== undefined" ng-include="'app/wizards/directdebit/directdebit-setup-shortfall.html'"></div>
+</div>

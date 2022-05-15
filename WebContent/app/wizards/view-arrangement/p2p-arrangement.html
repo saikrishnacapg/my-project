@@ -1,0 +1,89 @@
+<div ng-controller="MsgCntlr">
+    <div ng-form="makepaymentDetailsForm" class="makepaymentDetailsForm" novalidate>
+        <div sy-form-group>
+            <div class="col-sm-5 modify-label">
+                <label class="label-required" for="customer.type">How many instalments do you want to pay:</label>
+            </div>
+            <div class="col-sm-6 col-xs-10 no-padding">
+                <select id="customer.type"
+                        name="p2pArrangementCtrl.installmentNumber"
+                        class="form-control"
+                        ng-multiple="false"
+                        ng-model="p2pArrangementCtrl.installmentNumber"
+                        ng-required="true"
+                        ng-options="item.id for item in p2pArrangementCtrl.p2pPendingArrangementData"
+                        ng-change="p2pArrangementCtrl.setPaymentInstalments()">
+                    <option value="" disabled selected hidden>Please select a number of instalments</option>
+                </select>
+                <div sy-alert-box="customer.type">
+                    <p>Please provide a Customer Type.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <div sy-form-group ng-if="p2pArrangementCtrl.installmentNumber.id">
+                <div class="col-sm-5 arrangement-label instalment-details-label">
+                    <span id="instalmentDetails" class="label-required arrangement-form-label">Instalment details:</span>
+                </div>
+                <div class="col-sm-7 instalment-details no-padding">
+                    <span id="paymentDate" class="col-xs-4 label-date arrangement-form-label">Instalment Due Date</span>
+                    <span id="paymentAmount" class="col-xs-8 label-amount arrangement-form-label">Payment Amount</span>
+                    <div class="scrollbar" sy-auto-focus="sy-auto-focus">
+                        <div class="scrollbar__content" tabindex="0">
+                           <div ng-repeat="instalment in p2pArrangementCtrl.p2pSelectedArrangementData">
+                                <span
+                                        class="col-xs-7 no-padding"
+                                        ng-bind="instalment.payment_date_promised | date:'dd/MM/yy'"
+                                        aria-labelledby="instalmentDetails paymentDate"
+                                ></span>
+                                <span
+                                        class="col-xs-5 no-padding"
+                                        ng-bind="instalment.payment_amount_promised | currency"
+                                        aria-labelledby="instalmentDetails paymentAmount"
+                                ></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div sy-form-group ng-if="p2pArrangementCtrl.installmentNumber.id">
+                <div class="col-sm-5 arrangement-label instalment-details-label">
+                    <span class="label-required arrangement-form-label">Total Payment Amount</span>
+                </div>
+                <div class="col-sm-7 instalment-details no-padding">
+                    <span ng-bind="p2pArrangementCtrl.totalPaymentAmount"></span>
+                </div>
+            </div>
+
+            <div class="paymentOptionsDetailsForm" ng-if="p2pArrangementCtrl.installmentNumber.id && p2pArrangementCtrl.totalPaymentAmount >= p2pArrangementCtrl.minimumValidationAmount" novalidate>
+                <div class="must-complete">Select one of the below options to pay now.</div>
+                <div class="acc-radio-btn-group">
+                    <div class="sec">
+                        <div class="acc-radio-btn">
+                            <input type="radio" id="Bank" name="paymentOption" value="paymentByBank" ng-model="p2pArrangementCtrl.paymentOption">
+                            <label for="Bank">Bank account</label><br>
+                        </div>
+                        <p>Make a one off payment. All you need is your BSB and bank account number.</p>
+                    </div>
+                    <div class="sec">
+                        <div class="acc-radio-btn">
+                            <input type="radio" id="Card" name="paymentOption" value="paymentByCard" ng-model="p2pArrangementCtrl.paymentOption">
+                            <label for="Card">Credit or debit card</label><br>
+                        </div>
+                        <p>All you need is your credit or debit card. Surcharges may apply.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paymentOptionsDetailsForm" ng-if="p2pArrangementCtrl.installmentNumber.id && p2pArrangementCtrl.totalPaymentAmount < p2pArrangementCtrl.minimumValidationAmount" novalidate>
+                <div class="must-complete">Pay using credit or debit card.</div>
+                <div>
+                        <p>All you need is your credit or debit card. Surcharges may apply.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

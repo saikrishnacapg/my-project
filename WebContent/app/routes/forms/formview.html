@@ -1,0 +1,48 @@
+<div class="sy-wizard-inline">
+  <div class="container">
+    <div class="header">
+      <div class="header__logo">
+        <a title="Synergy" class="logo" ng-href="{{formViewCtrl.viewParams.contentSite}}" analytics-on="click" analytics-event="hyperlink" analytics-label="homepage">
+            <img title="Synergy" alt="Synergy My Account home" src="img/logo/synergy-logo.svg">
+        </a>
+      </div>
+      <div class="header__login">
+        <a title="My Account login" ng-href="{{formViewCtrl.viewParams.myAccountLogon}}" id="my-account-logon" analytics-on="click" analytics-event="hyperlink" analytics-label="myaccount">
+            My Account login
+            <span class="sy-icon--log_in"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero" form-container form-id="{{flow}}">
+
+      <form method="post" class="sy-wizard" name="wizardForm" novalidate="" class="sy-wizard">
+        <div class="sy-wizard__container">
+              <div class="sy-wizard__header">
+                <h1>{{wizard.context.title}}</h1>
+            </div>
+              <div class="sy-wizard__utility hidden-print" ng-show="wizard.context.progressbar.show && !wizard.context.completed">
+                    <h2 class="text-center">
+                         Your progress
+                    </h2>
+                  <div class="sy-progress">
+                      <div class="sy-progress-bar" sy-progress-bar role="progressbar"
+                           aria-valuenow="{{wizard.context.progressbar.level}}"
+                           aria-valuemin="0" aria-valuemax="100" ng-style="{width:wizard.context.progressbar.level+'%'}">
+                          <!-- The completely weird ng-style attribute is needed so the progress bar will work in IE -->
+                      </div>
+                  </div>
+              </div>
+              <div class="sy-wizard__body">
+            <main></main>
+              </div>
+              <div class="sy-wizard__footer hidden-print">
+              <button id="nextBtn" type="submit" class="sy-button--primary pull-right" ng-click="wizard.goForward()" ng-show="wizard.context.navbar.showNext" ng-disabled="wizard.context.navbar.disableNext" sy-busy-chevron="next" sy-submit-button>{{wizard.context.navbar.nextMsg}} <span class="sy-icon--chevron-right"></span></button>
+                    <button id="backBtn" type="button" class="sy-button--default pull-left" ng-click="wizard.goBack()" ng-show="wizard.context.navbar.showBack"><span class="sy-icon--chevron-left"></span> {{wizard.context.navbar.backMsg}}</button>
+              </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

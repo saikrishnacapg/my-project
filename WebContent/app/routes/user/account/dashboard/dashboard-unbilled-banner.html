@@ -1,0 +1,35 @@
+<div class="panel">
+    <div sy-banner ng-show="accountCtrl.showUnBilledBannerFirst">
+        <span class="cta__close cta_close_banner">
+            <span class="sy-icon--remove_2" ng-click="accountCtrl.bannerClosed=true;accountCtrl.showUnBilledBannerFirst=false;
+            accountCtrl.showUnBilledBannerSec=false;"></span>
+        </span>
+        <div class="sy-alert--banner-notification sy-banner">
+            <h2 class="sy-banner-header">
+                <span class="sy-icon--circle_info"></span>Invoice update
+            </h2>
+            <p class="sy-banner-text">
+                Due to technical issues, we have not received your recent meter data. This means when you receive your 
+                next bill, it will cover a longer time period than usual. Once resolved, we will issue your invoice as 
+                soon as possible.
+            </p>
+            <button class="sy-button--default" ng-click="accountCtrl.redirectToPWS('synergy.unbilled.invoice')"  rel="noopener noreferrer" >Learn more</button>
+        </div>
+    </div>
+    <div sy-banner ng-show="accountCtrl.showUnBilledBannerSec">
+        <span class="cta__close cta_close_banner">
+            <span class="sy-icon--remove_2" ng-click="accountCtrl.bannerClosed=true;accountCtrl.showUnBilledBannerFirst=false;
+            accountCtrl.showUnBilledBannerSec=false;"></span>
+        </span>
+        <div class="sy-alert--banner-notification sy-banner">
+            <h2 class="sy-banner-header">
+                <span class="sy-icon--circle_info"></span>Invoice update
+            </h2>
+            <p class="sy-banner-text">
+                Due to technical issues, you have not received a bill for an extended time period. We would like to 
+                resolve the issue as soon as possible. Please contact <a ng-if="accountCtrl.isResidential" href="tel:131353">13 13 53</a><a ng-if="!accountCtrl.isResidential" href="tel:131354">13 13 54</a> 
+                at your convenience to discuss this further.
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<ul  class="dropdown-menu" data-role="menu">
+    <li role="presentation" ng-repeat="billChoice in activityStatementPowerbankCtrl.billPeriodsPB"
+        class="arrangement-modify-dropdown" >
+        <a role="menuitem" ng-click="activityStatementPowerbankCtrl.loadPowerbankActivityStatementData(billChoice.billingPeriodName)"> {{billChoice.billingPeriodName}} </a>
+    </li>
+</ul>

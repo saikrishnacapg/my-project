@@ -1,0 +1,16 @@
+<div ng-form="rebsForm">
+
+    <div class="form-group">
+        <h2>Installer details</h2>
+        <p class="must-complete">This section is optional.</p>
+        <p>
+            It enables us to send your Synergy Reference Number directly to
+            your installer if you give us permission and request us to do so.
+        </p>
+    </div>
+
+    <div sy-contact-details
+         contact-details="rebsCtrl.model.installer"
+         exclude="rebsCtrl.model.installerExcludeFields"
+         is-required="false" is-mandatory-msg="No"></div>
+</div>

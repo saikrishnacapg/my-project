@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <div class="btn-group left" ng-model="sasCtrl.product.graph" bs-radio-group >
+            <label class="btn btn-default" ng-if="!sasCtrl.isMobile()" title="View Line graph"><input type="radio" class="btn btn-default" value="line" id="viewLineGraph">
+                <span class="sy-icon--stats"></span>
+            </label>
+            <label class="btn btn-default" title="View Pie graph"><input type="radio" class="btn btn-default" value="pie" id="viewPieGraph">
+                <span class="sy-icon--pie_chart"></span>
+            </label>
+            <label class="btn btn-default" ng-if="sasCtrl.isPricingAvailable()" title="View Bar graph"><input type="radio" class="btn btn-default" value="bar" id="viewBarGraph">
+                <span class="sy-icon--charts"></span>
+            </label>
+        </div>
+
+        <div class="right">
+            <button type="button" class="btn btn-default dropdown-toggle" id="downloadDataOptions" no-sy-analytics title="Download data"
+                    bs-dropdown data-template="app/routes/user/account/seeandsave/templates/graph/_sas--csv-dropdown.html">
+                <span class="sy-icon--download_alt"></span>
+            </button>
+
+            <button type="button" class="btn btn-default" ng-click="sasCtrl.customise()" title="Customise devices" id="customiseDevices">
+                <span class="sy-icon--edit"></span>
+            </button>
+            <button type="button" class="btn btn-default" ng-if="!sasCtrl.isMobile()" ng-model="sasCtrl.product.displayData" bs-checkbox title="Show data" id="showData">
+                <span class="sy-icon--show_lines"></span>
+            </button>
+        </div>
+
+    </div>
+</div>

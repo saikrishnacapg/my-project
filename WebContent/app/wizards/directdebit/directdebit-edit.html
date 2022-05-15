@@ -1,0 +1,31 @@
+<div ng-if="signUpCtrl.model.paymentType === 'FULL' || signUpCtrl.model.paymentType === 'UPDATE'">
+    <div sy-form-group data-layout="form">
+        <label>Name on card: </label>
+        <span ng-bind="signUpCtrl.model.directDebit.ccDetails.creditCardHolder"></span>
+    </div>
+
+    <div sy-form-group data-layout="form" >
+        <label>Card number: </label>
+        <span ng-bind="signUpCtrl.model.directDebit.ccDetails.maskedCreditCardNumber"></span>
+    </div>
+
+    <div class="must-complete">All fields must be completed.</div>
+    
+    <sy-card-expiry card-model="signUpCtrl.model.directDebit.ccDetails"></sy-card-expiry>
+</div>
+
+<div ng-if="signUpCtrl.model.paymentType === 'SPLIT'">
+    <div sy-form-group data-layout="form">
+        <label>Name on card: </label>
+        <span ng-bind="signUpCtrl.model.instalment.ccDetails.creditCardHolder"></span>
+    </div>
+
+    <div sy-form-group data-layout="form" >
+        <label>Card number: </label>
+        <span ng-bind="signUpCtrl.model.instalment.ccDetails.maskedCreditCardNumber"></span>
+    </div>
+
+    <div class="must-complete">All fields must be completed.</div>
+
+    <sy-card-expiry card-model="signUpCtrl.model.instalment.ccDetails"></sy-card-expiry>
+</div>

@@ -1,0 +1,62 @@
+<div class="response bankaccountpayment" id="printableArea" ng-if="oneOffPaymentCtrl.usabilla_surveytrigger('/ma/payment-bank/success')">
+    <div sy-wizard-success real-time="true">
+        <div class="row">
+            <div class="logo visible-print pull-left">
+                <img src="img/Synergy_logo_mono.svg" alt="Synergy">
+            </div>
+        </div>
+
+        <h2>You have successfully requested a one-off bank account payment.</h2>
+
+        <div class="row">
+            <div class="bankaccountpaymentSuccessDisplay">
+                <div class="logo pull-left">
+                    <img src="img/cookie-alert-blue-flat.svg">
+                </div>
+                <p class="form-caveat form-caveat--notice">
+                    Your payment request will be sent to your bank on {{oneOffPaymentCtrl.payResult.processDate | date : 'dd MMM yyyy'}}.
+                    The date that the payment will be deducted from your account will depend on your bank.
+                </p>
+            </div>
+        </div>
+
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Transaction number:</h3>
+            <p class="inline" ng-bind="oneOffPaymentCtrl.payResult.transactionNumber"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Payment number:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payResult.paymentNumber"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Account holder name:</h3>
+            <p class="inline"  ng-bind="oneOffPaymentCtrl.payResult.accountName"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">BSB:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payResult.bsbNumber | syBankBSPMask"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Account number:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payResult.accountNumber | syBankAccountMask"></p>
+        </div>
+
+        <div ng-if="oneOffPaymentCtrl.numberOfInstalments">
+            <h3 class="inline" style="width:166px;margin-right:20px">Number of instalments:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.numberOfInstalments"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Payment amount:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payResult.amount | currency:'$'"></p>
+        </div>
+
+        <bankpay-receipt email-address="oneOffPaymentCtrl.account.businessPartnerDetails.emailAddress" pay-result="oneOffPaymentCtrl.payResult"></bankpay-receipt>
+    </div>
+
+</div>

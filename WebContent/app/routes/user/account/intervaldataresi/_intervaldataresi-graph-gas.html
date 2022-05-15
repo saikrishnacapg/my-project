@@ -1,0 +1,20 @@
+<div ng-if="intervalDataResiCtrl.intervalDataResi.mode==='Consumption'">
+    <div id="gasConsumptionChart">
+        <div class="interval-data-gas-consumption-chart" chart-data="intervalDataResiCtrl.intervalDataResi.latestData()" dirty-check="intervalDataResiCtrl.intervalDataResi.timestamp" chart="intervalDataResiCtrl.gasConsumptionChart()"
+             chart-values="{{intervalDataResiCtrl.intervalDataResi.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="intervalDataResiCtrl.goBackStartDate()" go-back-end-date="intervalDataResiCtrl.goBackEndDate()" go-back-devices="intervalDataResiCtrl.goBackDevices()"
+             day-interval="intervalDataResiCtrl.intervalDataResi.dayInterval" contract-account-number="intervalDataResiCtrl.contractAccountNumber" mode="intervalDataResiCtrl.intervalDataResi.mode"
+             download="intervalDataResiCtrl.intervalDataResi.download"></div>
+    </div>
+</div>
+<div ng-if="intervalDataResiCtrl.intervalDataResi.mode==='Load Profile'">
+    <div id="gasLoadProfileChart">
+        <div class="load-profile-chart" chart-data="intervalDataResiCtrl.intervalDataResi.latestData()" dirty-check="intervalDataResiCtrl.intervalDataResi.timestamp" chart="intervalDataResiCtrl.gasLoadProfileChart()"
+             chart-values="{{intervalDataResiCtrl.intervalDataResi.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="intervalDataResiCtrl.goBackStartDate()" go-back-end-date="intervalDataResiCtrl.goBackEndDate()" go-back-devices="intervalDataResiCtrl.goBackDevices()"
+             day-interval="intervalDataResiCtrl.intervalDataResi.dayInterval" contract-account-number="intervalDataResiCtrl.contractAccountNumber" mode="intervalDataResiCtrl.intervalDataResi.mode"
+             download="intervalDataResiCtrl.intervalDataResi.download"></div>
+    </div>
+</div>
+
+

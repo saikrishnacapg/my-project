@@ -1,0 +1,34 @@
+<h2 ng-show="!signUpCtrl.nextState">
+    Before you begin
+</h2>
+
+<div class="sy-alert--info">
+    <span class="sy-icon--circle_info"></span>
+    Please do not refresh your browser or use the back or forward buttons of your browser while completing this process.
+</div>
+
+<div class="sy-alert--info" ng-if="signUpCtrl.account.paymentInfo.accountBalance > 0">
+    <span class="sy-icon--circle_info"></span>
+    <p>Please note your balance of $<strong ng-bind="signUpCtrl.account.paymentInfo.accountBalance"></strong> will be deducted within 24 hours of establishing your Direct Debit.</p>
+    <p>Please contact us on 13 13 53 if you wish to confirm whether you have any historical debt and the basis of the historical debt prior to establishing the Direct Debit.</p>
+</div>
+
+<p>
+    Direct Debit is a convenient, hassle-free way to pay your Synergy bills. If you choose to register for Direct Debit, the Total Due amount on your Synergy bill will be automatically deducted from your credit card* or bank account on the due date – so your bills are paid on time, every time.
+</p>
+<p>
+    To set up Direct Debit from your bank account you will need your BSB number, account number and account name. If you would like to use your debit or credit card* you will need to provide the name on the card, your credit or debit card number and the card's expiry date.
+</p>
+<p>
+    As per the Direct Debit Terms and Conditions, we are currently investigating options to provide you with more ways to pay by Direct Debit.
+</p>
+
+<p class="small">
+    <span sy-server-include="MYACC_DD_CARD_ALERT"></span>
+</p>
+<p class="small">
+    Download a copy of our Service Agreement for <a sy-doc-href="terms.directdebit">Terms and Conditions</a>.
+</p>
+
+<br>
+<img src="./img/BPoint_logo.jpg" alt="Bpoint payment provider logo"/>

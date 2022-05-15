@@ -1,0 +1,24 @@
+
+<div ng-if="intervalDataResiCtrl.intervalDataResi.latestData().hasValue">
+    <div class="interval-data__heading" ng-include="'app/routes/user/account/intervaldataresi/_intervaldataresi-heading.html'"></div>
+    <div id="intervalDataResiconsumptionChart" style="padding:0px;" >
+        <div class="intervalDataResi-consumption-chart" chart-data="intervalDataResiCtrl.intervalDataResi.latestData()" dirty-check="intervalDataResiCtrl.intervalDataResi.timestamp" chart="intervalDataResiCtrl.consumptionChart()"
+             off-peak-values="{{intervalDataResiCtrl.intervalDataResi.dayInterval == 0 ? 'offpeakKwhHalfHourlyValues': 'offpeakKwhDailyValues'}}"
+             peak-values="{{intervalDataResiCtrl.intervalDataResi.dayInterval == 0 ? 'peakKwhHalfHourlyValues': 'peakKwhDailyValues'}}"
+             go-back-start-date="intervalDataResiCtrl.goBackStartDate()" go-back-end-date="intervalDataResiCtrl.goBackEndDate()" go-back-devices="intervalDataResiCtrl.goBackDevices()"
+             day-interval="intervalDataResiCtrl.intervalDataResi.dayInterval" contract-account-number="intervalDataResiCtrl.contractAccountNumber" mode="intervalDataResiCtrl.intervalDataResi.mode"
+             download="intervalDataResiCtrl.intervalDataResi.download" interval-details="intervalDataResiCtrl.intervalDataResi.intervalDetailsData()"></div>
+    </div>
+</div>
+<div class="sy-alert--info ng-scope" ng-if="!intervalDataResiCtrl.intervalDataResi.latestData().hasValue">
+    <span class="sy-icon--circle_info"></span>
+    <h2>Hang tight while we wait for the data to arrive</h2>
+    <br>
+    <p>Unfortunately there is nothing to show here. This means we are just waiting to receive your first meter read
+        on the new plan. Once you receive your first bill, come back and visit again.</p>
+
+    <p>If you've already accessed the (extra) usage data here, then something has gone wrong under the hood. This means we’ll be busy trying to get it back up and running for you as quickly as possible. Please try again soon.</p>
+
+</div>
+
+

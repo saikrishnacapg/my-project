@@ -1,0 +1,183 @@
+<div class="panel account-options" ng-controller="DashboardOptionsCtrl as optionsCtrl">
+    <!-- Default panel contents -->
+    <div class="panel-header">
+        <h3>Manage your account</h3>
+    </div>
+    <div class="panel-body">
+        <!-- List group -->
+        <div class="list-group">
+            <a href="" class="list-group-item update-details-link" ng-click="optionsCtrl.openMyDetailsEdit()">
+                <div class="text-content">
+                    <span class="sy-icon--pencil"></span>
+                    Update details
+                </div>
+                <span class="action-text">Update</span>
+            </a>
+
+            <a
+                id="updateMyDetailsLink"
+                href=""
+                class="list-group-item"
+                ng-click="accountCtrl.openDirectDebit()"
+                ng-if="optionsCtrl.directDebit || optionsCtrl.directDebitP2PExists"
+            >
+                <div class="row">
+                    <span
+                        class="col-xs-1 sy-icon--direct-debit {{(optionsCtrl.directDebit || optionsCtrl.directDebitP2PExists) ? 'active' : ''}}"
+                    ></span>
+                    <span class="col-xs-6">Direct Debit</span>
+                    <span class="action-text pull-right">
+                        {{(optionsCtrl.directDebit || optionsCtrl.directDebitP2PExists) ? 'Modify' : 'Set up'}}
+                    </span>
+                </div>
+            </a>
+
+            <a
+                id="newDirectDebitLink"
+                href=""
+                class="list-group-item"
+                ng-click="accountCtrl.signUpDirectDebit()"
+                ng-if="!optionsCtrl.directDebit && !optionsCtrl.directDebitP2PExists"
+            >
+                <div class="row">
+                    <span
+                        class="col-xs-1 sy-icon--direct-debit {{(optionsCtrl.directDebit || optionsCtrl.directDebitP2PExists) ? 'active' : ''}}"
+                    ></span>
+                    <span class="col-xs-6">Direct Debit</span>
+                    <span class="action-text pull-right">
+                        {{(optionsCtrl.directDebit || optionsCtrl.directDebitP2PExists) ? 'Modify' : 'Set up'}}
+                    </span>
+                </div>
+            </a>
+
+            <a id="paperlessBillingLink" href="" class="list-group-item" ng-click="accountCtrl.openPaperless()">
+                <div class="row">
+                    <span class="col-xs-1 sy-icon--paperless-billing {{optionsCtrl.paperlessBilling ? 'active' : ''}}"></span>
+                    <span class="col-xs-6">Paperless</span>
+                    <span class="action-text pull-right" ng-show="!optionsCtrl.isBpay">
+                        {{optionsCtrl.paperlessBilling ? 'Modify' : 'Switch now'}}
+                    </span>
+                    <span class="action-text pull-right" ng-show="optionsCtrl.isBpay">Not eligible</span>
+                </div>
+            </a>
+
+            <a
+                id="greenEnergyLink"
+                href=""
+                class="list-group-item"
+                ng-click="accountCtrl.openGreenEnergy()"
+                ng-if="optionsCtrl.allowedGreen && !accountCtrl.isPodFCPFlag"
+            >
+                <div class="row">
+                    <span class="col-xs-1 sy-icon--green-energy {{optionsCtrl.greenEnergy ? 'active' : ''}}"></span>
+                    <span class="col-xs-6">Green energy</span>
+                    <span class="action-text pull-right">{{optionsCtrl.greenEnergy ? 'Modify' : 'Register'}}</span>
+                </div>
+            </a>
+
+            <a
+                id="concessionsLink"
+                href=""
+                class="list-group-item"
+                ng-click="accountCtrl.openConcessionCards()"
+                ng-if="optionsCtrl.allowedConcessions"
+            >
+                <div class="row">
+                    <span class="col-xs-1 sy-icon--concessions {{optionsCtrl.concessions ? 'active' : ''}}"></span>
+                    <span class="col-xs-6">
+                        Concessions
+                        <span ng-if="optionsCtrl.concessions">({{optionsCtrl.noOfConcessions}})</span>
+                    </span>
+                    <span class="action-text pull-right" ng-show="optionsCtrl.concessions">{{optionsCtrl.getConcessionCardTextLabel()}}</span>
+                    <span class="action-text pull-right" ng-hide="optionsCtrl.concessions">Add a new card</span>
+                </div>
+            </a>
+
+            <a
+                id="renewableApplicationLink"
+                href=""
+                ng-click="accountCtrl.openRenewableEnergyApplication()"
+                class="list-group-item"
+                ng-if="optionsCtrl.canRenewEnergy && !accountCtrl.isPodFCPFlag"
+            >
+                <div class="row">
+                    <span
+                        class="col-xs-1 sy-icon--solar {{(optionsCtrl.hasRenewableEnergy) && !(optionsCtrl.pendingRenewable)? 'active' : ''}}"
+                    ></span>
+                    <span class="col-xs-6" ng-if="!optionsCtrl.RebsEnabled">Distributed energy systems</span>
+                    <span class="col-xs-6" ng-if="optionsCtrl.RebsEnabled">Renewable energy systems</span>
+                    <span
+                        class="action-text pull-right"
+                        ng-show="(optionsCtrl.hasRenewableEnergy) && !(optionsCtrl.pendingRenewable)"
+                    >
+                        Modify
+                    </span>
+                    <span class="action-text pull-right" ng-hide="optionsCtrl.hasRenewableEnergy || optionsCtrl.pendingRenewable">
+                        Apply to connect
+                    </span>
+                    <span class="action-text pull-right" ng-show="optionsCtrl.pendingRenewable">Pending</span>
+                </div>
+            </a>
+
+            <a
+                id="renewableRefundLink"
+                href=""
+                ng-click="accountCtrl.openRenewableRefundApplication()"
+                class="list-group-item"
+                ng-if="optionsCtrl.canRefundEnergy"
+            >
+                <div class="row">
+                    <span class="col-xs-1 sy-icon--rebs  {{optionsCtrl.renewableRefundActive() ? 'active' : ''}}"></span>
+                    <span class="col-xs-6">Automated REBS payment</span>
+                    <span
+                        ng-if="!optionsCtrl.isBpay"
+                        class="action-text pull-right"
+                        ng-hide="optionsCtrl.renewableRefundActive()"
+                    >
+                        Set up
+                    </span>
+                    <span
+                        ng-if="!optionsCtrl.isBpay"
+                        class="action-text pull-right"
+                        ng-show="optionsCtrl.renewableRefundActive()"
+                    >
+                        Modify
+                    </span>
+                    <span class="action-text pull-right" ng-show="optionsCtrl.isBpay">Not eligible</span>
+                </div>
+            </a>
+
+            <a id="moveHouseLink" href="/moving.html" class="list-group-item" ng-if="optionsCtrl.allowedMoveHouse">
+                <div class="row">
+                    <span
+                        class="col-xs-1 {{accountCtrl.isResidential ? 'sy-icon--moving-home' : 'sy-icon--moving-business'}}"
+                    ></span>
+                    <span class="col-xs-6">{{accountCtrl.isResidential? 'Moving home?' : 'Moving premises?'}}</span>
+                    <span class="action-text pull-right">Get started</span>
+                </div>
+            </a>
+
+            <a
+                id="selfreadmeterLink"
+                sy-full-href="selfreadmeter.link"
+                target="_blank"
+                class="list-group-item"
+                ng-if="accountCtrl.currentAccount.premiseDetails.selfRead != null"
+            >
+                <div class="row">
+                    <span class="col-xs-1 sy-icon--meter"></span>
+                    <span class="col-xs-6">Self read meter?</span>
+                    <span class="action-text pull-right">Western Power</span>
+                </div>
+            </a>
+
+            <a class="list-group-item online-support-link" sy-doc-href="{{ optionsCtrl.onlineSupportLink() }}" target="_blank" rel="noreferrer noopener">
+                <div class="text-content">
+                    <span class="icon-help">?</span>
+                    Online Support
+                </div>
+                <span class="action-text">Need help?</span>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div ng-if="lifestyleCtrl.lifestyle.mode==='Consumption'">
+    <div id="gasConsumptionChart">
+        <div class="interval-data-gas-consumption-chart" chart-data="lifestyleCtrl.lifestyle.latestData()" dirty-check="lifestyleCtrl.lifestyle.timestamp" chart="lifestyleCtrl.gasConsumptionChart()"
+             chart-values="{{lifestyleCtrl.lifestyle.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="lifestyleCtrl.goBackStartDate()" go-back-end-date="lifestyleCtrl.goBackEndDate()" go-back-devices="lifestyleCtrl.goBackDevices()"
+             day-interval="lifestyleCtrl.lifestyle.dayInterval" contract-account-number="lifestyleCtrl.contractAccountNumber" mode="lifestyleCtrl.lifestyle.mode"
+             download="lifestyleCtrl.lifestyle.download"></div>
+    </div>
+</div>
+<div ng-if="lifestyleCtrl.lifestyle.mode==='Load Profile'">
+    <div id="gasLoadProfileChart">
+        <div class="load-profile-chart" chart-data="lifestyleCtrl.lifestyle.latestData()" dirty-check="lifestyleCtrl.lifestyle.timestamp" chart="lifestyleCtrl.gasLoadProfileChart()"
+             chart-values="{{lifestyleCtrl.lifestyle.dayInterval == 0 ? 'gjHourlyValues': 'gjDailyValues'}}"
+             go-back-start-date="lifestyleCtrl.goBackStartDate()" go-back-end-date="lifestyleCtrl.goBackEndDate()" go-back-devices="lifestyleCtrl.goBackDevices()"
+             day-interval="lifestyleCtrl.lifestyle.dayInterval" contract-account-number="lifestyleCtrl.contractAccountNumber" mode="lifestyleCtrl.lifestyle.mode"
+             download="lifestyleCtrl.lifestyle.download"></div>
+    </div>
+</div>
+
+
+<div ng-if="lifestyleCtrl.lifestyle.mode==='Tabular'" class="col-xs-12">
+    <div ng-if="lifestyleCtrl.lifestyle.dayInterval > 0" class="table-responsive">
+        <table class="table table-bordered table-condensed table-hover text-center">
+            <tr>
+                <th>Date</th>
+                <th>GJ</th>
+                <th>HHV</th>
+                <th>Peak Usage</th>
+                <th>Load Factor</th>
+                <th>Reading Status</th>
+            </tr>
+            <!-- Data isn't wrapped so we need to reference other values by index -->
+            <tr ng-repeat="gjDailyValue in lifestyleCtrl.lifestyle.latestData().gjDailyValues track by $index" ng-click="lifestyleCtrl.clickNavigate($index)">
+                <td>{{lifestyleCtrl.tabularDate($index)}}</td>
+                <td>{{gjDailyValue | number:2 | noZeroes}}</td>
+                <td>{{lifestyleCtrl.lifestyle.latestData().hhvDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{lifestyleCtrl.lifestyle.latestData().peakGjDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{lifestyleCtrl.lifestyle.latestData().loadFactorDailyValues[$index] | number:2 | noZeroes}}</td>
+                <td>{{lifestyleCtrl.lifestyle.latestData().readingTypeDailyValues[$index]}}</td>
+            </tr>
+        </table>
+    </div>
+    <div ng-if="lifestyleCtrl.lifestyle.dayInterval === 0">
+        <table class="table table-bordered table-condensed table-hover text-center white-background">
+            <tr>
+                <th>Hour Date</th>
+                <th>Time</th>
+                <th>GJ</th>
+                <th>Reading Status</th>
+            </tr>
+            <tr ng-repeat="gjHourlyValue in lifestyleCtrl.lifestyle.latestData().gjHourlyValues track by $index" ng-click="lifestyleCtrl.clickNavigate($index)">
+                <td>{{lifestyleCtrl.lifestyle.latestData().startDate}}</td>
+                <td>{{lifestyleCtrl.tabularTime($index, 60)}}</td>
+                <td>{{gjHourlyValue | number:2 | noZeroes}}</td>
+                <td>{{lifestyleCtrl.lifestyle.latestData().readingTypeHourlyValues[$index]}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

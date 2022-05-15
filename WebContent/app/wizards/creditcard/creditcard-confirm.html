@@ -1,0 +1,37 @@
+<div class="terms">
+    <div class="terms__summary">
+
+        <p><h2>We're almost done! Please check the following details are correct:</h2></p>
+
+        <br/>
+        <div sy-form-group data-layout="split">
+            <label>Cardholder name:</label>
+            <span ng-bind="myCtrl.payData.newCard.cardHolderName">myCtrl.payData.newCard.cardHolderName</span>
+        </div>
+
+        <div sy-form-group data-layout="split">
+            <label>Card number:</label>
+            <span ng-bind="myCtrl.payData.newCard.cardNumber | syMaskCard"></span>
+        </div>
+
+        <div sy-form-group data-layout="split">
+            <label>Expiry date:</label>
+            <span>{{myCtrl.payData.newCard.expiryMonth}}/{{myCtrl.payData.newCard.expiryYear}}</span>
+        </div>
+
+        <div sy-form-group data-layout="split">
+            <label>Card security code:</label>
+            <span ng-bind="myCtrl.payData.newCard.cvv"></span>
+        </div>
+
+    </div>
+
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="myCtrl.payData.termsAccepted" id="myTerms" class="">
+            <label for="myTerms">
+                <strong>I have read, understand and agree with the <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a></strong>
+            </label>
+        </div>
+    </div>
+</div>

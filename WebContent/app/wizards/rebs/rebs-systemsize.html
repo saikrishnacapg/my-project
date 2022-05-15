@@ -1,0 +1,128 @@
+<div ng-form="rebsForm">
+
+    <div class="form-group">
+        <p ng-if="rebsCtrl.model.isNewApplication()">
+            Please note that if these details change upon Western Power technical approval,
+            Synergy will automatically update your application with these details.
+        </p>
+
+        <p ng-if="!rebsCtrl.model.isNewApplication()">
+            Please note if your total inverter capacity remains unchanged and you are only increasing your solar panel
+            size, you do not require Western Power technical approval. If these details change upon Western Power
+            technical approval, Synergy will automatically update your application.
+        </p>
+
+        <p ng-if="!rebsCtrl.model.isNewApplication()">
+            Also note that increasing the inverter capacity may affect your eligibility to participate in the Distributed
+            Energy Buyback Scheme/Renewable Energy Buyback Scheme or the Residential Net Feed-in Tariff Scheme.
+        </p>
+
+        <p class="sy-alert--info" ng-if="isAndroid()">
+            Please enter a value greater than 0.5.
+        </p>
+    </div>
+    <div class="must-complete">All fields must be completed.</div>
+    <!--Padding to ensure errors don't merge-->
+    <div sy-form-group data-layout="form" class="pad-bottom-10">
+        <label class="label-required" for="totalGenerationSize">How many kWs can your system generate?</label>
+
+        <div>
+            <div sy-form-group data-layout="tooltip" >
+                <!--
+                     Issue with HTML5 numbers in Android where you can't input a decimal
+                     http://stackoverflow.com/questions/11134903/samsung-galaxy-tablet-does-not-allow-entering-floating-point-numbers-to-inputs-w
+                     http://stackoverflow.com/questions/15148456/angularjs-cant-change-input-type
+                     We can't dynamically change the input type so we need to do an ng-if and switch to tel on Android.
+                 -->
+                <div>
+                    <input type="number" name="totalGenerationSize" id="totalGenerationSize" class="form-control"
+                           ng-model="rebsCtrl.model.system.totalGenerationSize" sy-focus-me
+                           min="0.5" max="1000" step="0.01" sy-pattern="DEFAULT_DECIMAL_REBS" required
+                           ng-hide="isAndroid()"/>
+
+                    <input type="tel" name="totalGenerationSize" id="totalGenerationSize" class="form-control"
+                           ng-model="rebsCtrl.model.system.totalGenerationSize" sy-pattern="DEFAULT_DECIMAL_REBS" ng-required="true"
+                           ng-show="isAndroid()"/>
+                </div>
+
+                <a href id="generationHelp" type="button" alt="Help" title="Help" ng-click="generationHelp()">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+
+            </div>
+
+            <div sy-alert-box="totalGenerationSize">
+                <p ng-show="rebsForm.totalGenerationSize.$error.min">
+                    The total generation size must be a number greater than 0.5.
+                </p>
+
+                <p ng-show="rebsForm.totalGenerationSize.$error.pattern">
+                    Please enter the total generation size of your solar system. It must be a number greater than 0.5 and equal or less than 1000kW.
+                </p>
+
+                <p ng-show="rebsForm.totalGenerationSize.$error.required">
+                    Please enter the total generation size of your solar system. It must be a number greater than 0.5 and equal or less than 1000kW.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form">
+
+        <label class="label-required" for="totalInverterCapacity">What is the kW capacity of your inverter?</label>
+
+        <div>
+            <div sy-form-group data-layout="tooltip">
+                <!--
+                     Issue with HTML5 numbers in Android where you can't input a decimal
+                     We can't dynamically change the input type so we need to do an ng-if and switch to tel on Android.
+                 -->
+                <div>
+                    <input type="number" name="totalInverterCapacity" id="totalInverterCapacity" class="form-control"
+                           ng-model="rebsCtrl.model.system.totalInverterCapacity"
+                           min="0.5" max="1000" step="0.01" sy-pattern="DEFAULT_DECIMAL_REBS" required
+                           ng-hide="isAndroid()">
+
+                    <input type="tel" name="totalInverterCapacity" id="totalInverterCapacity" class="form-control"
+                           ng-model="rebsCtrl.model.system.totalInverterCapacity" sy-pattern="DEFAULT_DECIMAL_REBS"
+                           required
+                           ng-show="isAndroid()">
+                </div>
+
+                <a href id="inverterHelp" type="button" ng-click="inverterHelp()" alt="Help" title="Help">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+            </div>
+            <div sy-alert-box="totalInverterCapacity">
+                <p ng-show="rebsForm.totalInverterCapacity.$error.min">
+                    The total inverter capacity must be a number greater than 0.5.
+                </p>
+
+                <p ng-show="rebsForm.totalInverterCapacity.$error.pattern">
+                    Please enter your inverter capacity. It must be a number greater than 0.5 and equal or less than 1000kW.
+                </p>
+
+                <p ng-show="rebsForm.totalInverterCapacity.$error.required">
+                    Please enter your inverter capacity. It must be a number greater than 0.5 and equal or less than 1000kW.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form" ng-if="!rebsCtrl.model.isNewApplication()">
+        <label class="control-label label-required">Is this inverter new?</label>
+        <div class="btn-group" ng-init="rebsCtrl.model.system.resIsthisInverternew=='true'?rebsCtrl.model.system.resIsthisInverternew='true':rebsCtrl.model.system.resIsthisInverternew = 'false'">
+           <div class="col-xs-12 col-md-6 pad-left-0">
+                <div class="col-xs-12 col-md-6 no-margin-top">
+                    <label style="padding-top:0px!important">  <input type="radio" class="sy-radio" ng-model="rebsCtrl.model.system.resIsthisInverternew" value="true">
+                    Yes</label>
+                </div>
+                <div class="col-xs-12 col-md-6 no-margin-top">
+                    <label style="padding-top:0px!important">  <input type="radio" class="sy-radio" ng-model="rebsCtrl.model.system.resIsthisInverternew" value="false">
+                    No</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

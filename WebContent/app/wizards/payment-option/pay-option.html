@@ -1,0 +1,21 @@
+<div ng-controller="MsgCntlr">
+    <div ng-form="paymentOptionsDetailsForm" class="paymentOptionsDetailsForm" novalidate>
+        <div class="must-complete">Select one of the below options to pay now.</div>
+        <div class="acc-radio-btn-group">
+            <div class="sec">
+                <div class="acc-radio-btn">
+                    <input type="radio" id="Bank" name="paymentOption" value="paymentByBank" ng-model="paymentOptionCtrl.paymentOption">
+                    <label for="Bank">Bank account</label><br>
+                </div>
+                <p>Make a one off payment. All you need is your BSB and bank account number.</p>
+            </div>
+            <div class="sec">
+                <div class="acc-radio-btn">
+                    <input type="radio" id="Card" name="paymentOption" value="paymentByCard" ng-model="paymentOptionCtrl.paymentOption">
+                    <label for="Card">Credit or debit card</label><br>
+                </div>
+                <p>All you need is your credit or debit card. Surcharges may apply.</p>
+            </div>
+        </div>
+    </div>
+</div>

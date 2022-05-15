@@ -1,0 +1,4 @@
+<div class="step__content" ng-class="{true: 'content-expand'}[stepCtrl.expand]">
+	<span ng-transclude></span>
+	<span class="intro-readless" ng-if="stepCtrl.hasIntro" ng-show="stepCtrl.expand">(<a href ng-click="statusContent.contentShowLess()">less info</a>)</span>
+</div>

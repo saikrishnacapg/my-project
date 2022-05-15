@@ -1,0 +1,9 @@
+<div class="interval-data__graph">
+    <div id="intervalDataResiGraph" ng-if="intervalDataResiCtrl.displayGraph()">
+        <div ng-if="intervalDataResiCtrl.intervalDataResi.isElectricity()" ng-include="'app/routes/user/account/intervaldataresi/_intervaldataresi-graph-elec.html'"></div>
+    </div>
+    <div ng-if="intervalDataResiCtrl.displayLookupErrorMessage()">
+        <h3 class="text-center" ng-bind="intervalDataResiCtrl.intervalDataResi.message">
+        </h3>
+    </div>
+</div>

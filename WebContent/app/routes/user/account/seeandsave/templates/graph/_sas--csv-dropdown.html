@@ -1,0 +1,19 @@
+<ul class="dropdown-menu" data-role="menu">
+    <li role="presentation">
+        <a id="downloadKwLink" role="menuItem" href="" analytics-event="downloadEvent"
+           sy-csv-download csv-ca="accountCtrl.currentAccountNumber"
+           csv-data="sasCtrl.portrait.csv.load">
+           Load
+        </a>
+    </li>
+
+    <li role="presentation" class="divider visible-xs"></li>
+
+    <li role="presentation">
+        <a id="downloadDollarLink" role="menuItem" href="" analytics-event="downloadEvent"
+           sy-csv-download csv-ca="accountCtrl.currentAccountNumber"
+           csv-data="sasCtrl.portrait.csv.usage">
+           Usage
+        </a>
+    </li>
+</ul>

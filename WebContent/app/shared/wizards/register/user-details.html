@@ -1,0 +1,99 @@
+<div ng-form="form-register-accountnumber" name="userdetailsForm" novalidate="" class="terms">
+
+    <!--  note that this directive includes its own sub-form -->
+    <div sy-contact-details
+         contact-details="registerUserCtrl.registerFields"
+         exclude="{company: true, dateOfBirth: true, mailingAddress:true, furtherInfo: true, phone: true}"
+         is-required="true"></div>
+
+
+    <div class="sy-form-group">
+
+        <label class="control-label label-required" for="username">
+            Username:
+        </label>
+
+
+        <div class="controls">
+            <input type="text" id="username" name="username" placeholder="Username" class="form-control" required=""
+                   ng-model="registerUserCtrl.registerFields.username" ng-minlength="6"
+                   analytics-on="change" analytics-event="formEvent"
+                   sy-pattern="USERNAME" autocapitalize="off">
+
+            <div sy-alert-box="username">
+                <p>
+                    Your username must be between 6 and 16 characters in length, and contain letters and numbers only.
+                    It may not contain spaces, punctuation or other special characters (e.g. @*#/ are not allowed).
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="sy-form-group">
+        <label class="control-label label-required" for="password">Password:</label>
+
+        <div class="controls">
+            <input type="password" id="password" placeholder="Password" class="form-control"
+                   name="password" style="box-sizing: border-box;" ng-model="registerUserCtrl.registerFields.password"
+                   ng-minlength="6" ng-maxlength="32"
+                   analytics-on="change" analytics-event="formEvent"
+                   required="" autocomplete="off"><!-- jq-cf-hide-show-password="" -->
+
+            <div sy-password-strength="registerUserCtrl.registerFields.password" ng-show="userdetailsForm.password.$valid">
+            </div>
+
+            <div sy-alert-box="password">
+                <p ng-show="userdetailsForm.password.$error.required">Please enter a password.</p>
+                <p ng-show="userdetailsForm.password.$error.minlength || userdetailsForm.password.$error.maxlength">
+                    Please enter a password between 6 - 32 characters.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="sy-form-group" ng-hide="registerUserCtrl.isBpay()">
+
+        <h2 class="control-label">Go paperless</h2>
+        
+        <p>Save on paperwork and get your bills and other notifications about your account delivered straight to your inbox.</p>
+
+        <p>You'll still receive a copy of your bill - just with less trees involved and more convenient ways to open, print or file it.</p>
+
+        <div>
+            <label for="paperlessbillIndicator">
+                Yes - I want to switch to <a sy-doc-href="terms.paperless">Paperless</a>
+                <input name="signUpPaperlessBilling" type="checkbox" class="sy-checkbox" ng-model="registerUserCtrl.registerFields.signUpPaperlessBilling" ng-true-value="true" ng-false-value="false" id="paperlessbillIndicator" />
+            </label>
+        </div>
+
+    </div>
+
+    <div class="terms__acceptance" ng-init="registerUserCtrl.registerFields.linkOtherAccounts=''" ng-if="registerUserCtrl.isLargeBusiness()">
+        <label for="linkOtherAccounts">
+            Contact me to link other accounts
+            <input name="linkOtherAccounts" type="checkbox" class="sy-checkbox" ng-model="registerUserCtrl.registerFields.linkOtherAccounts" ng-true-value="true" ng-false-value="false" id="linkOtherAccounts" />
+        </label>
+    </div>
+
+    <div class="sy-form-group" ng-if="registerUserCtrl.registerFields.linkOtherAccounts">
+        <label for="linkContactNumber" class="label-required">Please provide a contact number.</label>
+        <div class="controls">
+            <input type="text" name="linkContactNumber" id="linkContactNumber" ng-model="registerUserCtrl.registerFields.linkContactNumber" ng-maxlength="50" ng-required="true" />
+            <div sy-alert-box="linkContactNumber">
+                <p>Please enter a valid contact number.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input name="registerTerms" type="checkbox" class="sy-checkbox" ng-model="registerUserCtrl.registerFields.terms" ng-true-value="'Yes'" ng-false-value="'No'" id="registerTerms">
+            <label for="registerTerms">
+                <strong class="label-required">I have read, understand and agree with the <a sy-doc-href="terms.synergy">Terms and Conditions</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.</strong>
+            </label>
+        </div>
+    </div>
+
+</div>

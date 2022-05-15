@@ -1,0 +1,65 @@
+<p>
+    <span ng-if="synergyAssistPlanCtrl.caseDetails.caseManagerName">As a customer on the case management program, your case manager is {{synergyAssistPlanCtrl.caseDetails.caseManagerName}}. </span>
+    If you need any help with your repayment plan or would you like to talk about your account, please call
+    <a data-description="{{synergyAssistPlanCtrl.caseDetails.formattedContactNumber}}" href="tel:+{{synergyAssistPlanCtrl.caseDetails.formattedContactNumber}}">
+        {{synergyAssistPlanCtrl.caseDetails.contactNumber}}
+    </a> between {{synergyAssistPlanCtrl.caseDetails.contactTime}}.
+</p>
+<section class="synergy-assist-plan">
+    <section>
+        <h2 class="heading">My Synergy Assist plan</h2>
+        <section class="wrapper-frequency">
+            <div>
+                Payment frequency:
+                <span class="payment-frequency">
+          {{synergyAssistPlanCtrl.instalmentFrequency}}
+        </span>
+            </div>
+            <button class="button button-payment-plan" ng-click="synergyAssistPlanCtrl.changePaymentPlan()"
+                    style="display: none">
+                Change payment plan
+            </button>
+        </section>
+        <div class="payment-change-warning" style="display: none">
+            Your payment plan cannot be changed at this time as you have already made
+            recent changes. Please call your case manager to discuss.
+        </div>
+
+        <section class="wrapper-upcoming-payments">
+            <h2>Payments until next review</h2>
+            <section class="upcoming-payments">
+                <table>
+                    <thead>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="payment in synergyAssistPlanCtrl.upcomingPayments">
+                        <td>{{payment.paymentDatePromised | date : 'dd MMM yyyy'}}&nbsp;</td>
+                        <td>{{payment.paymentAmountPromised | currency}}</td>
+                        <td>
+                            <span class="payment-status status-{{synergyAssistPlanCtrl.getStatusClass(payment.status)}}">
+                              {{payment.status}}
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="hidden-print">
+                    <button analytics-on="print" class="button button-print " onclick="window.print();return false;">
+                        <span class="icon sy-icon--print"></span>
+                        <span>Print</span>
+                    </button>
+                </div>
+            </section>
+            <section class="fine-print" style="display:none">
+                You currently owe {{ synergyAssistPlanCtrl.paymentDetails.totalBalance | currency }}. If you continue to
+                make payments of
+                {{synergyAssistPlanCtrl.paymentDetail.regularPaymentAmount | currency }} each week,
+                your estimated time to clear this debt is approximately {{synergyAssistPlanCtrl.debtClearedDate }},
+                taking into account your projected future consumption.
+            </section>
+        </section>
+    </section>
+</section>

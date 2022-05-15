@@ -1,0 +1,13 @@
+<div ng-if="greenCtrl.hasGreenEnergy">
+    <p>
+        Green energy is currently setup on this account:
+    </p>
+    <div sy-form-group data-layout="edit">
+        <span sy-green-info="greenCtrl.account.productDetails.greenDetails"></span>
+        <button class="sy-button--default" ng-click="greenCtrl.editGreen()">Edit</button>
+    </div>
+</div>
+
+<p ng-if="!greenCtrl.hasGreenEnergy">
+    This account is not valid for green energy.
+</p>

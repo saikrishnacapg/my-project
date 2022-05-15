@@ -1,0 +1,31 @@
+<div ng-controller="MsgCntlr">
+	<div class="must-complete">All fields must be completed.</div>
+    <div ng-form="updateConcessionCardsForm" class="updateConcessionCardsForm" novalidate="">
+        <h2 class="label-required">Concession card type</h2>
+
+        <div class="form-group" ng-repeat="issuer in ccCtrl.concessionCardTypes">
+            <label>{{issuer.name}}</label>
+            <div class="acc-radio-btn-group" ng-repeat="ct in issuer.cardTypes | orderBy:'name'"  ng-attr-sy-auto-focus="{{$parent.$index == 0 && $index == 0 }}">
+                    <div class="acc-radio-btn">
+                        <input type="radio" class="" ng-model="ccCtrl.newCard.cardType" id="radio{{ct.code}}" value="{{ct.code}}" required />
+                        <label for="radio{{ct.code}}">{{ct.name}}</label>
+                    </div>
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="cardNumber" class="label-required">Concession card number:</label>
+
+            <div>
+                <input type="text" id="cardNumber" placeholder="Card Number" class="form-control" name="cardNumber"
+                       ng-model="ccCtrl.newCard.cardNumber" value="" required="">
+
+                <div sy-alert-box="cardNumber">
+                    <p>{{findMsgHTML('MA_E52')}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

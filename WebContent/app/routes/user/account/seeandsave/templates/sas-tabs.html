@@ -1,0 +1,20 @@
+<div class="sy-tab-container" style="margin-bottom: 40px" ng-init="sasCtrl.mode = 'data';">
+    <ul class="sy-tabs sy-tabs--responsive">
+        <li ng-class="{'active': sasCtrl.mode == 'data'}">
+            <a href="" ng-click="sasCtrl.mode = 'data'">
+                <tab-heading class="ng-binding">
+                    <span ng-class="tab.icon" class="sy-icon--charts"></span>
+                    Real-time usage 
+                </tab-heading>
+            </a>
+        </li>
+        <li ng-class="{'active': sasCtrl.mode == 'feedback'}">
+            <a href="" ng-click="sasCtrl.mode = 'feedback'">
+                <tab-heading class="ng-binding">
+                    <span ng-class="tab.icon" class="sy-icon--file"></span>
+                    Tips & Support
+                </tab-heading>
+            </a>
+        </li>
+    </ul>
+</div>

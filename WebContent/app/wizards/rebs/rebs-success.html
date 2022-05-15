@@ -1,0 +1,46 @@
+<!-- Not real time but we have a custom notification below. -->
+<div sy-wizard-success real-time="true" ng-if="rebsCtrl.analyticsSend()">
+
+    <h2>We've successfully received your Distributed Energy System application.</h2>
+
+    <div ng-if="rebsCtrl.model.isNewApplication()">
+        <p>
+            Thank you for applying for distributed energy. You will
+            receive an email to confirm your application shortly.
+        </p>
+    </div>
+    <div ng-if="!rebsCtrl.model.isNewApplication()">
+        <p>
+            Thank you for applying to change your system size. You will
+            receive an email to confirm your application shortly.
+        </p>
+
+        <p>
+            If you are increasing your total inverter capacity, we will
+            email your Synergy Reference Number to you.
+        </p>
+    </div>
+
+    <div class="my-account-promo" ng-if="!rebsCtrl.isLoggedIn">
+        <div id="registered-promo" ng-show="rebsCtrl.hasMARegistered">
+            <p ng-show="rebsCtrl.model.isNewApplication()">By signing in to My Account you can view and track the status of your application online wherever you are on your smartphone, tablet or laptop.</p>
+            <p ng-hide="rebsCtrl.model.isNewApplication()">By signing in to My Account you can view your current solar power system details online wherever you are on your smartphone, tablet or laptop.</p>
+
+            <p>Just click Login to My Account below to proceed to the My Account login page or return to the <a sy-doc-href="synergy.site">Synergy site</a> here.</p>
+        </div>
+        <div id="yet-to-register-promo" ng-hide="rebsCtrl.hasMARegistered">
+            <p ng-show="rebsCtrl.model.isNewApplication()">We've noticed that your account for <span ng-bind="rebsCtrl.model.meter.address.supplyAddress"></span> has not yet been linked to My Account. By registering this account with My Account you can view and track the status of your application online wherever you are on your smartphone, tablet or laptop.</p>
+            <p ng-hide="rebsCtrl.model.isNewApplication()">We've noticed that your account for <span ng-bind="rebsCtrl.model.meter.address.supplyAddress"></span> has not yet been linked to My Account. By registering this account with My Account you can view your current solar power system details online wherever you are on your smartphone, tablet or laptop.</p>
+
+            <p>Just click Register for My Account below to complete your My Account registration or return to the <a sy-doc-href="synergy.site">Synergy site</a> here.</p>
+        </div>
+    </div>
+
+    <div class="sy-alert--info">
+        <p>
+            We aim to process your request within 24 hours. If you haven't received a response from us by this time, please contact us on
+            <span ng-bind="rebsCtrl.contactNumber()"></span> and our helpful staff will be able to assist you.
+        </p>
+    </div>
+</div>
+

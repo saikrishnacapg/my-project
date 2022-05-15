@@ -1,0 +1,32 @@
+<div>
+    <div sy-form-group data-layout="form">
+        <label class="control-label label-required">Email address:</label>
+
+        <div>
+            <input id="to"
+                   name="to"
+                   class="form-control"
+                   type="text"
+                   ng-model="usageexportCtrl.emailId"
+                   sy-pattern="EMAIL_COMMA_SEPARATED" ng-required="true"
+                   ng-blur="usageexportCtrl.isEmailValid()">
+            <div sy-alert-box="to">
+                <p>Please provide a valid list of email addresses. <br> For example; yourname@example.com <br>name1@example.com,name2@example.com</p>
+            </div>
+        </div>
+    </div>
+    <div sy-form-group class="file-format" data-layout="form">
+        <label class="control-label label-required">File format:</label>
+        <div>
+            <div class="btn-group acc-radio-btn-group" name="fileformatselection" ng-model="usageexportCtrl.dataExport.details.exportFormat" ng-required="true" style="margin-bottom: 10px;">
+                <div class="acc-radio-btn" ng-repeat="file in usageexportCtrl.exportFormats">
+                    <input type="radio" id="{{file.name}}" ng-model="usageexportCtrl.dataExport.details.exportFormat" class="form-control" value="{{file.format}}" ng-required="true">
+                    <label for="{{file.name}}">{{file.name}}</label>
+                </div>
+            </div>
+            <div sy-alert-box="fileformatselection">
+                <p>Please select your preferred file format.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div ng-form="myContactsDetailsForm">
+
+    <style>
+        .sy-block__body .sy-block__body--inner{
+            display: inline-block;
+            float: left;
+            margin: 0px 0px 0px 0px;
+        }
+        .sy-block__body .sy-block__body--inner h2{
+            margin:0px;
+        }
+        .sy-block__body .sy-block__body--Add-Acc{
+            float:right;
+            margin-right:0px;
+        }
+        .sy-block__body.list-group-item{
+            border-top: 0px;
+            padding: 30px 0px 10px;
+            border-bottom: 0px;
+        }
+    </style>
+    <div class="authorise-contacts-details-container">
+
+        <div class="form-group manageContact-instruction">
+            <h2>Add, edit or remove authorised contact/s</h2>
+            <p>The authorised contact/s will have the authority to manage and update your account</p>
+        </div>
+        <div class="sy-form-group manageContact-group">
+            <div class="container-fluid no-padding-left-right">
+                <div class="heading1"><h2 class="select-inr-title">Authorised contact</h2></div>
+                    <div class="heading2" ng-hide="myCtrl.account.contractAccountType == 'RESD'">
+                        <h2 class="select-inr-title">Primary contact <span class="sy-icon--circle_info tooltip" ng-mouseover="myCtrl.tooltipShow = true">
+                            <span class="tooltiptext"
+                                  ng-style="{'visibility': myCtrl.tooltipShow === true ? 'visible' : 'hidden'}">The primary contact will be contacted by Western Power for outage notifications. Only one person can be set as the primary contact for the business.
+                                <a href="javascript:void(0)" class="pull-right tooltip-close"  ng-click="myCtrl.tooltipHide()">
+                                    <span class="sy-icon--remove_2" title="Close"></span>
+                                </a>
+                            </span>
+                        </span></h2>
+                    </div>
+                    <div class="heading3"></div>
+            </div>
+            <br/>
+            <div  ng-repeat="contact in myCtrl.contactDetails | filter:{ changeIndicator: '!D'} track by $index" class="container-fluid no-padding-left-right ng-scope">
+                <div class="content">
+                    <p>{{contact.firstName}} {{contact.lastName}} </p>
+                </div>
+                <div class="content middle-content">
+                    <div class="acc-radio-btn" ng-hide="myCtrl.account.contractAccountType == 'RESD'">
+                        <input type="radio"  name="primaryContact{{$index}}" ng-model="myCtrl.contactDetails[$index].isPrimaryContact" id="primaryContact{{$index}}" ng-checked="myCtrl.contactDetails[$index].isPrimaryContact"
+                               ng-click="myCtrl.checkedPrimaryConatct($index)" value="{{myCtrl.contactDetails[$index].isPrimaryContact}}"  />
+                        <label  for="primaryContact{{$index}}"></label>
+
+                    </div>
+                </div>
+                <div class="content last-content" style="">
+                    <a href id="btnupdateSCD" ng-click="myCtrl.updateContactDetails($index)">Update</a>
+                    <span ng-if="!myCtrl.contactDetails[$index].isPrimaryContact">|</span>
+                    <a ng-if="!myCtrl.contactDetails[$index].isPrimaryContact"  href id="btndeleteSCD" ng-click="myCtrl.deleteContactDetails($index)">Delete</a>
+                </div>
+            </div>
+
+            <div class="sy-block__body list-group-item clearfix" style="border-top: 0px;">
+                <div class="sy-block__body--inner">
+                    <h2>Add a new energy account</h2>
+                    <p class="">This will link another account to your My Account</p>
+                </div>
+                <div class="sy-block__body--Add-Acc">
+                    <button class="pull-right-md sy-button--primary" ng-click="myCtrl.addContactDetails($index)">
+                        <span class="sy-icon--plus"></span> Add Contact
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

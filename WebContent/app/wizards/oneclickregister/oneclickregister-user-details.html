@@ -1,0 +1,317 @@
+
+<div ng-if="registerCtrl.validToken == true">
+  <div class="sy-alert--info">
+    <span class="sy-icon--circle_info"></span> Please verify and complete the details below and accept the Terms & Conditions to register for My Account.
+  </div>
+
+  <div ng-form name="oneclickForm" id="oneclickForm" novalidate class="terms">
+
+    <div data-layout="form">
+
+      <div ng-if="registerCtrl.credentialsCheck['dateOfBirth']">
+        <div class="form-group">
+          <label class="control-label label-required" >Date of birth: </label>
+          <a href ng-click="showCustomHelp('Date of birth' ,'We think age is only a number! Please enter your date of birth in the following order day/month/year (e.g. 27/05/1988).')" alt="Help" title="Help">
+            <span class="sy-icon--circle_question_mark blockingInline"></span>
+          </a>
+          <div>
+            <div id="dateOfBirth" data-layout="tooltip">
+              <input id="DOBDay"
+                     type="tel"
+                     name="DOBDay"
+                     class="input-mini form-control"
+                     ng-model="registerCtrl.dateOfBirthDay"
+                     placeholder="DD"
+                     maxlength="02"
+                     sy-pattern="DOBDAY"
+                     sy-check-dateofbirth
+                     sy-auto-move
+                     required
+                     style="margin: 0; width:50px;display:inline"/>
+              <span style="display:inline">/</span>
+              <input id="DOBMonth"
+                     type="tel"
+                     name="DOBMonth"
+                     class="input-mini form-control"
+                     ng-model="registerCtrl.dateOfBirthMonth"
+                     placeholder="MM"
+                     maxlength="02"
+                     sy-pattern="DOBMONTH"
+                     sy-check-dateofbirth
+                     sy-auto-move
+                     required
+                     style="margin: 0; width:50px;display:inline"/>
+              <span style="display:inline">/</span>
+              <input id="DOBYear"
+                     type="tel"
+                     name="DOBYear"
+                     class="input-mini form-control"
+                     ng-model="registerCtrl.dateOfBirthYear"
+                     placeholder="YYYY"
+                     maxlength="04"
+                     sy-pattern="DOBYEAR"
+                     sy-validate-dateofbirth
+                     sy-check-dateofbirth
+                     required
+                     style="margin: 0; width:65px;display:inline"/>
+            </div>
+
+            <div>
+              <p ng-show="oneclickForm.DOBDay.$error.pattern || oneclickForm.DOBDay.$error.required ||oneclickForm.DOBDay.$error.dateValid" sy-alert-box="DOBDay">
+                  <span ng-show="oneclickForm.DOBDay.$error.pattern">
+                    Please enter a valid date of birth.
+                  </span>
+                <span ng-show="oneclickForm.DOBDay.$error.required">
+                   Don't forget to tell us your date of birth. You'll need to add this to continue.
+                  </span>
+                <span ng-show="oneclickForm.DOBDay.$error.dateValid">Please enter a valid date of birth.</span>
+              </p>
+            </div>
+
+            <div>
+              <p ng-show="oneclickForm.DOBDay.$valid" sy-alert-box="DOBMonth">
+                    <span ng-show="oneclickForm.DOBMonth.$error.pattern">
+                        Please enter a valid month of birth.
+                    </span>
+
+                <span ng-show="oneclickForm.DOBMonth.$error.required">
+                       Don't forget to tell us your date of birth. You'll need to add this to continue.
+                    </span>
+                <span ng-show="oneclickForm.DOBMonth.$error.dateValid">Please enter a valid date of birth.</span>
+              </p>
+            </div>
+
+            <div>
+              <p ng-show="oneclickForm.DOBDay.$valid && registerCtrl.DOBMonth.$valid" sy-alert-box="DOBYear">
+                    <span ng-show="oneclickForm.DOBYear.$error.pattern">
+                        Please enter a valid year of birth.
+                    </span>
+
+                <span ng-show="oneclickForm.DOBYear.$error.required">
+                        Don't forget to tell us your date of birth. You'll need to add this to continue.
+                    </span>
+
+                <span ng-show="oneclickForm.DOBYear.$error.age">You must be 16 years of age to use this service.</span>
+                <span ng-show="oneclickForm.DOBYear.$error.dateValid">Please enter a valid date of birth.</span>
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div ng-if="registerCtrl.credentialsCheck['contractAccountProtectionPassword']">
+        <div class="form-group one-click-register-password">
+          <label class=" control-label label-required" for="contractAccountProtectionPassword">Electricity account privacy password:
+          </label>
+          <input type="password" id="contractAccountProtectionPassword" placeholder="Account Password" class="form-control"
+                 name="contractAccountProtectionPassword" style="box-sizing: border-box;"
+                 ng-model="registerCtrl.securityAnswers.mandatoryAccount.contractAccountProtectionPassword"
+                 analytics-on="change" analytics-event="formEvent"
+                 required>
+
+          <div sy-alert-box="contractAccountProtectionPassword">
+            <p>Please enter a password.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="registerCtrl.billDetailsValue">
+      <div class="form-group one-click-register-pointId">
+        <label class="label-required">Additional point of identification:</label>
+        <div>
+          <div>
+            <select
+              name="threePointIdChoice"
+              id="threePointIdChoice"
+              class="form-control"
+              ng-model="registerCtrl.securityAnswers.mandatoryAccount.billDetailType"
+              ng-options="bd.id as bd.label for bd in registerCtrl.credentialsCheck.billDetails"
+              placeholder="Choose one of the below"
+              required>
+              Select <span class="caret"></span>
+            </select>
+          </div>
+          <div sy-alert-box="threePointIdChoice">
+            <p>Please select an additional point of identification.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="registerCtrl.billDetailsValue && registerCtrl.billDetailDescription">
+      <div class="form-group one-click-register-pointId">
+        <label class="label-required" for="billDetailValue">Please enter your {{registerCtrl.billDetailDescription}}</label>
+
+        <div>
+          <div class="one-click-register-help">
+            <input type="text" id="billDetailValue" name="billDetailValue"
+                   class=" form-control" placeholder="{{registerCtrl.billDetailDescription}}"
+                   required
+                   analytics-on="change" analytics-event="formEvent"
+                   ng-model="registerCtrl.securityAnswers.mandatoryAccount.billDetailValue"/>
+            <a href ng-click="registerCtrl.showBillDetailHelp()" alt="Help" title="Help" class="help-position">
+              <span class="sy-icon--circle_question_mark"></span>
+            </a>
+          </div>
+
+          <div sy-alert-box="billDetailValue">
+            <p>Please enter your {{registerCtrl.billDetailDescription}}.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group" ng-if="registerCtrl.contract.contractAccountType != 'RESD'">
+
+      <label for="firstName" class="control-label label-required">Contact First name: </label>
+      <input type="text"
+             id="firstName"
+             name="firstName"
+             placeholder="First name"
+             class="inline-input form-control"
+             required
+             analytics-on="change"
+             analytics-event="formEvent"
+             ng-model="registerCtrl.registerFields.firstName"
+             sy-pattern="NAME">
+      <div sy-alert-box="firstName">
+        <p>Please provide a first name.</p>
+      </div>
+    </div>
+
+    <div class="form-group" ng-if="registerCtrl.contract.contractAccountType != 'RESD'">
+      <label for="lastName" class="control-label label-required">Contact Last name:</label>
+      <input type="text"
+             id="lastName"
+             name="lastName"
+             placeholder="Last name"
+             analytics-on="change"
+             analytics-event="formEvent"
+             class="inline-input form-control"
+             required
+             ng-model="registerCtrl.registerFields.lastName"
+             sy-pattern="NAME">
+      <div sy-alert-box="lastName">
+        <p>Please provide a last name.</p>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="form-group">
+
+      <label class="control-label label-required" for="username">
+        Username:
+      </label>
+
+
+      <div class="controls">
+        <input type="text" id="username" name="username" placeholder="Username" class="form-control" required=""
+               ng-model="registerCtrl.registerFields.username" ng-minlength="6"
+               analytics-on="change" analytics-event="formEvent"
+               sy-pattern="USERNAME" autocapitalize="off">
+
+        <div sy-alert-box="username">
+          <p ng-show="oneclickForm.username.$error.pattern">
+            Your username must be between 6 and 16 characters in length, and contain letters and numbers only.
+            It may not contain spaces, punctuation or other special characters (e.g. @*#/ are not allowed).
+          </p>
+          <p ng-show="oneclickForm.username.$error.required">
+            Please enter a username.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label class="control-label label-required" for="password">Password:</label>
+
+      <div class="controls">
+        <input type="password" id="password" placeholder="Password" class="form-control"
+               name="password" style="box-sizing: border-box;" ng-model="registerCtrl.registerFields.password"
+               ng-minlength="6" ng-maxlength="32"
+               analytics-on="change" analytics-event="formEvent"
+               required autocomplete="off">
+
+        <div sy-alert-box="password">
+          <p ng-if="oneclickForm.password.$error.required">Please enter a password.</p>
+          <p ng-if="oneclickForm.password.$error.minlength || oneclickForm.password.$error.maxlength">
+            Please enter a password between 6 - 32 characters.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div sy-password-strength="registerCtrl.registerFields.password" ng-show="oneclickForm.password.$valid">
+    </div>
+    <br>
+
+
+    <div class="form-group">
+      <label class="control-label label-required" for="newPasswordConfirm">Confirm password:</label>
+
+      <div class="controls">
+        <input type="password" name="newPasswordConfirm" id="newPasswordConfirm" placeholder="Confirm password"
+               ng-model="registerCtrl.registerFields.newPasswordConfirm"
+               class="form-control"
+               required
+               sy-match="registerCtrl.registerFields.password"
+        />
+        <div sy-alert-box="newPasswordConfirm">
+          <p ng-show="oneclickForm.newPasswordConfirm.$error.required">Please confirm your password.</p>
+          <p ng-show="oneclickForm.newPasswordConfirm.$error.syMatch">Password and confirm password must match.</p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <div class="form-group" ng-if="registerCtrl.registerFields.contractAccountType === 'RESD' || registerCtrl.registerFields.contractAccountType === 'SME'"
+         ng-init="registerCtrl.registerFields.signUpPaperlessBilling=''">
+      <div>
+        <p>Would you like us to sign you up for paperless billing?</p>
+        <div>
+          <label>
+            <input type="radio" name="paperless" class="sy-radio" value="yes" required="required" ng-model="registerCtrl.registerFields.signUpPaperlessBilling">
+            Yes
+          </label>
+          <label>
+            <input type="radio" name="paperless" class="sy-radio" value="no" required="required" checked="checked" ng-model="registerCtrl.registerFields.signUpPaperlessBilling">
+            No
+          </label>
+        </div>
+
+        <div sy-alert-box="paperless">
+          <p ng-show="oneclickForm.paperless.$error.required">Please select your billing preference.</p>
+        </div>
+      </div>
+
+    </div>
+    <div style="font-size: 20%">.</div>
+
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+      <div class="acc-chkBox-btn">
+        <input name="registerTerms" type="checkbox" class="" ng-model="registerCtrl.registerFields.terms" ng-true-value="'Yes'" ng-false-value="'No'" id="registerTerms">
+        <label for="registerTerms">
+          <strong class="label-required">I have read, understand and agree with the <a sy-doc-href="terms.synergy">Terms and Conditions</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.</strong>
+        </label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div ng-if="registerCtrl.validToken == false">
+  <p>
+        <span>
+            An error occured validating your registration. To complete your registration please call
+            <a href="tel:131353">13 13 53</a> for Residential or <a href="tel:131354">13 13 54</a> for Business.
+        </span>
+  </p>
+</div>

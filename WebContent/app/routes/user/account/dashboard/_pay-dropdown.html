@@ -1,0 +1,24 @@
+<ul class="dropdown-menu" data-role="menu" ng-controller="DashboardOptionsCtrl as optionsCtrl">
+	<li role="presentation">
+		<a role="menuitem" href="" ng-click="accountCtrl.choosePaymentOptionIds();$hide()">{{accountCtrl.paymentLabel}}</a>
+	</li>
+	<li role="presentation">
+		<a id="directDebitLink" href="" ng-click="accountCtrl.openDirectDebit()" ng-if="accountCtrl.directDebitButton">
+			Direct Debit
+		</a>
+		<a
+			id="newDirectDebitLink"
+			href=""
+			ng-click="accountCtrl.signUpDirectDebit()"
+			ng-if="!accountCtrl.directDebitButton"
+		>
+			Direct Debit
+		</a>
+	</li>
+	<li role="presentation">
+		<a role="menuitem" href="/payment-extension.html" ng-if="!accountCtrl.isAtRisk">Payment extension</a>
+	</li>
+	<li role="presentation">
+		<a role="menuitem" href="{{accountCtrl.paymentArrangementUrl()}}">Payment {{accountCtrl.promiseToPayType}}</a>
+	</li>
+</ul>

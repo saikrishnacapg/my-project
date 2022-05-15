@@ -1,0 +1,35 @@
+<div class="section">
+
+    <div class="row">
+        <div class="col s12 m6 parent-center">
+            <div class="col s3 m3 center-x element-center">
+                <i class="material-icons large" ng-class="sasCtrl.portrait.active ? (sasCtrl.portrait.partiallyActive ? 'sy-orange' : 'sy-green') : 'sy-red'">power_settings_new</i>
+            </div>
+            <div class="col s9 m9" ng-if="sasCtrl.portrait.active !== false">
+                <h1 class="col s12 m12"><span title="Current load">{{portrait.load.current | round}} kW</span><span ng-show="sasCtrl.portrait.temperature.value" title="{{sasCtrl.portrait.temperature.label}}">, {{sasCtrl.portrait.temperature.value}} <sup>o</sup>C </span></h1>
+                <strong class="col s12 m12" ng-bind="'As at ' + portrait.lastUpdate"></strong>
+                <strong class="col s12 m12" ng-bind="'Next update ' + portrait.nextUpdate"></strong>
+                <div class="col s12 m12" ng-if="sasCtrl.portrait.partiallyActive">
+                    <p class="pad-top-15">Some of your devices are inactive. Please call <strong sy-phone-number account-type="{{sasCtrl.account.contractAccountType}}"></strong> to speak to one of our energy consultants.</p>
+                </div>
+            </div>
+
+            <div class="col s9 m9" ng-if="sasCtrl.portrait.active === false">
+                <h1>Inactive</h1>
+                <p>Please call <strong sy-phone-number account-type="{{sasCtrl.account.contractAccountType}}"></strong> to speak to one of our energy consultants.</p>
+            </div>
+        </div>
+        <div class="col s12 m6" ng-if="sasCtrl.portrait.active !== false">
+            <div class="col s3 m3 center-x element-center">
+                <i class="material-icons large sy-red" ng-if="portrait.savings.load.yesterday === false">trending_up</i>
+                <i class="material-icons large sy-orange" ng-if="portrait.savings.load.yesterday === undefined">trending_flat</i>
+                <i class="material-icons large sy-green" ng-if="portrait.savings.load.yesterday">trending_down</i>
+            </div>
+            <div class="col s9 m9">
+                <h1 class="col s12 m12" ng-bind="portrait.delta.load.yesterday + '%'"></h1>
+                <strong class="col s12 m12"><span ng-bind="portrait.savings.load.yesterday !== undefined ? portrait.savings.load.yesterday ? 'Decrease on' : 'Increase on' : 'Similar to'"></span> {{sasCtrl.portrait.lastUpdate}} yesterday</strong>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+
+<p>Synergy has a range of green energy solutions to suit every budget, choose the one that is right for you:</p>
+<div class="greenProductCode">
+    <div  class="acc-radio-btn-group" ng-repeat="(greenProductCode, greenModel) in greenflowCtrl.greenModels">
+        <div class="acc-radio-btn" ng-attr-sy-auto-focus="{{$index == 0 }}">
+            <input type="radio" required id="greenProductCode{{$index}}" ng-model="greenflowCtrl.newGreenEnergy.greenProductCode" ng-value="greenProductCode"
+                   ng-change="greenflowCtrl.newGreenEnergy.greenProductPlanAmount = 0;">
+            <label class="label-h4" for="greenProductCode{{$index}}">{{greenModel.title}} - {{greenModel.subTitle}}</label>
+            <p>{{greenModel.description}}</p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,16 @@
+<div class="controls">
+  	<p>Simply start typing your address and select it from the list that appears.</span></p>
+    <input type="text"
+        id="address"
+        name="address"
+      	class="form-control"
+      	placeholder="Start Typing..."
+      	ng-model="address.selection"
+      	ng-options="result as result.label for result in quickSearch($viewValue) | filter:$viewValue | limitTo:8 "
+        trigger="{{options.trigger}}"
+        bs-typeahead
+        sy-is-address/>
+    <div sy-alert-box="address" wait-for-submit="true">
+        {{errorMsg ? errorMsg : 'Please enter a valid address.'}}
+    </div>
+</div>

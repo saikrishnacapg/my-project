@@ -1,0 +1,60 @@
+<div sy-wizard-success real-time="false">
+    <h2>Paperless Billing has been cancelled.</h2>
+
+    <p>Your next bill and account related notifications for account number {{paperlessCtrl.account.contractAccountNumber}} at supply address {{paperlessCtrl.account.premiseAddress.label | capitalize}} will now be delivered to your mailing address.</p>
+
+    <p ng-if="paperlessCtrl.accountList.length > 0">If you want to switch other accounts to paper, you will need to switch them individually.</p>
+
+    <p sy-econnect-deactivation-info process="cancellation of Paperless" account="paperlessCtrl.account"></p>
+
+    <h2 class="sy-form-separator">Please help us make Paperless Billing better.</h2>
+
+    <p>Please take a moment to let us know why you changed your mind about Paperless Billing.</p>
+
+    <div ng-form="paperlessForm">
+        <p>Why do you want to cancel Paperless Billing?</p>
+
+        <div sy-form-group data-layout="default">
+            <div class="col-sm-6 acc-chkBox-btn" ng-repeat="reason in paperlessCtrl.reasons">
+                <input class="" id="{{reason.name}}" type="checkbox" ng-model="reason.checked" />
+                <label for="{{reason.name}}" class="squeeze"><span ng-bind="reason.name"></span></label>
+            </div>
+        </div>
+
+        <div sy-form-group data-layout="default" ng-if="paperlessCtrl.cancellationReasonRequired()">
+            <label class="control-label" for="customerComment" >Please specify:</label>
+
+            <div class="controls">
+                <textarea id="customerComment"
+                          name="customerComment"
+                          class="form-control"
+                          placeholder="Details"
+                          rows="5"
+                          ng-model="paperlessCtrl.cancellationDetail.customerComment"
+                          ng-maxlength="4000"></textarea>
+                <div sy-alert-box="customerComment">
+                    <p>
+                        Please limit your entry to 4000 characters.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div data-layout="default"  class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="paperlessCtrl.cancellationDetail.contact" id="contact" />
+            <label for="contact">I would like to be contacted regarding my feedback.</label>
+        </div>
+
+        <div sy-form-group data-layout="default" ng-show="paperlessCtrl.cancellationDetail.contact">
+            <label for="contactDetail">Day time number or email address:</label>
+            <input type="text" ng-model="paperlessCtrl.cancellationDetail.contactDetail" id="contactDetail" class="form-control" ng-maxlength="254" />
+            <div sy-alert-box="contactDetail">
+                <p>
+                    Please limit your entry to 254 characters.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>

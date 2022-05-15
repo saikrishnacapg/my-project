@@ -1,0 +1,37 @@
+<div ng-if="solarCtrl.solar.dayInterval !== 0">
+    <button id="fetchMoreBtn"
+            type="button"
+            class="sy-button--default pull-left"
+            ng-click="solarCtrl.previousInterval()"
+            sy-busy-chevron="fetchMore"
+            busy-class="sy-icon--chevron-left pull-left">
+        Previous range
+    </button>
+
+    <button id="fetchMoreFutureBtn"
+            type="button"
+            class="sy-button--default pull-right"
+            ng-click="solarCtrl.nextInterval()"
+            sy-busy-chevron="fetchMore"
+            busy-class="sy-icon--chevron-right pull-right">
+        Next range
+    </button>
+</div>
+<div ng-if="solarCtrl.solar.dayInterval === 0">
+        <button id="fetchMoreBtn"
+                type="button"
+                class="sy-button--default pull-left"
+                ng-click="solarCtrl.previousInterval()"
+                sy-busy-chevron="fetchMore"
+                busy-class="sy-icon--chevron-left pull-left">
+            Previous day
+        </button>
+        <button id="fetchMoreFutureBtn"
+                type="button"
+                class="sy-button--default pull-right"
+                ng-click="solarCtrl.nextInterval()"
+                sy-busy-chevron="fetchMore"
+                busy-class="sy-icon--chevron-right pull-right">
+            Next day
+        </button>
+    </div>

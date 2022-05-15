@@ -1,0 +1,24 @@
+<div ng-controller="BilledCtrl as billedCtrl" ng-cloak>
+   <div class="ami-int-cnt" ng-if="!billedCtrl.hasValidationError">
+         <div class="" ng-if="billedCtrl.showBilledInsight()">
+               <h2 ng-if="billedCtrl.billedConsumptionDetails.startDate">Billed usage trends from {{billedCtrl.billedConsumptionDetails.startDate|date:'dd MMM'}} to {{billedCtrl.billedConsumptionDetails.endDate|date:'dd MMM'}}</h2>
+               <p class="content" ng-if="billedCtrl.billedConsumptionDetails.highestConsumptionDate">Highest usage day is <span class="capitalize">{{billedCtrl.billedConsumptionDetails.highestConsumptionDay}}</span> {{billedCtrl.billedConsumptionDetails.highestConsumptionDate|date:'dd MMM'}}.</p>
+               <p ng-if="billedCtrl.billedConsumptionDetails.lowestConsumptionDate">Lowest usage day is <span class="capitalize">{{billedCtrl.billedConsumptionDetails.lowestConsumptionDay}}</span> {{billedCtrl.billedConsumptionDetails.lowestConsumptionDate|date:'dd MMM'}}.</p>
+               <p ng-if="billedCtrl.billedConsumptionDetails.highestConsumptionDayWeek">On average you use the most electricity on a <span class="capitalize">{{billedCtrl.billedConsumptionDetails.highestConsumptionDayWeek}}</span> during the week.</p>
+               <p ng-if="billedCtrl.billedConsumptionDetails.highestConsumptionHrs">Highest usage hours are between {{billedCtrl.billedConsumptionDetails.highestConsumptionHrs}}.</p>
+         </div>
+         <div class=""  ng-if="billedCtrl.isMultipleHighConsumption()">
+            <h2 ng-if="billedCtrl.billedConsumptionDetails.startDate">Billed usage trends from {{billedCtrl.billedConsumptionDetails.startDate|date:'dd MMM'}} to {{billedCtrl.billedConsumptionDetails.endDate|date:'dd MMM'}}</h2>
+            <p class="content">We have found multiple high usage hours/days since your bill was issued.</p>
+         </div>
+       <div class=""  ng-if="billedCtrl.isMultipleLowConsumption()">
+           <h2 ng-if="billedCtrl.billedConsumptionDetails.startDate">Billed usage trends from {{billedCtrl.billedConsumptionDetails.startDate|date:'dd MMM'}} to {{billedCtrl.billedConsumptionDetails.endDate|date:'dd MMM'}}</h2>
+           <p class="content">We have found multiple low usage hours/days since your bill was issued.</p>
+       </div>
+       <div class=""  ng-if="billedCtrl.isSubstitueDataPresent()">
+           <h2 ng-if="billedCtrl.billedConsumptionDetails.startDate">Billed usage trends from {{billedCtrl.billedConsumptionDetails.startDate|date:'dd MMM'}} to {{billedCtrl.billedConsumptionDetails.endDate|date:'dd MMM'}}</h2>
+           <p class="content">We have found that some or all of your meter data is estimated</p>
+       </div>
+   </div>
+
+</div>

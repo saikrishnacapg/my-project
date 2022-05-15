@@ -1,0 +1,34 @@
+<div class="margin-top-10" sy-econnect-info account="accountCtrl.currentAccount" ng-if="((!accountCtrl.isResidential && !accountCtrl.BusinessSolarXsellBanner && accountCtrl.BusinessSolarXbannerNotify)||(accountCtrl.isResidential&&!accountCtrl.SolarXsellBanner && !accountCtrl.SolarXbannerNotify))"></div>
+
+<div class="panel margin-top-10"  ng-if="accountCtrl.ShowResidentialsolarXBanner() && !accountCtrl.isPodFCPFlag">
+    <div class="panel-header" ng-if="accountCtrl.trigggersolarbannerEvent()">
+        <div class="text-center">
+            <div class="margin-left-0"><img alt="" src="img/solar-blue-sky.svg" width="32" /></div>
+             <h3 class="margin-top-10">Save up to $500 every year with solar</h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        <p>Enquire now to receive information on a solar solution and we will refer your details to our trusted supplier Solargain.</p>
+        <div sy-form-group data-layout="default">
+            <p><input type="button" id="Requestacallback" class="sy-button--primary sy-button--col12" value="Enquire now"  ng-click="accountCtrl.RequestacallForSolar_x_My_Account();"></p>
+            <p><input type="button" id="Nothanks" class="sy-button--blue sy-button--col12" value="No thanks" ng-click="accountCtrl.hidesolarXBanner()"></p>
+        </div>
+    </div>
+</div>
+
+<div class="panel margin-top-10"  ng-if="accountCtrl.ShowBusinesssolarXBanner()">
+    <div class="panel-header" data-event="site-interaction" data-type="banner" data-location="my account" data-description="display Business Solar banner" ng-if="accountCtrl.trigggersolarbannerEvent()">
+        <div class="text-center">
+            <div class="margin-left-0"><img alt="" src="img/solar-blue-sky.svg" width="32" /></div>
+            <h3 class="margin-top-10">Reduce your power bill with commercial solar</h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        <p>Investing in a renewable energy source such as solar power to put all that WA sunshine to work could help to significantly reduce electricity costs for your business.
+           <!-- Request a solar quote today!-->
+        </p>
+        <div sy-form-group data-layout="default">
+            <p><input type="button" id="Requestacallback" class="sy-button--primary sy-button--col12" value="Request a solar quote"  ng-click="accountCtrl.RequestacallForSolar_x_My_Account();" data-event= "site-interaction" data-type= "button" data-location= "my account" data-description="Business Solar callback yes"></p>
+            <p><input type="button" id="Nothanks" class="sy-button--blue sy-button--col12" value="No thanks" ng-click="accountCtrl.hidesolarXBanner()" data-event= "site-interaction" data-type= "button" data-location="my account" data-description="Business Solar quote callback no"></p></div>
+    </div>
+</div>

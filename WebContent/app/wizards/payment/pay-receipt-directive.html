@@ -1,0 +1,29 @@
+<div ng-controller="PayReceiptOptionsCtrl as payReceipt">
+    <p class="hidden-print">
+        <span class="sy-icon--print sy-primary-color-text"></span>
+        <a href="" onclick="window.print()" analytics-event="Print" analytics-label="{{payReceiptCtrl.analyticsLabel}}">Print</a>
+        &nbsp;
+        <span class="sy-icon--envelope sy-primary-color-text"></span>
+        <a href="" ng-click="payReceiptCtrl.showEmail = true;">Email</a>
+        &nbsp;&nbsp;
+        <span class="sy-icon--download-link sy-primary-color-text"></span>
+        <a href="" ng-click="payReceiptCtrl.pdf()" analytics-event="Download" analytics-label="{{payReceiptCtrl.analyticsLabel}}">Download</a>
+    </p>
+
+    <div class="form-group hidden-print" data-layout="edit" ng-if="payReceiptCtrl.showEmail;">
+        <input type="text"
+               id="emailAddress"
+               placeholder="Email address"
+               ng-model="payReceiptCtrl.emailAddress"
+               required
+               sy-validate-email
+               class="form-control"/>
+        <br>
+        <button class="sy-button--yellow" ng-click="payReceiptCtrl.email()" analytics-event="Send email" analytics-label="{{payReceiptCtrl.analyticsLabel}}">Send email</button>
+    </div>
+
+    <div class="sy-alert--info" ng-if="payResult.wasSuccessful">
+        Please allow up to 2 business days for this amount to be applied to your Synergy account.
+    </div>
+
+</div>

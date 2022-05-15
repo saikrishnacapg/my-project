@@ -1,0 +1,94 @@
+<ng-form name="myHouseForm" class="myHouseForm">
+
+
+	<div>
+		<h2>My household profile</h2>
+		<p ng-if="energyprofileCtrl.account.feaDetails.isFirstTimeMigratingUser">Please check your household details below. Make changes where required, and then continue checking your appliance info.</p>
+		<p ng-if="!energyprofileCtrl.account.feaDetails.isFirstTimeMigratingUser">Please provide the information on the form below to allow us to show more accurate comparison data with households like yours.</p>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+	
+			<h3>Residents</h3>
+
+			<div class="row">
+				<div class="col-xs-6">
+					<label>Adults</label><br/>
+					<div sy-item-quantity 
+						 ng-model="energyprofileCtrl.houseProfile.adults" 
+						 sy-item-quantity-value="energyprofileCtrl.houseProfile.adults" 
+						 data-value="{{energyprofileCtrl.houseProfile.adults}}">
+					</div>
+				</div>
+
+				<div class="col-xs-6">
+					<label>Children</label><br/>
+					<div sy-item-quantity 
+						 ng-model="energyprofileCtrl.houseProfile.children" 
+						 sy-item-quantity-value="energyprofileCtrl.houseProfile.children" 
+						 data-value="{{energyprofileCtrl.houseProfile.children}}">
+					</div>
+				</div>
+			</div>
+
+		</div>
+	
+		<div class="col-xs-12 col-sm-6">
+
+			<h3>House</h3>
+
+			<div class="row">
+				<div class="col-xs-6">
+					<label>Bedrooms</label><br/>
+					<div sy-item-quantity 
+						 ng-model="energyprofileCtrl.houseProfile.bedrooms" 
+						 sy-item-quantity-value="energyprofileCtrl.houseProfile.bedrooms" 
+						 data-value="{{energyprofileCtrl.houseProfile.bedrooms}}">
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<label>Bathrooms</label><br/>
+					<div sy-item-quantity 
+						 ng-model="energyprofileCtrl.houseProfile.bathrooms" 
+						 sy-item-quantity-value="energyprofileCtrl.houseProfile.bathrooms" 
+						 data-value="{{energyprofileCtrl.houseProfile.bathrooms}}">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<h3>Property type</h3>
+
+			<button class="sy-button--dropdown sy-button--icon-right" ng-model="energyprofileCtrl.houseProfile.houseType" ng-options="houseType.id as houseType.name for houseType in energyprofileCtrl.houseTypes" bs-select style="text-align: left; width: 100%" required="true">
+				Choose a property type
+			</button>
+		</div>
+
+		<div class="col-xs-12 col-sm-6">
+			<h3>Do you own or rent?</h3>
+			<div class="acc-radio-btn-group" sy-auto-focus="sy-auto-focus">
+				<div class="acc-radio-btn" >
+					<input type="radio"  ng-model="energyprofileCtrl.houseProfile.owner" id="houseProfile_owner_home" ng-value="true"/>
+					<label for="houseProfile_owner_home">I own my home</label>
+				</div>
+				<div class="acc-radio-btn">
+					<input type="radio"  ng-model="energyprofileCtrl.houseProfile.owner" ng-value="false" id="houseProfile_owner_rent" />
+					<label for="houseProfile_owner_rent">I rent</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-offset-6 col-sm-6">
+			<button id="nextBtn" type="submit" class="sy-button--default" ng-click="saveAndClose()" sy-busy-chevron="next" sy-submit-button="">
+				<span class="sy-icon--unshare"></span> Save &amp; Close
+			</button>
+		</div>
+	</div>
+
+</ng-form>

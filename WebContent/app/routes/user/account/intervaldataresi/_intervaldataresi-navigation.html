@@ -1,0 +1,16 @@
+    <button id="fetchMoreBtn"
+            type="button"
+            class="sy-button--default pull-left"
+            ng-click="intervalDataResiCtrl.previousInterval()"
+            sy-busy-chevron="fetchMore"
+            busy-class="sy-icon--chevron-left pull-left">
+        Previous interval
+    </button>
+    <button id="fetchMoreFutureBtn"
+            type="button"
+            class="sy-button--default pull-right"
+            ng-click="intervalDataResiCtrl.nextInterval()"
+            sy-busy-chevron="fetchMore"
+            busy-class="sy-icon--chevron-right pull-right">
+        Next interval
+    </button>

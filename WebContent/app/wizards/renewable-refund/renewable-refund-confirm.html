@@ -1,0 +1,25 @@
+<div class="terms">
+
+    <div class="terms__summary">
+        <h2>Confirm your bank account details</h2>
+        <p>Your Automated REBS Payments will be sent to the following bank account - please confirm these details are correct:</p>
+        <div>
+            <h2>Account name</h2>
+            <p ng-bind="rrCtrl.model.bankDetails.accountName"></p>
+            <h2>BSB</h2>
+            <p ng-bind="rrCtrl.model.bankDetails.bsbNumber"></p>
+            <h2>Account number</h2>
+            <p ng-bind="rrCtrl.model.bankDetails.accountNumber"></p>
+        </div>
+    </div>
+
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="rrCtrl.model.refundTermsAccepted" id="signUpTerms" class="sy-checkbox" />
+            <label for="signUpTerms">I have read and understood the <a sy-doc-href="terms.renewable.refund">Automated REBS Payment Terms and Conditions</a> and agree to be bound by them.</label>
+        </div>
+     </div>
+</div>
+
+
+

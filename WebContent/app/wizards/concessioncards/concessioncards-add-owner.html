@@ -1,0 +1,52 @@
+<div ng-form="addConcessionCardsNameForm" novalidate="">
+
+    <div class="panel-header">
+        <div class="sy-alert--info">
+            Please add the card holder's first and last name. Please note that by applying to have this rebate added to your account, you agree that you have the cardholder's permission to do so, are eligible for a rebate and take responsibility for adhering to our rebate conditions.
+        </div>
+    </div>
+
+    <p>Is this the name on the card?</p>
+
+    <div class="must-complete">All fields must be completed.</div>
+
+    <div class="form-group" sy-auto-focus="sy-auto-focus">
+        <label for="firstName" class="label-required">First Name:</label>
+
+        <div>
+            <input type="text" id="firstName" placeholder="First Name" class="form-control" name="firstName"
+                   ng-model="ccCtrl.newCard.firstName" value="" required="" sy-pattern="NAME">
+
+
+            <div sy-alert-box="firstName">
+                <p ng-show="addConcessionCardsNameForm.firstName.$error.required">
+                    Please enter your first name.
+                </p>
+                <p ng-show="addConcessionCardsNameForm.firstName.$error.pattern">
+                    Eek. There's some unexpected characters here. You can only add letters,apostrophes, hyphens or spaces.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-group" >
+        <label for="lastName" class="label-required">Last Name:</label>
+
+        <div>
+            <input type="text" id="lastName" placeholder="Last Name" class="form-control" name="lastName"
+                   ng-model="ccCtrl.newCard.lastName" value="" required="" sy-pattern="NAME">
+
+            <div sy-alert-box="lastName">
+                <p ng-show="addConcessionCardsNameForm.lastName.$error.required">
+                    Please enter your first name.
+                </p>
+                <p ng-show="addConcessionCardsNameForm.lastName.$error.pattern">
+                    Eek. There's some unexpected characters here. You can only add letters,apostrophes,hyphens or spaces.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</div>

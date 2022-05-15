@@ -1,0 +1,23 @@
+<div  class="panel margin-top-10">
+    <div class="panel-header">
+        <h1>
+            <img ng-if="accountCtrl.isLifestyle()" src="img/timer-green-lawn.svg" class="icon">
+            <img ng-if="accountCtrl.isSolar()" src="img/sun.png" class="icon">
+            <span >Welcome to the trial</span>
+        </h1>
+    </div>
+    <div class="panel-body" >
+        Once you receive your first bill, you'll
+        get access to more detailed usage
+        data. This makes it easier to see how
+        you could shift your usage to
+        maximise the value of this plan.
+    </div>
+    <div class="form-horizontal panel-footer">
+        <a href class="sy-button--default sy-button--block"
+           ng-click="accountCtrl.gotoTrial()">
+            <span >View usage</span>
+        </a>
+    </div>
+
+</div>

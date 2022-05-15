@@ -1,0 +1,204 @@
+<div ng-controller="MsgCntlr">
+    <div ng-form="paymentDetailsForm" class="paymentDetailsForm" novalidate>
+
+        <div class="sy-alert--info">
+            <span class="sy-icon--circle_info"></span>
+            Please do not refresh your browser or use the back or forward buttons of your browser while completing this process.</p>
+        </div>
+
+        <div class="form-group form-separator">
+            <div sy-server-include="MYACC_PAY_CARD_ALERT"></div>
+        </div>
+        <div class="must-complete">All fields must be completed.</div>
+        <div sy-form-group data-layout="form" ng-if="!payCtrl.existingAccount">
+            <label class="control-label label-required" for="paymentNumber">Payment number:</label>
+            <div>
+                <div sy-form-group data-layout="tooltip">
+                    <input type="text" ng-model="payCtrl.payData.paymentNumber"
+                           name="paymentNumber" id="paymentNumber"
+                           maxlength="10"
+                           sy-pattern="PAYMENT_NUMBER"
+                           required
+                           class="form-control">
+                    <a href id="showPaymentNumberHelp" ng-click="showPaymentNumberHelp()" alt="Help" title="Help" >
+                        <span class="sy-icon--circle_question_mark"></span>
+                    </a>
+                </div>
+                <div sy-alert-box="paymentNumber" sy-analytics-error="paymentNumber">
+                    <p>The payment number provided is invalid. It's the 10 digit number at the bottom of your bill.</p>
+                </div>
+            </div>
+        </div>
+
+        <div sy-form-group data-layout="form">
+            <label class="control-label label-required" for="amount">Amount ($):</label>
+            <div>
+                <div sy-form-group data-layout="tooltip" sy-auto-focus="sy-auto-focus">
+                    <input ng-disabled="payCtrl.transferp2pArrangementModel.p2pArrangementFlag" type="text" ng-model="payCtrl.payData.amount"
+                           name="amount" id="amount"
+                           sy-is-number positive
+                           ng-min="0.01"
+                           maxlength="10"
+                           sy-pattern="PAYMENT_CURRENCY"
+                           required
+                           class="form-control" />
+                    <a href id="showPaymentAmountHelp" ng-if="!payCtrl.transferp2pArrangementModel.p2pArrangementFlag" ng-click="payCtrl.showHelpText('Payment amount', '{{findMsgHTML('MA_H2')}}')" alt="Help" title="Help">
+                        <span class="sy-icon--circle_question_mark"></span>
+                    </a>
+                </div>
+                <div sy-alert-box="amount" sy-analytics-error="amount">
+                    <p>Please enter digits only, no spaces or commas. </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div  data-layout="form"  ng-if="payCtrl.hasStoredCards"   style="margin-top:25px!important;">
+            <div sy-form-group>
+                <div class="sy-element-left col-sm-12">
+                    <h2>Select&nbsp;card</h2>
+                </div>
+
+                <div class="sy-element-left col-sm-10"> <div class="container-fluid no-padding-left-right">
+                    <div class="col-sm-5 col-xs-7"><h4 class="select-inr-title">Card&nbsp;number</h4></div>
+                    <div class="col-sm-7 col-xs-5"><h4 class="select-inr-title">Expiry</h4></div>
+                </div>
+                    <div class="container-fluid no-padding-left-right" ng-repeat="card in payCtrl.storedCards" ng-include="payCtrl.getTemplate(card,$index);">
+
+                    </div>
+                    <div class="col-12 acc-radio-btn-group">
+                        <div class="acc-radio-btn">
+                            <input type="radio" class="" name="cardIndex" ng-model="payCtrl.payData.cardIndex" id="newcard" value="-1" ng-value="-1">
+                            <label for="newcard">Pay with a new card</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="!payCtrl.hasStoredCards || payCtrl.payData.cardIndex === -1">
+            <div sy-form-group data-layout="form">
+                <label class="label-required" for="cardHolderName">Cardholder name:</label>
+                <div>
+                    <div sy-form-group data-layout="tooltip">
+                        <input type="text" ng-model="payCtrl.payData.newCard.cardHolderName"
+                               id="cardHolderName" name="cardHolderName"
+                               class="form-control" maxlength="60" sy-pattern="NAME" required ng-paste="$event.preventDefault()">
+                        <a href id="cardHolderNamehelp" ng-click="payCtrl.showHelpText('Card Holder Name', '{{findMsgHTML('H12')}}')" alt="Help" title="Help">
+                            <span class="sy-icon--circle_question_mark"></span>
+                        </a>
+                        <div sy-alert-box="cardHolderName" sy-analytics-error="cardHolderName">
+                            <p ng-show="paymentDetailsForm.cardHolderName.$error.required">{{findMsgHTML('MA_E20')}}</p>
+                            <p ng-show="paymentDetailsForm.cardHolderName.$error.pattern">{{findMsgHTML('E412')}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div sy-form-group data-layout="form">
+                <label class="label-required" for="cardNumber">Card number:</label>
+                <div>
+                    <div sy-card-type-picker="payCtrl.payData.newCard.cardType" card-number="payCtrl.payData.newCard.cardNumber">
+                        <input type="tel" ng-model="payCtrl.payData.newCard.cardNumber"
+                               id="cardNumber" name="cardNumber"
+                               sy-pattern="CARD_NUMBER"
+                               ng-change="payCtrl.setCardType()"
+                               ng-required="true"
+                               sy-validate-card class="form-control" required>
+                    </div>
+                    <div sy-alert-box="cardNumber" sy-analytics-error="cardNumber">
+                        <p>
+                            {{findMsgHTML('MA_E22')}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div sy-form-group data-layout="form">
+                    <label class="control-label label-required" for="expiryMonth">Card expiry:</label>
+                    <div>
+                        <input id="expiryMonth"
+                               type="tel"
+                               name="expiryMonth"
+                               class="input-mini form-control"
+                               ng-model="payCtrl.payData.newCard.expiryMonth"
+                               placeholder="MM"
+                               maxlength="02"
+                               sy-pattern="MONTH"
+                               sy-move-focus
+                               sy-validate-card-expiry
+                               required style="margin: 0; width:50px;display:inline">
+                        <span style="display:inline">/</span>
+                        <input id="expiryYear"
+                               type="tel"
+                               name="expiryYear"
+                               class="input-mini form-control"
+                               ng-model="payCtrl.payData.newCard.expiryYear"
+                               placeholder="YY"
+                               maxlength="02"
+                               sy-pattern="YEAR"
+                               sy-move-focus
+                               sy-validate-card-expiry
+                               required style="margin: 0; width:50px;display:inline">
+                        <br />
+                        <span style="padding: 10px">Month</span>
+                        <span style="padding: 14px">Year</span>
+
+                        <div sy-alert-box="expiryMonth" sy-analytics-error="expiryMonth" style="width:60%">
+                            <p ng-show="!paymentDetailsForm.expiryMonth.$error.syValidateCardExpiry">{{findMsgHTML('MA_E60')}}</p>
+                            <p ng-show="paymentDetailsForm.expiryMonth.$error.syValidateCardExpiry">{{findMsgHTML('MA_E65')}}</p>
+                        </div>
+
+                        <div ng-show="paymentDetailsForm.expiryMonth.$valid" sy-alert-box="expiryYear" sy-analytics-error="expiryYear"  style="margin-left:60px;width:60%">
+                            <p ng-show="!paymentDetailsForm.expiryYear.$error.syValidateCardExpiry" >{{findMsgHTML('MA_E61')}}</p>
+                            <p ng-show="paymentDetailsForm.expiryYear.$error.syValidateCardExpiry">{{findMsgHTML('MA_E65')}}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div sy-form-group data-layout="form">
+                <label class="control-label label-required" for="card_csv">Card security code:</label>
+                <div>
+                    <div sy-form-group data-layout="tooltip">
+                        <input type="tel" name="card_csv"
+                               id="card_csv" ng-model="payCtrl.payData.newCard.cvv"
+                               ng-minlength="3" ng-maxlength="4" required
+                               sy-pattern="CSV_NUMBER"
+                               size="6" class="form-control" value="" autocomplete="off">
+                        <a href id="showPaymentCVVHelp" ng-click="payCtrl.showHelpText('Card verification value (CVV)', '{{findMsgHTML('MA_H1')}}')"alt="Help" title="Help">
+                            <span class="sy-icon--circle_question_mark"></span>
+                        </a>
+                    </div>
+
+                    <div sy-alert-box="card_csv" sy-analytics-error="card_csv">
+                        <!--Not sure why errors for this control are not under paymentDetailsForm.card_csv but using just paymentDetailsForm-->
+                        <p ng-show="paymentDetailsForm.$error">{{findMsgHTML('MA_E39_1')}} {{payCtrl.payData.newCard.cardType === 'amex' ? 4 : 3}} {{findMsgHTML('MA_E39_2')}}</p>
+                        <p ng-show="paymentDetailsForm.$error.pattern">{{findMsgHTML('MA_E58')}} {{payCtrl.payData.newCard.cardType === 'amex' ? 4 : 3}} {{findMsgHTML('MA_E59')}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div sy-form-group data-layout="form" ng-if="payCtrl.existingAccount" ng-init="payCtrl.checkCardSave()">
+                <label class="control-label" >Do you want to save this card?</label>
+                <div sy-form-group data-layout="tooltip" class="isSaveCard">
+                    <div class="acc-radio-btn-group">
+                        <div class="acc-radio-btn">
+                            <input type="radio" class="" name="saveCard" id="Yes" ng-model="payCtrl.payData.newCard.saveCard" value="Yes" />
+                            <label for="Yes">Yes</label>
+                        </div>
+                        <div class="acc-radio-btn">
+                            <input type="radio" class="" id="No" name="saveCard" ng-model="payCtrl.payData.newCard.saveCard" value="No"/>
+                            <label for="No">No</label>
+                        </div>
+                    </div>
+                    <a href id="showSaveCardHelp" ng-click="payCtrl.showHelpText('Securely saving your card details', '{{findMsgHTML('MA_H3')}}')"alt="Help" title="Help">
+                        <span class="sy-icon--circle_question_mark"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

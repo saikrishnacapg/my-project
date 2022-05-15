@@ -1,0 +1,44 @@
+<div class="sy-tab-container" style="margin-bottom: 40px">
+    <ul class="sy-tabs sy-tabs--responsive">
+        <li ng-if="usageCtrl.eligibleAmiIntervalDataCustomers()" ng-class="{'active': usageCtrl.mode == 'ami-interval'}">
+            <a href="" ng-click="usageCtrl.mode = 'ami-interval'" sy-usage-tab="amiintervaldata" title="Interval data usage history only">
+                <tab-heading class="ng-binding">
+                    <span ng-class="tab.icon" class="sy-icon--stats"></span>
+                    Interval data
+                </tab-heading>
+            </a>
+        </li>
+        <li ng-class="{'active': usageCtrl.mode == 'consumption'}">
+            <a href="" ng-click="usageCtrl.mode = 'consumption'" sy-usage-tab="energyusage" title="Complete energy usage history">
+                <tab-heading class="ng-binding">
+                    <span ng-class="tab.icon" class="sy-icon--charts"></span>
+                    Energy usage
+                </tab-heading>
+            </a>
+        </li>
+        <li ng-if="usageCtrl.eligibleIntervalDataCustomers() && !usageCtrl.eligibleAmiIntervalDataCustomers() " ng-class="{'active': usageCtrl.mode == 'interval'}">
+            <a href="" ng-click="usageCtrl.mode = 'interval'" sy-usage-tab="intervaldata" title="Interval data usage history only">
+                <tab-heading class="ng-binding">
+                    <span ng-class="tab.icon" class="sy-icon--stats"></span>
+                    Interval data
+                </tab-heading>
+            </a>
+        </li>
+        <li ng-class="{'active': usageCtrl.mode == 'cost'}">
+            <a href="" ng-click="usageCtrl.mode = 'cost'" sy-usage-tab="cost" >
+                <tab-heading class="ng-binding">
+                    <span ng-class="tab.icon" class="sy-icon--usd"></span>
+                    Cost
+                </tab-heading>
+            </a>
+        </li>
+        <li ng-class="{'active': usageCtrl.mode == 'table'}">
+            <a href="" ng-click="usageCtrl.mode = 'table'" sy-usage-tab="summary">
+                <tab-heading class="ng-binding">
+                    <span ng-class="tab.icon" class="sy-icon--justify"></span>
+                    Summary
+                </tab-heading>
+            </a>
+        </li>
+    </ul>
+</div>

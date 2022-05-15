@@ -1,0 +1,53 @@
+<div class="main" analytics-category="See and save">
+
+    <div class="main__content" ng-cloak>
+
+        <div class="panel">
+
+            <div class="panel-body">
+                <div ng-if="sasCtrl.product.enabled == true && sasCtrl.product.underConstruction == false">
+                    <!--<h1>Now<span ng-if="sasCtrl.portrait.partiallyActive"><small>Some of your devices are inactive. Please call <strong sy-phone-number account-type="{{sasCtrl.account.contractAccountType}}"></strong> to speak to one of our energy consultants.</small></span></h1>-->
+                    <h1>Now</h1>
+                    <div class="material" ng-include="'app/routes/user/account/seeandsave/templates/sas-intro-now.html'"></div>
+                    <span ng-if="sasCtrl.portrait.active">
+                        <h1 ng-if="sasCtrl.viewingPresentData()">
+                            <span>Today</span>
+                            <span style="margin-left:1em">00:00 to {{sasCtrl.portrait.lastUpdate}}</span>
+                            </h1>
+                        <h1 ng-if="!sasCtrl.viewingPresentData()">
+                            <span >Selected period</span>
+                            <span style="margin-left:1em">{{sasCtrl.formatDate(sasCtrl.startDate)}} to {{sasCtrl.formatDate(sasCtrl.endDate)}}</span>
+                        </h1>
+                        <div class="material" ng-include="'app/routes/user/account/seeandsave/templates/sas-intro-cards.html'"></div>
+                        <div class="material" ng-include="'app/routes/user/account/seeandsave/templates/sas-graph-area.html'"></div>
+                    </span>
+                </div>
+                <div ng-if="sasCtrl.product.enabled == false">
+                    <p>Your See & Save subscription is not active. Please call <strong sy-phone-number account-type="{{sasCtrl.account.contractAccountType}}"></strong> to speak to one of our energy consultants to re-activate your See and Save.</p>
+                </div>
+                <div ng-if="sasCtrl.product.underConstruction == true">
+                    
+                        <h1>Your See & Save data is coming…</h1>
+                        
+                        <p></p>
+
+                        <p>We can’t wait to connect you to your real-time consumption data - so you can start seeing where your energy is going, around the business. </p>
+                        
+                        <p>We’re just plugging in a few things and switching everything on. We’ll have your data up and running as quickly as possible.</p>
+                                                                      
+                        <p>Please try again soon.</p>
+
+                        <br/>
+                </div>
+            </div>
+
+
+            <div class="panel-footer">
+                <p class="panel-footer-terms small">
+                    The My Account Terms and Conditions and the Website Disclaimer apply to your use of the See and Save product.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>

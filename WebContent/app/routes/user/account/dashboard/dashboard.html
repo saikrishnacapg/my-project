@@ -1,0 +1,35 @@
+<div class="main__content column">
+    <div class="tip__utility sy-alert--outage-main" ng-if="accountCtrl.Notify">
+        <div ng-include="'app/routes/user/account/dashboard/dashboard-fea-banner.html'"></div>
+    </div>
+    <div class="tip__utility" ng-if="accountCtrl.showEAPBanner">
+        <div ng-include="'app/routes/user/account/dashboard/dashboard-payment-info-banner.html'"></div>
+    </div>
+    <div class="tip__utility" ng-if="accountCtrl.showRecontractingBanner">
+        <div ng-include="'app/routes/user/account/dashboard/dashboard-recontracting-banner.html'"></div>
+    </div>
+    <div class="tip__utility" ng-if="accountCtrl.showUnBilledBannerFirst || accountCtrl.showUnBilledBannerSec">
+        <div ng-include="'app/routes/user/account/dashboard/dashboard-unbilled-banner.html'"></div>
+    </div>
+    <div class="tip__utility" ng-if="accountCtrl.showDuplicateBillBanner && accountCtrl.isResidential">
+        <div ng-include="'app/routes/user/account/dashboard/dashboard-duplicate-banner.html'"></div>
+    </div>
+    <div ng-include="'app/routes/user/account/dashboard/dashboard-balance.html'"></div>
+    <div ng-include="'app/routes/user/account/dashboard/dashboard-usage.html'"></div>
+</div>
+
+<div class="main__aside">
+    <div class="tip__utility">
+        <div ng-include="'app/routes/user/account/dashboard/dashboard-update-details-banner.html'"></div>
+    </div>
+    <div ng-include="'app/routes/user/account/dashboard/dashboard-options.html'"></div>
+    <div ng-if="!accountCtrl.isSolar() && !accountCtrl.isLifestyle() && !accountCtrl.showEVHomePlanPromo() && !accountCtrl.showOnlyIntervalData() && !(accountCtrl.showOnlyIntervalData() || accountCtrl.showPromoForGeneration())" ng-include="'app/routes/user/account/dashboard/dashboard-econnect-info.html'"></div>
+    <div ng-if="accountCtrl.showEVHomePlanPromo() && !accountCtrl.showOnlyIntervalData() && !(accountCtrl.showOnlyIntervalData() || accountCtrl.showPromoForGeneration())" ng-include="'app/routes/user/account/dashboard/dashboard-ev-home-plan.html'"></div>
+
+    <div ng-if="accountCtrl.showPromoForGeneration()">
+        <div ng-if="accountCtrl.showSolarTarrifTrialPromo()" ng-include="'app/routes/user/account/dashboard/dashboard-solar-interval-data-info.html'"></div>
+        <div ng-if="accountCtrl.showGenerationNoSolarTarrif() && !accountCtrl.isPodFCPFlag" ng-include="'app/routes/user/account/dashboard/dashboard-gen-product-interval-data-info.html'"></div>
+        <div ng-if="accountCtrl.businessCustomersWithGeneration()" ng-include="'app/routes/user/account/dashboard/dashboard-business-interval-data-info.html'"></div>
+    </div>
+    <div ng-if="accountCtrl.showOnlyIntervalData()" ng-include="'app/routes/user/account/dashboard/dashboard-interval-data-only-info.html'"></div>
+</div>

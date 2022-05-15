@@ -1,0 +1,34 @@
+<div class="terms">
+
+    <div class="terms__summary">
+        <p>You are about to update the name on the card details. Please confirm the details as below and that the card holder meets the eligibility criteria</p>
+
+        <h3>Synergy account number</h3>
+        <p ng-bind="ccCtrl.account.contractAccountNumber"></p>
+        <h3>Supply address</h3>
+        <p ng-bind="ccCtrl.account.premiseAddress.label"></p>
+        <h3>Name on card</h3>
+        <p>{{ccCtrl.newCard.firstName}} {{ccCtrl.newCard.lastName}}</p>
+        <h3>Card type</h3>
+        <p ng-bind="ccCtrl.cardDisplayName()"></p>
+        <h3>Card number</h3>
+        <p ng-bind="ccCtrl.newCard.cardNumber"></p>
+    </div>
+
+    <h2>Concessions &amp; Rebates and WA Government Energy Assistance Payment Terms &amp; Conditions</h2>
+
+    <div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" class="sy-checkbox" ng-model="ccCtrl.newCard.termsAccepted" id="ccTerms">
+            <label for="ccTerms">
+                I have read, understand and agree with the <a href="" sy-doc-href="terms.concessions">Concessions and Rebates & WA Government Energy Assistance Payment - Terms & Conditions</a>,<a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.
+            </label>
+        </div>
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" class="sy-checkbox" ng-model="ccCtrl.newCard.termsAccepted2" id="ccTerms2">
+            <label for="ccTerms2">
+                I confirm that all information entered is true and correct. If there are any changes to circumstances that may affect the eligibility of concessions against this account, I will notify Synergy immediately.
+            </label>
+        </div>
+    </div>
+</div>

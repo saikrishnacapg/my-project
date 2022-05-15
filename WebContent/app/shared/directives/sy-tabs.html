@@ -1,0 +1,17 @@
+<div>
+<div class="sy-tab-container">
+    <ul class="sy-tabs sy-tabs--responsive">
+        <li ng-repeat="tab in tabsCtrl.tabs" ng-class="{'active': tabsCtrl.tabIsActive(tab.title)}">
+            <a href="" ng-click="tabsCtrl.setTabMode(tab)">
+                <tab-heading>
+                    <span ng-class="tab.icon"></span>
+                    {{tab.title}}
+                </tab-heading>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div data-ng-transclude></div>
+
+</div>

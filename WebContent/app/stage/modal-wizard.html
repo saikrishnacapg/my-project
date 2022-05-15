@@ -1,0 +1,76 @@
+<div id="transaction-light-box" ng-controller="ModalWizardsCtrl" >
+	<div form-container form-id="{{formId}}" ng-if="formId" form-args="formArgs" close="close">
+		<form name="wizardForm" novalidate="" method="post">
+			<div class="sy-wizard" ng-class="{'in': wizard.context.enter}" id="modalWizard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false"  style="display: block;z-index:1044">
+			    <div><!-- modal-dialog //-->
+			        <div class="sy-wizard__container strip-frame-on-print forFocus" id="modal-wizard-content"> <!-- modal-content //-->
+		
+			                <div class="sy-wizard__header hidden-print"><!-- modal-header //-->
+			                    <a href=""
+								   alt="Close"
+								   title="Close"
+                                   class="pull-right"
+                                   data-dismiss="modal"
+                                   ng-click="wizard.close()"
+                                   analytics-on="click"
+                                   analytics-event="close"
+                                   analytics-label="{{formId}}">
+			                        <span class="sy-icon--remove_2" ></span>
+			                    </a>
+			                    <h2>{{wizard.context.title}}</h2>
+			                </div>
+			                <div class="sy-wizard__utility hidden-print" ng-show="wizard.context.progressbar.show && !wizard.context.complete">
+			                    <h2 class="text-center">
+			                    	Your progress
+			                        <!-- {{wizard.view.progress.text}} -->
+			                    </h2>
+			                    <div class="sy-progress">
+			                        <div class="sy-progress-bar" sy-progress-bar role="progressbar"
+			                             aria-valuenow="{{wizard.context.progressbar.level}}"
+			                             aria-valuemin="0" aria-valuemax="100" ng-style="{width:wizard.context.progressbar.level+'%'}">
+		
+			                            <!-- The completely weird ng-style attribute is needed so the progress bar will work in IE -->
+			                        </div>
+			                    </div>
+			                </div>
+			                <div class="sy-wizard__body"><!-- modal-body //-->
+			                	<main></main>
+			                </div>
+		
+			                <div class="sy-wizard__footer hidden-print">
+			                    <div id="modalModal_tray">
+									<div class="sy-wizard-footer__right">
+									    <button id="nextBtn"
+                                                type="submit"
+                                                class="sy-button--primary"
+                                                ng-click="wizard.goForward()"
+                                                ng-show="wizard.context.navbar.showNext"
+                                                ng-disabled="wizard.context.navbar.disableNext"
+                                                sy-busy-chevron="next"
+                                                sy-submit-button>
+                                            {{wizard.context.navbar.nextMsg}}
+                                            <span class="sy-icon--chevron-right"></span>
+                                        </button>
+									</div>
+                                    <div class="sy-wizard-footer__left">
+                                        <button id="backBtn"
+                                                type="button"
+                                                class="sy-button--default"
+                                                ng-click="wizard.goBack()"
+                                                ng-show="wizard.context.navbar.showBack">
+                                            <span class="sy-icon--chevron-left"></span>
+                                            {{wizard.context.navbar.backMsg}}
+                                        </button>
+                                    </div>
+			                    </div><!-- modal-footer //-->
+			                </div>
+	
+			        </div>
+			        <!-- /.modal-content -->
+			    </div>
+			    <!-- /.modal-dialog -->
+			</div>
+		</form>
+		<div class="modal-backdrop in"></div>
+	</div>
+</div>

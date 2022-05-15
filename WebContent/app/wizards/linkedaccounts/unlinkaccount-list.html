@@ -1,0 +1,14 @@
+<div class="sy-alert--info">
+    Select an account below to remove from My Account.
+</div>
+<input type="search" class="form-control searchAccounts" placeholder="Search accounts"  ng-model="searchText" ng-show="accountList.length > 3"/>
+<div class="list-group ">
+    <a class="list-group-item clearfix"
+       href=""
+       ng-repeat="account in unlink.accountList | filter:searchText"
+       ng-click="unlink.account = account"
+       ng-class="{'active': unlink.account.contractAccountNumber === account.contractAccountNumber}">
+        <strong>{{account.contractAccountNumber}}</strong>
+        <div>{{account.premiseAddress.label | capitalize}}</div>
+    </a>
+</div>

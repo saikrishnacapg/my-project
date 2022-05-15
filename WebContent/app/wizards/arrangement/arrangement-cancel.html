@@ -1,0 +1,32 @@
+<div>
+	<h2>Cancel your payment plan?</h2>
+	<div class="margin-left-20">
+		<p>
+			If you cancel your payment plan now, the total amount owing will become due/overdue immediately. This means you’ll
+			need to pay the total amount promptly to prevent fees and other actions being applied to your account.
+		</p>
+		<p>Your current payment plan total is: {{cancelArrangementCtrl.arrangementTotalOutstandingAmount | currency}}</p>
+		<div ng-if="cancelArrangementCtrl.hasNewBill || cancelArrangementCtrl.isOverdue">
+			<p>The total owing on your account is: {{cancelArrangementCtrl.totalOwingOnAccount}}</p>
+		</div>
+		<p>
+			If you’ve received a new bill that you would like to include in your current payment plan or would like to adjust
+			your payment amount, you can change your payment plan in the previous menu. Select ‘Back’ to return to the
+			previous menu.
+		</p>
+		<div class="terms hidden-print">
+			<div class="terms__acceptance" sy-auto-focus="sy-auto-focus">
+				<div class="acc-chkBox-btn">
+					<input
+						type="checkbox"
+						ng-model="cancelArrangementCtrl.termsAccepted"
+						id="cancelArrangementTerms"
+						class="sy-checkbox"
+						name="cancelArrangementTerms"
+					/>
+					<label for="cancelArrangementTerms">I acknowledge the above and still wish to cancel.</label>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

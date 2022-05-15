@@ -1,0 +1,35 @@
+<div class="response">
+<div>
+        <h2>You already have a pending payment request scheduled to be sent to your bank on {{oneOffPaymentCtrl.viewStatusBankPaymentsDetails.processDate | date : "dd MMM yyyy"}}. This payment needs to be cleared by your bank before another one-off bank account payment can be made.</h2>
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Transaction number:</h3>
+            <p class="inline" ng-bind="oneOffPaymentCtrl.viewStatusBankPaymentsDetails.transactionNumber"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Payment number:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.payData.paymentNumber"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Account holder name:</h3>
+            <p class="inline"  ng-bind="oneOffPaymentCtrl.viewStatusBankPaymentsDetails.accountName"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">BSB:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.viewStatusBankPaymentsDetails.bsbNumber | syBankBSPMask"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Account number:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.viewStatusBankPaymentsDetails.accountNumber  | syBankAccountMask"></p>
+        </div>
+
+        <div>
+            <h3 class="inline" style="width:165px;margin-right:20px">Payment amount:</h3>
+            <p  class="inline" ng-bind="oneOffPaymentCtrl.viewStatusBankPaymentsDetails.amount | currency:'$'"></p>
+        </div>
+
+    </div>
+</div>

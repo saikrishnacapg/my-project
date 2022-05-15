@@ -1,0 +1,45 @@
+<div class="medium" sy-card ready-when="!sasCtrl.product.loadingData" color="white" font-color="black-text"
+     card-title="'Comparison'" show-help="true" help-id="comparison"  icon="sy-icon--charts">
+	<div sy-card-content>
+		<div class="row margin-bottom-10 margin-top-10" ng-if="sasCtrl.comparisonAvailable()">
+			<div class="col-sm-2 col-xs-2 center-x">
+				<span ng-class="portrait.savings.usage.period ? 'sy-icon--down_arrow' : 'sy-icon--up_arrow'" class="larger" style="color:#EFBD46;"></span>
+			</div>
+			<div class="col-sm-10 col-xs-10">
+                <strong ng-bind="portrait.delta.usage.period + '%'"></strong>
+                <span ng-bind="portrait.savings.usage.period ? 'decrease' : 'increase'"></span>
+				in usage compared to
+				<span ng-bind="sasCtrl.viewingPresentData() ? 'last week' : 'the previous period'"></span>
+			</div>
+		</div>
+        <div class="row margin-bottom-10 margin-top-10" ng-if="!sasCtrl.comparisonAvailable()">
+            <div class="col-sm-12 col-xs-12 center-x">
+                No usage data available for comparison.
+            </div>
+        </div>
+		<table>
+			<tbody class="padded-table-5 absolute left-55">
+            <tr>
+                <td>
+                    <span ng-bind="sasCtrl.viewingPresentData() ? 'Today' : 'Selected period'"></span>
+                </td>
+                <td>
+					<strong ng-bind="(portrait.usage.current.kwh | round) + ' kWh'">0</strong>
+                </td>
+            </tr>
+			<tr>
+				<td>
+                    <span ng-bind="sasCtrl.viewingPresentData() ? 'Same day last week' : 'Previous period'"></span>
+                </td>
+				<td>
+					<strong ng-bind="(portrait.usage.previous.kwh | round) + ' kWh'">0</strong>
+				</td>
+			</tr>
+			<tr ng-show="!sasCtrl.viewingPresentData()">
+				<td colspan="2">({{sasCtrl.formatDate(sasCtrl.previousPeriodStartDate)}} to {{sasCtrl.formatDate(sasCtrl.previousPeriodEndDate)}})</td>
+			</tr>
+			</tbody>
+
+		</table>
+	</div>
+</div>

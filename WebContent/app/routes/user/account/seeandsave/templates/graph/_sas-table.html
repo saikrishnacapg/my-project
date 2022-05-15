@@ -1,0 +1,28 @@
+<div direction="right">
+    <table class="margin-bottom-10 sas-table">
+        <thead>
+        <tr>
+            <th data-field="id">
+                Device
+            </th>
+            <th data-field="name" ng-if="sasCtrl.viewingPresentData()">
+                Now (W)
+            </th>
+            <th data-field="price">
+                <span ng-show="sasCtrl.viewingPresentData()">Today (kWh)</span>
+                <span ng-hide="sasCtrl.viewingPresentData()">Total for Period (kWh)</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="usage in portrait.usageTodayArray">
+            <td ng-bind="usage.name"></td>
+
+            <td ng-bind="(usage.lastLoad || 0 ) | round" ng-if="sasCtrl.viewingPresentData()">0</td>
+            <td ng-bind="(usage.kwh || 0) | round">0</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>

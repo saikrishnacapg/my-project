@@ -1,0 +1,9 @@
+<div sy-wizard-success real-time="true" ng-init="ccCtrl.analyticsSend()">
+    <h2>Your concession has been reactivated</h2>
+    <div class="sy-alert--info" ng-if="ccCtrl.canEditDependents() && ccCtrl.newCard.cardIssuer == 'Centrelink'">
+        The number of dependent children entitlement shall be validated by Centrelink and could change without notice, but will always be clearly shown on your energy bill.
+    </div>
+    <div class="sy-alert--info">
+        <p>The concession rebate will be applied to your bill from {{ccCtrl.effectiveFrom.format('DD MMM YYYY')}}</p>
+    </div>
+</div>

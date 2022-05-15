@@ -1,0 +1,44 @@
+<div sy-form-group data-layout="form">
+    <label class="control-label label-required" for="feedbackType">Type of feedback:</label>
+
+    <div>
+        <select name="feedbackType" id="feedbackType" class="form-control"
+                ng-model="feedbackCtrl.model.feedbackType" ng-required="true">
+            <option value="">-- Please select --</option>
+            <option value="Website">Website</option>
+            <option value="Product">Product</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <div sy-alert-box="feedbackType">
+            <p>Please select the type of feedback you wish to submit.</p>
+        </div>
+    </div>
+</div>
+
+<div sy-form-group data-layout="form">
+    <label class="control-label label-required" for="comment">Feedback:</label>
+    <div>
+        <textarea
+               id="comment"
+               name="comment"
+               class="form-control"
+               ng-model="feedbackCtrl.model.comment"
+               ng-maxlength="3999"
+               ng-required="true">
+        </textarea>
+
+        <div sy-alert-box="comment">
+            <p>Please enter a comment.</p>
+        </div>
+    </div>
+</div>
+
+<div sy-form-group data-layout="form">
+    <label>Follow up required?</label>
+    <label class="control-label" for="followUpRequired">
+        <input type="checkbox" id="followUpRequired" name="followUpRequired"
+               class="sy-checkbox" ng-model="feedbackCtrl.model.followUpRequired">
+    </label>
+
+</div>

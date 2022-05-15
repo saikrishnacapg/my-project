@@ -1,0 +1,31 @@
+<div class="response" id="printableArea" ng-if="payCtrl.usabilla_surveytrigger('/ma/payment/bpoint-declined')">
+    <div>
+        <div class="row">
+            <div class="logo visible-print pull-left">
+                <img src="img/Synergy_logo_mono.svg" alt="Synergy">
+            </div>
+        </div>
+
+        <h2>Sorry your payment was declined</h2>
+
+        <h3>Account number</h3>
+
+        <p ng-bind="payCtrl.payData.contractAccountNumber"></p>
+
+        <h3>Payment number</h3>
+
+        <p ng-bind="payCtrl.payResult.paymentNumber"></p>
+
+        <h3>Date processed</h3>
+
+        <p ng-bind="payCtrl.payResult.paymentDate"></p>
+
+        <h3>Receipt number</h3>
+
+        <p ng-bind="payCtrl.payResult.receiptNumber"></p>
+
+        <pay-receipt email-address="payCtrl.account.businessPartnerDetails.emailAddress"
+                     pay-result="payCtrl.payResult"></pay-receipt>
+
+    </div>
+</div>

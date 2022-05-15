@@ -1,0 +1,28 @@
+<div class="modal" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" analytics-category="modals">
+   <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">{{title}}</h2>
+        </div>
+        <div class="modal-body">
+        	<div ng-if="isTemplate" ng-include="message"></div>
+			<div ng-if="!isTemplate" ng-bind-html="message"></div>
+        </div>
+        <div class="modal-footer" id="modalAlert_tray">
+            <div sy-form-group data-layout="split">
+                <div  class="sy-wizard-footer__right">
+                    <button id="modalCancel" class="sy-button--default" ng-if="options.indexOf('Cancel') !== -1" ng-click="selectOption('Cancel');$hide()"><span class="sy-icon--remove_2"></span> {{ btnLabels.cancel || 'Cancel'}}</button>
+                </div>
+        	    <div  class="sy-wizard-footer__left">
+                    <div ng-if="!isPaperLessErrorMsg" >
+                        <button id="modalOK" class="sy-button--primary" ng-disabled="ctrl && ctrl.disableNext()" ng-if="options.indexOf('OK') !== -1" ng-click="selectOption('OK');"><span class="sy-icon--ok_2"></span> {{ btnLabels.ok || 'OK'}}</button>
+                    </div>
+                    <div ng-if="isPaperLessErrorMsg">
+                        <button id="modalOKIsPaperless"  class="sy-button--primary" style="margin-right: 6px !important;" ng-disabled="ctrl && ctrl.disableNext()" ng-if="options.indexOf('OK') !== -1" ng-click="selectOption('OK');">{{ btnLabels.ok || 'Try  a different email address'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

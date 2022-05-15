@@ -1,0 +1,51 @@
+<div ng-form="signUpForm" ng-controller="MsgCntlr">
+
+    <h2>Nominate a bank account</h2>
+
+    <div sy-form-group data-layout="form">
+        <label class="control-label label-required" for="accountName">Account holder name:</label>
+        <div>
+            <input type="text" sy-focus-me
+                   ng-model="rrCtrl.model.bankDetails.accountName"
+                   id="accountName" name="accountName" sy-pattern="NAME"
+                   class="form-control" ng-required="true" maxlength="60"
+                   ng-paste="$event.preventDefault()">
+            <div sy-alert-box="accountName">
+                <p ng-show="signUpForm.accountName.$error.required">{{findMsgHTML('MA_E41')}}</p>
+                <p ng-show="signUpForm.accountName.$error.pattern">{{findMsgHTML('MA_E42')}}</p>
+                <p ng-show="signUpForm.accountName.$error.pattern">{{findMsgHTML('E412')}}</p>
+            </div>
+        </div>
+        <a href ng-click="showBankHolderNameInfo()" alt="Help" title="Help"><span class="sy-icon--circle_question_mark"></span></a>
+    </div>
+
+    <div sy-form-group data-layout="form">
+        <label class="control-label label-required" for="bsbNumber">BSB:</label>
+        <div>
+            <input type="tel"
+                   id="bsbNumber"
+                   name="bsbNumber"
+                   class="form-control"
+                   ng-model="rrCtrl.model.bankDetails.bsbNumber"
+                   maxlength="7"
+                   ng-required="true"
+                   sy-bsb-mask>
+
+            <div sy-alert-box="bsbNumber">
+                <p>{{findMsgHTML('MA_E43')}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form">
+        <label class="control-label label-required" for="accountNumber">Account number:</label>
+        <div>
+            <input type="tel" id="accountNumber" name="accountNumber" class="form-control"
+                   ng-model="rrCtrl.model.bankDetails.accountNumber" sy-is-number-ignore-spaces ng-minlength="1" maxlength="9" ng-required="true">
+
+            <div sy-alert-box="accountNumber">
+                <p>{{findMsgHTML('MA_E44')}}</p>
+            </div>
+        </div>
+    </div>
+</div>

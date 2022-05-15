@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="column">
+        <h3 class="tertiary-heading bold dates-padding">Selected Period</h3>
+        <div class="dates-padding">
+            <p>{{ActivityStatementCtrl.ctrlActivityServices.graph2StartAndEndDatesFormat}}</p>
+        </div>
+        <div>
+            <div  class="graph-title-padding"  ng-if="ActivityStatementCtrl.displayOption=='percentage'"
+                    id="midDaySaverCurrentYearComparison"
+                    sy-apex-charts
+                    chart="ActivityStatementCtrl.ctrlActivityServices.chartOptionsMidDaySaverCurrentYearPercentageComparison"
+            ></div>
+
+            <div class="graph-title-padding"    ng-if="ActivityStatementCtrl.displayOption=='dollar'"
+                    id="midDaySaverCurrentYearComparisonWithData"
+                    sy-apex-charts
+                    chart="ActivityStatementCtrl.ctrlActivityServices.chartOptionsMidDaySaverCurrentYearDataValueComparison"
+            ></div>
+        </div>
+
+    </div>
+
+    <div class="column">
+        <h3 class="tertiary-heading dates-padding">12 Months Prior </h3>
+        <div class="dates-padding">
+            <p>{{ActivityStatementCtrl.ctrlActivityServices.graph3StartAndEndDatesFormat}}</p>
+        </div>
+        <div>
+            <div class="graph-title-padding"    ng-if="ActivityStatementCtrl.displayOption=='percentage'"
+                    id="midDaySaverPreviousYearComparison"
+                    sy-apex-charts
+                    chart="ActivityStatementCtrl.ctrlActivityServices.chartOptionsMidDaySaverPreviousYearPercentageComparison"
+            ></div>
+            <div class="graph-title-padding"
+                 ng-if="ActivityStatementCtrl.displayOption=='dollar'"
+                    id="midDaySaverPreviousYearComparisonWithData"
+                    sy-apex-charts
+                    chart="ActivityStatementCtrl.ctrlActivityServices.chartOptionsMidDaySaverPreviousDataValueYearComparison"
+            ></div>
+
+        </div>
+    </div>
+</div>

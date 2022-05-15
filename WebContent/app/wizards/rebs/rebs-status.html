@@ -1,0 +1,15 @@
+<div>
+    <div ng-hide="rebsCtrl.model.validForRebs()">
+        <p>This account is not valid for distributed energy systems.</p>
+
+        <div ng-if="rebsCtrl.model.isTempSupply()" ng-include="'app/wizards/rebs/status/_temp-supply.html'"></div>
+    </div>
+
+    <div ng-if="rebsCtrl.model.validForRebs()">
+        <div ng-if="rebsCtrl.model.isPending()" ng-include="'app/wizards/rebs/status/_application-tracker.html'"></div>
+
+        <div ng-if="rebsCtrl.model.isApproved() && !rebsCtrl.model.isPending()" ng-include="'app/wizards/rebs/status/_approved-application.html'"></div>
+
+        <div ng-if="rebsCtrl.model.showNewApplication()" ng-include="'app/wizards/rebs/status/_new-application.html'"></div>
+    </div>
+</div>

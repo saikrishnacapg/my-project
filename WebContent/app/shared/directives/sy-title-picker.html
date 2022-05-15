@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label class="control-label" for="title">Title: <span ng-if="titleCtrl.isRequired" class="label-required"></span></label>
+    <select id="title"
+            name="title"
+            class="form-control"
+            ng-model="titleCtrl.title"
+            ng-options="tit.value as tit.label for tit in titleCtrl.titles"
+            ng-required="titleCtrl.isRequired"
+            ng-change="titleCtrl.titleUpdated()"/>
+</div>

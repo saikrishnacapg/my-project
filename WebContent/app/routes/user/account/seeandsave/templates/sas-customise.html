@@ -1,0 +1,23 @@
+<div ng-controller="SeeAndSaveCustomiseCtrl as customiseCtrl">
+    <div class="row sy-form-group">
+        <ng-form name="meterUpdateForm">
+            <h2 class="pad-bottom-15">Device labels</h2>
+
+            <div class="col-md-6 col-xs-12" ng-repeat="stream in customiseCtrl.streams">
+                <ng-form name="innerForm{{$index}}">
+                <label class="control-label"> Device {{stream}}: </label>
+                <input type="text"
+                       name="device{{$index}}"
+                       class="form-control"
+                       ng-model="data[customiseCtrl.streamId($index)]"
+                       ng-disabled="!customiseCtrl.isStreamActive($index)"
+                       maxlength="20"
+                       ng-required="customiseCtrl.isStreamActive($index)">
+                <div sy-alert-box="device{{$index}}">
+                    <p>Please enter a valid name</p>
+                </div>
+                    </ng-form>
+            </div>
+        </ng-form>
+    </div>
+</div>

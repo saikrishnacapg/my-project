@@ -1,0 +1,378 @@
+<div class="aun-online">
+    <!--New Option introduce refered by CR 4739 3pointID-->
+    <div ng-if="(accountAuth.credentials.contractAccountType == 'RESD') &&(!accountAuth.credentials['contractAccountProtectionPassword'])" >
+        <h2>How would you like to identify yourself?</h2>
+        <div class="acc-radio-btn-group add-an-acc-radio-grp">
+            <div class="acc-radio-btn" sy-auto-focus="sy-auto-focus">
+                <input type="radio" ng-model="accountAuth.data.identificationId" value="FIRSTANDLASTNAME" id="FirstAndLastName" required />
+                <label class="normal-text" for="FirstAndLastName"> By providing my first and last name</label>
+            </div>
+            <div class="acc-radio-btn">
+                <input type="radio" ng-model="accountAuth.data.identificationId" value="NAMEONBILL"  id="NameOnBill" required />
+                <label class="normal-text" for="NameOnBill">By typing the name as printed on my bill</label>
+            </div>
+        </div>
+    </div>
+
+    <!--New Option introduce refered by CR 4739 3pointID-->
+    <div data-layout="form" ng-if="(accountAuth.credentials.contractAccountType == 'RESD')">
+        <div class="name-fields" ng-if="(accountAuth.data.identificationId == 'FIRSTANDLASTNAME') &&(!accountAuth.credentials['contractAccountProtectionPassword'])">
+            <label for="customerFirstName" class="label-required">First name: </label>
+            <div class="input-cntr">
+                <div  data-layout="tooltip">
+                    <input type="text" id="customerFirstName" name="customerFirstName"
+                           placeholder="First name" class="form-control"
+                           required ng-model="accountAuth.securityAnswers.mandatoryAccount.customerFirstName"  sy-pattern="NAME"/>
+                    <a href ng-click="showCustomHelp('Your first and last name' ,findMsgHTML('H98'))"alt="Help" title="Help">
+                        <span class="sy-icon--circle_question_mark"></span>
+                    </a>
+                </div>
+                <div sy-alert-box="customerFirstName">
+                    <p ng-show="accountAuth2Form.customerFirstName.$error.required && accountAuth2Form.customerFirstName.$invalid">
+                        {{findMsgHTML('E40')}}
+                    </p>
+                    <p ng-show="accountAuth2Form.customerFirstName.$error.pattern">{{findMsgHTML('E412')}}</p>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="name-fields" ng-if="(accountAuth.data.identificationId == 'FIRSTANDLASTNAME') &&(!accountAuth.credentials['contractAccountProtectionPassword'])">
+            <label for="customerLastName" class="label-required">Last name:</label>
+            <div class="input-cntr">
+                <div  data-layout="tooltip">
+                    <input type="text" id="customerLastName" name="customerLastName"
+                           placeholder="Last name" class="form-control"
+                           required ng-model="accountAuth.securityAnswers.mandatoryAccount.customerLastName" sy-pattern="NAME"/>
+                    <a href ng-click="showCustomHelp('Your first and last name' ,findMsgHTML('H98'))"alt="Help" title="Help">
+                        <span class="sy-icon--circle_question_mark"></span>
+                    </a>
+                </div>
+                <div sy-alert-box="customerLastName">
+                    <p ng-show="accountAuth2Form.customerLastName.$error.required && accountAuth2Form.customerLastName.$invalid">
+                        {{findMsgHTML('E41')}}
+                    </p>
+                    <p ng-show="accountAuth2Form.customerLastName.$error.pattern">{{findMsgHTML('E412')}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="name-of-bill" sy-form-group data-layout="form" ng-if="accountAuth.credentials['customerName']&& (accountAuth.data.identificationId == 'NAMEONBILL' || accountAuth.credentials.contractAccountType != 'RESD')">
+        <label class="label-required" for="customerName">Name on bill:</label>
+        <div class="input-cntr">
+            <div  data-layout="tooltip">
+                <input type="text" id="customerName" name="customerName"
+                       class="form-control" placeholder="Name on bill"
+                       required
+                       analytics-category="3Point ID"
+                       sy-focus-me
+                       ng-model="accountAuth.securityAnswers.mandatoryAccount.customerName"/>
+                <a href ng-click="showCustomerNameHelp()" alt="Help" title="Help">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+            </div>
+            <div sy-alert-box="customerName">
+                <p ng-show="accountAuth2Form.customerName.$error.required && accountAuth2Form.customerName.$invalid">
+                    Please enter the name on your bill.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!--New Option introduce refered by CR 4739 3pointID-->
+    <div data-layout="form" id="identitySelector" ng-if="(accountAuth.credentials.contractAccountType == 'RESD') &&(!accountAuth.credentials['contractAccountProtectionPassword'])">
+        <label class="control-label label-required">Select an additional point of identification</label>
+        <div>
+            <div class="threePointIdentityChoice">
+                <select
+                        name="threePointIdentityChoice"
+                        id="threePointIdentityChoice"
+                        class="form-control"
+                        ng-model="accountAuth.data.identitySelectorId"
+                        ng-options="bd.id as bd.label for bd in accountAuth.pointOfIdentification.identificationDetailType"
+                        required>
+                    <option value="">Select preferred ID</option><span class="caret"></span>
+                </select>
+                <div sy-alert-box="threePointIdentityChoice">
+                    <p ng-show="accountAuth2Form.threePointIdentityChoice.$error.required && accountAuth2Form.threePointIdentityChoice.$invalid">
+                        {{findMsgHTML('E232')}}
+                    </p>
+                </div>
+            </div>
+            <div sy-alert-box="threePointIdChoice">
+                <p ng-show="accountAuth2Form.threePointIdChoice.$error.required">
+                    {{findMsgHTML('E232')}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--New Option introduce refered by CR 4739 3pointID-->
+    <div class="telephone" ng-if="(accountAuth.data.identitySelectorId=='LANDLINE') && (accountAuth.credentials.contractAccountType == 'RESD') &&(!accountAuth.credentials['contractAccountProtectionPassword'])">
+        <label for="landlineCountryCode">Landline number</label>
+        <a class="telephone-tooltip" href ng-click="showCustomHelp('Landline number' ,findMsgHTML('H38'))" alt="Help" title="Help">
+            <span class="sy-icon--circle_question_mark"></span>
+        </a>
+        <!-- Radio button for phone type -->
+        <div class="sy-form-group--form landline-no">
+            <div class="sy-element-left col-sm-4">
+                <select ng-model="accountAuth.landlineCountryCode"
+                        name="landlineCountryCode"
+                        id="landlineCountryCode"
+                        class="form-control"
+                        ng-options="area.Code as area.Name group by area.Label for area in accountAuth.landlineFinalList">
+                </select>
+            </div>
+            <div class="sy-element-right col-sm-8" data-layout="tooltip">
+                <input type="text"
+                       name="landlineTelephoneNumber"
+                       ng-model="accountAuth.landlineTelephoneNumber"
+                       class="form-control"
+                       sy-pattern="LAND_NUMBER"
+                       sy-remove-space="sy-remove-space"
+                       landlinevalidate-no
+                       required
+                       ng-minlength="1" ng-maxlength="20">
+
+
+                <div sy-alert-box="landlineTelephoneNumber" >
+                    <p ng-show="accountAuth2Form.landlineTelephoneNumber.$error.pattern && !accountAuth2Form.landlineTelephoneNumber.$error.required">
+                        {{findMsgHTML('MA_E5')}}
+                    </p>
+                    <p ng-show="accountAuth2Form.landlineTelephoneNumber.$error.minlength || accountAuth2Form.landlineTelephoneNumber.$error.maxlength">
+                        {{findMsgHTML('MA_E5')}}
+                    </p>
+                    <p ng-show="accountAuth2Form.landlineTelephoneNumber.$error.required">
+                        {{findMsgHTML('MA_H31')}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--New Option introduce refered by CR 4739 3pointID-->
+    <div class="form-group mobilephone" ng-if="(accountAuth.data.identitySelectorId=='MOBILE_NUMBER') && (accountAuth.credentials.contractAccountType == 'RESD') &&(!accountAuth.credentials['contractAccountProtectionPassword'])" >
+        <label for="mobileTelephoneCountry">Mobile number</label>
+        <a class="mobilephone-tooltip" href ng-click="showCustomHelp('Mobile number' ,findMsgHTML('H40'))" alt="Help" title="Help">
+        <span class="sy-icon--circle_question_mark"></span>
+        </a>
+        <!-- Radio button for phone type -->
+        <div class="sy-form-group--form">
+
+            <div class="sy-element-left col-sm-4">
+                <select ng-model="accountAuth.mobileTelephoneCountry"
+                        name="mobileTelephoneCountry" id="mobileTelephoneCountry"
+                        class="form-control"
+                        required
+                        ng-options="area.Code as area.Name group by area.Label for area in accountAuth.mobileFinalList">
+                </select>
+                <div sy-alert-box="mobileTelephoneCountry">
+                    <p ng-show="accountAuth2Form.mobileTelephoneCountry.$error.required">
+                        {{findMsgHTML('MA_E7')}}
+                    </p>
+                    <p ng-show="accountAuth2Form.mobileTelephoneCountry.$error.pattern">
+                        {{findMsgHTML('MA_E7')}}
+                    </p>
+                </div>
+            </div>
+            <div class='sy-element-right col-sm-8' >
+                <input type="text"
+                       name="mobileTelephoneNumber"
+                       id="mobileTelephoneNumber"
+                       ng-model="accountAuth.mobileTelephoneNumber"
+                       class="form-control"
+                       required
+                       mobilevalidate-no
+                       sy-select-input-zero-prefix="sy-select-input-zero-prefix"
+                       sy-remove-space="sy-remove-space"
+                       ng-minlength="1" ng-maxlength="20"/>
+
+                <div sy-alert-box="mobileTelephoneNumber">
+                    <p ng-show="accountAuth2Form.mobileTelephoneNumber.$error.required">
+                        {{findMsgHTML('MA_H30')}}
+                    </p>
+                    <p ng-show="accountAuth2Form.mobileTelephoneNumber.$error.pattern && !accountAuth2Form.mobileTelephoneNumber.$error.required">
+                        {{findMsgHTML('MA_E14')}}
+                    </p>
+                    <p ng-show="accountAuth2Form.mobileTelephoneNumber.$error.minlength || accountAuth2Form.mobileTelephoneNumber.$error.maxlength">
+                        {{findMsgHTML('MA_E14')}}
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--New Option introduce refered by CR 4739 3pointID-->
+    <div class="dob" data-layout="form" ng-if="(accountAuth.credentials['dateOfBirth']) && (accountAuth.data.identitySelectorId=='DATE_OF_BIRTH')">
+        <label class="label-required" for="dateOfBirth">Date of birth: </label>
+        <a class="dob-tooltip" href ng-click="showCustomHelp('Date of birth' ,findMsgHTML('H22'))" alt="Help" title="Help">
+            <span class="sy-icon--circle_question_mark"></span>
+        </a>
+        <div>
+            <div id="dateOfBirth" data-layout="tooltip">
+                <input id="DOBDay"
+                       type="tel"
+                       name="DOBDay"
+                       class="input-mini form-control"
+                       ng-model="accountAuth.dateOfBirthDay"
+                       placeholder="DD"
+                       maxlength="02"
+                       sy-pattern="DOBDAY"
+                       sy-check-dateofbirth
+                       sy-auto-move
+                       required
+                       style="margin: 0; width:50px;display:inline"/>
+                <span style="display:inline">/</span>
+                <input id="DOBMonth"
+                       type="tel"
+                       name="DOBMonth"
+                       class="input-mini form-control"
+                       ng-model="accountAuth.dateOfBirthMonth"
+                       placeholder="MM"
+                       maxlength="02"
+                       sy-pattern="DOBMONTH"
+                       sy-check-dateofbirth
+                       sy-auto-move
+                       required
+                       style="margin: 0; width:50px;display:inline"/>
+                <span style="display:inline">/</span>
+                <input id="DOBYear"
+                       type="tel"
+                       name="DOBYear"
+                       class="input-mini form-control"
+                       ng-model="accountAuth.dateOfBirthYear"
+                       placeholder="YYYY"
+                       maxlength="04"
+                       sy-pattern="DOBYEAR"
+                       sy-validate-dateofbirth
+                       sy-check-dateofbirth
+                       required
+                       style="margin: 0; width:65px;display:inline"/>
+            </div>
+
+            <div>
+                <p ng-show="accountAuth2Form.DOBDay.$error.pattern || accountAuth2Form.DOBDay.$error.required ||accountAuth2Form.DOBDay.$error.dateValid" sy-alert-box="DOBDay">
+                  <span ng-show="accountAuth2Form.DOBDay.$error.pattern">
+                    Please enter a valid date of birth.
+                  </span>
+                    <span ng-show="accountAuth2Form.DOBDay.$error.required">
+                   Don't forget to tell us your date of birth. You'll need to add this to continue.
+                  </span>
+                    <span ng-show="accountAuth2Form.DOBDay.$error.dateValid">Please enter a valid date of birth.</span>
+                </p>
+            </div>
+
+            <div>
+                <p ng-show="accountAuth2Form.DOBDay.$valid" sy-alert-box="DOBMonth">
+                    <span ng-show="accountAuth2Form.DOBMonth.$error.pattern">
+                        Please enter a valid month of birth.
+                    </span>
+
+                    <span ng-show="accountAuth2Form.DOBMonth.$error.required">
+                       Don't forget to tell us your date of birth. You'll need to add this to continue.
+                    </span>
+                    <span ng-show="accountAuth2Form.DOBMonth.$error.dateValid">Please enter a valid date of birth.</span>
+                </p>
+            </div>
+
+            <div>
+                <p ng-show="accountAuth2Form.DOBDay.$valid && accountAuth2Form.DOBMonth.$valid" sy-alert-box="DOBYear">
+                    <span ng-show="accountAuth2Form.DOBYear.$error.pattern">
+                        Please enter a valid year of birth.
+                    </span>
+
+                    <span ng-show="accountAuth2Form.DOBYear.$error.required">
+                        Don't forget to tell us your date of birth. You'll need to add this to continue.
+                    </span>
+
+                    <span ng-show="accountAuth2Form.DOBYear.$error.age">You must be 16 years of age to use this service.</span>
+                    <span ng-show="accountAuth2Form.DOBYear.$error.dateValid">Please enter a valid date of birth.</span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form" ng-if="accountAuth.credentials['contractAccountProtectionPassword']">
+        <label class="label-required" for="contractAccountProtectionPassword">Electricity account privacy password:</label>
+
+        <div>
+            <div sy-form-group data-layout="tooltip">
+                <input type="password" id="contractAccountProtectionPassword" placeholder="Password" class="form-control"
+                       name="contractAccountProtectionPassword" style="box-sizing: border-box;"
+                       ng-model="accountAuth.securityAnswers.mandatoryAccount.contractAccountProtectionPassword"
+                       analytics-category="3Point ID"
+                       required=""><!-- jq-cf-hide-show-password="" -->
+                <a href ng-click="showContractAccountProtectionPasswordHelp()" alt="Help" title="Help"
+                   analytics-on="click" analytics-event="infoButton" analytics-category="3Point ID" analytics-label="Privacy password">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+            </div>
+
+            <div sy-alert-box="contractAccountProtectionPassword">
+                <p ng-show="accountAuth2Form.contractAccountProtectionPassword.$error.required">
+                    Please enter a password.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form" id="billDetailSelector" ng-if="accountAuth.credentials['billDetails'] && accountAuth.credentials['billDetails'].length > 1">
+        <label class="label-required">Additional point of identification:</label>
+        <div>
+            <div>
+                <select
+                        name="threePointIdChoice"
+                        id="threePointIdChoice"
+                        class="form-control"
+                        ng-model="accountAuth.securityAnswers.mandatoryAccount.billDetailType"
+                        ng-options="bd.id as bd.label for bd in accountAuth.credentials.billDetails"
+                        placeholder="Choose one of the below"
+                        required>
+                    Select <span class="caret"></span>
+                </select>
+            </div>
+            <div sy-alert-box="threePointIdChoice">
+                <p ng-show="accountAuth2Form.threePointIdChoice.$error.required">
+                    Please select an additional point of identification.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div sy-form-group data-layout="form" ng-if="accountAuth.credentials['billDetails'] && billDetailDescription">
+        <label class="label-required" for="billDetailValue">{{billDetailDescription}}:</label>
+
+        <div>
+            <div sy-form-group data-layout="tooltip" ng-if="billDetailDescription === 'Amount due on latest bill'">
+                <input type="text" id="billDetailValue" name="billDetailValue"
+                       class=" form-control" placeholder="{{billDetailDescription}}"
+                       required
+                       sy-is-number
+                       analytics-category="3Point ID" analytics-label="{{billDetailDescription}}"
+                       ng-model="accountAuth.securityAnswers.mandatoryAccount.billDetailValue"/>
+                <a href ng-click="showBillDetailHelp()" analytics-on="click" analytics-event="infoButton" analytics-category="3Point ID" analytics-label="{{billDetailDescription}}" alt="Help" title="Help">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+            </div>
+            <div sy-form-group data-layout="tooltip" ng-if="billDetailDescription != 'Amount due on latest bill'">
+                <input type="text" id="billDetailValue" name="billDetailValue"
+                       class=" form-control" placeholder="{{billDetailDescription}}"
+                       required
+                       analytics-category="3Point ID" analytics-label="{{billDetailDescription}}"
+                       ng-model="accountAuth.securityAnswers.mandatoryAccount.billDetailValue"/>
+                <a href ng-click="showBillDetailHelp()" analytics-on="click" analytics-event="infoButton" analytics-category="3Point ID" analytics-label="{{billDetailDescription}}" alt="Help" title="Help">
+                    <span class="sy-icon--circle_question_mark"></span>
+                </a>
+            </div>
+
+            <div sy-alert-box="billDetailValue">
+                <p ng-show="accountAuth2Form.billDetailValue.$error.required">
+                    Please enter your {{billDetailDescription | lowercase}}
+                </p>
+                <p ng-show="accountAuth2Form.billDetailValue.$error.syIsNumber && !accountAuth2Form.billDetailValue.$error.required">
+                    Please enter digits only, no spaces or commas.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

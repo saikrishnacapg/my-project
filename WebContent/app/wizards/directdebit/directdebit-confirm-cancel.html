@@ -1,0 +1,20 @@
+<div ng-if="!cancelCtrl.LifestyleOrSolar">
+<h2>Cancel your Direct Debit for {{cancelCtrl.cancelLabel}}?</h2>
+<span ng-if="cancelCtrl.instalmentPaymentValue">
+    <p sy-econnect-deactivation-warning process="cancelling your Direct Debit" account="cancelCtrl.account"></p>
+</span>
+    <span ng-if="!cancelCtrl.instalmentPaymentValue && cancelCtrl.account.paymentInfo.directDebitExists">
+    <p>Please note that any balance owing on your bills will continue to be deducted via Direct Debit until you cancel Direct Debit.</p>
+</span>
+    <span ng-if="cancelCtrl.instalmentPaymentValue && cancelCtrl.account.paymentInfo.directDebitInstalmentExists">
+    <p>Please note that your instalment payments will continue to be deducted until you cancel your regular instalment payments in My Account.</p>
+</span>
+</div>
+<div ng-if="cancelCtrl.LifestyleOrSolar && !cancelCtrl.eConnect">
+    <h2>Cancel your Direct Debit for {{cancelCtrl.cancelLabel}}?</h2>
+    <p sy-econnect-deactivation-warning process="cancelling your Direct Debit" account="cancelCtrl.account"></p>
+</div>
+<div ng-if="cancelCtrl.LifestyleOrSolar && cancelCtrl.eConnect">
+    <h2>Are you sure you want  to say goodbye to your extra rewards?</h2>
+    <p>Don’t forget, if you choose to cancel your Direct Debit you’ll no longer receive the extra 1% discount off your electricity charges on the {{cancelCtrl.productName}}.</p>
+</div>

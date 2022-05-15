@@ -1,0 +1,19 @@
+<div>
+    <h2>Would you like to make this change to your other accounts?</h2>
+
+    <div>
+        If you select yes then your new contact details will also be applied to your other accounts listed below.
+    </div>
+    <div class="list-group">
+        <div class="list-group-item clearfix" ng-repeat="account in myCtrl.accountList">
+            <strong>{{account.contractAccountNumber}}</strong>
+            <div>{{account.address | capitalize}}</div>
+        </div>
+    </div>
+    <div>
+        <input type="button" class="sy-button--primary" value="No, just make the change for this account"
+               ng-click="setUpdateMultipleAccounts(false)" style="width:280px; white-space:normal;" sy-busy-chevron="global"/>
+        <input type="button" class="sy-button--primary" value="Yes, apply the change to all my other accounts"
+               ng-click="setUpdateMultipleAccounts(true)" style="float:right;width:280px; white-space:normal" sy-busy-chevron="global"/>
+    </div>
+</div>

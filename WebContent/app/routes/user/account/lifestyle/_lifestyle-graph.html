@@ -1,0 +1,9 @@
+<div class="interval-data__graph">
+    <div id="lifestyleGraph" ng-if="lifestyleCtrl.displayGraph()">
+        <div ng-if="lifestyleCtrl.lifestyle.isElectricity()" ng-include="'app/routes/user/account/lifestyle/_lifestyle-graph-elec.html'"></div>
+    </div>
+    <div ng-if="lifestyleCtrl.displayLookupErrorMessage()">
+        <h3 class="text-center" ng-bind="lifestyleCtrl.lifestyle.message">
+        </h3>
+    </div>
+</div>

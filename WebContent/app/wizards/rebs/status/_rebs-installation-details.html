@@ -1,0 +1,66 @@
+<div ng-init="selectedSupplyAddress = rebsCtrl.model.meter.address">
+     <div ng-if="rebsCtrl.model.isRebsEnabled() && !rebsCtrl.model.isFitEnabled()" class="tooltipWrap-ma-res">
+        <div class="toolIner-ma-res">
+            <span>
+                You currently participate in the Renewable Energy Buyback Scheme (REBS). If you upgrade your renewable energy system, you will no longer be eligible for REBS and
+                may be eligible to participate in the Distributed Energy Buyback Scheme (DEBS), provided you meet all the
+                <span ng-if="rebsCtrl.model.customer.type === 'Residential'"><a sy-doc-href="eligibility.criteria.debs.residential">eligibility criteria</a>.</span>
+                <span ng-if="rebsCtrl.model.customer.type !== 'Residential'"><a sy-doc-href="eligibility.criteria.debs.business">eligibility criteria</a>.</span>
+                Please refer to <a sy-doc-href="about.debs.external.info">DEBS</a> for more information before completing your application.
+                Please note that this may impact the amount you receive for the energy you export back into grid because the REBS and DEBS rates are different.
+            </span>
+        </div>
+    </div>
+    <div ng-if="rebsCtrl.model.isRebsEnabled() && rebsCtrl.model.isFitEnabled()" class="tooltipWrap-ma-res">
+        <div class="toolIner-ma-res">
+            <span>
+                You currently participate in the Renewable Energy Buyback Scheme (REBS). In accordance with the new REBS terms and conditions, if you increase the capacity to your existing renewable energy system or add in a storage capable device,
+                you will no longer be eligible for the Net-Feed-In-Tariff (FiT) and REBS. If you are no longer eligible for FiT and REBS, you can continue to use this form to apply for the Distributed Energy Buyback Scheme (DEBS), provided you meet all the
+                <span ng-if="rebsCtrl.model.customer.type === 'Residential'"><a sy-doc-href="eligibility.criteria.debs.residential">eligibility criteria</a>.</span>
+                <span ng-if="rebsCtrl.model.customer.type !== 'Residential'"><a sy-doc-href="eligibility.criteria.debs.business">eligibility criteria</a>.</span>
+                Please refer to <a href="" sy-doc-href="about.debs.external.info">DEBS</a> for more information before completing your application.
+                Please note that this may impact the amount you receive for the energy you export back into grid because the REBS and DEBS rates are different.
+            </span>
+        </div>
+    </div>
+    <h3>Your previously approved system details</h3>
+
+    <div sy-form-group data-layout="split">
+        <label class="control-label">Supply address</label>
+
+        <div ng-bind="selectedSupplyAddress.supplyAddress"></div>
+    </div>
+    <div sy-form-group data-layout="split">
+        <label class="control-label">
+            Panel size
+        </label>
+
+        <div>
+            <span ng-bind="selectedSupplyAddress.panelSize ? (selectedSupplyAddress.panelSize + ' kW') : '*'"></span>
+        </div>
+    </div>
+    <div sy-form-group data-layout="split">
+        <label class="control-label">
+            Inverter capacity
+        </label>
+
+        <div>
+            <span ng-bind="selectedSupplyAddress.inverterCapacity ? (selectedSupplyAddress.inverterCapacity + ' kW') : '*'"></span>
+        </div>
+    </div>
+    <div sy-form-group data-layout="split" ng-if="selectedSupplyAddress.applicationStatus.lastChanged">
+        <label class="control-label">
+            Date of last activity**
+        </label>
+
+        <div ng-bind="selectedSupplyAddress.applicationStatus.lastChanged | date:'dd/MM/yy'">
+        </div>
+    </div>
+    <p class="small" ng-show="!selectedSupplyAddress.inverterCapacity || !selectedSupplyAddress.panelSize">
+        *System data unavailable. Please <a href="" ng-click="statusCtrl.openContactUs();">contact us</a> for more information.
+    </p>
+    <p class="small" ng-show="selectedSupplyAddress.applicationStatus.lastChanged">
+        **Most recent installation / system upgrade
+    </p>
+</div>
+

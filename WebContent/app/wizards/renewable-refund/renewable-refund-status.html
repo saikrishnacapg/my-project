@@ -1,0 +1,37 @@
+<div class="clearfix">
+	<h2>Automated REBS payments</h2>
+
+    <p class="pad-bottom-10">
+        Any REBS credits of $75 or more will be transferred straight to your bank on the 1st business day of each month to the following nominated account:
+    </p>
+
+    <div class="clearfix">
+        <div class="sy-element-left col-sm-8">
+
+            <div sy-form-group data-layout='form'>
+                <label>Account name:</label>
+                <div ng-bind="rrCtrl.model.account.rebsRefund.accountName"></div>
+            </div>
+            <div sy-form-group data-layout='form'>
+                <label>BSB:</label>
+                <div ng-bind="rrCtrl.model.account.rebsRefund.bsbNumber | syBankBSPMask"></div>
+            </div>
+            <div sy-form-group data-layout='form'>
+                <label>Account number:</label>
+                <div ng-bind="rrCtrl.model.account.rebsRefund.accountNumber | syBankAccountMask"></div>
+            </div>
+        </div>
+
+        <div class="sy-element-right col-sm-4">
+            <button type="button" class="sy-button--white sy-button--icon-left" ng-click="rrCtrl.editRenewableRefund()"><span class="sy-icon--pencil"></span>
+                Update bank details
+            </button>
+        </div>
+    </div>
+
+    <p>
+        If you haven’t received your REBS payment, please double check the eligibility criteria in the <a sy-doc-href="terms.renewable.refund">Automated REBS Payments Terms and Conditions</a> or view the <a sy-doc-href="synergy.rebsrefund.faqs">frequently asked questions</a>.
+
+        To opt-out from receiving Automated REBS Payments, please select the opt-out button below.
+    </p>
+</div>

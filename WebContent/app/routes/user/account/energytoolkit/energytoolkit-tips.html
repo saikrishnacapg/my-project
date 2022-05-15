@@ -1,0 +1,30 @@
+<!-- user has filtered out all tips -->
+<div ng-if="accountCtrl.currentAccount.feaDetails.hasEnergyProfile && tips_list.length == 0">
+	Sorry, there are no matching tips.
+</div>
+
+<div class="tip tip-status--{{tip.status}}" ng-repeat="tip in tips_list = (energyCtrl.tips | filter:energyCtrl.tipFilter:false | orderBy:'rank')">
+
+	<div class="tip__heading">
+		<span class="sy-icon--ok" style="float: left; font-size: 24px" ng-show="tip.status == 'done'"></span>
+
+		<span style="color: #002c5a; font-weight: bold;">{{tip.content}}</span>
+
+	</div>
+
+	<div class="tip__popularity">
+		<span class="sy-icon--parents"></span> {{tip.popularity}}
+	</div>
+
+	<div class="tip__status">
+
+		<button class="sy-button--white sy-button--icon-left sy-button--block"
+				style="text-align: left; padding-left: 40px"
+				ng-model="tip.status"
+				ng-change="energyCtrl.statusUpdated(tip)"
+				data-html="1"
+				ng-options="status.value as status.label for status in energyCtrl.tipStatuses" bs-select>
+		</button>
+	</div>
+
+</div>

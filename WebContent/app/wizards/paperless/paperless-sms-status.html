@@ -1,0 +1,138 @@
+<div class="must-complete">All fields must be completed.</div>
+
+<div ng-form="paperlessForm">
+    <div class="form-group paperlessForm">
+        <!--<h2>My contact preferences</h2>-->
+
+        <div class="controls acc-radio-btn-group">
+            <div class="acc-radio-btn" sy-auto-focus="sy-auto-focus">
+                <input type="radio" class="" name="paperlessType" id="paperlessTypeEmailSMS" ng-model="paperlessCtrl.paperlessType" value="ES">
+                <label for="paperlessTypeEmailSMS">Paperless - Email + SMS</label>
+            </div>
+            <div class="acc-radio-btn">
+                <input type="radio" class="" name="paperlessType" id="paperlessTypeEmail" ng-model="paperlessCtrl.paperlessType" value="E">
+                <label for="paperlessTypeEmail">Paperless - Email Only</label>
+            </div>
+            <div class="acc-radio-btn">
+                <input type="radio" class="" name="paperlessType" id="paperlessTypePaper" ng-model="paperlessCtrl.paperlessType" value="P">
+                <label for="paperlessTypePaper">Paper</label>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="paperlessCtrl.paperlessType == 'ES' || paperlessCtrl.paperlessType == 'E'">
+        <div class="form-group">
+            <label for="emailAddress">We&#39;ll deliver your <a sy-doc-href="terms.paperless">Paperless</a> bills to the following
+                inbox:<span ng-if="isRequired()"
+                               class="label-required"></span></label>
+
+            <div class="controls">
+                <input type="email"
+                       id="emailAddress"
+                       name="emailAddress"
+                       placeholder="Email address"
+                       ng-model="paperlessCtrl.emailAddress"
+                       ng-required="true"
+                       class="form-control"
+                       sy-pattern="EMAIL_ADDRESS"
+                       sy-validate-email
+                        />
+            </div>
+
+            <div sy-alert-box="emailAddress">
+                <p ng-show="paperlessForm.emailAddress.$error.email">The email address you have entered is not valid.
+                    Please
+                    enter a valid email address.</p>
+
+                <p ng-show="paperlessForm.emailAddress.$error.required">Please provide an email address.</p>
+
+                <p ng-show="paperlessForm.emailAddress.$error.pattern">The email address you have entered is not valid.
+                    Please enter a valid email address.</p>
+
+                <p ng-show="!paperlessForm.emailAddress.$error.email && !paperlessForm.emailAddress.$error.required && !paperlessForm.emailAddress.syValidateEmail">
+                    Double check your email is correct. If you are happy with it, then please ignore this message.</p>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="paperlessCtrl.paperlessType == 'ES'">
+        <div class="form-group">
+            <label>Plus we&#39;ll send your SMS reminders to:<span ng-if="isRequired()"
+                                                                     class="label-required"></span></label>
+
+            <div>
+                <div style="float: left;width: 33%">
+                    <select ng-model="paperlessCtrl.mobileTelephoneCountry"
+                            name="mobileTelephoneCountry" id="mobileTelephoneCountry"
+                            class="form-control"
+                            ng-required="true"
+                            ng-options="mobilearea.countrycode as mobilearea.countryname for mobilearea in paperlessCtrl.internationalAreas">
+                    </select>
+
+                    <div sy-alert-box="mobileTelephoneCountry" style="float: left;width: 33%;">
+                        <p ng-show="paperlessForm.mobileTelephoneCountry.$error.required">
+                            Please select a country code for mobile.
+                        </p>
+
+                        <p ng-show="paperlessForm.mobileTelephoneCountry.$error.pattern">
+                            Please select a country code for mobile.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="float: right;width: 66%">
+                    <div class="controls">
+                        <input type="tel"
+                               name="sendSMSMobileNumber"
+                               id="sendSMSMobileNumber"
+                               class="form-control"
+                               placeholder="Enter your mobile number"
+                               ng-model="paperlessCtrl.sendSMSMobileNumber"
+                               ng-required="true"
+                               mobilevalidate-no
+                               sy-select-input-zero-prefix="sy-select-input-zero-prefix"
+                               ng-minlength="9"
+                               ng-maxlength="10"/>
+                    </div>
+                    <div sy-alert-box="sendSMSMobileNumber" style="float: right;width: 66%">
+                        <p ng-show="paperlessForm.sendSMSMobileNumber.$error.required && !paperlessForm.sendSMSMobileNumber.$error.pattern">
+                            Please provide a telephone or mobile number.
+                        </p>
+
+                        <p ng-show="paperlessForm.sendSMSMobileNumber.$error.pattern">
+                            Please provide a valid contact number.
+                        </p>
+
+                        <p ng-show="(paperlessForm.sendSMSMobileNumber.$error.minlength || paperlessForm.sendSMSMobileNumber.$error.maxlength) && !paperlessForm.sendSMSMobileNumber.$error.pattern">
+                            Please provide a valid contact number.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="sy-alert--info" ng-if="paperlessCtrl.paperlessType == 'ES' || paperlessCtrl.paperlessType == 'E'">
+        <span class="sy-icon--circle_info"></span>
+        <p>Any changes made to your email or mobile number here, will be applied to your account details for this energy account.</p>
+    </div>
+    <div ng-if="paperlessCtrl.paperlessType == 'P' && !paperlessCtrl.isEconnect()">
+        <div class="sy-alert--info">
+            <span class="sy-icon--circle_info"></span>
+            <p ng-show="paperlessCtrl.renewableRefundActive()" class="sy-alert--info-content">By choosing to cancel your Paperless service, your Automated REBs payments will be cancelled and a paper based bill fee may apply.</p>
+            <p ng-show="paperlessCtrl.renewableRefundActive()" class="sy-alert--info-content-second">Hate dealing with paperwork? Save on paper and have your synergy bills and other communication sent directly to your inbox instead! Simply select a Paperless option above.</p>
+            <p ng-hide="paperlessCtrl.renewableRefundActive()" class="sy-alert--info-content">Hate dealing with paperwork? Save on paper and have your synergy bills and other communication sent directly to your inbox instead! Simply select a Paperless option above.</p>
+            <p ng-hide="paperlessCtrl.renewableRefundActive()" class="sy-alert--info-content-second"> By switching to paper based bills, a Paper based bill fee may apply.</p>
+        </div>
+    </div>
+    <div ng-if="paperlessCtrl.paperlessType == 'P' && paperlessCtrl.isEconnect()">
+        <div class="sy-alert--info">
+            <span class="sy-icon--circle_info"></span>
+            <p class="sy-alert--info-content">Please note that by switching off Paperless, you’ll no longer be eligible to be rewarded with eConnect.</p>
+            <p class="sy-alert--info-content-second"> By switching to paper based bills, a Paper based bill fee may apply.</p>
+        </div>
+    </div>
+
+</div>

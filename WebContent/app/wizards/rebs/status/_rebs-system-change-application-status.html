@@ -1,0 +1,48 @@
+<div id="rebs-application-status">
+
+    <!--<div class="status-header" style="margin:15px;" ng-show="rebsCtrl.model.applicationStatus() == 1">
+        We're currently processing your application
+    </div>
+    <div class="status-header" style="margin:15px;" ng-if="rebsCtrl.model.applicationStatus() == 3">
+        You're now ready to connect your new system
+    </div>-->
+    <div class="status-header" style="margin:15px;">
+        <p>Synergy Reference Number: <strong ng-bind="rebsCtrl.model.getApplicationReferenceNumber()"></strong></p>
+    </div>
+    <div class="sy-app-status" current-step="rebsCtrl.model.applicationStatus()"  step="1">
+        <div class="sy-app-status-title">Step 1- Apply to Synergy for a reference number</div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() == 1">
+            <p>We've successfully received your application to connect a distributed energy system and we're currently processing your application.</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() != 1">
+            <p>Your application to Synergy has been accepted. Your Synergy Reference number which you will need to complete step 2 is <strong ng-bind="rebsCtrl.model.getApplicationReferenceNumber()"></strong>.</p>
+        </div>
+    </div>
+
+    <div class="sy-app-status" current-step="rebsCtrl.model.applicationStatus()" step="2">
+        <div class="sy-app-status-title" data-progress-text="Please complete">Step 2- Apply to Western Power using your reference number</div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() == 2">
+            <div class="sy-app-status-intro">
+                <p>You or your solar provider will need to apply to Western Power for approval to connect your system to the network.</p>
+            </div>
+            <p>You or your solar provider will need to apply to Western Power for approval to connect your system to the network.</p>
+            <p>This requires the completion of an Application to connect embedded generation to the Western Power network form. The form and information regarding connecting a small-scale energy system can be found at westernpower.com.au</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() > 2">
+            <p>Western Power has approved your application and a meter upgrade or reconfiguration is being arranged.</p>
+        </div>
+    </div>
+
+    <div class="sy-app-status" current-step="rebsCtrl.model.applicationStatus()" step="3">
+        <div class="sy-app-status-title" data-completed-text="Ready to install" data-progress-text="Ready to install">Step 3- Arrange for your solar supplier to install your new system</div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() < 3">
+            <p>You must complete steps 1-3 before your system can be connected to the network.</p>
+        </div>
+        <div class="sy-app-status-content" ng-if="rebsCtrl.model.applicationStatus() == 3">
+            <p>Congratulations - your application has been successfully completed.  Your solar supplier can now connect your new system and you could soon be generating even more distributed energy.</p>
+        </div>
+    </div>
+
+</div>
+
+<div ng-include="'app/wizards/rebs/status/_download-application.html'"></div>

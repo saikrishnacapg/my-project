@@ -1,0 +1,43 @@
+<div ng-form="ddForm" style="border: 1px solid #b4d2dc; border-radius: 4px; padding: 0 15px; margin-bottom: 15px;">
+    <h3>How would you like to pay any possible outstanding amount when your bill is due?</h3>
+    <p>
+        For example, you've had the air conditioner on more during the hotter days in Summer - your $210 bill is a little higher than normal.
+        You pay $40 every fortnight, but this time there will be $50 still owing when your regular bill is due to be paid.
+    </p>
+    <div>
+        <label for="nominated">
+            <input type="radio" name="shortfall" ng-model="signUpCtrl.model.instalment.shortfall" value="nominated" class="sy-radio" id="nominated" required />
+            Use my nominated account
+        </label>
+        <label for="bank">
+            <input type="radio" name="shortfall" ng-model="signUpCtrl.model.instalment.shortfall" value="bank" class="sy-radio" id="bank" required sy-analytics-payment-method="BANK" />
+            Other bank account
+            <div style="padding: 15px 15px 0 15px; font-weight: normal;" ng-if="signUpCtrl.model.instalment.shortfall == 'bank'">
+                <sy-bank-details bank-model="signUpCtrl.model.directDebit.bankDetails"></sy-bank-details>
+            </div>
+        </label>
+        <label for="card">
+            <input type="radio" name="shortfall" ng-model="signUpCtrl.model.instalment.shortfall" value="card" class="sy-radio" id="card" required sy-analytics-payment-method="CARD" />
+            Other credit/debit card
+            <div style="padding: 15px 15px 0 15px; font-weight: normal;" ng-if="signUpCtrl.model.instalment.shortfall == 'card'">
+                <sy-card-details card-model="signUpCtrl.model.directDebit.ccDetails"></sy-card-details>
+            </div>
+        </label>
+        <label for="managed">
+            <input type="radio" name="shortfall" ng-model="signUpCtrl.model.instalment.shortfall" value="managed" class="sy-radio" id="managed" required/>
+            I'll take care of it
+            <div style="padding: 15px 15px 0 15px; font-weight: normal;" ng-if="signUpCtrl.model.instalment.shortfall == 'managed'">
+                <p>I'll pay any outstanding amount when my bill is due using another payment option instead</p>
+                <div class="sy-alert--info">
+                    <span class="sy-icon--circle_info"></span>
+                    Additional fees may be charged for outstanding amounts unpaid when bill is due.
+                    <a sy-doc-href="faq.bills.residential" ng-show="signUpCtrl.isResidential">Read more about our bill process</a>
+                    <a sy-doc-href="faq.bills.business" ng-show="!signUpCtrl.isResidential">Read more about our bill process</a>.
+                </div>
+            </div>
+        </label>
+        <div sy-alert-box="shortfall">
+            <p ng-show="ddForm.shortfall.$error.required">Please select how you would like to pay any outstanding amount</p>
+        </div>
+    </div>
+</div>

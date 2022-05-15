@@ -1,0 +1,18 @@
+<div class="must-complete">All fields required unless indicated as optional.</div>
+
+<div ng-form="exportForm">
+    <div data-layout="split" class="acc-radio-btn-group">
+        <div  class="acc-radio-btn" sy-auto-focus="sy-auto-focus">
+            <input type="radio" ng-model="exportCtrl.dataExport.selection" name="selection" id="downloadSelection" value="download" class="">
+            <label for="downloadSelection">Download</label>
+        </div>
+        <div class="acc-radio-btn" >
+            <input type="radio" ng-model="exportCtrl.dataExport.selection" name="selection" id="emailSelection" value="email" class="">
+            <label for="emailSelection"> Email </label>
+        </div>
+    </div>
+
+    <div ng-include="'app/wizards/intervalexport/intervalexport-email.html'" ng-if="exportCtrl.dataExport.selection === 'email'"></div>
+    <div ng-include="'app/wizards/intervalexport/intervalexport-details.html'" ng-if="exportCtrl.dataExport.selection"></div>
+</div>
+

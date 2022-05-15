@@ -1,0 +1,58 @@
+<div ng-form="rebsForm" sy-auto-focus="sy-auto-focus">
+    <div class="form-group">
+        <h2 ng-if="rebsCtrl.model.meterAccessRequired()">Meter access contact details</h2>
+        <h2 ng-if="!rebsCtrl.model.meterAccessRequired()">Meter access issues contact details</h2>
+
+        <p ng-if="rebsCtrl.model.meterAccessRequired()">
+            As a Life Support registered customer, these contact details are mandatory. Also note that changes to your meter will require a temporary power disruption.
+        </p>
+        <div ng-if="!rebsCtrl.model.meterAccessRequired()">
+            <p class="must-complete">
+                This section is optional.
+            </p>
+            <p>
+                If your meter is not accessible for any reason, please provide the contact details of a person who can provide access to the meter.
+            </p>
+        </div>
+    </div>
+
+    <div sy-title-picker title="rebsCtrl.model.meterAccess.title" is-required="false"></div>
+
+    <div sy-contact-details
+         contact-details="rebsCtrl.model.meterAccess"
+         exclude="rebsCtrl.model.meterAccessExcludeFields"
+         is-required="rebsCtrl.model.meterAccessRequired()" is-mandatory-msg="No"></div>
+
+    <div class="form-group">
+        <label for="contactPhoneNumber">Contact phone number:</label>
+        <div class="controls">
+            <input type="tel"
+                   name="contactPhoneNumber"
+                   id="contactPhoneNumber"
+                   class="form-control"
+                   placeholder="Contact phone number"
+                   ng-model="rebsCtrl.model.meterAccess.contactPhoneNumber"
+                   ng-required="rebsCtrl.model.meterAccessRequired()"
+                   sy-is-number-ignore-spaces
+                   ng-minlength="9"
+                   ng-maxlength="10" />
+        </div>
+        <div sy-alert-box="contactPhoneNumber">
+            <p ng-show="rebsForm.contactPhoneNumber.$error.required">
+                Please provide a telephone or mobile number.
+            </p>
+            <p ng-show="rebsForm.contactPhoneNumber.$error.syIsNumberIgnoreSpaces">
+                Please provide a valid contact number.
+            </p>
+            <p ng-show="rebsForm.contactPhoneNumber.$error.minlength || rebsForm.contactPhoneNumber.$error.maxlength">
+                Please provide a valid contact number.
+            </p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <p class="help-block">
+            Please note that the phone number must be an Australian phone number. If a landline number please include your area code.
+        </p>
+    </div>
+</div>

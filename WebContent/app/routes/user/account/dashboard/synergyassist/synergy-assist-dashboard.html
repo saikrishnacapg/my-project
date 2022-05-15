@@ -1,0 +1,79 @@
+<section class="synergy-assist-case-management">
+    <div class="panel-header">
+        <h2>
+            <a class="pull-right" href="" ng-click="synergyAssistDashCtrl.showCaseManagerInfo()">
+                <span class="sy-icon--circle_info"></span>
+            </a>
+            Your case management progress
+        </h2>
+    </div>
+
+    <div class="panel-contribution" ng-if="synergyAssistDashCtrl.isSynergyAssist">
+        <div class="wrapper-contribution-bar">
+            <div class="bar bar-payments" ng-style="{width: synergyAssistDashCtrl.paymentBarWidth}"></div>
+            <div class="bar bar-synergy-contributions" ng-style="{width: synergyAssistDashCtrl.contributionBarWidth}"></div>
+            <div class="bar bar-synergy-other-credits" ng-style="{width: synergyAssistDashCtrl.otherCreditsBarWidth}"></div>
+        </div>
+        <p class="small-text">
+            Contributions to your account since {{ synergyAssistDashCtrl.caseDetails.planStartDate | date : 'dd MMM yyyy' }}
+        </p>
+
+        <div class="wrapper-legends">
+            <div class="legend total-payments">
+                <span class="indicator indicator-payments"></span>
+                <span> Total payments by you: ${{ synergyAssistDashCtrl.paymentDetails.customerPayment}}</span>
+            </div>
+
+            <div class="legend synergy-contributions">
+                <span class="indicator indicator-contributions"></span>
+                <span>Synergy Assist contributions: ${{ synergyAssistDashCtrl.paymentDetails.synergyContribution }}</span>
+            </div>
+
+            <div class="legend synergy-contributions">
+                <span class="indicator indicator-other-credits"></span>
+                <span>Other credits: ${{ synergyAssistDashCtrl.paymentDetails.otherCredit }}</span>
+            </div>
+        </div>
+
+        <div class="next-payments" ng-if="synergyAssistDashCtrl.upcomingPayments && synergyAssistDashCtrl.upcomingPayments.length > 0">
+            <h2>Your next payments:</h2>
+            <table class="payments-table">
+                <thead>
+                <th>Date:</th>
+                <th>Amount</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="payment in synergyAssistDashCtrl.upcomingPayments">
+                    <td>
+                        {{payment.paymentDatePromised | date : 'dd MMM yyyy'}}&nbsp;
+                        <span ng-if="synergyAssistDashCtrl.showStatus(payment.status)" class="payment-status status-{{synergyAssistDashCtrl.getStatusClass(payment.status)}}">({{synergyAssistDashCtrl.getStatusClass(payment.status)}})</span>
+                    </td>
+                    <td>${{payment.outstandingAmount}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel-case-review" ng-if="!synergyAssistDashCtrl.isSynergyAssist">
+        <img alt="Contact your case manager to get your case review." class="icon-telephone"
+             ng-src="img/icon-telephone.svg"/>
+        <span>
+            Your account requires a review with your case manager. Please call
+            <a data-description="{{synergyAssistPlanCtrl.caseDetails.formattedContactNumber}}" class="telephone-link"  href="tel:{{synergyAssistDashCtrl.caseDetails.formattedContactNumber}}">{{synergyAssistDashCtrl.caseDetails.contactNumber}}</a>
+            to discuss.
+        </span>
+    </div>
+
+    <div class="form-horizontal panel-footer" ng-if="synergyAssistDashCtrl.isSynergyAssist">
+        <a class="sy-button--default sy-button--block" href="" ng-click="synergyAssistDashCtrl.openSynergyAssistPlan()">
+            <span>View Synergy Assist plan</span>
+        </a>
+    </div>
+    <div class="form-horizontal panel-footer explore">
+        <a class="sy-button--default sy-button--block" ng-click="accountCtrl.isVisible = false"
+           ui-sref="user.account.energytoolbox">
+            <span>Explore energy saving tips</span>
+        </a>
+    </div>
+</section>

@@ -1,0 +1,28 @@
+<div ng-if="lifestyleCtrl.lifestyle.mode==='Consumption' && lifestyleCtrl.lifestyle.latestData().hasValue">
+    <div class="interval-data__heading" ng-include="'app/routes/user/account/lifestyle/_lifestyle-heading.html'"></div>
+    <div id="lifestyleconsumptionChart" style="padding:0px;" >
+        <div class="lifestyle-consumption-chart" chart-data="lifestyleCtrl.lifestyle.latestData()" dirty-check="lifestyleCtrl.lifestyle.timestamp" chart="lifestyleCtrl.consumptionChart()"
+             otherday-values="{{lifestyleCtrl.lifestyle.dayInterval == 0 ? 'otherdayKwhHalfHourlyValues': 'otherdayKwhDailyValues'}}"
+             saturday-values="{{lifestyleCtrl.lifestyle.dayInterval == 0 ? 'saturdayKwhHalfHourlyValues': 'saturdayKwhDailyValues'}}"
+             go-back-start-date="lifestyleCtrl.goBackStartDate()" go-back-end-date="lifestyleCtrl.goBackEndDate()" go-back-devices="lifestyleCtrl.goBackDevices()"
+             day-interval="lifestyleCtrl.lifestyle.dayInterval" contract-account-number="lifestyleCtrl.contractAccountNumber" mode="lifestyleCtrl.lifestyle.mode"
+             download="lifestyleCtrl.lifestyle.download"></div>
+    </div>
+</div>
+<div class="sy-alert--info ng-scope" ng-if="!lifestyleCtrl.lifestyle.latestData().hasValue">
+    <span class="sy-icon--circle_info"></span>
+    <h2>Hang tight while we wait for the data to arrive</h2>
+    <br>
+    <p>Unfortunately there is nothing to show here. This means we are just waiting to receive your first meter read
+    on the new plan. Once you receive your first bill, come back and visit again.</p>
+
+    <p>If you've already accessed the (extra) usage data here, then something has gone wrong under the hood. This means we’ll be busy
+        trying to get it back up and running for you as quickly as possible. Please try again soon.</p>
+
+</div>
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+<div ng-form="numberOfDependentsForm">
+    <p>Enter the number of dependent children if higher than what is registered.</p>
+    
+    <div class="must-complete">All fields must be completed.</div>
+
+    <div sy-form-group sy-auto-focus="sy-auto-focus">
+        <div class="sy-element-left col-md-8">
+            <label class="label-required" for="dependents">Current number of dependents registered on account:</label>
+        </div>
+        <div class="sy-element-right col-md-4">
+            <select id="dependents" name="dependents" class="form-control" ng-options="currOption for currOption in ccCtrl.dependentsList" ng-model="ccCtrl.newConcessionDetails.noOfDependents"></select>
+        </div>
+    </div>
+</div>

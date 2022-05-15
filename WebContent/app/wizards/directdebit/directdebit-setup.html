@@ -1,0 +1,41 @@
+<p>Direct Debit is a convenient, hassle-free way to pay your Synergy bills.</p>
+
+<div ng-show="'refundbankdetails' !== signUpCtrl.nextState && 'skipInstalmentOption' !== signUpCtrl.nextState" ng-form="form">
+<!--<div ng-show="'refundbankdetails' !== signUpCtrl.nextState" ng-form="form">-->
+    <h3>Choose your payment option</h3>
+
+    <div sy-form-group data-layout="split">
+        <button type="button" ng-class="(signUpCtrl.model.paymentType == 'FULL') ? 'sy-button--blue' : 'sy-button--white'" style="font-size: 12px;" ng-click="signUpCtrl.model.paymentType = 'FULL'" analytics-event="formEvent">Pay full amount when bill is due</button>
+        <button type="button" ng-class="(signUpCtrl.model.paymentType == 'SPLIT') ? 'sy-button--blue' : 'sy-button--white'" style="font-size: 12px;" ng-click="signUpCtrl.model.paymentType = 'SPLIT'" analytics-event="formEvent">Pay regular small amounts towards my bill</button>
+    </div>
+    <div sy-alert-box="paymentType">
+        <p ng-show="form.paymentType.$error.required">Please select a Direct Debit payment.</p>
+    </div>
+
+    <div sy-form-group data-layout="split" style="display: none;">
+        <div>
+            <label>
+                <input type="radio" name="paymentType" ng-model="signUpCtrl.model.paymentType" value="FULL" class="btn btn-default" id="fullPayment" required />
+                Pay full amount when bill is due
+            </label>
+            <div sy-alert-box="paymentType">
+                <p ng-show="form.paymentType.$error.required">Please select a Direct Debit payment.</p>
+            </div>
+        </div>
+        <label>
+            <input type="radio" name="paymentType" ng-model="signUpCtrl.model.paymentType" value="SPLIT" class="sy-radio" id="splitPayment" required />
+            Pay regular small amounts towards my bill
+        </label>
+    </div>
+</div>
+
+<div class="dd-payment-type" style="position: relative; border: 1px solid #b4d2dc; border-radius: 4px; padding: 0 15px; margin-bottom: 15px;margin-top: 15px;" ng-if="signUpCtrl.model.paymentType == 'FULL'">
+    <div ng-if="signUpCtrl.useButtonSelector" style="position: absolute; border-style: solid; border-color: transparent transparent #b4d2dc transparent; border-width: 8px 8px 8px 8px; top: -16px; left: 130px"></div>
+    <div ng-if="signUpCtrl.useButtonSelector" style="position: absolute; border-style: solid; border-color: transparent transparent #ffffff transparent; border-width: 8px 8px 8px 8px; top: -15px; left: 130px"></div>
+    <div ng-include="'app/wizards/directdebit/directdebit-details.html'"></div>
+</div>
+<div style="position: relative; border: 1px solid #b4d2dc; border-radius: 4px; padding: 0 15px; margin-bottom: 15px;" ng-if="signUpCtrl.model.paymentType == 'SPLIT'">
+    <div ng-if="signUpCtrl.useButtonSelector" style="position: absolute; border-style: solid; border-color: transparent transparent #b4d2dc transparent; border-width: 8px 8px 8px 8px; top: -16px; left: 415px"></div>
+    <div ng-if="signUpCtrl.useButtonSelector" style="position: absolute; border-style: solid; border-color: transparent transparent #ffffff transparent; border-width: 8px 8px 8px 8px; top: -15px; left: 415px"></div>
+    <div ng-include="'app/wizards/directdebit/directdebit-instalments.html'"></div>
+</div>

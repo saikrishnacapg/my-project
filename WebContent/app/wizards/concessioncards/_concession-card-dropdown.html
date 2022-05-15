@@ -1,0 +1,17 @@
+<ul class="dropdown-menu" data-role="menu">
+    <li role="presentation">
+        <a role="menuitem" href="" ng-if="card.active" ng-click="ccCtrl.expireCard(card.cardNumber);">
+            Expire card
+        </a>
+    </li>
+    <li role="presentation">
+        <a role="menuitem" href="" ng-if="!card.active" ng-click="ccCtrl.reactivateCard(card.cardNumber);">
+            Reactivate card
+        </a>
+    </li>
+    <li role="presentation">
+        <a role="menuitem" href="" ng-click="ccCtrl.updateCardName(card.cardNumber);">
+            Update name on card
+        </a>
+    </li>
+</ul>

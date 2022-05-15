@@ -1,0 +1,18 @@
+<div class="terms">
+
+    <div class="terms__summary">
+        <h2>Please confirm you wish to expire the concession card detailed below:</h2>
+        
+        <h3>Synergy account number</h3>
+        <p ng-bind="ccCtrl.account.contractAccountNumber"></p>
+        <h3>Supply address</h3>
+        <p ng-bind="ccCtrl.account.premiseAddress.label"></p>
+        <h3>Name on card</h3>
+        <p>{{ccCtrl.selectedCard.nameOnCard}}</p>
+        <h3>Card type</h3>
+        <p ng-bind="ccCtrl.selectedCard.cardTypeText"></p>
+        <h3>Card number</h3>
+        <p ng-bind="ccCtrl.selectedCard.cardNumber"></p>
+    </div>
+
+</div>

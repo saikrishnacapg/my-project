@@ -1,0 +1,62 @@
+<div class="ma-container noPrint" ng-controller="MaTourCtrl as maTourCtrl">
+  <button
+    aria-label="Click to view the guided tour"
+    analytics-label='help' analytics-location='tour'
+    class="ma_tour--launch-button ma_tour--launch-button-default"
+  >
+    Help
+  </button>
+  <!-- The Modal -->
+  <div class="ma_tour--modal" ng-init="maTourCtrl.initTour()">
+    <div class="instruction-container">
+      <div class="instruction instruction--next">
+        <p class="instruction--text">
+          Navigation arrows allows you to move between slides.
+        </p>
+      </div>
+
+      <div class="instruction instruction--close">
+        <p class="instruction--text">Close button ends the tour.</p>
+      </div>
+
+      <div class="instruction instruction--play_pause">
+        <p class="instruction--text">Play button plays or pauses the tour.</p>
+      </div>
+    </div>
+
+    <!-- Navigation controls -->
+    <button
+      aria-label="Click to view the guided tour"
+      class="ma_tour--launch-button ma_tour--launch-button-modal-box"
+      analytics-label='help' analytics-location='tour'
+    >
+      Help
+    </button>
+    <button analytics-label='close' analytics-location='tour' class="ma_tour--modal-close" aria-label="Close modal"></button>
+    <button
+      class="ma_tour--slider-prev"
+      analytics-label='previous' analytics-location='tour'
+      aria-label="Go to the previous slide"
+    ></button>
+    <button
+      class="ma_tour--slider-next"
+      analytics-label='next' analytics-location='tour'
+      aria-label="Go to the next slide slide"
+    ></button>
+    <!-- Slider content -->
+    <div class="ma_tour--content" aria-rolescription="carousel">
+      <div class="ma_tour--slider">
+        <div class="ma_tour--slider-inner"></div>
+      </div>
+    </div>
+    <!-- Slide indicators -->
+    <div class="ma_tour--slider-indicators">
+      <div class="ma_tour--slider-dots-container"></div>
+      <button
+        aria-label="Pause or play slide"
+        analytics-label='pause_or_play' analytics-location='tour'
+        class="ma_tour--slider-play-button"
+      ></button>
+    </div>
+  </div>
+</div>

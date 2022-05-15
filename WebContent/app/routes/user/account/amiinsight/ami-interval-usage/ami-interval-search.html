@@ -1,0 +1,87 @@
+<style>
+    .activeButton{
+        background-color: white;
+    }
+
+    .ui-select-match-text{
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 40px;
+    }
+    .ui-select-toggle > .btn.btn-link {
+        margin-right: 10px;
+        top: 6px;
+        position: absolute;
+        right: 10px;
+    }
+</style>
+
+<div class="" ng-controller="AmiIntervalSearchCtrl as amiIntervalSearchCtrl">
+    <div class="sy-alert--info" ng-if="amiIntervalSearchCtrl.userSearch.error"><p ng-bind="amiIntervalSearchCtrl.userSearch.error"></p></div>
+
+        <div class="form-horizontal interval-data__search">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <div class="form-group">
+                        <div class="btn-group pull-left btn-toggle-gph-chart" ng-if="amiIntervalCtrl.amiInterval.hasValue">
+                            <button aria-label="view data in bar chart" title="View Data in Bar Chart"  class="btn btn-chart sy-icon-stats-bar--charts activeButton"  ng-click="amiIntervalCtrl.setDataMode('Consumption','sy-icon-stats-bar--charts')">
+                                <span class="tab.icon"></span></button>
+                            <button aria-label="view data in a data table" title="View Data in a Data Table" class="btn btn-tabular sy-icon-tabular--charts"  ng-click="amiIntervalCtrl.setDataMode('Tabular','sy-icon-tabular--charts')">
+                                <span class="tab.icon"></span></button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                   <div class="date-range-selector pull-left">
+                    <div  id="intervalDateRangeSelector" class="form-group">
+                        <label>Date range</label><br />
+                        <button type="button"
+                                title="Interval data date range selector"
+                                class="sy-button--dropdown sy-button--icon-left"
+                                data-animation="am-flip-x"
+                                data-placement="bottom-left"
+                                data-container="#intervalDateRangeSelector"
+                                ng-click="amiIntervalSearchCtrl.search();">
+                            <span class="sy-icon--calendar"></span>
+                            <span ng-bind="amiIntervalSearchCtrl.dateRangeLabel()"></span>
+                            <span class="caret"></span>
+                        </button>
+                    </div>
+                    <div class="form-group" ng-if="amiIntervalSearchCtrl.electricityMeters().length>0">
+                        <label>Meters selected</label>
+                        <div ng-dropdown-multiselect=""
+                             options="amiIntervalSearchCtrl.electricityMeters()"
+                             selected-model="amiIntervalSearchCtrl.userSearch.meters"
+                             extra-settings="amiIntervalSearchCtrl.dropdownSettings"
+                             translation-texts="amiIntervalSearchCtrl.translationbutton">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label><br />
+                        <button class="sy-button--primary" ng-click="amiIntervalSearchCtrl.display()">
+                            <span class="sy-icon--search"></span>&nbsp;Display
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+            <div class="btn-group pull-right exportprint"  ng-if="amiIntervalCtrl.amiInterval.hasValue" >
+                <label>&nbsp;</label><br/>
+                <label class="btn" ng-click="accountCtrl.openRESIIntervalExport()"><span class="sy-icon--new_window"></span> Export</label>
+                <label class="btn" ng-click="amiIntervalCtrl.printChart()"><span class="sy-icon--print"></span> Print</label>
+            </div>
+        </div>
+    <div >
+
+        <!-- <p>Now you can see what day and time you use energy around the home. This makes it easier to see where you could shift
+            more of your usage to Off-peak
+            times to maximise the value of this plan.</p>
+
+        -->
+    </div>
+</div>
+

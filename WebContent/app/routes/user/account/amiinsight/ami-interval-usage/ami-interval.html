@@ -1,0 +1,26 @@
+<div class="ami-int-cnt ami-interval-data">
+    <div class="main interval-data" style="width:100%" ng-controller="AmiIntervalCtrl as amiIntervalCtrl" id="amiIntervalDataContainer">
+        <div class="main__content full-width">
+            <div class="interval-data">
+                <div class="panel-header">
+                    <div ng-include="'app/routes/user/account/amiinsight/ami-interval-usage/ami-interval-search.html'"></div>
+                </div>
+                <div class="panel-body">
+                    <div class="noPrint" ng-if="accountCtrl.isAmiCustomer()">
+                        <div  ng-include="'app/routes/user/account/amiinsight/ami-usage-cost.html'"></div>
+                    </div>
+                    <div class="interval-data__graph"  ng-include="'app/routes/user/account/amiinsight/ami-interval-usage/ami-interval-graph.html'"></div>
+                    <div class="noPrint" ng-show="amiIntervalCtrl.amiInterval.unAvailableDataFlag" style="text-align: center">
+                        <div ng-hide="!amiIntervalCtrl.amiInterval.latestData().hasValue">Interval data is not available prior to {{ amiIntervalCtrl.amiInterval.minDate}}. Please refer to the Energy usage tab for full energy usage history.</div>
+                    </div>
+                    <div class="interval-data__nav"  ng-include="'app/routes/user/account/amiinsight/ami-interval-usage/ami-interval-navigation.html'"></div>
+                    <br><br>
+                </div>
+                <div ng-if="amiIntervalCtrl.showGeneration()" ng-include="'app/routes/user/account/amiinsight/ami-interval-usage/ami-interval-tabs.html'"></div>
+                <div class="noPrint" ng-if="accountCtrl.isAmiCustomer()">
+                    <div ui-view="amiInsight"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

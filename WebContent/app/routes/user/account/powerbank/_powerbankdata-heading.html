@@ -1,0 +1,10 @@
+<h2 ng-bind="powerbankDataCtrl.chartTitle()" class="text-center"></h2>
+<div class="panel" style="display: inline-block; vertical-align: middle">
+     <label ng-if="powerbankDataCtrl.powerbankData.dayInterval> 1" class="text-center" >Select the graph to switch to pie view</label>
+     <label ng-if="powerbankDataCtrl.powerbankData.dayInterval == 1" class="text-center">Click the graph to return to the selected date range</label>
+</div>
+
+<div class="btn-group pull-right" ng-if="powerbankDataCtrl.powerbankData.hasData">
+    <label class="btn" ng-click="accountCtrl.openIntervalExport()"><span class="sy-icon--new_window"></span> Export</label>
+    <label class="btn" ng-click="powerbankDataCtrl.printChart()"><span class="sy-icon--print"></span> Print</label>
+</div>

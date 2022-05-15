@@ -1,0 +1,5 @@
+<div sy-form-group data-layout="split">
+	<button id="backBtn" type="button" class="sy-button--default pull-left" ng-click="goBack()" ng-hide="!showBack()"><span class="sy-icon--chevron-left"></span> {{backMsg}}</button>
+	<button id="nextBtn" type="submit" class="sy-button--primary pull-right" ng-click="next()" ng-show="next != undefined" ng-hide="!showNext()" ng-disabled="disableNext()" sy-busy-chevron="next">{{nextMsg}} <span class="sy-icon--chevron-right"></span></button>
+<!-- <button id="helpBtn" class="btn btn-info" ng-click="help()" ng-show="help != undefined">Help</button> -->
+</div>

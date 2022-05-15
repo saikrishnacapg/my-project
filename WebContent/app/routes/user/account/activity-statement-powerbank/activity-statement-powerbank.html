@@ -1,0 +1,378 @@
+    <div class="activity-statement-powerbank" id="activity-statement-chart">
+        <div class="panel">
+            <div class="panel-body">
+                <!-- DROPDOWN -->
+                <div class="dropdown-container">
+                    <div class="dropdown-select">
+                    <button
+                        type="button"
+                        class="sy-button--primary"
+                        data-animation="am-flip-x"
+                        data-placement="bottom-left"
+                        data-template="app/routes/user/account/activity-statement-powerbank/_date-selector-dropdown.html"
+                        bs-dropdown
+                        ng-model="activityStatementPowerbankCtrl.selectedBillPeriod"
+                    >
+                        <span>Select bill period</span>
+                        <span class="caret"></span>
+                    </button>
+                    </div>
+                    <div class="dropdown-text">
+                        <span>Selected bill period: {{activityStatementPowerbankCtrl.selectedBillPeriod}}</span>
+                    </div>
+                </div>
+
+                <!-- COSTS/INPUTS -->
+                <div class="row bg-grey">
+                    <div class="column-gray">
+                        <h3 class="row tertiary-heading">PowerBank Saver Plan compared to Home Plan (A1)</h3>
+                        <div class="cost-container">
+                            <div class="cost-label-container">
+                                <label for="cost">
+                                    Your <b>cost</b> on PowerBank Saver Plan for selected bill period
+                                </label>
+                                <button
+                                    class="powerbank-tooltip"
+                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I61')"
+                                >
+                                    <span class="sy-icon--circle_info"></span>
+                                </button>
+                            </div>
+                            <div class="cost-input-container">
+                                <p class="content black-box-border" name="cost" id="cost">${{activityStatementPowerbankCtrl.pbSaverPlanCost}}</p>
+                            </div>
+                        </div>
+                        <div class="cost-container">
+                            <div class="cost-label-container">
+                                <label for="compared-cost">
+                                    Cost for the selected bill period if you were on Home Plan (A1)
+                                </label>
+                                <button
+                                    class="powerbank-tooltip"
+                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I62')"
+                                >
+                                    <span class="sy-icon--circle_info"></span>
+                                </button>
+                            </div>
+                            <div class="cost-input-container">
+                                <p class="content black-box-border" name="compared-cost" id="compared-cost">${{activityStatementPowerbankCtrl.a1Charges}}</p>
+                            </div>
+                        </div>
+                        <div class="cost-container">
+                            <div class="cost-label-container">
+                                <label for="savings-pb-saver-plan">Estimated savings for selected bill period^</label>
+                                <button
+                                    class="powerbank-tooltip"
+                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I63')"
+                                >
+                                    <span class="sy-icon--circle_info"></span>
+                                </button>
+                            </div>
+                            <div class="cost-input-container">
+                                <p class="content black-box-border" name="savings-pb-saver-plan" id="savings-pb-saver-plan">${{activityStatementPowerbankCtrl.savings}}</p>
+                            </div>
+                        </div>
+                        <div class="cost-container">
+                            <div class="cost-label-container">
+                                <label for="savings-since-date">
+                                    Your estimated total savings on the PowerBank Saver Plan
+                                </label>
+                                <button
+                                    class="powerbank-tooltip"
+                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I64')"
+                                >
+                                    <span class="sy-icon--circle_info"></span>
+                                </button>
+                            </div>
+                            <div class="cost-input-container">
+                                <p class="content black-box-border" name="savings-since-date" id="savings-since-date">${{activityStatementPowerbankCtrl.totalSavings}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BATTERY -->
+                <div class="row">
+                    <div class="battery-column">
+                        <div class="battery-column-head">
+                            <span class="bold">Total battery charge for this bill</span>
+                            <button
+                                    class="powerbank-tooltip powerbank-tooltip-battery"
+                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I65')"
+                            >
+                                <span class="sy-icon--circle_info"></span>
+                            </button>
+                        </div>
+
+                        <div class="battery-container">
+                            <div class="battery-body">
+                                <div class="battery-child battery-percentage"></div>
+                                <div class="battery-child battery-text">
+                                    <p>{{activityStatementPowerbankCtrl.batteryPercentageValue}}%</p>
+                                    <p>{{activityStatementPowerbankCtrl.batteryActualCharge}}kWh&nbsp;/&nbsp;{{activityStatementPowerbankCtrl.possibleCharge}}kWh</p>
+                                </div>
+                            </div>
+                            <div class="battery-tip"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TABLE -->
+                <div class="row">
+                    <div class="column-head">
+                        <span class="bold">Electricity consumption and offset from virtually stored electricity in the battery</span>
+                    </div>
+                    <div class="column-head" ng-show="activityStatementPowerbankCtrl.splitBill">
+                        <span class="bold">For billing period: {{activityStatementPowerbankCtrl.firstCycleBillPeriod}} </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive-container">
+                            <table class="table-hover text-center table-responsive">
+                                <thead>
+                                    <tr class="text-head-centre">
+                                        <th class="consumption-label"></th>
+                                        <th class="consumption-percentage">Consumption breakdown</th>
+                                        <th>Total electricity consumption</th>
+                                        <th>Electricity consumption offset by battery</th>
+                                        <th>Electricity consumption not offset by battery</th>
+                                        <th>Applicable rate</th>
+                                        <th>Electricity consumption charges</th>
+                                    </tr>
+                                    <tr class="text-head-centre">
+                                        <td class="consumption-label"></td>
+                                        <td class="consumption-percentage">
+                                            <button
+                                                    class="powerbank-tooltip"
+                                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I66')"
+                                            >
+                                                <span class="sy-icon&#45;&#45;circle_info"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                    class="powerbank-tooltip"
+                                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I67')"
+                                            >
+                                                <span class="sy-icon&#45;&#45;circle_info"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                    class="powerbank-tooltip"
+                                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I68')"
+                                            >
+                                                <span class="sy-icon&#45;&#45;circle_info"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                        <button
+                                                class="powerbank-tooltip"
+                                                ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I69')"
+                                        >
+                                            <span class="sy-icon&#45;&#45;circle_info"></span>
+                                        </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                    class="powerbank-tooltip"
+                                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I70')"
+                                            >
+                                                <span class="sy-icon&#45;&#45;circle_info"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button
+                                                    class="powerbank-tooltip"
+                                                    ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I71')"
+                                            >
+                                                <span class="sy-icon&#45;&#45;circle_info"></span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-head-centre">
+                                        <td></td>
+                                        <td></td>
+                                        <td>(kWh)</td>
+                                        <td>(kWh)</td>
+                                        <td>(kWh)</td>
+                                        <td>($ per kWh inc GST)</td>
+                                        <td>($ inc GST)</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr  ng-repeat="band in activityStatementPowerbankCtrl.finalResult.bandType track by $index">
+                                    <td>
+                                        <div data-ng-bind-html="trustAsHtml(band)"></div>
+                                    </td>
+                                    <td class="consumption-breakdown-cell" ng-repeat="content in activityStatementPowerbankCtrl.finalResult.consumptionValue[$index] track by $index">
+                                        <div class="consumption-bar" data-ng-bind-html="trustAsHtml(content)"></div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr class="text-head-centre">
+                                    <td class="cell-total">Total</td>
+                                    <td ng-repeat="total in activityStatementPowerbankCtrl.totalSum track by $index">{{total}}</td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        <div class="column-head" ng-show="activityStatementPowerbankCtrl.splitBill">
+                            <span class="bold">For billing period: {{activityStatementPowerbankCtrl.secondCycleBillPeriod}} </span>
+                        </div>
+                        <table class="table-hover text-center table-responsive" ng-show="activityStatementPowerbankCtrl.splitBill">
+                            <thead>
+                            <tr class="text-head-centre">
+                                <th class="consumption-label"></th>
+                                <th class="consumption-percentage">Consumption breakdown</th>
+                                <th>Total electricity consumption</th>
+                                <th>Electricity consumption offset by battery</th>
+                                <th>Electricity consumption not offset by battery</th>
+                                <th>Applicable rate</th>
+                                <th>Electricity consumption charges</th>
+                            </tr>
+                            <tr class="text-head-centre">
+                                <td class="consumption-label"></td>
+                                <td class="consumption-percentage">
+                                    <button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I66')"
+                                    >
+                                        <span class="sy-icon&#45;&#45;circle_info"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I67')"
+                                    >
+                                        <span class="sy-icon&#45;&#45;circle_info"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I68')"
+                                    >
+                                        <span class="sy-icon&#45;&#45;circle_info"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I69')"
+                                    >
+                                        <span class="sy-icon&#45;&#45;circle_info"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I70')"
+                                    >
+                                        <span class="sy-icon&#45;&#45;circle_info"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I71')"
+                                    >
+                                        <span class="sy-icon&#45;&#45;circle_info"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="text-head-centre">
+                                <td></td>
+                                <td></td>
+                                <td>(kWh)</td>
+                                <td>(kWh)</td>
+                                <td>(kWh)</td>
+                                <td>($ per kWh inc GST)</td>
+                                <td>($ inc GST)</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr  ng-repeat="band in activityStatementPowerbankCtrl.finalResult.bandType track by $index">
+                                <td>
+                                    <div data-ng-bind-html="trustAsHtml(band)"></div>
+                                </td>
+                                <td class="consumption-breakdown-cell" ng-repeat="content in activityStatementPowerbankCtrl.finalResult.consumptionValueExtended[$index] track by $index">
+                                    <div class="consumption-bar" data-ng-bind-html="trustAsHtml(content)"></div>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr class="text-head-centre">
+                                <td class="cell-total">Total</td>
+                                <td ng-repeat="total in activityStatementPowerbankCtrl.totalSumExtended track by $index">{{total}}</td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        </div>
+                    </div>
+
+                <!-- CIRCLES -->
+                <div class="row">
+                    <div class="column-head">
+                        <span class="bold">Other fees, charges and credits for the selected bill period</span>
+                    </div>
+                    <div class="other-charges-container">
+                        <div class="other-charges-column">
+                            <div class="cost-input-container">
+                                <p class="content black-box-border" name="other-supplyCharge" id="other-supplyCharge">${{activityStatementPowerbankCtrl.supplyCharge}}</p>
+                            </div>
+                            <div class="other-charges-head">
+                                <h4>
+                                    Daily Supply Charge<button
+                                        class="powerbank-tooltip"
+                                        ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I72')"
+                                    >
+                                        <span class="sy-icon--circle_info"></span>
+                                    </button>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="other-charges-column">
+                            <div class="other-charges-column">
+                                <div class="cost-input-container">
+                                    <p class="content black-box-border" name="other-subscriptionFee" id="other-subscriptionFee">${{activityStatementPowerbankCtrl.subscriptionFee}}</p>
+                                </div>
+                                <div class="other-charges-head">
+                                    <h4>
+                                        Daily Subscription Fee<button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I73')"
+                                        >
+                                            <span class="sy-icon--circle_info"></span>
+                                        </button>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="other-charges-column">
+                            <div class="other-charges-column">
+                                <div class="cost-input-container">
+                                    <p class="content black-box-border" name="other-sellBuybackCredits" id="other-sellBuybackCredits">${{activityStatementPowerbankCtrl.sellBuybackCredits}}</p>
+                                </div>
+                                <div class="other-charges-head">
+                                    <h4>
+                                        Buy Back Credits<button
+                                            class="powerbank-tooltip"
+                                            ng-click="activityStatementPowerbankCtrl.showActivityStatementTooltip('Info','I74')"
+                                        >
+                                            <span class="sy-icon--circle_info"></span>
+                                        </button>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TIPS/DISCLAIMER -->
+                <div ng-include="'app/routes/user/account/activity-statement-powerbank/activity-statement-powerbank-tips.html'"></div>
+                <div ng-include="'app/routes/user/account/activity-statement-powerbank/activity-statement-powerbank-disclaimer.html'"></div>
+            </div>
+        </div>
+    </div>

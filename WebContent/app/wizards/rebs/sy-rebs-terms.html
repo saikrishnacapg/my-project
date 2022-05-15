@@ -1,0 +1,64 @@
+<div class="terms" sy-auto-focus="sy-auto-focus">
+    <h2 ng-if="model.isDebs() && model.isNewApplication()">DEBS declaration</h2>
+    <h2 ng-if="model.isDebs() && !model.isRemainRebs() && !model.isNewApplication()">DEBS change of system size declaration</h2>
+    <h2 ng-if="model.isRebs() &&  model.isRemainRebs() && !model.isNewApplication()">REBS change of system size declaration</h2>
+    <h2 ng-if="!model.isDebs()">Distributed energy system declaration</h2>
+	
+	<div class="must-complete">All fields must be completed.</div>
+
+    <div class="terms__content" sy-server-include="MYACC_DEBS_NEW_TERMS"  ng-if="model.isDebs() && model.isNewApplication()"></div>
+    <div class="terms__content" sy-server-include="MYACC_DEBS_CHANGE_TERMS" ng-if="model.isDebs() && !model.isRemainRebs() && !model.isNewApplication()"></div>
+    <div class="terms__content" sy-server-include="MYACC_REBS_CHANGE_TERMS" ng-if="model.isRebs() &&  model.isRemainRebs() && !model.isNewApplication()"></div>
+    <div class="terms__content" sy-server-include="MYACC_NON_DEBS_NEW_TERMS" ng-if="!model.isDebs() && model.isNewApplication()"></div>
+    <div class="terms__content" sy-server-include="MYACC_NON_DEBS_CHANGE_TERMS" ng-if="!model.isDebs() && !model.isNewApplication()"></div>
+
+
+    <div class="terms__acceptance" ng-if="model.isDebs() && !model.isRemainRebs()" >
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="model.debsConsent" id="debsTerms" class="" />
+            <label for="debsTerms">
+                I have read, understood and accept Synergy’s Distributed Energy Buyback Scheme Terms and Conditions and agree to be bound by those Terms and Conditions.
+            </label>
+        </div>
+    </div>
+
+    <div class="terms__acceptance" ng-if="model.isDebs() && model.isRemainRebs()" >
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="model.rebsConsent" id="rebsTerms" class="" />
+            <label for="rebsTerms">
+                I have read, understood and accept Synergy’s Renewable Energy Buyback Scheme Terms and Conditions and agree to be bound by those Terms and Conditions.
+            </label>
+        </div>
+    </div>
+
+
+    <div class="terms__acceptance" ng-if="!model.isDebs() && !model.isRebs()">
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="model.nonRebsConsent" id="ddTerms" class="" />
+            <label for="ddTerms">
+                I have read, understood and accept the distributed energy system application Terms and Conditions and agree to be bound by those Terms and Conditions.
+            </label>
+        </div>
+    </div>
+
+    <p class="help-block" ng-if="model.isDebs() && !model.isRemainRebs()">
+        A full copy of our <a sy-doc-href="terms.debs">DEBS Terms and Conditions</a> is available for printing.
+    </p>
+    <p class="help-block" ng-if="model.isRebs() && model.isRemainRebs()">
+        A full copy of our <a sy-doc-href="terms.rebs">REBS Terms and Conditions</a> is available for printing.
+    </p>
+
+    <p class="help-block" ng-if="!model.isDebs() && !model.isRebs()">
+        A full copy of our <a sy-doc-href="terms.nonrebs.nondebs">distributed energy system Terms and Conditions</a> is available for printing.
+    </p>
+
+    <div class="terms__acceptance" >
+        <div class="acc-chkBox-btn">
+            <input type="checkbox" ng-model="model.synergyTermsAccepted" id="synergyTerms" name="synergyTerms" class="" />
+            <label for="synergyTerms">
+                <p>I have read, understand and agree with the <a sy-doc-href="terms.synergy">Terms and Conditions</a>, <a sy-doc-href="terms.privacy">Privacy Policy</a> and <a sy-doc-href="terms.collections">Collection of Information Statement</a> and I am authorised to enter into these Terms and Conditions.</p>
+                <p>We may use and disclose your personal or credit information for direct marketing purposes, unless you opt-out. However, we will not use your personal information that we collect in this form for direct marketing of solar power systems or battery storage systems.</p>
+            </label>
+        </div>
+    </div>
+</div>

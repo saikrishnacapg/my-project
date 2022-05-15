@@ -1,0 +1,59 @@
+<div>
+    <div sy-form-group data-layout="form">
+        <label class="control-label label-required">To</label>
+
+        <div>
+            <input id="to"
+                   name="to"
+                   class="form-control"
+                   type="text"
+                   ng-model="exportCtrl.dataExport.details.to"
+                   sy-pattern="EMAIL_COMMA_SEPARATED" ng-required="true"
+                   ng-blur="exportCtrl.isEmailValid()">
+
+            <div sy-alert-box="to">
+                <p>Please provide a valid list of email addresses. <br>  For example; yourname@example.com <br>name1@example.com,name2@example.com</p>
+            </div>
+            <div class="alert sy-alert--warning" ng-if="exportCtrl.invalidEmail">
+                One or more email addresses you have entered are not valid.  Please enter a valid email address.
+            </div>
+        </div>
+    </div>
+    <div sy-form-group data-layout="form">
+        <label class="control-label">CC (optional)</label>
+
+        <div>
+            <input id="cc" name="cc"
+                   class="form-control"
+                   type="text"
+                   ng-model="exportCtrl.dataExport.details.cc"
+                   sy-pattern="EMAIL_COMMA_SEPARATED"
+                   ng-required="false"
+                   ng-blur="exportCtrl.isCCEmailValid()">
+
+            <div sy-alert-box="cc">
+                <p>Please provide a valid list of email addresses. <br>  For example; yourname@example.com <br>name1@example.com,name2@example.com</p>
+            </div>
+            <div class="alert sy-alert--warning" ng-if="exportCtrl.invalidCCEmail">
+                One or more email addresses you have entered are not valid.  Please enter a valid email address.
+            </div>
+
+            <div>
+                <p class="help-block">
+                    Email addresses should be comma separated.
+                </p>
+                <p class="help-block">
+                    Please note that any email addresses entered will not be saved to your Synergy account.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    <div sy-form-group data-layout="form">
+        <label class="control-label label-required">Subject</label>
+        <input class="form-control" type="text" ng-model="exportCtrl.dataExport.details.subject" ng-required="true">
+    </div>
+
+</div>

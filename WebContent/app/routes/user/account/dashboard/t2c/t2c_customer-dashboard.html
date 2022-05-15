@@ -1,0 +1,125 @@
+<div>
+      <div class="panel-header">
+          <div class="panel-header-container">
+                <h2 class="pull-left panel-title">Your Track to Change progress</h2>
+                <a href="" title="track-to-change-tooltip" ng-click="track2changeCtrl.showTracktoChangeInfo()" class="pull-right title-info-icon">
+                  <span class="sy-icon--circle_info"></span>
+                </a>
+          </div>
+    </div>
+    <div class="panel-body t2c-goal-body" ng-if="!track2changeCtrl.hasServiceError">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div ng-if="track2changeCtrl.unbilledData.failureReason == ''">
+                    <p class="track-title"><b>You're tracking towards a {{track2changeCtrl.unbilledData.possibleIncentiveUnit | currency }} reward </b></p>
+                    <div class="reward-bar">
+                        <p>Your average daily usage is {{track2changeCtrl.unbilledData.avgDailyCons | number : 2}} Units</p>
+                        <div aria-hidden="true">
+                            <div class="bar-container">
+                                <div class="bar bar_{{$index+1}}" ng-repeat="track in track2changeCtrl.unbilledUsageList track by $index">
+                                        <div ng-class="track.show ? 'arrow':''"  ></div>
+                                        <div class="content">
+                                            <span ng-if="$index+1 == 1">{{track.incentiveAmount}}<br>reward</span>
+                                            <span ng-if="$index+1 != 1">{{track.incentiveAmount | currency}}<br>reward</span>
+                                        </div>
+                                        <div class="border-line"></div>
+                                        <span ng-if="$index+1 == 1" class="content-secondary">More than {{track.goalLevel | number : 2}} </span>
+                                        <span ng-if="$index+1 != 1" class="content-secondary">{{track.goalLevel | number : 2}}  or less </span>
+                                </div>
+                            </div>
+                            <div>
+                                <p><b>Average daily units used</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="track2changeCtrl.unbilledData.failureReason == track2changeCtrl.brokenPromise">
+                    <p class="track-title title-left"><b>You've missed a payment and won't earn a reward this time</b></p>
+                    <p>Your next incentive period starts in 30 days - <a href="mailto:{{track2changeCtrl.caseManagerEmailID}}" title="Email your Case Manager">Email your Case Manager</a> for help in how to reach your goals next time.</p>
+                    <p>Your average daily usage is {{track2changeCtrl.unbilledData.avgDailyCons | number : 2}} units</p></p>
+                </div>
+                <div ng-if="track2changeCtrl.unbilledData.failureReason == track2changeCtrl.noMeterReding">
+                    <p class="sorryMessage">
+                        We're having trouble calculating your average daily usage right now.  Please try again tomorrow.
+                    </p>
+                    <div class="faces-container">
+                        <div class="box">
+                            <div class="faces">
+                                <img alt="" title="" src="{{track2changeCtrl.goalLevelSadErrorCase[0].imgsrc}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="!track2changeCtrl.unbilledData">
+                    <p class="track-title title-left"><b>Your goals will appear here soon</b></p>
+                    <p>Your Case Manager will be in touch about your new goals shortly. <br/> Can't wait? <a href="mailto:{{track2changeCtrl.caseManagerEmailID}}" title="Email your Case Manager">Email your Case Manager</a> for assistance.</p>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+        <div class="faces-container">
+            <div class="box text">
+                <div ng-if="!track2changeCtrl.billedData">
+                    <p><b>Welcome to Track to Change, {{track2changeCtrl.customerFirstName}}</b></p>
+                    <p>Your 1st bill will be issued on the {{track2changeCtrl.schduleBillDate }}</p>
+                </div>
+                <div ng-if="track2changeCtrl.billedData && track2changeCtrl.billedData.goalMet && !track2changeCtrl.billedData.failureReason!=''">
+                    <p><b>Your last bill average usage was {{track2changeCtrl.billedData.avgDailyCons | number : 2 }} units</b></p>
+                    <p>Congratulations, you've earned a {{ track2changeCtrl.billedData.incentiveAmt | currency }} reward. </p>
+                </div>
+               <div ng-if="track2changeCtrl.billedData && !track2changeCtrl.billedData.goalMet && !track2changeCtrl.billedData.failureReason!=''">
+                    <p>You didn't earn a reward because your last bill average daily usage didn't meet the agreed goal.</p>
+                    <p>To learn how you can earn your reward, Please <a href="mailto:{{track2changeCtrl.caseManagerEmailID}}" title="contact your Case Manager by email">contact your Case Manager by email</a></p>
+               </div>
+                <div ng-if="track2changeCtrl.billedData && track2changeCtrl.billedData.failureReason == track2changeCtrl.brokenPromise">
+                    <p>You didn't earn a reward last bill because you missed a payment towards your amount owing.</p>
+                    <p>To learn how you can earn your reward, Please <a href="mailto:{{track2changeCtrl.caseManagerEmailID}}" title="contact your Case Manager by email">contact your Case Manager by email</a></p>
+                </div>
+                <div ng-if="track2changeCtrl.billedData && track2changeCtrl.billedData.failureReason == track2changeCtrl.consumptionGoalNotMet">
+                    <p>You didn't earn a reward because your last bill average daily usage didn't meet the agreed goal.</p>
+                    <p>To learn how you can earn your reward, Please <a href="mailto:{{track2changeCtrl.caseManagerEmailID}}" title="contact your Case Manager by email" >contact your Case Manager by email</a></p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="faces">
+                    <img alt="{{!track2changeCtrl.billedData ?  track2changeCtrl.goalLevelWelcome[0].altText :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel1[0].goallevel ? track2changeCtrl.goalLevel1[0].altText :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel2[0].goallevel ? track2changeCtrl.goalLevel2[0].altText :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel3[0].goallevel ? track2changeCtrl.goalLevel3[0].altText :
+                    track2changeCtrl.goalLevelSad[0].altText }}"
+                    title="{{!track2changeCtrl.billedData ?  track2changeCtrl.goalLevelWelcome[0].altText :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel1[0].goallevel ? track2changeCtrl.goalLevel1[0].altText :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel2[0].goallevel ? track2changeCtrl.goalLevel2[0].altText :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel3[0].goallevel ? track2changeCtrl.goalLevel3[0].altText :
+                    track2changeCtrl.goalLevelSad[0].altText }}"
+                    ng-src="{{!track2changeCtrl.billedData ? track2changeCtrl.goalLevelWelcome[0].imgsrc :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel1[0].goallevel ? track2changeCtrl.goalLevel1[0].imgsrc  :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel2[0].goallevel ? track2changeCtrl.goalLevel2[0].imgsrc  :
+                    track2changeCtrl.billedData.goalLevelMet == track2changeCtrl.goalLevel3[0].goallevel ? track2changeCtrl.goalLevel3[0].imgsrc  :
+                    track2changeCtrl.goalLevelSad[0].imgsrc}}">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body t2c-goal-body-error" ng-if="track2changeCtrl.hasServiceError">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="sorryMessage">
+                    Uh-oh. We're having trouble loading this section. Please refresh your browser or try again later.
+                </p>
+                <div class="faces-container">
+                    <div class="box">
+                        <div class="faces">
+                            <img alt="" title="" src="{{track2changeCtrl.goalLevelSadErrorCase[0].imgsrc}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="form-horizontal panel-footer" ng-if="accountCtrl.isResidential">
+    <a ui-sref="user.account.energytoolbox" ng-click="accountCtrl.isVisible = false" class="sy-button--default sy-button--block">
+        <span>Explore energy saving tips</span>
+    </a>
+</div>

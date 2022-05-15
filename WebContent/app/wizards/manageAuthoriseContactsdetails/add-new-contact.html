@@ -1,0 +1,239 @@
+<div ng-form="addNewContactForm" class="addNewContactForm" ng-controller="MsgCntlr">
+    <div class="add-on-authorise-contact-container">
+        <div class="must-complete" ng-hide="newContactDetailsCtrl.contact.isPrimaryContact">All fields are required unless indicated as optional.</div>
+        <p class="form-caveat form-caveat--notice" ng-show="newContactDetailsCtrl.contact.isPrimaryContact">
+            This person is the primary authorised contact.This person will be contacted by Western Power for outage notigications only.
+        </p>
+        <div class="must-complete">Note: Your current correspondence mailing address will not change.</div>
+        <br />
+        <div class="sy-form-group title-cntr">
+            <label for="title"><b>Title</b></label>
+            <select class="input-form form-control half-wd" id="title" name="title"   ng-model="newContactDetailsCtrl.contact.title" required>
+                <option value="">Select your title</option>               
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr</option>
+                <option value="No title">No title</option>
+            </select>
+
+            <div sy-alert-box="title">
+                <p ng-show="addNewContactForm.title.$error.required">
+                    {{findMsgHTML('E64')}}
+                </p>
+            </div>
+        </div>
+        <div class="sy-form-group">
+            <label for="firstName">First name: </label>
+            <input type="text"
+                   id="firstName"
+                   name="firstName"
+                   placeholder="First name"
+                   class="inline-input form-control"
+                   required
+                   ng-model="newContactDetailsCtrl.contact.firstName"
+                   sy-pattern="NAME">
+            <div sy-alert-box="firstName">
+                <p ng-show="addNewContactForm.firstName.$error.required">
+                    {{findMsgHTML('MA_E1')}}
+                </p>
+                <p ng-show="addNewContactForm.firstName.$error.pattern">
+                    {{findMsgHTML('E412')}}
+                </p>
+            </div>
+        </div>
+
+        <div class="sy-form-group">
+            <label for="lastName">Last name:</label>
+            <input type="text"
+                   id="lastName"
+                   name="lastName"
+                   placeholder="Last name"
+                   class="inline-input form-control"
+                   required
+                   ng-model="newContactDetailsCtrl.contact.lastName"
+                   sy-pattern="NAME">
+            <div sy-alert-box="lastName">
+                <p ng-show="addNewContactForm.lastName.$error.required">
+                    {{findMsgHTML('MA_E2')}}
+                </p>
+                <p ng-show="addNewContactForm.lastName.$error.pattern">
+                    {{findMsgHTML('E412')}}
+                </p>
+            </div>
+        </div>
+
+
+        <div class="dob" data-layout="form">
+            <label class="label-required" for="dateOfBirth">Date of birth: </label>
+            <div>
+                <div id="dateOfBirth" data-layout="tooltip">
+                    <input id="DOBDay"
+                           type="tel"
+                           name="DOBDay"
+                           class="input-mini form-control"
+                           ng-model="newContactDetailsCtrl.contact.dateOfBirthDay"
+                           placeholder="DD"
+                           maxlength="2"
+                           sy-pattern="DOBDAY"
+                           sy-check-dateofbirth
+                           sy-auto-move
+                           required
+                           style="margin: 0; width:50px;display:inline"/>
+                    <span style="display:inline">/</span>
+                    <input id="DOBMonth"
+                           type="tel"
+                           name="DOBMonth"
+                           class="input-mini form-control"
+                           ng-model="newContactDetailsCtrl.contact.dateOfBirthMonth"
+                           placeholder="MM"
+                           maxlength="02"
+                           sy-pattern="DOBMONTH"
+                           sy-check-dateofbirth
+                           sy-auto-move
+                           required
+                           style="margin: 0; width:50px;display:inline"/>
+                    <span style="display:inline">/</span>
+                    <input id="DOBYear"
+                           type="tel"
+                           name="DOBYear"
+                           class="input-mini form-control"
+                           ng-model="newContactDetailsCtrl.contact.dateOfBirthYear"
+                           placeholder="YYYY"
+                           maxlength="04"
+                           sy-pattern="DOBYEAR"
+                           sy-validate-dateofbirth
+                           sy-check-dateofbirth
+                           required
+                           style="margin: 0; width:65px;display:inline"/>
+                </div>
+                <div>
+                    <p sy-alert-box="DOBDay">
+                  <span ng-show="addNewContactForm.DOBDay.$error.pattern">
+                    Please enter a valid date of birth.
+                  </span>
+                        <span ng-show="addNewContactForm.DOBDay.$error.required">
+                   Don't forget to tell us your date of birth. You'll need to add this to continue.
+                  </span>
+                        <span ng-show="addNewContactForm.DOBDay.$error.dateValid">Please enter a valid date of birth.</span>
+                    </p>
+                </div>
+
+                <div>
+                    <p ng-show="addNewContactForm.DOBDay.$valid" sy-alert-box="DOBMonth">
+                    <span ng-show="addNewContactForm.DOBMonth.$error.pattern">
+                        Please enter a valid month of birth.
+                    </span>
+
+                        <span ng-show="addNewContactForm.DOBMonth.$error.required">
+                       Don't forget to tell us your date of birth. You'll need to add this to continue.
+                    </span>
+                        <span ng-show="addNewContactForm.DOBMonth.$error.dateValid">Please enter a valid date of birth.</span>
+                    </p>
+                </div>
+
+                <div>
+                    <p ng-show="addNewContactForm.DOBDay.$valid && addNewContactForm.DOBMonth.$valid" sy-alert-box="DOBYear">
+                    <span ng-show="addNewContactForm.DOBYear.$error.pattern">
+                        Please enter a valid year of birth.
+                    </span>
+
+                        <span ng-show="addNewContactForm.DOBYear.$error.required">
+                        Don't forget to tell us your date of birth. You'll need to add this to continue.
+                    </span>
+                        <span ng-show="addNewContactForm.DOBYear.$error.age">You must be 16 years of age to use this service.</span>
+                        <span ng-show="addNewContactForm.DOBYear.$error.dateValid">Please enter a valid date of birth.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="sectionHeading">
+            <label class="form-label">Please provide at least one contact number</label>
+        </div>
+
+        <div class="sy-form-group title-cntr">
+            <label for="landline"><b>Landline:</b></label>
+            <select class="input-form form-control half-wd" id="landline" ng-model="newContactDetailsCtrl.contact.telephoneNumberCountry"
+                    ng-options="v.Name group by v.Label for v in newContactDetailsCtrl.landlineFinalList track by v.Code">
+            </select>
+            <input type="text"
+                   id="telephoneNumber"
+                   name="telephoneNumber"
+                   ng-model="newContactDetailsCtrl.contact.telephoneNumberCountry.number"
+                   class="input-form form-control qthf-wd"
+                   customvalidate-no>
+            <div sy-alert-box="telephoneNumber" style="float: right; width: 66%">
+                <p ng-show="addNewContactForm.telephoneNumber.$error.pattern">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+                <p ng-show="addNewContactForm.telephoneNumber.$error.minlength || addNewContactForm.telephoneNumber.$error.maxlength">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+                <p ng-show="addNewContactForm.telephoneNumber.$error.required">
+                    {{findMsgHTML('MA_E5')}}
+                </p>
+            </div>
+        </div>
+
+        <div class="sy-form-group">
+            <label for="mobileTelephoneCountry"><b>Mobile number:</b></label>
+            <select class="input-form form-control half-wd" id="mobileTelephoneCountry"
+                    ng-model="newContactDetailsCtrl.contact.mobileTelephoneCountry"
+                    ng-options="v.Name group by v.Label for v in newContactDetailsCtrl.mobileFinalList track by v.Code">
+            </select>
+            <input  type="text"
+                    name="mobileTelephone"
+                    id="mobileTelephone"
+                    ng-model="newContactDetailsCtrl.contact.mobileTelephoneCountry.number"
+                    class="input-form form-control qthf-wd"
+                    mobilevalidate-no
+                    sy-input-zero-prefix="sy-input-zero-prefix"
+                    ng-required="isRequired() ? newContactDetailsCtrl.noPhoneNumbersPresent() : false"
+                    ng-blur="newContactDetailsCtrl.isMobileValid()"
+            />
+            <div sy-alert-box="mobileTelephone">
+                <p ng-show="addNewContactForm.mobileTelephone.$error.pattern && !addNewContactForm.mobileTelephone.$error.required">
+                    {{findMsgHTML('MA_E9')}}
+                </p>
+                <p ng-show="addNewContactForm.mobileTelephone.$error.required">
+                    {{findMsgHTML('MA_E8')}}
+                </p>
+                <p ng-show="addNewContactForm.mobileTelephone.$error.minlength || addNewContactForm.mobileTelephone.$error.maxlength">
+                    {{findMsgHTML('MA_E14')}}
+                </p>
+            </div>
+            <div class="alert sy-alert--warning" ng-if="invalidMobile && !addNewContactForm.mobileTelephone.$error.pattern && !addNewContactForm.mobileTelephone.$error.required">
+                {{findMsgHTML('MA_E16')}}
+            </div>
+        </div>
+        <!--{{isRequired() ? newContactDetailsCtrl.noPhoneNumbersPresent() : false}}-->
+        <div class="sy-form-group">
+            <label for="emailAddress">Email address:</label>
+            <input type="text"
+                   id="emailAddress"
+                   name="emailAddress"
+                   placeholder="Email address"
+                   ng-model="newContactDetailsCtrl.contact.emailAddress"
+                   class="form-control"
+                   ng-pattern="emailPattern()"/>
+            <div sy-alert-box="emailAddress">
+                <p ng-show="addNewContactForm.emailAddress.$error.email">{{findMsgHTML('MA_E17')}}</p>
+                <!--<p ng-show="addNewContactForm.emailAddress.$error.required">{{findMsgHTML('MA_E25')}}</p>-->
+                <p ng-show="addNewContactForm.emailAddress.$error.pattern">{{findMsgHTML('MA_E17')}}</p>
+                <!--<p ng-show="!addNewContactForm.emailAddress.syValidateEmail">{{findMsgHTML('MA_E26')}}</p>-->
+            </div>
+        </div>
+        <div class="form-group chk-box-group manageContact-group-checkbox">
+            <div class="acc-chkBox-btn">
+                <input type="checkbox" id="authorise_Person" class="" ng-model="newContactDetailsCtrl.termsAndConditions"/>
+                <label for="authorise_Person">
+                    I authorise the person(s) listed on this form will have authority to discuss and perform actions on my Synergy account and have read and understood  the  <a title="Authorised Representatives Terms and Conditions" href="https://www.synergy.net.au/UtilityLinks/Authorised-Representatives-Terms-and-Conditions">
+                    Authorised Representatives Terms & Conditions.</a>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

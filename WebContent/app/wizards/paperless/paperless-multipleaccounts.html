@@ -1,0 +1,24 @@
+<div>
+    <h2 ng-if="paperlessCtrl.paperlessType=='E'">Would you like to register your other accounts to paperless?</h2>
+    <h2 ng-if="paperlessCtrl.paperlessType=='ES'">Would you like to register your other accounts to paperless and SMS?</h2>
+
+    <div ng-if="paperlessCtrl.paperlessType=='E'">
+        If you choose yes then we will switch your other accounts listed below to paperless and send your bills and all account related communication to {{paperlessCtrl.emailAddress}}.
+    </div>
+    <div ng-if="paperlessCtrl.paperlessType=='ES'">
+        If you choose yes then we will switch your other accounts listed below to paperless and send your bills and all account related communication to {{paperlessCtrl.emailAddress}}, plus
+        we will send reminder messages to {{paperlessCtrl.sendSMSMobileNumber}} when your bill is ready to view or is due.
+    </div>
+    <div class="list-group">
+        <div class="list-group-item clearfix" ng-repeat="account in paperlessCtrl.accountList">
+            <strong>{{account.contractAccountNumber}}</strong>
+            <div>{{account.address | capitalize}}</div>
+        </div>
+    </div>
+    <div>
+        <input type="button" class="sy-button--primary" value="No, just register this account"
+               ng-click="setUpdateMultipleAccounts(false)" style="width:280px;" sy-busy-chevron="global"/>
+        <input type="button" class="sy-button--primary" value="Yes, register all my accounts"
+               ng-click="setUpdateMultipleAccounts(true)" style="float:right;width:280px;" sy-busy-chevron="global"/>
+    </div>
+</div>

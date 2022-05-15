@@ -1,0 +1,122 @@
+<style>
+	.account-header .account-header__icon.inactive-img{
+		top: 23px;
+		left: 18px;
+	}
+</style>
+
+<div class="main home">
+
+    <div class="main__header">
+		<div class="account-header">
+
+		    <div class="account-header__icon" ng-class="{'inactive-img':  !accountCtrl.currentAccount.active}">
+		        <!--<span class="sy-icon&#45;&#45;account-info"></span>-->
+				<span ng-class="{'sy-icon--account-info': accountCtrl.currentAccount.active, 'sy-icon--account-info-inactive-white':  !accountCtrl.currentAccount.active}"></span>
+		    </div>
+
+		    <div class="account-header__info">
+		        <h2>
+		            Account {{accountCtrl.currentAccount.contractAccountNumber | syContractAccountNumber}} |
+					<small>{{ accountCtrl.currentAccount.active ? accountCtrl.currentAccount.productDetails.energyProductLabel : "Inactive"}}</small>
+					<a href="" ng-if="!accountCtrl.currentAccount.active" ng-click="accountCtrl.showInactiveAccountInfo()"
+					   analytics-on="click" analytics-event="OpenTooltip" analytics-category="Homepage" analytics-label="InactiveAccount" data-analytics-event="OpenTooltip">
+						<span class="sy-icon--circle_info_inactive" title="Inactive Account"></span>
+					</a>
+		        </h2>
+		        <span>{{accountCtrl.currentAccount.premiseAddress.label | capitalize}}</span><br />
+				<a href ng-click="accountCtrl.openAccountSelector()">
+					{{accountCtrl.accountList.length > 1 ? 'View' : 'Add' }} another energy account
+				</a>
+		    </div>
+
+            <nav class="mobile-nav">
+                <button class="sy-button--white sy-button--icon-left" ng-click="accountCtrl.isVisible = !accountCtrl.isVisible">
+                    <span class="sy-icon--show_lines"></span>
+                    <span ng-bind="accountCtrl.getActiveTab()"></span>
+                </button>
+            </nav>
+
+	        <nav class="main-nav sy-tab-container" ng-show="(accountCtrl.isTouch && accountCtrl.isVisible) || !accountCtrl.isTouch">
+
+	            <ul class="sy-tabs">
+
+	                <li ui-sref-active="active">
+	                    <a ui-sref=".dashboard" ng-click="accountCtrl.isVisible = false">
+	                        <span class="sy-icon--account-info"></span>
+	                        Account
+	                    </a>
+	                </li>
+								<li ui-sref-active="active" ng-if="accountCtrl.isMidDaySaver()" ui-sref-active="active">
+									<a ui-sref=".activitystatement" ng-click="accountCtrl.isVisible = false">
+										<span class="sy-icon-activitystatement"></span>
+										Activity statement
+									</a>
+								</li>
+								<li ui-sref-active="active" ng-if="accountCtrl.isPowerBank3()">
+									<a ui-sref=".activitystatementpowerbank" ng-click="accountCtrl.isVisible = false">
+										<span class="sy-icon-activitystatement"></span>
+										Activity statement
+									</a>
+								</li>
+	                <li ui-sref-active="active">
+	                    <a ui-sref=".usage" ng-click="accountCtrl.isVisible = false">
+	                        <span class="sy-icon--charts"></span>
+	                        Usage
+	                    </a>
+	                </li>
+
+
+	                <li ui-sref-active="active">
+	                    <a ui-sref=".bills" ng-click="accountCtrl.isVisible = false">
+	                        <span class="sy-icon--file"></span>
+	                        Bills and payments
+	                    </a>
+	                </li>
+	                <!-- TODO no more accountCtrl -->
+	                <li ng-if="accountCtrl.hasIntervalDevices() || accountCtrl.isIntervalDevices()"  ui-sref-active="active">
+	                    <a ui-sref=".intervaldata" ng-click="accountCtrl.isVisible = false">
+	                        <span class="sy-icon--stats"></span>
+	                        Interval data
+	                    </a>
+	                </li>
+					<!-- Powerbank ng-if="accountCtrl.hasIntervalDevices() || accountCtrl.isIntervalDevices()" -->
+					<li ng-if="accountCtrl.currentAccount.productDetails.energyProductLabel=='Battery Smart Plan' || accountCtrl.currentAccount.productDetails.energyProductLabel.indexOf('Home Battery Plan') !== -1" ui-sref-active="active">
+						<a ui-sref=".powerbank" ng-click="accountCtrl.isVisible = false">
+							<img src="img/solar_white.svg" class="icon-tab" style="height:19px" ng-if="accountCtrl.getStateName()==='user.account.powerbank'" >
+							<img src="img/solar_black.svg" class="icon-tab" style="height:17px" ng-if="accountCtrl.getStateName()!='user.account.powerbank'" >
+							PowerBank
+						</a>
+					</li>
+	                <!-- ng-if="accountCtrl.allowedEnergyToolkit" -->
+	                <li  ng-if="accountCtrl.isResidential && !accountCtrl.isResiAmiCustomer() && !accountCtrl.isCollective()" ui-sref-active="active">
+	                    <a ui-sref=".energytoolbox" ng-click="accountCtrl.isVisible = false">
+	                        <span class="sy-icon-energytoolbox"></span>
+	                        Energy tool
+	                    </a>
+					</li>
+					<li  ng-if="accountCtrl.isResiAmiCustomer() && !accountCtrl.isCollective()" ui-sref-active="active">
+	                    <a ui-sref=".energytoolbox" ng-click="accountCtrl.isVisible = false">
+	                        <span class="sy-icon-energytoolbox"></span>
+	                        Energy tips
+	                    </a>
+	                </li>
+					<li ui-sref-active="active">
+	                <a ng-if="accountCtrl.partOfSeeAndSave" ui-sref=".seeandsave" ng-click="accountCtrl.isVisible = false">
+	                  <span class="sy-icon--charts"></span>
+	                  See and Save
+	                </a>
+					    </li>
+								<li>
+									<a class="online-support-link" sy-doc-href="{{ accountCtrl.onlineSupportLink() }}" target="_blank" rel="noreferrer noopener">
+										<span class="icon-help">?</span>
+										Online support
+									</a>
+								</li>
+	            </ul>
+	        </nav>
+     	</div>
+    </div>
+	<div ng-if="accountCtrl.isAmiCustomer()" ng-include="'app/routes/user/account/ma-tour/matour.html'"></div>
+	<div ui-view></div>
+</div>

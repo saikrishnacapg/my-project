@@ -1,0 +1,12 @@
+<div ng-form="rebsForm">
+
+    <div sy-form-group data-layout="form">
+        <label class="label-required" for="supplyAddress">Child account:</label>
+        <select id="supplyAddress"
+                class="form-control"
+                required
+                ng-multiple="false"
+                ng-model="rebsCtrl.selectedChildAccount"
+                ng-options="account for account in stepCtrl.childAccounts" />
+    </div>
+</div>

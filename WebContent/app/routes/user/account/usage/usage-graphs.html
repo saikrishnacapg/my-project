@@ -1,0 +1,127 @@
+<div ng-if="usageCtrl.mode=='consumption'">
+    <!-- consumption estimate currently turned off -->
+    <div sy-consumption-chart
+         id="UsageCtrl_consumption"
+         consumption-data="usageCtrl.consumptionData"
+         has-Off-Peak-Usage="usageCtrl.hasOffPeakUsage"
+         has-Super-Peak="usageCtrl.hasSuperPeak"
+         has-Week-End-Shoulder="usageCtrl.hasWeekEndShoulder"
+         has-Peak-Usage="usageCtrl.hasPeakUsage"
+         has-Week-Day-Shoulder="usageCtrl.hasWeekDayShoulder"
+         has-Standard-Home="usageCtrl.hasStandardHome"
+         has-E-V-Off-Peak="usageCtrl.hasEVOffPeak"
+         has-Period-Total="usageCtrl.hasPeriodTotal"
+         has-ren-export="usageCtrl.hasRenExport"
+         has-ren-consumption="usageCtrl.hasRenConsumption"
+         has-Mid-Day-Saver="usageCtrl.hasMidDaySaver"
+         has-Offset-Battery-Units="usageCtrl.hasOffsetBatteryUnits">
+    </div>
+
+    <div class="sy-alert--info">
+        <span class="pull-left sy-icon--circle_info"></span>
+        <strong ng-if="usageCtrl.premiseDetails.selfRead == null">
+            Visit the <a href="http://www.westernpower.com.au/metering.html" target="_blank">Western Power website</a> to find out how to read your meter.
+        </strong>
+        <strong ng-if="usageCtrl.premiseDetails.selfRead != null">
+            Did you know you can conveniently submit your readings online via the <a href="http://www.westernpower.com.au/metering-self-read-meters.html" target="_blank">Western Power website</a>?
+        </strong>
+    </div>
+
+    <div class="help-block">
+        <p>
+            Scroll over each months graph band to view the usage and cost associated.
+        </p>
+        <p>
+            * A unit of energy is measured by kWh (kilowatt hours) for electricity or GJ (gigajoule) for gas.
+        </p>
+        <p>
+            Electricity data is obtained from Western Power. Gas data is obtained from ATCO Gas Australia. Bills may include estimated consumption.
+        </p>
+        <p>
+            Billing periods may vary depending on when Western Power or ATCO Gas Australia schedule to read your meter.
+        </p>
+    </div>
+</div>
+
+<div ng-if="usageCtrl.mode=='cost'">
+    <div sy-cost-chart
+         id="UsageCtrl_cost"
+         consumption-data="usageCtrl.consumptionData">
+    </div>
+
+    <div class="help-block">
+        <p>
+            Electricity data is obtained from Western Power. Gas data is obtained from ATCO Gas Australia. Bills may include estimated consumption.
+        </p>
+        <p>
+            Billing periods may vary depending on when Western Power or ATCO Gas Australia schedule to read your meter.
+        </p>
+    </div>
+</div>
+
+<div ng-if="usageCtrl.mode=='table'">
+    <div ng-if="!usageCtrl.childAccount">
+        <div class="btn-group pull-right" ; style="margin:-34px 4px 0px 0px;">
+            <label class="dropdown"
+                   style="font-size:14px; font-weight: normal; float: left; margin:5px;">
+                <a href="" bs-dropdown="">
+                    <span class="sy-icon--new_window"></span>
+                    <span style="color:#333;">Export</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="usageCtrl.exportConsumptionHistoryToPDF()"
+                           ng-model="usageCtrl.selectedExportType">PDF</a></li>
+                    <li><a ng-click="usageCtrl.exportConsumptionHistoryToCSV()"
+                           ng-model="usageCtrl.selectedExportType">CSV</a></li>
+                </ul>
+            </label>
+            <label class="btn" ng-click="usageCtrl.printUsageSummary()"><span
+                    class="sy-icon--print"></span>Print</label>
+            <label class="btn" ng-click="accountCtrl.openUsageSummaryExport()"><span
+                    class="sy-icon&#45;&#45;envelope"></span>Email</label>
+        </div>
+    </div>
+    <div id="UsageSummaryTable"  name="UsageSummaryTable" class="table-responsive">
+        <table class="table text-center table-responsive">
+            <thead>
+            <tr>
+                <th>Bill period end date</th>
+                <th>Number of billing days</th>
+                <th>Average daily usage</th>
+                <th>Total usage for period</th>
+                <th>Amount</th>
+                <th ng-if="usageCtrl.hasRenExport">Solar export (units)</th>
+                <th>C0<sub>2</sub> (kg)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="record in usageCtrl.consumptionData.records">
+                <td>{{record.periodLabel}}</td>
+                <td>{{record.supplyPeriod.numberOfDays}}</td>
+                <td>{{record.averageDaily}}</td>
+                <td>{{record.periodTotal}}</td>
+                <td>{{record.charges ||  "" | number:2}}</td>
+                <td ng-if="usageCtrl.hasRenExport">{{record.solarExportKwh}}</td>
+                <td>{{record.carbonKg}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <p>The C0<sup>2</sup> (kg) value shown does not include any offset amount from Green Energy products.</p>
+    </div>
+</div>
+
+
+
+<!-- Interval data -->
+<div ng-if="usageCtrl.mode=='interval'">
+    <div class="table-responsive">
+        <div ng-include="'app/routes/user/account/usage/interval/solar.html'"></div>
+    </div>
+</div>
+
+
+<div ng-if="usageCtrl.mode=='ami-interval'">
+    <div class="">
+        <div ng-include="'app/routes/user/account/amiinsight/ami-interval-usage/ami-interval.html'"></div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<!-- NOTE not currently used -->
+<div class="dropdown-menu">
+    <nav class="">
+      <ul>
+        <li ng-class="{'active': accountCtrl.tabIsActive('account')}">
+            <a href="" ng-click="accountCtrl.gotoDashboard()">
+                <span class="sy-icon--account-info"></span>
+                Account
+            </a>
+        </li>
+        <li ng-class="{'active': accountCtrl.tabIsActive('usage')}">
+            <a href="" ng-click="accountCtrl.gotoUsage()">
+                <span class="sy-icon--charts"></span>
+                Usage
+            </a>
+        </li>
+        <li ng-class="{'active': accountCtrl.tabIsActive('bills')}">
+            <a href="" ng-click="accountCtrl.gotoBills()">
+                <span class="sy-icon--file"></span>
+                Bills
+            </a>
+        </li>
+        <li ng-if="accountCtrl.hasIntervalDevices()" ng-class="{'active': accountCtrl.tabIsActive('interval')}">
+            <a href="" ng-click="accountCtrl.gotoIntervalData()">
+                <span class="sy-icon--stats"></span>
+                Interval data
+            </a>
+        </li>
+        <li ng-class="{'active': accountCtrl.tabIsActive('energytoolkit')}">
+            <a href="" ng-click="accountCtrl.gotoEnergyToolkit()">
+                <span class="sy-icon-energytoolbox"></span>
+                Energy Tool
+            </a>
+        </li>
+      </ul>
+    </nav>
+</div>

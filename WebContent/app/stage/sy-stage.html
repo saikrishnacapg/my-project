@@ -1,0 +1,80 @@
+<!-- Show this while loading the notifications -->
+<div class="container login" ng-if="!appCtrl.initialised">
+
+    <div class="header">
+        <div class="header__logo">
+            <img alt="synergy" title="Synergy My Account home" src="img/logo/synergy-logo.svg"/>
+        </div>
+        <div class="header__title">
+            Loading
+        </div>
+        <div class="header__info">
+          Please wait...
+        </div>
+    </div>
+</div>
+
+<!-- Show this if there is an outage -->
+<div class="container login" ng-if="appCtrl.initialised && appCtrl.showOutageMessage()">
+
+    <div class="header">
+        <div class="header__logo">
+          <a title="Synergy" href=""><img class="logo" alt="Synergy My Account outage page" src="img/logo/synergy-logo.svg" ng-click="userCtrl.gotoHome();" /></a>
+        </div>
+        <div class="header__title">
+            My Account is currently unavailable
+        </div>
+            <div class="header__info" ng-if="appCtrl.showOutageMessage()">
+                <p class="sy-alert--danger">{{appCtrl.outageMessage}}</p>
+            </div>
+        <br>
+        <div class="form-group">
+            <button sy-busy-chevron="startup" id="retryBtn" class="sy-button--primary sy-button--block" ng-click="appCtrl.startup()" sy-submit-button>
+                <span class="sy-icon--log_in"></span> Retry
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Show this if everything is ok -->
+<div id="myAccount" ng-if="appCtrl.initialised && !appCtrl.showOutageMessage()">
+
+    <!-- global modal wizard (z-index: 1030) -->
+    <div ng-include="'app/stage/modal-wizard.html'"></div>
+
+    <div ng-include="'app/stage/hidden-iframe.html'"></div>
+
+    <!-- page wrapper so that content does not exceed 1024px -->
+    <div id="wrapper">
+        <!-- use ng-router for the application view components -->
+        <div class="wrapper-modal" sy-toggle-class-on-modal toggle="hidden-print" ui-view=""></div>
+    </div>
+
+    <!-- footer (relative) -->
+    <footer class="footer hidden-print">
+        <div class="footer__contact">
+            <a class="navbar-link" id="termsAndConditions" sy-doc-href="terms.synergy">
+                Terms and conditions
+            </a>
+            <a class="navbar-link" id="contactUs" href="" sy-doc-href="synergy.contactus">
+                Contact us
+            </a>
+          <a class="navbar-link feedback-cta" onclick="window.usabilla_live('click');event.preventDefault();" href="#" >Help us improve</a>
+                    <a ng-if="appCtrl.customerType" class="navbar-link online-support-link" sy-doc-href="{{ appCtrl.onlineSupportLink() }}" target="_blank" rel="noopener noreferrer">Online support</a>
+        </div>
+        <div class="footer__logos">
+            <ul itemscope="itemscope" itemtype="http://schema.org/Organization" class="social-media">
+                <li class="social-media-item"><a title="Synergy on Twitter" href="https://twitter.com/synergyenergy" itemprop="sameAs" target="_blank" class="icon icon--social-twitter"><span>Twitter</span></a></li>
+                <li class="social-media-item"><a title="Synergy on Facebook" href="https://www.facebook.com/synergywa" itemprop="sameAs" target="_blank" class="icon icon--social-facebook"><span>Facebook</span></a></li>
+                <li class="social-media-item"><a title="Synergy on LinkedIn" href="https://www.linkedin.com/company/synergy-retail-electricity-corporation-" itemprop="sameAs" target="_blank" class="icon icon--social-linkedin"><span>LinkedIn</span></a></li>
+                <li class="social-media-item"><a title="Synergy on YouTube" href="https://www.youtube.com/user/synergywa" itemprop="sameAs" target="_blank" class="icon icon--social-youtube"><span>YouTube</span></a></li>
+            </ul>
+            <div class="gte-logo" title="Owned By The People Of WA"></div>
+        </div>
+    </footer>
+
+    <!-- busy indicator -->
+  <div ng-show="appCtrl.busyTracker.active()" class="stage-busy">
+    <div class="sy-spinner"></div>
+  </div>
+</div>

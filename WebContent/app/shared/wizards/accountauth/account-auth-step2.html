@@ -1,0 +1,39 @@
+<div ng-form role="form" name="accountAuth2Form" novalidate="">
+
+    <div sy-form-group data-layout="form">
+      <label class="label-required" for="account">Synergy account number:</label>
+      <div sy-form-group data-layout="tooltip">
+        <input type="text" ng-number="" id="account" name="accountNumber"
+               ng-model="accountAuth.securityAnswers.mandatoryAccount.contractAccountNumber"
+               class="form-control"
+               disabled />
+        <span class="sy-icon--ok_2"></span>
+      </div>
+    </div>
+
+    <div ng-if="accountAuth.credentials.manualOption">
+        <h2>How would you like to complete your My Account registration?</h2>
+        <div class="form-group col-md-offset-1 pad-bottom-10">
+            <label class="normal-text" for="autoOption">
+                <input type="radio" ng-model="accountAuth.credentials.process" value="ONLINE" class="sy-radio" id="autoOption" required />
+                Register online now in just a few clicks - just have a copy of your bill handy.
+            </label>
+            <label class="normal-text" for="manualOption" ng-click="accountAuth.clearThreePointCheck()">
+                <input type="radio" ng-model="accountAuth.credentials.process" value="PHONE" class="sy-radio" id="manualOption" required />
+                We can register you instead - it takes a little longer but we'll notify you via email once complete.
+            </label>
+        </div>
+    </div>
+
+    <div ng-include="'app/shared/wizards/accountauth/_account-auth-step2-online.html'"
+         ng-if="!accountAuth.credentials.manualOption || accountAuth.credentials.process === 'ONLINE'">
+    </div>
+
+    <div ng-include="'app/shared/wizards/accountauth/_account-auth-step2-phone.html'"
+         ng-if="accountAuth.credentials.process === 'PHONE'">
+    </div>
+
+
+</div>
+
+

@@ -1,0 +1,32 @@
+<div>
+    <div class="header">
+      <div class="header__logo">
+        <a title="Synergy" href=""><img class="logo" alt="Synergy My Account home" src="img/logo/synergy-logo.svg" /></a>
+      </div>
+    </div>
+
+    <div class="main">
+        <div class="sy-block">
+            <div class="row hidden-xs top-plus-20-sm-and-up">
+                <div class="col-sm-4 text-center">
+                    <a title="Synergy" href="/"><img class="hidden-xs sy-logo" src="img/synergy_logo.png" title="Synergy" alt="Synergy mobile logo"></a>
+                </div>
+
+                <div class="col-sm-8">
+                    <h1 class="sy-headline sy-main-headline">Re-Energisation Request</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 pad-v-25-xs-and-down top-minus-40-xs widen-2-xs" ng-if="reenreqconfirmCtrl.isSuccess">
+                    <span sy-server-include="RE_EN_REQ_SUCCESS"></span>
+                </div>
+                <div class="col-xs-12 pad-v-25-xs-and-down top-minus-40-xs widen-2-xs" ng-if="!reenreqconfirmCtrl.isSuccess">
+                    <span sy-server-include="RE_EN_REQ_FAILURE"></span>
+                </div>
+            </div>
+        </div>
+
+        <br/><br/><br/>
+    </div>
+</div>
